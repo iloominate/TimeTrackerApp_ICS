@@ -1,0 +1,31 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.4.33403.182
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TimeTracker.DAL", "TimeTracker.DAL\TimeTracker.DAL.csproj", "{7B58B24E-5E20-4383-A924-96355F1069EC}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TimeTracker.DAL.Tests", "TimeTracker.DAL.Tests\TimeTracker.DAL.Tests.csproj", "{F1A9E8F1-E327-4C84-A150-E4891A5D2E36}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{7B58B24E-5E20-4383-A924-96355F1069EC}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7B58B24E-5E20-4383-A924-96355F1069EC}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7B58B24E-5E20-4383-A924-96355F1069EC}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7B58B24E-5E20-4383-A924-96355F1069EC}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F1A9E8F1-E327-4C84-A150-E4891A5D2E36}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F1A9E8F1-E327-4C84-A150-E4891A5D2E36}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F1A9E8F1-E327-4C84-A150-E4891A5D2E36}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F1A9E8F1-E327-4C84-A150-E4891A5D2E36}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {482281AD-0783-4010-82A9-557EF2C5B8C2}
+	EndGlobalSection
+EndGlobal
