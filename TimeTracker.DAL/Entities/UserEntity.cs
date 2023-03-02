@@ -1,17 +1,16 @@
 ﻿using System;
-
+using System.Collections;
 using System.Diagnostics;
 
 namespace TimeTracker.DAL.Entities
 {
     public record UserEntity : IEntity
     {
-        public Guid Id { get; set; }
+        public required Guid Id { get; set; }
         public required string Name { get; set; }
         public required string Surname { get; set; }
         public string? PhotoUrl { get; set; }
 
-        public ICollection<ActivityEntity> Activities { get; set; } = new List<ActivityEntity>();
-        public ICollection<ProjectEntity> Projects { get; set; } = new List<ProjectEntity>();
+        public ICollection<ProjectAmountEntity> Projects { get; set; }
     }
 }

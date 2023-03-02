@@ -4,14 +4,14 @@ namespace TimeTracker.DAL.Entities;
 
 public record ActivityEntity : IEntity
 {
-    public Guid Id { get; set; }
+    public required Guid Id { get; set; }
     public required DateTime Start { get; set; }
     public required DateTime End { get; set; }
     public required string ActivityType { get; set; }
     public string Description { get; set; }
 
-    public Guid UserId { get; set; }
-    public UserEntity? User { get; set; }
-    public Guid ProjectId { get; set; }
-    public ProjectEntity? Project { get; set; }
+    public required Guid UserId { get; set; }
+    public required UserEntity? User { get; set; }
+    public required Guid ProjectId { get; set; }
+    public required ProjectEntity? Project { get; set; }
 }
