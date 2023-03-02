@@ -9,4 +9,6 @@ public record ProjectEntity : IEntity
     
     public ICollection<ProjectAmountEntity> Users { get; set; } = new List<ProjectAmountEntity>();
 
+    public required UserEntity CreatorId { get; set; }
+
 }
