@@ -2,11 +2,12 @@
 
 namespace TimeTracker.DAL.Entities;
 
-public class ProjectEntity : IEntity
+public record ProjectEntity : IEntity
 {
-    public Guid ID { get; set; }
-    public string Name { get; set; }
-    public ICollection<ActivityEntity> Activities { get; set; }
-    public ICollection<UserEntity> Users { get; set; }
+    public Guid Id { get; set; }
+    public required string Name { get; set; }
+
+    public ICollection<ActivityEntity> Activities { get; set; } = new List<ActivityEntity>();
+    public ICollection<UserEntity> Users { get; set; } = new List<UserEntity>();
 
 }

@@ -3,14 +3,15 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using TimeTracker.DAL.Entities;
 using Microsoft.EntityFrameworkCore;
 
 namespace TimeTracker.DAL
 {
     public class TimeTrackerDbContext : DbContext
     {
-        public DbSet<Entities.ActivityEntity> Activities => Set<Entities.ActivityEntity>();
-        public DbSet<Entities.ProjectEntity> Projects => Set<Entities.ProjectEntity>();
-        public DbSet<Entities.UserEntity> Users => Set<Entities.UserEntity>();
+        public DbSet<ActivityEntity> Activities => Set<ActivityEntity>();
+        public DbSet<ProjectEntity> Projects => Set<ProjectEntity>();
+        public DbSet<UserEntity> Users => Set<UserEntity>();
     }
 }
