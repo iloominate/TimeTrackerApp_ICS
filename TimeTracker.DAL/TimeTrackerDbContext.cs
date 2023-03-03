@@ -8,8 +8,16 @@ using Microsoft.EntityFrameworkCore;
 
 namespace TimeTracker.DAL
 {
+    
+
     public class TimeTrackerDbContext : DbContext
     {
+        private readonly bool _seedDemoData;
+
+        public TimeTrackerDbContext(DbContextOptions contextOptions, bool seedDemoData = false) 
+            : base(contextOptions) => 
+            _seedDemoData = seedDemoData;
+
         public DbSet<ActivityEntity> Activities => Set<ActivityEntity>();
         public DbSet<ProjectEntity> Projects => Set<ProjectEntity>();
         public DbSet<UserEntity> Users => Set<UserEntity>();
