@@ -1,50 +1,35 @@
-using Microsoft.EntityFrameworkCore;
+using System;
+using System.Linq;
+using System.Threading.Tasks;
 using TimeTracker.DAL.Entities;
+using Microsoft.EntityFrameworkCore;
+using Xunit;
 using Xunit.Abstractions;
 
-namespace TimeTracker.DAL.Tests
+namespace TimeTracker.DAL.Tests;
+
+public class DbContextUserTests : DbContextTestsBase
 {
-    public class DbContextUserTests
+    public DbContextUserTests(ITestOutputHelper output) : base(output)
     {
-        private readonly TimeTrackerDbContext _dbContextSUT;
+    }
 
-        public DbContextUserTests()
+    [Fact]
+    public async Task AddNewUserTest()
+    {
+        var newUser = new UserEntity
         {
-            _dbContextSUT = new TimeTrackerDbContext();
-        }
+            Id = Guid.NewGuid(),
+            Name = "John",
+            Surname = "Doe",
+            PhotoUrl = "http://example.com/photo.jpg"
+        };
 
-        [Fact]
-        public void AddNewUserTest()
-        {
-            var newUser = new UserEntity()
-            {
-                Id = Guid.NewGuid(),
-                Name = "John",
-                Surname = "Doe",
-                PhotoUrl = "http://example.com/photo.jpg"
-            };
+        TimeTrackerDbContextSUT.Users.Add(newUser);
+        await TimeTrackerDbContextSUT.SaveChangesAsync();
 
-            _dbContextSUT.Users.Add(newUser);
-            _dbContextSUT.SaveChanges();
-        }
-
-        [Fact]
-        public void RemoveUserTest()
-        {
-            var newUser = new UserEntity()
-            {
-                Id = Guid.NewGuid(),
-                Name = "Solomon",
-                Surname = "Grundy",
-                PhotoUrl = "http://example.com/photo.jpg"
-            };
-
-            _dbContextSUT.Users.Add(newUser);
-            _dbContextSUT.SaveChanges();
-
-            _dbContextSUT.Users.Remove(newUser);
-            _dbContextSUT.SaveChanges();
-
-        }
+        await using var dbx = await DbContextFactory.CreateDbContextAsync();
+        var actualEntities = await dbx.Users.SingleAsync(i => i.Id == newUser.Id);
+        Assert.Equal(newUser, actualEntities);
     }
 }

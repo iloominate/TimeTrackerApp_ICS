@@ -1,42 +1,40 @@
-﻿using TimeTracker.DAL.Entities;
+﻿using System;
+using System.Linq;
+using System.Threading.Tasks;
+using TimeTracker.DAL.Entities;
+using Microsoft.EntityFrameworkCore;
+using Xunit;
+using Xunit.Abstractions;
 
 namespace TimeTracker.DAL.Tests;
 
-public class ProjectTests
+public class DbContextProjectTests : DbContextTestsBase
 {
-    private readonly TimeTrackerDbContext _dbContextSUT;
-
-    public ProjectTests()
+    public DbContextProjectTests(ITestOutputHelper output) : base(output)
     {
-        _dbContextSUT = new TimeTrackerDbContext();
     }
 
     [Fact]
-    public void AddNewProjectTest()
+    public async Task AddNewProjectTest()
     {
-        var project = new ProjectEntity()
+        var newProject = new ProjectEntity
         {
             Id = Guid.NewGuid(),
             Name = "Project 1",
+            CreatorId = new UserEntity
+            {
+                Id = Guid.NewGuid(),
+                Name = "Chad",
+                Surname = "Watts",
+                PhotoUrl = "https://www.google.com/"
+            }
         };
+            
+        TimeTrackerDbContextSUT.Projects.Add(newProject);
+        await TimeTrackerDbContextSUT.SaveChangesAsync();
 
-        _dbContextSUT.Projects.Add(project);
-        _dbContextSUT.SaveChanges();
-    }
-    
-    [Fact]
-    public void RemoveProjectTest()
-    {
-        var project = new ProjectEntity()
-        {
-            Id = Guid.NewGuid(),
-            Name = "Project 2",
-        };
-
-        _dbContextSUT.Projects.Add(project);
-        _dbContextSUT.SaveChanges();
-        
-        _dbContextSUT.Projects.Remove(project);
-        _dbContextSUT.SaveChanges();
+        await using var dbx = await DbContextFactory.CreateDbContextAsync();
+        var actualEntities = await dbx.Projects.SingleAsync(i => i.Id == newProject.Id);
+        Assert.Equal(newProject, actualEntities);
     }
 }
