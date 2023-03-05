@@ -1,78 +1,129 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<DirectedGraph GraphDirection="LeftToRight" xmlns="http://schemas.microsoft.com/vs/2009/dgml">
+<DirectedGraph GraphDirection="LeftToRight" ZoomLevel="-1" xmlns="http://schemas.microsoft.com/vs/2009/dgml">
   <Nodes>
-<Node Id="IModel" Label="TimeTrackerDbContext" ChangeTrackingStrategy="ChangeTrackingStrategy.Snapshot" PropertyAccessMode="PropertyAccessMode.Default" ProductVersion="7.0.3" Annotations="BaseTypeDiscoveryConvention:DerivedTypes: System.Collections.Generic.Dictionary`2[System.Type,System.Collections.Generic.List`1[Microsoft.EntityFrameworkCore.Metadata.IConventionEntityType]]
-RelationshipDiscoveryConvention:InverseNavigationCandidates: System.Collections.Generic.Dictionary`2[System.Type,System.Collections.Generic.SortedSet`1[System.Type]]" Category="Model" Group="Expanded" />
-<Node Id = "ActivityEntity" Label="ActivityEntity" Name="ActivityEntity" BaseClass="" IsAbstract="False" ChangeTrackingStrategy="ChangeTrackingStrategy.Snapshot"  Annotations="Relational:TableName: Activities
-RelationshipDiscoveryConvention:NavigationCandidates: System.Collections.Immutable.ImmutableSortedDictionary`2[System.Reflection.PropertyInfo,System.ValueTuple`2[System.Type,System.Nullable`1[System.Boolean]]]" Category="EntityType" Group="Expanded" />
-<Node Id = "ProjectAmountEntity" Label="ProjectAmountEntity" Name="ProjectAmountEntity" BaseClass="" IsAbstract="False" ChangeTrackingStrategy="ChangeTrackingStrategy.Snapshot"  Annotations="Relational:TableName: ProjectAmounts
-RelationshipDiscoveryConvention:NavigationCandidates: System.Collections.Immutable.ImmutableSortedDictionary`2[System.Reflection.PropertyInfo,System.ValueTuple`2[System.Type,System.Nullable`1[System.Boolean]]]" Category="EntityType" Group="Expanded" />
-<Node Id = "ActivityEntity.Id" Label="Id (Guid)" Name="Id" Category="Property Primary" Type="Guid" MaxLength="None" Field="" PropertyAccessMode="PropertyAccessMode.Default" BeforeSaveBehavior="PropertySaveBehavior.Save" AfterSaveBehavior="PropertySaveBehavior.Save" Annotations="" IsPrimaryKey="True" IsForeignKey="False" IsRequired="True" IsIndexed="False" IsShadow="False" IsAlternateKey="False" IsConcurrencyToken="False" IsUnicode="True" ValueGenerated="ValueGenerated.OnAdd" />
-<Node Id = "ActivityEntity.Project" Label="Project (1)" Name="Project" Category="Navigation Property" Type="ProjectEntity"  Field="" Dependent="" Principal="ProjectEntity" Inverse="" PropertyAccessMode="PropertyAccessMode.Default" />
-<Node Id = "ActivityEntity.User" Label="User (1)" Name="User" Category="Navigation Property" Type="UserEntity"  Field="" Dependent="" Principal="UserEntity" Inverse="" PropertyAccessMode="PropertyAccessMode.Default" />
-<Node Id = "ActivityEntity.Description" Label="Description (string)" Name="Description" Category="Property Required" Type="string" MaxLength="None" Field="" PropertyAccessMode="PropertyAccessMode.Default" BeforeSaveBehavior="PropertySaveBehavior.Save" AfterSaveBehavior="PropertySaveBehavior.Save" Annotations="" IsPrimaryKey="False" IsForeignKey="False" IsRequired="True" IsIndexed="False" IsShadow="False" IsAlternateKey="False" IsConcurrencyToken="False" IsUnicode="True" ValueGenerated="None" />
-<Node Id = "ActivityEntity.End" Label="End (DateTime)" Name="End" Category="Property Required" Type="DateTime" MaxLength="None" Field="" PropertyAccessMode="PropertyAccessMode.Default" BeforeSaveBehavior="PropertySaveBehavior.Save" AfterSaveBehavior="PropertySaveBehavior.Save" Annotations="" IsPrimaryKey="False" IsForeignKey="False" IsRequired="True" IsIndexed="False" IsShadow="False" IsAlternateKey="False" IsConcurrencyToken="False" IsUnicode="True" ValueGenerated="None" />
-<Node Id = "ActivityEntity.ProjectId" Label="ProjectId (Guid)" Name="ProjectId" Category="Property Foreign" Type="Guid" MaxLength="None" Field="" PropertyAccessMode="PropertyAccessMode.Default" BeforeSaveBehavior="PropertySaveBehavior.Save" AfterSaveBehavior="PropertySaveBehavior.Save" Annotations="" IsPrimaryKey="False" IsForeignKey="True" IsRequired="True" IsIndexed="True" IsShadow="False" IsAlternateKey="False" IsConcurrencyToken="False" IsUnicode="True" ValueGenerated="None" />
-<Node Id = "ActivityEntity.Start" Label="Start (DateTime)" Name="Start" Category="Property Required" Type="DateTime" MaxLength="None" Field="" PropertyAccessMode="PropertyAccessMode.Default" BeforeSaveBehavior="PropertySaveBehavior.Save" AfterSaveBehavior="PropertySaveBehavior.Save" Annotations="" IsPrimaryKey="False" IsForeignKey="False" IsRequired="True" IsIndexed="False" IsShadow="False" IsAlternateKey="False" IsConcurrencyToken="False" IsUnicode="True" ValueGenerated="None" />
-<Node Id = "ActivityEntity.Type" Label="Type (ActivityType)" Name="Type" Category="Property Required" Type="ActivityType" MaxLength="None" Field="" PropertyAccessMode="PropertyAccessMode.Default" BeforeSaveBehavior="PropertySaveBehavior.Save" AfterSaveBehavior="PropertySaveBehavior.Save" Annotations="" IsPrimaryKey="False" IsForeignKey="False" IsRequired="True" IsIndexed="False" IsShadow="False" IsAlternateKey="False" IsConcurrencyToken="False" IsUnicode="True" ValueGenerated="None" />
-<Node Id = "ActivityEntity.UserId" Label="UserId (Guid)" Name="UserId" Category="Property Foreign" Type="Guid" MaxLength="None" Field="" PropertyAccessMode="PropertyAccessMode.Default" BeforeSaveBehavior="PropertySaveBehavior.Save" AfterSaveBehavior="PropertySaveBehavior.Save" Annotations="" IsPrimaryKey="False" IsForeignKey="True" IsRequired="True" IsIndexed="True" IsShadow="False" IsAlternateKey="False" IsConcurrencyToken="False" IsUnicode="True" ValueGenerated="None" />
-<Node Id = "ProjectEntity" Label="ProjectEntity" Name="ProjectEntity" BaseClass="" IsAbstract="False" ChangeTrackingStrategy="ChangeTrackingStrategy.Snapshot"  Annotations="Relational:TableName: Projects
-RelationshipDiscoveryConvention:NavigationCandidates: System.Collections.Immutable.ImmutableSortedDictionary`2[System.Reflection.PropertyInfo,System.ValueTuple`2[System.Type,System.Nullable`1[System.Boolean]]]" Category="EntityType" Group="Expanded" />
-<Node Id = "ProjectAmountEntity.Id" Label="Id (Guid)" Name="Id" Category="Property Primary" Type="Guid" MaxLength="None" Field="" PropertyAccessMode="PropertyAccessMode.Default" BeforeSaveBehavior="PropertySaveBehavior.Save" AfterSaveBehavior="PropertySaveBehavior.Save" Annotations="" IsPrimaryKey="True" IsForeignKey="False" IsRequired="True" IsIndexed="False" IsShadow="False" IsAlternateKey="False" IsConcurrencyToken="False" IsUnicode="True" ValueGenerated="ValueGenerated.OnAdd" />
-<Node Id = "ProjectAmountEntity.Project" Label="Project (1)" Name="Project" Category="Navigation Property" Type="ProjectEntity"  Field="" Dependent="" Principal="ProjectEntity" Inverse="Users" PropertyAccessMode="PropertyAccessMode.Default" />
-<Node Id = "ProjectAmountEntity.User" Label="User (1)" Name="User" Category="Navigation Property" Type="UserEntity"  Field="" Dependent="" Principal="UserEntity" Inverse="Projects" PropertyAccessMode="PropertyAccessMode.Default" />
-<Node Id = "ProjectAmountEntity.ProjectId" Label="ProjectId (Guid)" Name="ProjectId" Category="Property Foreign" Type="Guid" MaxLength="None" Field="" PropertyAccessMode="PropertyAccessMode.Default" BeforeSaveBehavior="PropertySaveBehavior.Save" AfterSaveBehavior="PropertySaveBehavior.Save" Annotations="" IsPrimaryKey="False" IsForeignKey="True" IsRequired="True" IsIndexed="True" IsShadow="False" IsAlternateKey="False" IsConcurrencyToken="False" IsUnicode="True" ValueGenerated="None" />
-<Node Id = "ProjectAmountEntity.UserId" Label="UserId (Guid)" Name="UserId" Category="Property Foreign" Type="Guid" MaxLength="None" Field="" PropertyAccessMode="PropertyAccessMode.Default" BeforeSaveBehavior="PropertySaveBehavior.Save" AfterSaveBehavior="PropertySaveBehavior.Save" Annotations="" IsPrimaryKey="False" IsForeignKey="True" IsRequired="True" IsIndexed="True" IsShadow="False" IsAlternateKey="False" IsConcurrencyToken="False" IsUnicode="True" ValueGenerated="None" />
-<Node Id = "UserEntity" Label="UserEntity" Name="UserEntity" BaseClass="" IsAbstract="False" ChangeTrackingStrategy="ChangeTrackingStrategy.Snapshot"  Annotations="Relational:TableName: Users
-RelationshipDiscoveryConvention:NavigationCandidates: System.Collections.Immutable.ImmutableSortedDictionary`2[System.Reflection.PropertyInfo,System.ValueTuple`2[System.Type,System.Nullable`1[System.Boolean]]]" Category="EntityType" Group="Expanded" />
-<Node Id = "ProjectEntity.Id" Label="Id (Guid)" Name="Id" Category="Property Primary" Type="Guid" MaxLength="None" Field="" PropertyAccessMode="PropertyAccessMode.Default" BeforeSaveBehavior="PropertySaveBehavior.Save" AfterSaveBehavior="PropertySaveBehavior.Save" Annotations="" IsPrimaryKey="True" IsForeignKey="False" IsRequired="True" IsIndexed="False" IsShadow="False" IsAlternateKey="False" IsConcurrencyToken="False" IsUnicode="True" ValueGenerated="ValueGenerated.OnAdd" />
-<Node Id = "ProjectEntity.CreatorId" Label="CreatorId (1)" Name="CreatorId" Category="Navigation Property" Type="UserEntity"  Field="" Dependent="" Principal="UserEntity" Inverse="" PropertyAccessMode="PropertyAccessMode.Default" />
-<Node Id = "ProjectEntity.Users" Label="Users (*)" Name="Users" Category="Navigation Collection" Type="ICollection&lt;ProjectAmountEntity&gt;"  Field="" Dependent="ProjectAmountEntity" Principal="" Inverse="Project" PropertyAccessMode="PropertyAccessMode.Default" />
-<Node Id = "ProjectEntity.CreatorIdId" Label="CreatorIdId (Guid)" Name="CreatorIdId" Category="Property Foreign" Type="Guid" MaxLength="None" Field="nofield" PropertyAccessMode="PropertyAccessMode.Default" BeforeSaveBehavior="PropertySaveBehavior.Save" AfterSaveBehavior="PropertySaveBehavior.Save" Annotations="" IsPrimaryKey="False" IsForeignKey="True" IsRequired="True" IsIndexed="True" IsShadow="True" IsAlternateKey="False" IsConcurrencyToken="False" IsUnicode="True" ValueGenerated="None" />
-<Node Id = "ProjectEntity.Name" Label="Name (string)" Name="Name" Category="Property Required" Type="string" MaxLength="None" Field="" PropertyAccessMode="PropertyAccessMode.Default" BeforeSaveBehavior="PropertySaveBehavior.Save" AfterSaveBehavior="PropertySaveBehavior.Save" Annotations="" IsPrimaryKey="False" IsForeignKey="False" IsRequired="True" IsIndexed="False" IsShadow="False" IsAlternateKey="False" IsConcurrencyToken="False" IsUnicode="True" ValueGenerated="None" />
-<Node Id = "UserEntity" Label="UserEntity" Name="UserEntity" BaseClass="" IsAbstract="False" ChangeTrackingStrategy="ChangeTrackingStrategy.Snapshot"  Annotations="" Category="EntityType" Group="Expanded" />
-<Node Id = "UserEntity.Id" Label="Id (Guid)" Name="Id" Category="Property Primary" Type="Guid" MaxLength="None" Field="" PropertyAccessMode="PropertyAccessMode.Default" BeforeSaveBehavior="PropertySaveBehavior.Save" AfterSaveBehavior="PropertySaveBehavior.Save" Annotations="" IsPrimaryKey="True" IsForeignKey="False" IsRequired="True" IsIndexed="False" IsShadow="False" IsAlternateKey="False" IsConcurrencyToken="False" IsUnicode="True" ValueGenerated="ValueGenerated.OnAdd" />
-<Node Id = "UserEntity.Projects" Label="Projects (*)" Name="Projects" Category="Navigation Collection" Type="ICollection&lt;ProjectAmountEntity&gt;"  Field="" Dependent="ProjectAmountEntity" Principal="" Inverse="User" PropertyAccessMode="PropertyAccessMode.Default" />
-<Node Id = "UserEntity.Name" Label="Name (string)" Name="Name" Category="Property Required" Type="string" MaxLength="None" Field="" PropertyAccessMode="PropertyAccessMode.Default" BeforeSaveBehavior="PropertySaveBehavior.Save" AfterSaveBehavior="PropertySaveBehavior.Save" Annotations="" IsPrimaryKey="False" IsForeignKey="False" IsRequired="True" IsIndexed="False" IsShadow="False" IsAlternateKey="False" IsConcurrencyToken="False" IsUnicode="True" ValueGenerated="None" />
-<Node Id = "UserEntity.PhotoUrl" Label="PhotoUrl (string)" Name="PhotoUrl" Category="Property Optional" Type="string" MaxLength="None" Field="" PropertyAccessMode="PropertyAccessMode.Default" BeforeSaveBehavior="PropertySaveBehavior.Save" AfterSaveBehavior="PropertySaveBehavior.Save" Annotations="" IsPrimaryKey="False" IsForeignKey="False" IsRequired="False" IsIndexed="False" IsShadow="False" IsAlternateKey="False" IsConcurrencyToken="False" IsUnicode="True" ValueGenerated="None" />
-<Node Id = "UserEntity.Surname" Label="Surname (string)" Name="Surname" Category="Property Required" Type="string" MaxLength="None" Field="" PropertyAccessMode="PropertyAccessMode.Default" BeforeSaveBehavior="PropertySaveBehavior.Save" AfterSaveBehavior="PropertySaveBehavior.Save" Annotations="" IsPrimaryKey="False" IsForeignKey="False" IsRequired="True" IsIndexed="False" IsShadow="False" IsAlternateKey="False" IsConcurrencyToken="False" IsUnicode="True" ValueGenerated="None" />
+    <Node Id="ActivityEntity" Category="EntityType" Annotations="Relational:TableName: Activities RelationshipDiscoveryConvention:NavigationCandidates: System.Collections.Immutable.ImmutableSortedDictionary`2[System.Reflection.PropertyInfo,System.ValueTuple`2[System.Type,System.Nullable`1[System.Boolean]]]" BaseClass="" Bounds="20,40,393.193333333333,253.84" ChangeTrackingStrategy="ChangeTrackingStrategy.Snapshot" Group="Expanded" IsAbstract="False" Label="ActivityEntity" Name="ActivityEntity" />
+    <Node Id="ActivityEntity.Description" Category="Property Required" AfterSaveBehavior="PropertySaveBehavior.Save" Annotations="" BeforeSaveBehavior="PropertySaveBehavior.Save" Bounds="40,247.88,120.876666666667,25.96" Field="" IsAlternateKey="False" IsConcurrencyToken="False" IsForeignKey="False" IsIndexed="False" IsPrimaryKey="False" IsRequired="True" IsShadow="False" IsUnicode="True" Label="Description (string)" MaxLength="None" Name="Description" PropertyAccessMode="PropertyAccessMode.Default" Type="string" ValueGenerated="None" />
+    <Node Id="ActivityEntity.End" Category="Property Required" AfterSaveBehavior="PropertySaveBehavior.Save" Annotations="" BeforeSaveBehavior="PropertySaveBehavior.Save" Bounds="159.57,135.96,101.123333333333,25.96" Field="" IsAlternateKey="False" IsConcurrencyToken="False" IsForeignKey="False" IsIndexed="False" IsPrimaryKey="False" IsRequired="True" IsShadow="False" IsUnicode="True" Label="End (DateTime)" MaxLength="None" Name="End" PropertyAccessMode="PropertyAccessMode.Default" Type="DateTime" ValueGenerated="None" />
+    <Node Id="ActivityEntity.Id" Category="Property Primary" AfterSaveBehavior="PropertySaveBehavior.Save" Annotations="" BeforeSaveBehavior="PropertySaveBehavior.Save" Bounds="130.783333333333,80,65.7833333333333,25.96" Field="" IsAlternateKey="False" IsConcurrencyToken="False" IsForeignKey="False" IsIndexed="False" IsPrimaryKey="True" IsRequired="True" IsShadow="False" IsUnicode="True" Label="Id (Guid)" MaxLength="None" Name="Id" PropertyAccessMode="PropertyAccessMode.Default" Type="Guid" ValueGenerated="ValueGenerated.OnAdd" />
+    <Node Id="ActivityEntity.Project" Category="Navigation Property" Bounds="226.566666666667,80,73.7133333333333,25.96" Dependent="" Field="" Inverse="" Label="Project (1)" Name="Project" Principal="ProjectEntity" PropertyAccessMode="PropertyAccessMode.Default" Type="ProjectEntity" />
+    <Node Id="ActivityEntity.ProjectId" Category="Property Foreign" AfterSaveBehavior="PropertySaveBehavior.Save" Annotations="" BeforeSaveBehavior="PropertySaveBehavior.Save" Bounds="290.693333333333,135.96,102.5,25.96" Field="" IsAlternateKey="False" IsConcurrencyToken="False" IsForeignKey="True" IsIndexed="True" IsPrimaryKey="False" IsRequired="True" IsShadow="False" IsUnicode="True" Label="ProjectId (Guid)" MaxLength="None" Name="ProjectId" PropertyAccessMode="PropertyAccessMode.Default" Type="Guid" ValueGenerated="None" />
+    <Node Id="ActivityEntity.Start" Category="Property Required" AfterSaveBehavior="PropertySaveBehavior.Save" Annotations="" BeforeSaveBehavior="PropertySaveBehavior.Save" Bounds="40,191.92,105.596666666667,25.96" Field="" IsAlternateKey="False" IsConcurrencyToken="False" IsForeignKey="False" IsIndexed="False" IsPrimaryKey="False" IsRequired="True" IsShadow="False" IsUnicode="True" Label="Start (DateTime)" MaxLength="None" Name="Start" PropertyAccessMode="PropertyAccessMode.Default" Type="DateTime" ValueGenerated="None" />
+    <Node Id="ActivityEntity.Type" Category="Property Required" AfterSaveBehavior="PropertySaveBehavior.Save" Annotations="" BeforeSaveBehavior="PropertySaveBehavior.Save" Bounds="175.596666666667,191.92,118.836666666667,25.96" Field="" IsAlternateKey="False" IsConcurrencyToken="False" IsForeignKey="False" IsIndexed="False" IsPrimaryKey="False" IsRequired="True" IsShadow="False" IsUnicode="True" Label="Type (ActivityType)" MaxLength="None" Name="Type" PropertyAccessMode="PropertyAccessMode.Default" Type="ActivityType" ValueGenerated="None" />
+    <Node Id="ActivityEntity.User" Category="Navigation Property" Bounds="40,80,60.7833333333333,25.96" Dependent="" Field="" Inverse="" Label="User (1)" Name="User" Principal="UserEntity" PropertyAccessMode="PropertyAccessMode.Default" Type="UserEntity" />
+    <Node Id="ActivityEntity.UserId" Category="Property Foreign" AfterSaveBehavior="PropertySaveBehavior.Save" Annotations="" BeforeSaveBehavior="PropertySaveBehavior.Save" Bounds="40,135.96,89.57,25.96" Field="" IsAlternateKey="False" IsConcurrencyToken="False" IsForeignKey="True" IsIndexed="True" IsPrimaryKey="False" IsRequired="True" IsShadow="False" IsUnicode="True" Label="UserId (Guid)" MaxLength="None" Name="UserId" PropertyAccessMode="PropertyAccessMode.Default" Type="Guid" ValueGenerated="None" />
+    <Node Id="IModel" Category="Model" Annotations="BaseTypeDiscoveryConvention:DerivedTypes: System.Collections.Generic.Dictionary`2[System.Type,System.Collections.Generic.List`1[Microsoft.EntityFrameworkCore.Metadata.IConventionEntityType]] RelationshipDiscoveryConvention:InverseNavigationCandidates: System.Collections.Generic.Dictionary`2[System.Type,System.Collections.Generic.SortedSet`1[System.Type]]" Bounds="0,0,697.238333333333,801.52" ChangeTrackingStrategy="ChangeTrackingStrategy.Snapshot" Group="Expanded" Label="TimeTrackerDbContext" ProductVersion="7.0.3" PropertyAccessMode="PropertyAccessMode.Default" />
+    <Node Id="ProjectAmountEntity" Category="EntityType" Annotations="Relational:TableName: ProjectAmounts RelationshipDiscoveryConvention:NavigationCandidates: System.Collections.Immutable.ImmutableSortedDictionary`2[System.Reflection.PropertyInfo,System.ValueTuple`2[System.Type,System.Nullable`1[System.Boolean]]]" BaseClass="" Bounds="443.955,67.98,233.283333333333,197.88" ChangeTrackingStrategy="ChangeTrackingStrategy.Snapshot" Group="Expanded" IsAbstract="False" Label="ProjectAmountEntity" Name="ProjectAmountEntity" />
+    <Node Id="ProjectAmountEntity.Id" Category="Property Primary" AfterSaveBehavior="PropertySaveBehavior.Save" Annotations="" BeforeSaveBehavior="PropertySaveBehavior.Save" Bounds="554.738333333333,107.98,65.7833333333333,25.96" Field="" IsAlternateKey="False" IsConcurrencyToken="False" IsForeignKey="False" IsIndexed="False" IsPrimaryKey="True" IsRequired="True" IsShadow="False" IsUnicode="True" Label="Id (Guid)" MaxLength="None" Name="Id" PropertyAccessMode="PropertyAccessMode.Default" Type="Guid" ValueGenerated="ValueGenerated.OnAdd" />
+    <Node Id="ProjectAmountEntity.Project" Category="Navigation Property" Bounds="463.955,163.94,73.7133333333333,25.96" Dependent="" Field="" Inverse="Users" Label="Project (1)" Name="Project" Principal="ProjectEntity" PropertyAccessMode="PropertyAccessMode.Default" Type="ProjectEntity" />
+    <Node Id="ProjectAmountEntity.ProjectId" Category="Property Foreign" AfterSaveBehavior="PropertySaveBehavior.Save" Annotations="" BeforeSaveBehavior="PropertySaveBehavior.Save" Bounds="463.955,219.9,102.5,25.96" Field="" IsAlternateKey="False" IsConcurrencyToken="False" IsForeignKey="True" IsIndexed="True" IsPrimaryKey="False" IsRequired="True" IsShadow="False" IsUnicode="True" Label="ProjectId (Guid)" MaxLength="None" Name="ProjectId" PropertyAccessMode="PropertyAccessMode.Default" Type="Guid" ValueGenerated="None" />
+    <Node Id="ProjectAmountEntity.User" Category="Navigation Property" Bounds="463.955,107.98,60.7833333333334,25.96" Dependent="" Field="" Inverse="Projects" Label="User (1)" Name="User" Principal="UserEntity" PropertyAccessMode="PropertyAccessMode.Default" Type="UserEntity" />
+    <Node Id="ProjectAmountEntity.UserId" Category="Property Foreign" AfterSaveBehavior="PropertySaveBehavior.Save" Annotations="" BeforeSaveBehavior="PropertySaveBehavior.Save" Bounds="567.668333333333,163.94,89.5699999999999,25.96" Field="" IsAlternateKey="False" IsConcurrencyToken="False" IsForeignKey="True" IsIndexed="True" IsPrimaryKey="False" IsRequired="True" IsShadow="False" IsUnicode="True" Label="UserId (Guid)" MaxLength="None" Name="UserId" PropertyAccessMode="PropertyAccessMode.Default" Type="Guid" ValueGenerated="None" />
+    <Node Id="ProjectEntity" Category="EntityType" Annotations="Relational:TableName: Projects RelationshipDiscoveryConvention:NavigationCandidates: System.Collections.Immutable.ImmutableSortedDictionary`2[System.Reflection.PropertyInfo,System.ValueTuple`2[System.Type,System.Nullable`1[System.Boolean]]]" BaseClass="" Bounds="267.18,339.8,248.833333333333,197.88" ChangeTrackingStrategy="ChangeTrackingStrategy.Snapshot" Group="Expanded" IsAbstract="False" Label="ProjectEntity" Name="ProjectEntity" />
+    <Node Id="ProjectEntity.CreatorId" Category="Navigation Property" Bounds="287.18,435.76,86.5133333333333,25.96" Dependent="" Field="" Inverse="" Label="CreatorId (1)" Name="CreatorId" Principal="UserEntity" PropertyAccessMode="PropertyAccessMode.Default" Type="UserEntity" />
+    <Node Id="ProjectEntity.CreatorIdId" Category="Property Foreign" AfterSaveBehavior="PropertySaveBehavior.Save" Annotations="" BeforeSaveBehavior="PropertySaveBehavior.Save" Bounds="287.18,491.72,115.3,25.96" Field="nofield" IsAlternateKey="False" IsConcurrencyToken="False" IsForeignKey="True" IsIndexed="True" IsPrimaryKey="False" IsRequired="True" IsShadow="True" IsUnicode="True" Label="CreatorIdId (Guid)" MaxLength="None" Name="CreatorIdId" PropertyAccessMode="PropertyAccessMode.Default" Type="Guid" ValueGenerated="None" />
+    <Node Id="ProjectEntity.Id" Category="Property Primary" AfterSaveBehavior="PropertySaveBehavior.Save" Annotations="" BeforeSaveBehavior="PropertySaveBehavior.Save" Bounds="381.59,379.8,65.7833333333333,25.96" Field="" IsAlternateKey="False" IsConcurrencyToken="False" IsForeignKey="False" IsIndexed="False" IsPrimaryKey="True" IsRequired="True" IsShadow="False" IsUnicode="True" Label="Id (Guid)" MaxLength="None" Name="Id" PropertyAccessMode="PropertyAccessMode.Default" Type="Guid" ValueGenerated="ValueGenerated.OnAdd" />
+    <Node Id="ProjectEntity.Name" Category="Property Required" AfterSaveBehavior="PropertySaveBehavior.Save" Annotations="" BeforeSaveBehavior="PropertySaveBehavior.Save" Bounds="403.693333333333,435.76,92.32,25.96" Field="" IsAlternateKey="False" IsConcurrencyToken="False" IsForeignKey="False" IsIndexed="False" IsPrimaryKey="False" IsRequired="True" IsShadow="False" IsUnicode="True" Label="Name (string)" MaxLength="None" Name="Name" PropertyAccessMode="PropertyAccessMode.Default" Type="string" ValueGenerated="None" />
+    <Node Id="ProjectEntity.Users" Category="Navigation Collection" Bounds="287.18,379.8,64.41,25.96" Dependent="ProjectAmountEntity" Field="" Inverse="Project" Label="Users (*)" Name="Users" Principal="" PropertyAccessMode="PropertyAccessMode.Default" Type="ICollection&lt;ProjectAmountEntity&gt;" />
+    <Node Id="UserEntity" Category="EntityType" Annotations="" BaseClass="" Bounds="256.701666666667,583.64,269.79,197.88" ChangeTrackingStrategy="ChangeTrackingStrategy.Snapshot" Group="Expanded" IsAbstract="False" Label="UserEntity" Name="UserEntity" />
+    <Node Id="UserEntity.Id" Category="Property Primary" AfterSaveBehavior="PropertySaveBehavior.Save" Annotations="" BeforeSaveBehavior="PropertySaveBehavior.Save" Bounds="276.701666666667,623.64,65.7833333333334,25.96" Field="" IsAlternateKey="False" IsConcurrencyToken="False" IsForeignKey="False" IsIndexed="False" IsPrimaryKey="True" IsRequired="True" IsShadow="False" IsUnicode="True" Label="Id (Guid)" MaxLength="None" Name="Id" PropertyAccessMode="PropertyAccessMode.Default" Type="Guid" ValueGenerated="ValueGenerated.OnAdd" />
+    <Node Id="UserEntity.Name" Category="Property Required" AfterSaveBehavior="PropertySaveBehavior.Save" Annotations="" BeforeSaveBehavior="PropertySaveBehavior.Save" Bounds="276.701666666667,679.6,92.32,25.96" Field="" IsAlternateKey="False" IsConcurrencyToken="False" IsForeignKey="False" IsIndexed="False" IsPrimaryKey="False" IsRequired="True" IsShadow="False" IsUnicode="True" Label="Name (string)" MaxLength="None" Name="Name" PropertyAccessMode="PropertyAccessMode.Default" Type="string" ValueGenerated="None" />
+    <Node Id="UserEntity.PhotoUrl" Category="Property Optional" AfterSaveBehavior="PropertySaveBehavior.Save" Annotations="" BeforeSaveBehavior="PropertySaveBehavior.Save" Bounds="276.701666666667,735.56,107.583333333333,25.96" Field="" IsAlternateKey="False" IsConcurrencyToken="False" IsForeignKey="False" IsIndexed="False" IsPrimaryKey="False" IsRequired="False" IsShadow="False" IsUnicode="True" Label="PhotoUrl (string)" MaxLength="None" Name="PhotoUrl" PropertyAccessMode="PropertyAccessMode.Default" Type="string" ValueGenerated="None" />
+    <Node Id="UserEntity.Projects" Category="Navigation Collection" Bounds="372.485,623.64,77.34,25.96" Dependent="ProjectAmountEntity" Field="" Inverse="User" Label="Projects (*)" Name="Projects" Principal="" PropertyAccessMode="PropertyAccessMode.Default" Type="ICollection&lt;ProjectAmountEntity&gt;" />
+    <Node Id="UserEntity.Surname" Category="Property Required" AfterSaveBehavior="PropertySaveBehavior.Save" Annotations="" BeforeSaveBehavior="PropertySaveBehavior.Save" Bounds="399.021666666667,679.6,107.47,25.96" Field="" IsAlternateKey="False" IsConcurrencyToken="False" IsForeignKey="False" IsIndexed="False" IsPrimaryKey="False" IsRequired="True" IsShadow="False" IsUnicode="True" Label="Surname (string)" MaxLength="None" Name="Surname" PropertyAccessMode="PropertyAccessMode.Default" Type="string" ValueGenerated="None" />
   </Nodes>
   <Links>
-<Link Source = "IModel" Target="ActivityEntity" Category="Contains" />
-<Link Source = "IModel" Target="ProjectAmountEntity" Category="Contains" />
-<Link Source = "ActivityEntity" Target="ActivityEntity.Project" Category="Contains" />
-<Link Source = "ActivityEntity" Target="ActivityEntity.User" Category="Contains" />
-<Link Source = "ActivityEntity" Target="ActivityEntity.Id" Category="Contains" />
-<Link Source="ActivityEntity" Target="ProjectEntity" From="ActivityEntity.ProjectId" To="ProjectEntity.Id" Name="ActivityEntity -> ProjectEntity" Annotations="" IsUnique="False" Label="1:*" Category="Foreign Key" />
-<Link Source="ActivityEntity" Target="UserEntity" From="ActivityEntity.UserId" To="UserEntity.Id" Name="ActivityEntity -> UserEntity" Annotations="" IsUnique="False" Label="1:*" Category="Foreign Key" />
-<Link Source = "ActivityEntity" Target="ActivityEntity.Description" Category="Contains" />
-<Link Source = "ActivityEntity" Target="ActivityEntity.End" Category="Contains" />
-<Link Source = "ActivityEntity" Target="ActivityEntity.ProjectId" Category="Contains" />
-<Link Source = "ActivityEntity" Target="ActivityEntity.Start" Category="Contains" />
-<Link Source = "ActivityEntity" Target="ActivityEntity.Type" Category="Contains" />
-<Link Source = "ActivityEntity" Target="ActivityEntity.UserId" Category="Contains" />
-<Link Source = "IModel" Target="ProjectEntity" Category="Contains" />
-<Link Source = "ProjectAmountEntity" Target="ProjectAmountEntity.Project" Category="Contains" />
-<Link Source = "ProjectAmountEntity" Target="ProjectAmountEntity.User" Category="Contains" />
-<Link Source = "ProjectAmountEntity" Target="ProjectAmountEntity.Id" Category="Contains" />
-<Link Source="ProjectAmountEntity" Target="ProjectEntity" From="ProjectAmountEntity.ProjectId" To="ProjectEntity.Id" Name="ProjectAmountEntity -> ProjectEntity" Annotations="" IsUnique="False" Label="1:*" Category="Foreign Key" />
-<Link Source="ProjectAmountEntity" Target="UserEntity" From="ProjectAmountEntity.UserId" To="UserEntity.Id" Name="ProjectAmountEntity -> UserEntity" Annotations="" IsUnique="False" Label="1:*" Category="Foreign Key" />
-<Link Source = "ProjectAmountEntity" Target="ProjectAmountEntity.ProjectId" Category="Contains" />
-<Link Source = "ProjectAmountEntity" Target="ProjectAmountEntity.UserId" Category="Contains" />
-<Link Source = "IModel" Target="UserEntity" Category="Contains" />
-<Link Source = "ProjectEntity" Target="ProjectEntity.CreatorId" Category="Contains" />
-<Link Source = "ProjectEntity" Target="ProjectEntity.Users" Category="Contains" />
-<Link Source = "ProjectEntity" Target="ProjectEntity.Id" Category="Contains" />
-<Link Source="ProjectEntity" Target="UserEntity" From="ProjectEntity.CreatorIdId" To="UserEntity.Id" Name="ProjectEntity -> UserEntity" Annotations="" IsUnique="False" Label="1:*" Category="Foreign Key" />
-<Link Source = "ProjectEntity" Target="ProjectEntity.CreatorIdId" Category="Contains" />
-<Link Source = "ProjectEntity" Target="ProjectEntity.Name" Category="Contains" />
-<Link Source = "IModel" Target="UserEntity" Category="Contains" />
-<Link Source = "UserEntity" Target="UserEntity.Projects" Category="Contains" />
-<Link Source = "UserEntity" Target="UserEntity.Id" Category="Contains" />
-<Link Source = "UserEntity" Target="UserEntity.Name" Category="Contains" />
-<Link Source = "UserEntity" Target="UserEntity.PhotoUrl" Category="Contains" />
-<Link Source = "UserEntity" Target="UserEntity.Surname" Category="Contains" />
+    <Link Source="ActivityEntity" Target="ActivityEntity.Description" Category="Contains" />
+    <Link Source="ActivityEntity" Target="ActivityEntity.End" Category="Contains" />
+    <Link Source="ActivityEntity" Target="ActivityEntity.Id" Category="Contains" />
+    <Link Source="ActivityEntity" Target="ActivityEntity.Project" Category="Contains" />
+    <Link Source="ActivityEntity" Target="ActivityEntity.ProjectId" Category="Contains" />
+    <Link Source="ActivityEntity" Target="ActivityEntity.Start" Category="Contains" />
+    <Link Source="ActivityEntity" Target="ActivityEntity.Type" Category="Contains" />
+    <Link Source="ActivityEntity" Target="ActivityEntity.User" Category="Contains" />
+    <Link Source="ActivityEntity" Target="ActivityEntity.UserId" Category="Contains" />
+    <Link Source="ActivityEntity" Target="ProjectEntity" Category="Foreign Key" Annotations="" Bounds="298.308837890625,293.839996337891,24.717529296875,38.3926696777344" From="ActivityEntity.ProjectId" IsUnique="False" Label="1:*" LabelBounds="299.030212885978,308.84,14.0733333333334,15.96" Name="ActivityEntity -&gt; ProjectEntity" To="ProjectEntity.Id" />
+    <Link Source="ActivityEntity" Target="UserEntity" Category="Foreign Key" Annotations="" Bounds="225.78547668457,293.839996337891,40.4891204833984,282.512176513672" From="ActivityEntity.UserId" IsUnique="False" Label="1:*" LabelBounds="214.523333333333,430.76,14.0733333333334,15.96" Name="ActivityEntity -&gt; UserEntity" To="UserEntity.Id" />
+    <Link Source="IModel" Target="ActivityEntity" Category="Contains" />
+    <Link Source="IModel" Target="ProjectAmountEntity" Category="Contains" />
+    <Link Source="IModel" Target="ProjectEntity" Category="Contains" />
+    <Link Source="IModel" Target="UserEntity" Category="Contains" />
+    <Link Source="ProjectAmountEntity" Target="ProjectAmountEntity.Id" Category="Contains" />
+    <Link Source="ProjectAmountEntity" Target="ProjectAmountEntity.Project" Category="Contains" />
+    <Link Source="ProjectAmountEntity" Target="ProjectAmountEntity.ProjectId" Category="Contains" />
+    <Link Source="ProjectAmountEntity" Target="ProjectAmountEntity.User" Category="Contains" />
+    <Link Source="ProjectAmountEntity" Target="ProjectAmountEntity.UserId" Category="Contains" />
+    <Link Source="ProjectAmountEntity" Target="ProjectEntity" Category="Foreign Key" Annotations="" Bounds="457.863159179688,265.859985351563,41.2190551757813,66.2968444824219" From="ProjectAmountEntity.ProjectId" IsUnique="False" Label="1:*" LabelBounds="467.398594412969,308.84,14.0733333333333,15.96" Name="ProjectAmountEntity -&gt; ProjectEntity" To="ProjectEntity.Id" />
+    <Link Source="ProjectAmountEntity" Target="UserEntity" Category="Foreign Key" Annotations="" Bounds="517.257385253906,265.859985351563,43.3392944335938,310.205444335938" From="ProjectAmountEntity.UserId" IsUnique="False" Label="1:*" LabelBounds="546.523333333333,430.76,14.0733333333334,15.96" Name="ProjectAmountEntity -&gt; UserEntity" To="UserEntity.Id" />
+    <Link Source="ProjectEntity" Target="ProjectEntity.CreatorId" Category="Contains" />
+    <Link Source="ProjectEntity" Target="ProjectEntity.CreatorIdId" Category="Contains" />
+    <Link Source="ProjectEntity" Target="ProjectEntity.Id" Category="Contains" />
+    <Link Source="ProjectEntity" Target="ProjectEntity.Name" Category="Contains" />
+    <Link Source="ProjectEntity" Target="ProjectEntity.Users" Category="Contains" />
+    <Link Source="ProjectEntity" Target="UserEntity" Category="Foreign Key" Annotations="" Bounds="391.5966796875,537.679992675781,0,36.9600219726563" From="ProjectEntity.CreatorIdId" IsUnique="False" Label="1:*" LabelBounds="377.523333333333,552.68,14.0733333333333,15.96" Name="ProjectEntity -&gt; UserEntity" To="UserEntity.Id" />
+    <Link Source="UserEntity" Target="UserEntity.Id" Category="Contains" />
+    <Link Source="UserEntity" Target="UserEntity.Name" Category="Contains" />
+    <Link Source="UserEntity" Target="UserEntity.PhotoUrl" Category="Contains" />
+    <Link Source="UserEntity" Target="UserEntity.Projects" Category="Contains" />
+    <Link Source="UserEntity" Target="UserEntity.Surname" Category="Contains" />
   </Links>
+  <Categories>
+    <Category Id="Contains" Label="Contains" Description="Whether the source of the link contains the target object" CanBeDataDriven="False" CanLinkedNodesBeDataDriven="True" IncomingActionLabel="Contained By" IsContainment="True" OutgoingActionLabel="Contains" />
+    <Category Id="EntityType" />
+    <Category Id="Foreign Key" />
+    <Category Id="Model" />
+    <Category Id="Navigation Collection" />
+    <Category Id="Navigation Property" />
+    <Category Id="Property Foreign" />
+    <Category Id="Property Optional" />
+    <Category Id="Property Primary" />
+    <Category Id="Property Required" />
+  </Categories>
+  <Properties>
+    <Property Id="AfterSaveBehavior" Group="Property Flags" DataType="System.String" />
+    <Property Id="Annotations" Description="Annotations" Group="Model Properties" DataType="System.String" />
+    <Property Id="BaseClass" Description="Base class" Group="Model Properties" DataType="System.String" />
+    <Property Id="BeforeSaveBehavior" Group="Property Flags" DataType="System.String" />
+    <Property Id="Bounds" DataType="System.Windows.Rect" />
+    <Property Id="CanBeDataDriven" Label="CanBeDataDriven" Description="CanBeDataDriven" DataType="System.Boolean" />
+    <Property Id="CanLinkedNodesBeDataDriven" Label="CanLinkedNodesBeDataDriven" Description="CanLinkedNodesBeDataDriven" DataType="System.Boolean" />
+    <Property Id="ChangeTrackingStrategy" Description="Change tracking strategy" Group="Model Properties" DataType="System.String" />
+    <Property Id="Dependent" Description="Dependent entity" Group="Model Properties" DataType="System.String" />
+    <Property Id="Expression" DataType="System.String" />
+    <Property Id="Field" Description="Backing field" Group="Model Properties" DataType="System.String" />
+    <Property Id="From" Description="Target property" Group="Model Properties" DataType="System.String" />
+    <Property Id="GraphDirection" DataType="Microsoft.VisualStudio.Diagrams.Layout.LayoutOrientation" />
+    <Property Id="Group" Label="Group" Description="Display the node as a group" DataType="Microsoft.VisualStudio.GraphModel.GraphGroupStyle" />
+    <Property Id="GroupLabel" DataType="System.String" />
+    <Property Id="IncomingActionLabel" Label="IncomingActionLabel" Description="IncomingActionLabel" DataType="System.String" />
+    <Property Id="Inverse" Description="Inverse entity" Group="Model Properties" DataType="System.String" />
+    <Property Id="IsAbstract" Label="IsAbstract" Description="IsAbstract" Group="Model Properties" DataType="System.Boolean" />
+    <Property Id="IsAlternateKey" Group="Property Flags" DataType="System.Boolean" />
+    <Property Id="IsConcurrencyToken" Group="Property Flags" DataType="System.Boolean" />
+    <Property Id="IsContainment" DataType="System.Boolean" />
+    <Property Id="IsEnabled" DataType="System.Boolean" />
+    <Property Id="IsForeignKey" Group="Property Flags" DataType="System.Boolean" />
+    <Property Id="IsIndexed" Group="Property Flags" DataType="System.Boolean" />
+    <Property Id="IsPrimaryKey" Group="Property Flags" DataType="System.Boolean" />
+    <Property Id="IsRequired" Group="Property Flags" DataType="System.Boolean" />
+    <Property Id="IsShadow" Group="Property Flags" DataType="System.Boolean" />
+    <Property Id="IsUnicode" Group="Property Flags" DataType="System.Boolean" />
+    <Property Id="IsUnique" Group="Model Properties" DataType="System.Boolean" />
+    <Property Id="Label" Label="Label" Description="Displayable label of an Annotatable object" DataType="System.String" />
+    <Property Id="LabelBounds" DataType="System.Windows.Rect" />
+    <Property Id="MaxLength" DataType="System.String" />
+    <Property Id="Name" Group="Model Properties" DataType="System.String" />
+    <Property Id="OutgoingActionLabel" Label="OutgoingActionLabel" Description="OutgoingActionLabel" DataType="System.String" />
+    <Property Id="Principal" Description="Principal entity" Group="Model Properties" DataType="System.String" />
+    <Property Id="ProductVersion" Label="Product Version" Description="EF Core product version" Group="Model Properties" DataType="System.String" />
+    <Property Id="PropertyAccessMode" Group="Property Flags" DataType="System.String" />
+    <Property Id="TargetType" DataType="System.Type" />
+    <Property Id="To" Description="Source property" Group="Model Properties" DataType="System.String" />
+    <Property Id="Type" Description="CLR data type" Group="Model Properties" DataType="System.String" />
+    <Property Id="Value" DataType="System.String" />
+    <Property Id="ValueGenerated" Group="Property Flags" DataType="System.String" />
+    <Property Id="ValueLabel" DataType="System.String" />
+    <Property Id="ZoomLevel" DataType="System.String" />
+  </Properties>
   <Styles>
     <Style TargetType="Node" GroupLabel="EntityType" ValueLabel="True">
       <Condition Expression="HasCategory('EntityType')" />
@@ -107,33 +158,4 @@ RelationshipDiscoveryConvention:NavigationCandidates: System.Collections.Immutab
       <Setter Property="Background" Value="#FFFFFFFF" />
     </Style>
   </Styles>
-  <Properties>
-    <Property Id="Name" Group="Model Properties" DataType="System.String" />
-    <Property Id="Field"  Description="Backing field" Group="Model Properties" DataType="System.String" />
-    <Property Id="Type"  Description="CLR data type" Group="Model Properties" DataType="System.String" />
-    <Property Id="To" Description="Source property" Group="Model Properties" DataType="System.String" />
-    <Property Id="From" Description="Target property" Group="Model Properties" DataType="System.String" />
-    <Property Id="Dependent" Description="Dependent entity" Group="Model Properties" DataType="System.String" />
-    <Property Id="Inverse" Description="Inverse entity" Group="Model Properties" DataType="System.String" />
-    <Property Id="Principal" Description="Principal entity" Group="Model Properties" DataType="System.String" />    
-    <Property Id="Annotations" Description="Annotations" Group="Model Properties" DataType="System.String" />
-    <Property Id="BaseClass"  Description="Base class" Group="Model Properties" DataType="System.String" />
-    <Property Id="ChangeTrackingStrategy" Description="Change tracking strategy" Group="Model Properties" DataType="System.String" />
-    <Property Id="IsUnique" Group="Model Properties" DataType="System.Boolean" />
-    <Property Id="IsAbstract" Group="Model Properties" DataType="System.Boolean" />
-    <Property Id="ProductVersion" Label="Product Version" Description="EF Core product version" Group="Model Properties" DataType="System.String" />
-    <Property Id="IsIndexed" Group="Property Flags" DataType="System.Boolean" />
-    <Property Id="IsRequired" Group="Property Flags" DataType="System.Boolean" />
-    <Property Id="IsPrimaryKey" Group="Property Flags" DataType="System.Boolean" />
-    <Property Id="IsForeignKey" Group="Property Flags" DataType="System.Boolean" />
-    <Property Id="IsShadow" Group="Property Flags" DataType="System.Boolean" />
-    <Property Id="IsAlternateKey" Group="Property Flags" DataType="System.Boolean" />
-    <Property Id="IsConcurrencyToken" Group="Property Flags" DataType="System.Boolean" />
-    <Property Id="IsIndexed" Group="Property Flags" DataType="System.Boolean" />
-    <Property Id="IsUnicode" Group="Property Flags" DataType="System.Boolean" />
-    <Property Id="ValueGenerated" Group="Property Flags" DataType="System.String" />
-    <Property Id="BeforeSaveBehavior" Group="Property Flags" DataType="System.String" />
-    <Property Id="AfterSaveBehavior" Group="Property Flags" DataType="System.String" />
-    <Property Id="PropertyAccessMode" Group="Property Flags" DataType="System.String" />
-  </Properties>
 </DirectedGraph>
