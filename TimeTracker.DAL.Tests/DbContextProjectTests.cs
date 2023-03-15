@@ -21,7 +21,7 @@ public class DbContextProjectTests : DbContextTestsBase
         {
             Id = Guid.NewGuid(),
             Name = "Project 1",
-            CreatorId = new UserEntity
+            Creator = new UserEntity
             {
                 Id = Guid.NewGuid(),
                 Name = "Chad",
