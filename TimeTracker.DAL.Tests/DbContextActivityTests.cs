@@ -6,6 +6,7 @@ using Microsoft.EntityFrameworkCore;
 using TimeTracker.Common.Enums;
 using Xunit;
 using Xunit.Abstractions;
+using TimeTracker.Common.Tests;
 
 namespace TimeTracker.DAL.Tests;
 
@@ -21,8 +22,9 @@ public class DbContextActivityTests : DbContextTestsBase
         var newActivity = new ActivityEntity
         {
             Id = Guid.NewGuid(),
-            Start = DateTime.Now,
-            End = DateTime.Now,
+            //Dont use DateTime.Now!!!!
+            Start = new DateTime(2020,1,1),
+            End = new DateTime(2020, 2, 2),
             Type = ActivityType.Studying,
             Description = "Coding some stuff",
             UserId = Guid.NewGuid(),
@@ -52,8 +54,12 @@ public class DbContextActivityTests : DbContextTestsBase
         await TimeTrackerDbContextSUT.SaveChangesAsync();
         
         await using var dbx = await DbContextFactory.CreateDbContextAsync();
-        var actualEntities = await dbx.Activities.SingleAsync(i => i.Id == newActivity.Id);
-        Assert.Equal(newActivity, actualEntities);
+        var actualEntities = await dbx.Activities
+            .Include(activity => activity.Project)
+            .ThenInclude(project => project.Creator)
+            .Include(activity => activity.User)
+            .SingleAsync(i => i.Id == newActivity.Id);
+        DeepAssert.Equal(newActivity, actualEntities);
         
     }
 }

@@ -1,7 +1,5 @@
-﻿using System;
-using System.Linq;
-using System.Threading.Tasks;
-using TimeTracker.DAL.Entities;
+﻿using TimeTracker.DAL.Entities;
+using TimeTracker.Common.Tests;
 using Microsoft.EntityFrameworkCore;
 using Xunit;
 using Xunit.Abstractions;
@@ -29,12 +27,15 @@ public class DbContextProjectTests : DbContextTestsBase
                 PhotoUrl = "https://www.google.com/"
             }
         };
+        
             
         TimeTrackerDbContextSUT.Projects.Add(newProject);
         await TimeTrackerDbContextSUT.SaveChangesAsync();
 
         await using var dbx = await DbContextFactory.CreateDbContextAsync();
-        var actualEntities = await dbx.Projects.SingleAsync(i => i.Id == newProject.Id);
-        Assert.Equal(newProject, actualEntities);
+        var actualEntities = await dbx.Projects
+            .Include(i => i.Creator)
+            .SingleAsync(i => i.Id == newProject.Id);
+        DeepAssert.Equal(newProject, actualEntities);
     }
 }
