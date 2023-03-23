@@ -16,6 +16,7 @@ public class DbContextSqLiteTestingFactory : IDbContextFactory<TimeTrackerDbCont
     public TimeTrackerDbContext CreateDbContext()
     {
         DbContextOptionsBuilder<TimeTrackerDbContext> builder = new();
+        builder.UseSqlite($"Data Source={_databaseName};Cache=Shared");
 
         return new TimeTrackerTestingDbContext(builder.Options, _seedTestingData);
     }
