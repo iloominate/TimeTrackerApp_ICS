@@ -11,7 +11,7 @@ using TimeTracker.DAL;
 namespace TimeTracker.DAL.Migrations
 {
     [DbContext(typeof(TimeTrackerDbContext))]
-    [Migration("20230401124247_Fix_entities")]
+    [Migration("20230401130628_Fix_entities")]
     partial class Fix_entities
     {
         /// <inheritdoc />
@@ -120,7 +120,7 @@ namespace TimeTracker.DAL.Migrations
             modelBuilder.Entity("TimeTracker.DAL.Entities.ActivityEntity", b =>
                 {
                     b.HasOne("TimeTracker.DAL.Entities.ProjectEntity", "Project")
-                        .WithMany("activities")
+                        .WithMany("Activities")
                         .HasForeignKey("ProjectId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
@@ -168,9 +168,9 @@ namespace TimeTracker.DAL.Migrations
 
             modelBuilder.Entity("TimeTracker.DAL.Entities.ProjectEntity", b =>
                 {
-                    b.Navigation("Users");
+                    b.Navigation("Activities");
 
-                    b.Navigation("activities");
+                    b.Navigation("Users");
                 });
 
             modelBuilder.Entity("TimeTracker.DAL.Entities.UserEntity", b =>
