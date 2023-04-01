@@ -15,17 +15,20 @@ public class DbContextProjectTests : DbContextTestsBase
     [Fact]
     public async Task AddNewProjectTest()
     {
+        var userGuid = Guid.NewGuid();
         var newProject = new ProjectEntity
         {
             Id = Guid.NewGuid(),
             Name = "Project 1",
             Creator = new UserEntity
             {
-                Id = Guid.NewGuid(),
+                Id = userGuid,
                 Name = "Chad",
                 Surname = "Watts",
                 PhotoUrl = "https://www.google.com/"
-            }
+            },
+            CreatorId = userGuid,
+            
         };
         
             

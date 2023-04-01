@@ -21,7 +21,6 @@ namespace TimeTracker.DAL
         public DbSet<ActivityEntity> Activities => Set<ActivityEntity>();
         public DbSet<ProjectEntity> Projects => Set<ProjectEntity>();
         public DbSet<UserEntity> Users => Set<UserEntity>();
-
         public DbSet<ProjectAmountEntity>  ProjectAmounts => Set<ProjectAmountEntity>();
     }
 }
