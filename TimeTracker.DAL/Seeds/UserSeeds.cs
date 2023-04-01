@@ -37,18 +37,22 @@ namespace TimeTracker.DAL.Seeds
         static UserSeeds()
         {
             JonhUser.Projects.Add(ProjectAmountSeeds.GameJamJohn);
+            JonhUser.Activities.Add(ActivitySeeds.LevelDesign);
 
             AdamUser.Projects.Add(ProjectAmountSeeds.SchoolAdam);
+            AdamUser.Activities.Add(ActivitySeeds.Generator);
 
             KrisWithProject.Projects.Add(ProjectAmountSeeds.GameJamKris);
             KrisWithProject.Projects.Add(ProjectAmountSeeds.SchoolKris);
+            KrisWithProject.Activities.Add(ActivitySeeds.Syntax);
+            KrisWithProject.Activities.Add(ActivitySeeds.MovementLogic);
         }
 
         public static void Seed(this ModelBuilder modelBuilder) =>
             modelBuilder.Entity<UserEntity>().HasData(
-                JonhUser,
-                AdamUser,
-                KrisWithProject
+                JonhUser with { Activities = Array.Empty<ActivityEntity>(), Projects = Array.Empty<ProjectAmountEntity>(), CreatedProjects = Array.Empty<ProjectEntity>() },
+                AdamUser with { Activities = Array.Empty<ActivityEntity>(), Projects = Array.Empty<ProjectAmountEntity>(), CreatedProjects = Array.Empty<ProjectEntity>() },
+                KrisWithProject with { Activities = Array.Empty<ActivityEntity>(), Projects = Array.Empty<ProjectAmountEntity>(), CreatedProjects = Array.Empty<ProjectEntity>() }
             );
     }
 }

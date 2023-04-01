@@ -48,7 +48,7 @@ namespace TimeTracker.DAL.Migrations
 
                     b.HasIndex("UserId");
 
-                    b.ToTable("Activities");
+                    b.ToTable("Activities", (string)null);
                 });
 
             modelBuilder.Entity("TimeTracker.DAL.Entities.ProjectAmountEntity", b =>
@@ -69,7 +69,7 @@ namespace TimeTracker.DAL.Migrations
 
                     b.HasIndex("UserId");
 
-                    b.ToTable("ProjectAmounts");
+                    b.ToTable("ProjectAmounts", (string)null);
                 });
 
             modelBuilder.Entity("TimeTracker.DAL.Entities.ProjectEntity", b =>
@@ -89,7 +89,7 @@ namespace TimeTracker.DAL.Migrations
 
                     b.HasIndex("CreatorId");
 
-                    b.ToTable("Projects");
+                    b.ToTable("Projects", (string)null);
                 });
 
             modelBuilder.Entity("TimeTracker.DAL.Entities.UserEntity", b =>
@@ -111,19 +111,19 @@ namespace TimeTracker.DAL.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Users");
+                    b.ToTable("Users", (string)null);
                 });
 
             modelBuilder.Entity("TimeTracker.DAL.Entities.ActivityEntity", b =>
                 {
                     b.HasOne("TimeTracker.DAL.Entities.ProjectEntity", "Project")
-                        .WithMany()
+                        .WithMany("Activities")
                         .HasForeignKey("ProjectId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
                     b.HasOne("TimeTracker.DAL.Entities.UserEntity", "User")
-                        .WithMany()
+                        .WithMany("Activities")
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
@@ -155,7 +155,7 @@ namespace TimeTracker.DAL.Migrations
             modelBuilder.Entity("TimeTracker.DAL.Entities.ProjectEntity", b =>
                 {
                     b.HasOne("TimeTracker.DAL.Entities.UserEntity", "Creator")
-                        .WithMany()
+                        .WithMany("CreatedProjects")
                         .HasForeignKey("CreatorId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
@@ -165,11 +165,17 @@ namespace TimeTracker.DAL.Migrations
 
             modelBuilder.Entity("TimeTracker.DAL.Entities.ProjectEntity", b =>
                 {
+                    b.Navigation("Activities");
+
                     b.Navigation("Users");
                 });
 
             modelBuilder.Entity("TimeTracker.DAL.Entities.UserEntity", b =>
                 {
+                    b.Navigation("Activities");
+
+                    b.Navigation("CreatedProjects");
+
                     b.Navigation("Projects");
                 });
 #pragma warning restore 612, 618

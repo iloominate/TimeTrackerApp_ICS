@@ -36,11 +36,18 @@ public class DbContextUserTests : DbContextTestsBase
     public async Task GetAll_Users_ContainsSeededKris()
     {
         //Act
-        var entity = await TimeTrackerDbContextSUT.Users
-            .Where(i => i.Id == UserSeeds.KrisWithProject.Id)
+        var entities = await TimeTrackerDbContextSUT.Users
+            //.Where(i => i.Id == UserSeeds.KrisWithProject.Id)
             .ToArrayAsync();
 
         //Assert
-        Assert.Contains(UserSeeds.KrisWithProject, entity);
+        Assert.Contains(
+            UserSeeds.KrisWithProject with
+            { 
+                Activities = Array.Empty<ActivityEntity>(),
+                CreatedProjects = Array.Empty<ProjectEntity>(), 
+                Projects = Array.Empty<ProjectAmountEntity>()
+            },
+            entities);
     }
 }

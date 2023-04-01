@@ -19,11 +19,12 @@ public class DbContextActivityTests : DbContextTestsBase
     [Fact]
     public async Task AddNewActivityTest()
     {
+        var creatorGuid = Guid.NewGuid();
         var newActivity = new ActivityEntity
         {
             Id = Guid.NewGuid(),
             //Dont use DateTime.Now!!!!
-            Start = new DateTime(2020,1,1),
+            Start = new DateTime(2020, 1, 1),
             End = new DateTime(2020, 2, 2),
             Type = ActivityType.Studying,
             Description = "Coding some stuff",
@@ -42,11 +43,12 @@ public class DbContextActivityTests : DbContextTestsBase
                 Name = "Project 1",
                 Creator = new UserEntity
                 {
-                    Id = Guid.NewGuid(),
+                    Id = creatorGuid,
                     Name = "Chad",
                     Surname = "Watts",
                     PhotoUrl = "https://www.google.com/"
-                }
+                },
+                CreatorId = creatorGuid,
             }
         };
         

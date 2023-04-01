@@ -31,15 +31,19 @@ namespace TimeTracker.DAL.Seeds
         {
             SchoolProject.Users.Add(ProjectAmountSeeds.SchoolKris);
             SchoolProject.Users.Add(ProjectAmountSeeds.SchoolAdam);
+            SchoolProject.Activities.Add(ActivitySeeds.Generator);
+            SchoolProject.Activities.Add(ActivitySeeds.Syntax);
 
             GameJam.Users.Add(ProjectAmountSeeds.GameJamKris);
             GameJam.Users.Add(ProjectAmountSeeds.GameJamJohn);
+            GameJam.Activities.Add(ActivitySeeds.LevelDesign);
+            GameJam.Activities.Add(ActivitySeeds.MovementLogic);
         }
 
         public static void Seed(ModelBuilder modelBuilder) =>
             modelBuilder.Entity<ProjectEntity>().HasData(
-                SchoolProject,
-                GameJam
+                SchoolProject with {Creator = null, Users = Array.Empty<ProjectAmountEntity>(), Activities = Array.Empty<ActivityEntity>() },
+                GameJam with { Creator = null, Users = Array.Empty<ProjectAmountEntity>(), Activities = Array.Empty<ActivityEntity>() }
                 );
     }
 }

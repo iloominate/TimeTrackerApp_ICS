@@ -40,7 +40,7 @@ namespace TimeTracker.DAL.Seeds
 
         public static readonly ProjectAmountEntity GameJamJohn = new()
         {
-            Id = Guid.Parse("18d3339f-7f40-4d1c-a49d-ef913081bcb9"),
+            Id = Guid.Parse("d2c378f0-10d6-4875-bdfe-6cb46d06ada7"),
             ProjectId = ProjectSeeds.GameJam.Id,
             UserId = UserSeeds.JonhUser.Id,
             Project = ProjectSeeds.GameJam,
@@ -49,10 +49,10 @@ namespace TimeTracker.DAL.Seeds
 
         public static void Seed(this ModelBuilder modelBuilder) =>
             modelBuilder.Entity<ProjectAmountEntity>().HasData(
-                SchoolKris,
-                SchoolAdam,
-                GameJamJohn,
-                GameJamKris
+                SchoolKris with { Project = null, User = null },
+                SchoolAdam with { Project = null, User = null },
+                GameJamJohn with { Project = null, User = null },
+                GameJamKris with { Project = null, User = null }
                 );
     }
 }

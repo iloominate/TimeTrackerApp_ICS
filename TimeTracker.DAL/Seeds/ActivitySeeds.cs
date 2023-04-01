@@ -64,7 +64,7 @@ namespace TimeTracker.DAL.Seeds
             Start = DateTime.Parse("01/03/2023 11:00:00"),
             End = DateTime.Parse("01/03/2023 15:00:00"),
             Type = ActivityType.Studying,
-
+            Description = "Add generator",
             User = UserSeeds.AdamUser,
             Project = ProjectSeeds.SchoolProject,
             UserId = UserSeeds.AdamUser.Id,
@@ -73,10 +73,10 @@ namespace TimeTracker.DAL.Seeds
 
         public static void Seed(ModelBuilder modelBuilder) =>
             modelBuilder.Entity<ActivityEntity>().HasData(
-                Generator,
-                Syntax,
-                LevelDesign,
-                MovementLogic
+                Generator with { Project = null, User = null},
+                Syntax with { Project = null, User = null },
+                LevelDesign with { Project = null, User = null },
+                MovementLogic with { Project = null, User = null }
                 );
     }
 }

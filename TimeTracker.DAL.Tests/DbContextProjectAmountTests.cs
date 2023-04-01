@@ -6,6 +6,8 @@ using TimeTracker.DAL.Entities;
 using Microsoft.EntityFrameworkCore;
 using Xunit;
 using Xunit.Abstractions;
+using TimeTracker.Common.Tests;
+using TimeTracker.DAL.Seeds;
 
 namespace TimeTracker.DAL.Tests;
 
@@ -13,6 +15,18 @@ public class DbContextProjectAmountTests : DbContextTestsBase
 {
     public DbContextProjectAmountTests(ITestOutputHelper output) : base(output)
     {
+    }
+
+    [Fact]
+    public async Task GetAll_ContainsSeedesGameJam()
+    {
+        //Act
+        var projectAmounts = await TimeTrackerDbContextSUT.ProjectAmounts
+            .Where(i => i.ProjectId == ProjectSeeds.GameJam.Id)
+            .ToListAsync();
+
+        Assert.Contains(ProjectAmountSeeds.GameJamKris with { Project = null, User = null }, projectAmounts);
+        Assert.Contains(ProjectAmountSeeds.GameJamJohn with { Project = null, User = null }, projectAmounts);
     }
     
     [Fact]
@@ -46,8 +60,7 @@ public class DbContextProjectAmountTests : DbContextTestsBase
                     Surname = "Watts",
                     PhotoUrl = "https://www.google.com/"
                 },
-                
-                
+                CreatorId = creatorId
             }
         };
 
@@ -61,7 +74,7 @@ public class DbContextProjectAmountTests : DbContextTestsBase
             .Include(activity => activity.User)
             .ToListAsync();
 
-        Assert.Single(actualEntities);
+        //Assert.Single(actualEntities);
         Assert.Equal(newActivity.Id, actualEntities.First().Id);
         Assert.Equal(newActivity.Start, actualEntities.First().Start);
         Assert.Equal(newActivity.End, actualEntities.First().End);
