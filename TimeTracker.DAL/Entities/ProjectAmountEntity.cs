@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace TimeTracker.DAL.Entities
 {
-    public class ProjectAmountEntity : IEntity
+    public record ProjectAmountEntity : IEntity
     {
         public Guid Id { get; set; }
 

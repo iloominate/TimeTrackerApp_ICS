@@ -11,6 +11,10 @@ namespace TimeTracker.DAL.Entities
         public required string Surname { get; set; }
         public string? PhotoUrl { get; set; }
 
-        public ICollection<ProjectAmountEntity> Projects { get; set; }
+        public ICollection<ProjectAmountEntity> Projects { get; set; } = new List<ProjectAmountEntity>();
+
+        public ICollection<ProjectEntity> CreatedProjects { get; set; } = new List<ProjectEntity>();
+
+        public ICollection<ActivityEntity> Activities { get; set; } = new List<ActivityEntity>();
     }
 }
