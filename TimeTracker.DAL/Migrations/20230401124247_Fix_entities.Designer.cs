@@ -11,8 +11,8 @@ using TimeTracker.DAL;
 namespace TimeTracker.DAL.Migrations
 {
     [DbContext(typeof(TimeTrackerDbContext))]
-    [Migration("20230303114830_firstMigration")]
-    partial class firstMigration
+    [Migration("20230401124247_Fix_entities")]
+    partial class Fix_entities
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -24,10 +24,6 @@ namespace TimeTracker.DAL.Migrations
                 {
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("TEXT");
-
-                    b.Property<string>("ActivityType")
-                        .IsRequired()
                         .HasColumnType("TEXT");
 
                     b.Property<string>("Description")
@@ -42,6 +38,9 @@ namespace TimeTracker.DAL.Migrations
 
                     b.Property<DateTime>("Start")
                         .HasColumnType("TEXT");
+
+                    b.Property<int>("Type")
+                        .HasColumnType("INTEGER");
 
                     b.Property<Guid>("UserId")
                         .HasColumnType("TEXT");
@@ -82,7 +81,7 @@ namespace TimeTracker.DAL.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("TEXT");
 
-                    b.Property<Guid>("CreatorIdId")
+                    b.Property<Guid>("CreatorId")
                         .HasColumnType("TEXT");
 
                     b.Property<string>("Name")
@@ -91,7 +90,7 @@ namespace TimeTracker.DAL.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("CreatorIdId");
+                    b.HasIndex("CreatorId");
 
                     b.ToTable("Projects");
                 });
@@ -121,13 +120,13 @@ namespace TimeTracker.DAL.Migrations
             modelBuilder.Entity("TimeTracker.DAL.Entities.ActivityEntity", b =>
                 {
                     b.HasOne("TimeTracker.DAL.Entities.ProjectEntity", "Project")
-                        .WithMany()
+                        .WithMany("activities")
                         .HasForeignKey("ProjectId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
                     b.HasOne("TimeTracker.DAL.Entities.UserEntity", "User")
-                        .WithMany()
+                        .WithMany("Activities")
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
@@ -158,22 +157,28 @@ namespace TimeTracker.DAL.Migrations
 
             modelBuilder.Entity("TimeTracker.DAL.Entities.ProjectEntity", b =>
                 {
-                    b.HasOne("TimeTracker.DAL.Entities.UserEntity", "CreatorId")
-                        .WithMany()
-                        .HasForeignKey("CreatorIdId")
+                    b.HasOne("TimeTracker.DAL.Entities.UserEntity", "Creator")
+                        .WithMany("CreatedProjects")
+                        .HasForeignKey("CreatorId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.Navigation("CreatorId");
+                    b.Navigation("Creator");
                 });
 
             modelBuilder.Entity("TimeTracker.DAL.Entities.ProjectEntity", b =>
                 {
                     b.Navigation("Users");
+
+                    b.Navigation("activities");
                 });
 
             modelBuilder.Entity("TimeTracker.DAL.Entities.UserEntity", b =>
                 {
+                    b.Navigation("Activities");
+
+                    b.Navigation("CreatedProjects");
+
                     b.Navigation("Projects");
                 });
 #pragma warning restore 612, 618

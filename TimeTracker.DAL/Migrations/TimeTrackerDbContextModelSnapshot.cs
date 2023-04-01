@@ -117,13 +117,13 @@ namespace TimeTracker.DAL.Migrations
             modelBuilder.Entity("TimeTracker.DAL.Entities.ActivityEntity", b =>
                 {
                     b.HasOne("TimeTracker.DAL.Entities.ProjectEntity", "Project")
-                        .WithMany()
+                        .WithMany("activities")
                         .HasForeignKey("ProjectId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
                     b.HasOne("TimeTracker.DAL.Entities.UserEntity", "User")
-                        .WithMany()
+                        .WithMany("Activities")
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
@@ -155,7 +155,7 @@ namespace TimeTracker.DAL.Migrations
             modelBuilder.Entity("TimeTracker.DAL.Entities.ProjectEntity", b =>
                 {
                     b.HasOne("TimeTracker.DAL.Entities.UserEntity", "Creator")
-                        .WithMany()
+                        .WithMany("CreatedProjects")
                         .HasForeignKey("CreatorId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
@@ -166,10 +166,16 @@ namespace TimeTracker.DAL.Migrations
             modelBuilder.Entity("TimeTracker.DAL.Entities.ProjectEntity", b =>
                 {
                     b.Navigation("Users");
+
+                    b.Navigation("activities");
                 });
 
             modelBuilder.Entity("TimeTracker.DAL.Entities.UserEntity", b =>
                 {
+                    b.Navigation("Activities");
+
+                    b.Navigation("CreatedProjects");
+
                     b.Navigation("Projects");
                 });
 #pragma warning restore 612, 618
