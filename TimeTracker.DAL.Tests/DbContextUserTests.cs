@@ -1,11 +1,9 @@
-using System;
-using System.Linq;
-using System.Threading.Tasks;
 using TimeTracker.DAL.Entities;
 using Microsoft.EntityFrameworkCore;
 using Xunit;
 using Xunit.Abstractions;
 using TimeTracker.Common.Tests;
+using TimeTracker.DAL.Seeds;
 
 namespace TimeTracker.DAL.Tests;
 
@@ -24,9 +22,6 @@ public class DbContextUserTests : DbContextTestsBase
             Name = "John",
             Surname = "Doe",
             PhotoUrl = "http://example.com/photo.jpg",
-            Activities = new List<ActivityEntity>(),
-            Projects = new List<ProjectAmountEntity>(),
-            CreatedProjects = new List<ProjectEntity>()
         };
 
         TimeTrackerDbContextSUT.Users.Add(newUser);
@@ -41,9 +36,18 @@ public class DbContextUserTests : DbContextTestsBase
     public async Task GetAll_Users_ContainsSeededKris()
     {
         //Act
-        var entity = await TimeTrackerDbContextSUT.Users.ToArrayAsync();
+        var entities = await TimeTrackerDbContextSUT.Users
+            //.Where(i => i.Id == UserSeeds.KrisWithProject.Id)
+            .ToArrayAsync();
 
         //Assert
-        Assert.Contains(UserSeeds.Kris, entity);
+        Assert.Contains(
+            UserSeeds.KrisWithProject with
+            { 
+                Activities = Array.Empty<ActivityEntity>(),
+                CreatedProjects = Array.Empty<ProjectEntity>(), 
+                Projects = Array.Empty<ProjectAmountEntity>()
+            },
+            entities);
     }
 }

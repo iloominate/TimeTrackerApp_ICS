@@ -48,7 +48,7 @@ namespace TimeTracker.DAL.Migrations
 
                     b.HasIndex("UserId");
 
-                    b.ToTable("Activities");
+                    b.ToTable("Activities", (string)null);
                 });
 
             modelBuilder.Entity("TimeTracker.DAL.Entities.ProjectAmountEntity", b =>
@@ -69,7 +69,7 @@ namespace TimeTracker.DAL.Migrations
 
                     b.HasIndex("UserId");
 
-                    b.ToTable("ProjectAmounts");
+                    b.ToTable("ProjectAmounts", (string)null);
                 });
 
             modelBuilder.Entity("TimeTracker.DAL.Entities.ProjectEntity", b =>
@@ -89,7 +89,7 @@ namespace TimeTracker.DAL.Migrations
 
                     b.HasIndex("CreatorId");
 
-                    b.ToTable("Projects");
+                    b.ToTable("Projects", (string)null);
                 });
 
             modelBuilder.Entity("TimeTracker.DAL.Entities.UserEntity", b =>
@@ -111,7 +111,7 @@ namespace TimeTracker.DAL.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Users");
+                    b.ToTable("Users", (string)null);
                 });
 
             modelBuilder.Entity("TimeTracker.DAL.Entities.ActivityEntity", b =>

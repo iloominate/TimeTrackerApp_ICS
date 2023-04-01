@@ -15,29 +15,35 @@ namespace TimeTracker.DAL.Seeds
         {
             Id = Guid.Parse("cb67db40-55f1-4d2f-9569-3bf5694ad802"),
             Name = "IFJ",
-            Creator = UserSeeds.KrisWithProject
+            Creator = UserSeeds.KrisWithProject,
+            CreatorId = UserSeeds.KrisWithProject.Id
         };
 
         public static readonly ProjectEntity GameJam = new()
         {
             Id = Guid.Parse("e6790563-6d01-4032-8b3e-3466b4ba43a8"),
             Name = "GAME JAM 2077",
-            Creator = UserSeeds.AdamUser
+            Creator = UserSeeds.AdamUser,
+            CreatorId = UserSeeds.AdamUser.Id
         };
 
         static ProjectSeeds()
         {
             SchoolProject.Users.Add(ProjectAmountSeeds.SchoolKris);
             SchoolProject.Users.Add(ProjectAmountSeeds.SchoolAdam);
+            SchoolProject.Activities.Add(ActivitySeeds.Generator);
+            SchoolProject.Activities.Add(ActivitySeeds.Syntax);
 
             GameJam.Users.Add(ProjectAmountSeeds.GameJamKris);
             GameJam.Users.Add(ProjectAmountSeeds.GameJamJohn);
+            GameJam.Activities.Add(ActivitySeeds.LevelDesign);
+            GameJam.Activities.Add(ActivitySeeds.MovementLogic);
         }
 
         public static void Seed(ModelBuilder modelBuilder) =>
             modelBuilder.Entity<ProjectEntity>().HasData(
-                SchoolProject,
-                GameJam
+                SchoolProject with {Creator = null, Users = Array.Empty<ProjectAmountEntity>(), Activities = Array.Empty<ActivityEntity>() },
+                GameJam with { Creator = null, Users = Array.Empty<ProjectAmountEntity>(), Activities = Array.Empty<ActivityEntity>() }
                 );
     }
 }
