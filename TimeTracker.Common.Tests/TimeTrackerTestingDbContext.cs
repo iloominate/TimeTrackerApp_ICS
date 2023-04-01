@@ -1,6 +1,6 @@
 using TimeTracker.DAL;
 using Microsoft.EntityFrameworkCore;
-using TimeTracker.DAL.Seeds;
+using TimeTracker.Common.Tests.Seeds;
 
 namespace TimeTracker.Common.Tests;
 
@@ -21,9 +21,9 @@ public class TimeTrackerTestingDbContext : TimeTrackerDbContext
         if (_seedTestingData)
         {
             UserSeeds.Seed(modelBuilder);
-            ProjectSeeds.Seed(modelBuilder);
-            ProjectAmountSeeds.Seed(modelBuilder);
-            ActivitySeeds.Seed(modelBuilder);
+            //ProjectSeeds.Seed(modelBuilder);
+            //ProjectAmountSeeds.Seed(modelBuilder);
+            //ActivitySeeds.Seed(modelBuilder);
         }
     }
 }
