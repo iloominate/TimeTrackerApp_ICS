@@ -15,14 +15,16 @@ namespace TimeTracker.DAL.Seeds
         {
             Id = Guid.Parse("cb67db40-55f1-4d2f-9569-3bf5694ad802"),
             Name = "IFJ",
-            Creator = UserSeeds.KrisWithProject
+            Creator = UserSeeds.KrisWithProject,
+            CreatorId = UserSeeds.KrisWithProject.Id
         };
 
         public static readonly ProjectEntity GameJam = new()
         {
             Id = Guid.Parse("e6790563-6d01-4032-8b3e-3466b4ba43a8"),
             Name = "GAME JAM 2077",
-            Creator = UserSeeds.AdamUser
+            Creator = UserSeeds.AdamUser,
+            CreatorId = UserSeeds.AdamUser.Id
         };
 
         static ProjectSeeds()

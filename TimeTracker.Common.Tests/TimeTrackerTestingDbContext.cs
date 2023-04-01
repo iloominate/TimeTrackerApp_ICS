@@ -2,7 +2,7 @@ using TimeTracker.DAL;
 using Microsoft.EntityFrameworkCore;
 using TimeTracker.DAL.Seeds;
 
-namespace TimeTracker.Common.Tests;
+namespace TimeTracker.DAL.Seeds;
 
 public class TimeTrackerTestingDbContext : TimeTrackerDbContext
 {

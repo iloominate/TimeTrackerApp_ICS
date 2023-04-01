@@ -18,6 +18,7 @@ public class DbContextProjectAmountTests : DbContextTestsBase
     [Fact]
     public async Task GetAll_ProjectAmounts_ForActivity()
     {
+        var creatorId = Guid.NewGuid();
         var newActivity = new ActivityEntity
         {
             Id = Guid.NewGuid(),
@@ -40,11 +41,13 @@ public class DbContextProjectAmountTests : DbContextTestsBase
                 Name = "Project 1",
                 Creator = new UserEntity
                 {
-                    Id = Guid.NewGuid(),
+                    Id = creatorId,
                     Name = "Chad",
                     Surname = "Watts",
                     PhotoUrl = "https://www.google.com/"
-                }
+                },
+                
+                
             }
         };
 
