@@ -5,7 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using TimeTracker.DAL.Entities;
 
-namespace TimeTracker.DAL.Mappers;
+namespace TimeTracker.DAL.Mappers; 
 
 public class UserEntityMapper : IEntityMapper<UserEntity>
 {
