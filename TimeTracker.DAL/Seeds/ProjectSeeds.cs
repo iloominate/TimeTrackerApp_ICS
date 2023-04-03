@@ -15,8 +15,8 @@ namespace TimeTracker.DAL.Seeds
         {
             Id = Guid.Parse("cb67db40-55f1-4d2f-9569-3bf5694ad802"),
             Name = "IFJ",
-            Creator = UserSeeds.KrisWithProject,
-            CreatorId = UserSeeds.KrisWithProject.Id
+            Creator = UserSeeds.Kris,
+            CreatorId = UserSeeds.Kris.Id
         };
 
         public static readonly ProjectEntity GameJam = new()

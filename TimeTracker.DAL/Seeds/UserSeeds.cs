@@ -26,13 +26,15 @@ namespace TimeTracker.DAL.Seeds
             PhotoUrl = @"https://cdn.vectorstock.com/i/1000x1000/77/50/man-person-thinking-icon-vector-10457750.webp"
         };
 
-        public static readonly UserEntity KrisWithProject = new()
+        public static readonly UserEntity Kris = new()
         {
             Id = Guid.Parse("9cd38b1e-e53a-45b2-bd7c-60ae5ffbd358"),
             Name = "Kris",
             Surname = "Kortes",
             PhotoUrl = "https://images.unsplash.com/photo-1438761681033-6461ffad8d80?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1470&q=80",
         };
+
+        public static readonly UserEntity KrisUpdate = Kris with { Id = Guid.Parse("f0550f74-a7b8-4e76-bd4d-996b2506e50e") };
 
         static UserSeeds()
         {
@@ -42,17 +44,18 @@ namespace TimeTracker.DAL.Seeds
             AdamUser.Projects.Add(ProjectAmountSeeds.SchoolAdam);
             AdamUser.Activities.Add(ActivitySeeds.Generator);
 
-            KrisWithProject.Projects.Add(ProjectAmountSeeds.GameJamKris);
-            KrisWithProject.Projects.Add(ProjectAmountSeeds.SchoolKris);
-            KrisWithProject.Activities.Add(ActivitySeeds.Syntax);
-            KrisWithProject.Activities.Add(ActivitySeeds.MovementLogic);
+            Kris.Projects.Add(ProjectAmountSeeds.GameJamKris);
+            Kris.Projects.Add(ProjectAmountSeeds.SchoolKris);
+            Kris.Activities.Add(ActivitySeeds.Syntax);
+            Kris.Activities.Add(ActivitySeeds.MovementLogic);
         }
 
         public static void Seed(this ModelBuilder modelBuilder) =>
             modelBuilder.Entity<UserEntity>().HasData(
                 JonhUser with { Activities = Array.Empty<ActivityEntity>(), Projects = Array.Empty<ProjectAmountEntity>(), CreatedProjects = Array.Empty<ProjectEntity>() },
                 AdamUser with { Activities = Array.Empty<ActivityEntity>(), Projects = Array.Empty<ProjectAmountEntity>(), CreatedProjects = Array.Empty<ProjectEntity>() },
-                KrisWithProject with { Activities = Array.Empty<ActivityEntity>(), Projects = Array.Empty<ProjectAmountEntity>(), CreatedProjects = Array.Empty<ProjectEntity>() }
+                Kris with { Activities = Array.Empty<ActivityEntity>(), Projects = Array.Empty<ProjectAmountEntity>(), CreatedProjects = Array.Empty<ProjectEntity>() },
+                KrisUpdate with { Activities = Array.Empty<ActivityEntity>(), Projects = Array.Empty<ProjectAmountEntity>(), CreatedProjects = Array.Empty<ProjectEntity>() }
             );
     }
 }

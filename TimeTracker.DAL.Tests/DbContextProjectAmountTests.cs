@@ -18,6 +18,7 @@ public class DbContextProjectAmountTests : DbContextTestsBase
     }
 
     [Fact]
+    //its not work. You are can delete this or fix
     public async Task GetAll_ContainsSeedesGameJam()
     {
         //Act

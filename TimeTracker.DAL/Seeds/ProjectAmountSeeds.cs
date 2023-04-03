@@ -15,9 +15,9 @@ namespace TimeTracker.DAL.Seeds
         {
             Id = Guid.Parse("5f690985-18d7-484a-824b-147e1c71cbc4"),
             ProjectId = ProjectSeeds.SchoolProject.Id,
-            UserId = UserSeeds.KrisWithProject.Id,
+            UserId = UserSeeds.Kris.Id,
             Project = ProjectSeeds.SchoolProject,
-            User = UserSeeds.KrisWithProject
+            User = UserSeeds.Kris
         };
 
         public static readonly ProjectAmountEntity SchoolAdam = new()
@@ -33,9 +33,9 @@ namespace TimeTracker.DAL.Seeds
         {
             Id = Guid.Parse("18d3339f-7f40-4d1c-a49d-ef913081bcb9"),
             ProjectId = ProjectSeeds.GameJam.Id,
-            UserId = UserSeeds.KrisWithProject.Id,
+            UserId = UserSeeds.Kris.Id,
             Project = ProjectSeeds.GameJam,
-            User = UserSeeds.KrisWithProject
+            User = UserSeeds.Kris
         };
 
         public static readonly ProjectAmountEntity GameJamJohn = new()

@@ -33,6 +33,7 @@ public class DbContextUserTests : DbContextTestsBase
     }
 
     [Fact]
+    //its not work. You are can delete this or fix
     public async Task GetAll_Users_ContainsSeededKris()
     {
         //Act
@@ -42,12 +43,37 @@ public class DbContextUserTests : DbContextTestsBase
 
         //Assert
         Assert.Contains(
-            UserSeeds.KrisWithProject with
+            UserSeeds.Kris with
             { 
                 Activities = Array.Empty<ActivityEntity>(),
                 CreatedProjects = Array.Empty<ProjectEntity>(), 
                 Projects = Array.Empty<ProjectAmountEntity>()
             },
             entities);
+    }
+
+    [Fact]
+    public async Task Update_UserInformation()
+    {
+        //Arrange
+        var baseEntity = UserSeeds.KrisUpdate;
+        await using var dbx = await DbContextFactory.CreateDbContextAsync();
+        var entity = await TimeTrackerDbContextSUT.Users.SingleAsync(i => i.Id == baseEntity.Id);
+
+        var UpdatedEntity =
+            entity with
+            {
+                Name = entity.Name + " Updated",
+                Surname = entity.Surname + " Updated",
+            };
+
+        //Act
+        dbx.Users.Update(UpdatedEntity);
+        await TimeTrackerDbContextSUT.SaveChangesAsync();
+
+        //Assert
+        
+        var actualEntity = await dbx.Users.SingleAsync(i => i.Id == UpdatedEntity.Id);
+        DeepAssert.Equal(UpdatedEntity, actualEntity);
     }
 }

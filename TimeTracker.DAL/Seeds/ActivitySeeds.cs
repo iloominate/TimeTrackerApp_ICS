@@ -17,7 +17,7 @@ namespace TimeTracker.DAL.Seeds
         
         
         
-        f0550f74-a7b8-4e76-bd4d-996b2506e50e
+        
         */
         public static readonly ActivityEntity MovementLogic = new()
         {
@@ -26,9 +26,9 @@ namespace TimeTracker.DAL.Seeds
             End = DateTime.Parse("01/01/2023 23:00:00"),
             Type = ActivityType.Work,
             Description = "Working Movement Logic for Game",
-            User = UserSeeds.KrisWithProject,
+            User = UserSeeds.Kris,
             Project = ProjectSeeds.GameJam,
-            UserId = UserSeeds.KrisWithProject.Id,
+            UserId = UserSeeds.Kris.Id,
             ProjectId = ProjectSeeds.GameJam.Id
         };
 
@@ -52,9 +52,9 @@ namespace TimeTracker.DAL.Seeds
             End = DateTime.Parse("01/03/2023 13:00:00"),
             Type = ActivityType.Studying,
             Description = "ITS HELL!!!",
-            User = UserSeeds.KrisWithProject,
+            User = UserSeeds.Kris,
             Project = ProjectSeeds.SchoolProject,
-            UserId = UserSeeds.KrisWithProject.Id,
+            UserId = UserSeeds.Kris.Id,
             ProjectId = ProjectSeeds.SchoolProject.Id
         };
 
