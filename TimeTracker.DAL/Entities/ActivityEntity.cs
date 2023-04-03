@@ -12,7 +12,7 @@ public record ActivityEntity : IEntity
     public string Description { get; set; }
 
     public required Guid UserId { get; set; }
-    public required UserEntity? User { get; set; }
+    public required UserEntity? User { get; init; }
     public required Guid ProjectId { get; set; }
-    public required ProjectEntity? Project { get; set; }
+    public required ProjectEntity? Project { get; init; }
 }

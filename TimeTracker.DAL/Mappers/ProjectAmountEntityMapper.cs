@@ -14,7 +14,5 @@ public class ProjectAmountEntityMapper : IEntityMapper<ProjectAmountEntity>
     {
         newEntity.ProjectId = existingEntity.ProjectId; 
         newEntity.UserId = existingEntity.UserId;
-        newEntity.User = existingEntity.User;
-        newEntity.Project = existingEntity.Project;
     }
 }
