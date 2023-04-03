@@ -13,7 +13,6 @@ public class ProjectEntityMapper : IEntityMapper<ProjectEntity>
     {
         newEntity.Name = existingEntity.Name;
         newEntity.Creator = existingEntity.Creator;
-        newEntity.Id = existingEntity.Id;
         newEntity.Users = existingEntity.Users;
         newEntity.CreatorId = existingEntity.CreatorId;
         newEntity.Activities = existingEntity.Activities;

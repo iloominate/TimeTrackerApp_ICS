@@ -15,7 +15,6 @@ public class UserEntityMapper : IEntityMapper<UserEntity>
         newEntity.Projects = existingEntity.Projects;
         newEntity.CreatedProjects = existingEntity.CreatedProjects;
         newEntity.PhotoUrl = existingEntity.PhotoUrl;
-        newEntity.Id = existingEntity.Id;
         newEntity.Name = existingEntity.Name;
         newEntity.Surname = existingEntity.Surname;
     }

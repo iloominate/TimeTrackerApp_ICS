@@ -11,7 +11,6 @@ public class ActivityEntityMapper : IEntityMapper<ActivityEntity>
 {
     public void MapToExistingEntity(ActivityEntity existingEntity, ActivityEntity newEntity)
     {
-        newEntity.Id = existingEntity.Id;
         newEntity.ProjectId = existingEntity.ProjectId;
         newEntity.UserId = existingEntity.UserId;
         newEntity.Type = existingEntity.Type;
