@@ -17,8 +17,6 @@ public class ActivityEntityMapper : IEntityMapper<ActivityEntity>
         newEntity.Start = existingEntity.Start;
         newEntity.End = existingEntity.End;
         newEntity.Description = existingEntity.Description;
-        newEntity.User = existingEntity.User;
-        newEntity.Project = existingEntity.Project;
 
     }
 }
