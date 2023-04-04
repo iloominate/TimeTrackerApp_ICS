@@ -27,33 +27,28 @@ namespace TimeTracker.DAL
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             base.OnModelCreating(modelBuilder);
-
+            
             modelBuilder.Entity<UserEntity>()
                 .HasMany(i => i.Projects)
                 .WithOne(i => i.User)
-                .OnDelete(DeleteBehavior.Cascade);
-            
-            modelBuilder.Entity<ProjectEntity>()
-                .HasMany<ProjectAmountEntity>()
-                .WithOne(i => i.Project)
-                .OnDelete(DeleteBehavior.Cascade);
-            
-            modelBuilder.Entity<ProjectEntity>()
-                .HasMany<ProjectAmountEntity>()
-                .WithOne(i => i.Project)
                 .OnDelete(DeleteBehavior.Restrict);
             
+            modelBuilder.Entity<ProjectEntity>()
+                .HasMany<ProjectAmountEntity>()
+                .WithOne(i => i.Project)
+                .OnDelete(DeleteBehavior.Cascade);
+
             modelBuilder.Entity<ActivityEntity>()
                 .HasOne(i => i.Project)
                 .WithMany(i => i.Activities)
                 .HasForeignKey(i => i.ProjectId)
-                .OnDelete(DeleteBehavior.Restrict);
+                .OnDelete(DeleteBehavior.Cascade);
             
             modelBuilder.Entity<ActivityEntity>()
                 .HasOne(i => i.User)
                 .WithMany(i => i.Activities)
                 .HasForeignKey(i => i.UserId)
-                .OnDelete(DeleteBehavior.Restrict);
+                .OnDelete(DeleteBehavior.Cascade);
                 
             if (!_seedDemoData) return;
             
