@@ -7,9 +7,6 @@ public record ProjectAmountDetailModel : ModelBase
 {
     public Guid ProjectId { get; set; }
     public Guid UserId { get; set; }
-    
-    public ObservableCollection<ProjectAmountDetailModel> Users { get; set; } = new();
-    public ObservableCollection<ProjectAmountDetailModel> Projects { get; set; } = new();
 
     public static ProjectAmountDetailModel Empty => new()
     {
