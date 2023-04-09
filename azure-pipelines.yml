@@ -3,11 +3,8 @@
 # Add steps that build, run tests, deploy, and more:
 # https://aka.ms/yaml
 
-trigger:
-- master
-
 pool:
-  vmImage: 'windows-2022'
+  vmImage: windows-2022
 
 steps:
 - task: UseDotNet@2
@@ -16,23 +13,18 @@ steps:
     packageType: 'sdk'
     version: '7.0.x'
 
-- task: CmdLine@2
-  inputs:
-    script: 'dotnet workload install maui'
+# - task: CmdLine@2
+#   inputs:
+#   script: 'dotnet workload install maui'
 
 - task: DotNetCoreCLI@2
   name: "Build"
   inputs:
     command: 'build'
-    projects: '/*.sln'
+    projects: 'TimeTracker.sln'
 
 - task: DotNetCoreCLI@2
   name: "Test"
   inputs:
     command: 'test'
-    projects: '*/CookBook.sln'
-
-- task: DotNetCoreCLI@2
-  inputs:
-    command: 'build'
-    projects: '/*.sln'
+    projects: 'TimeTracker.sln'
