@@ -35,6 +35,7 @@ namespace TimeTracker.DAL.Seeds
         };
 
         public static readonly UserEntity KrisUpdate = Kris with { Id = Guid.Parse("f0550f74-a7b8-4e76-bd4d-996b2506e50e") };
+        public static readonly UserEntity KrisDelete = Kris with { Id = Guid.Parse("f0550f74-a7b8-4e76-bd4d-996b2506e50d") };
 
         static UserSeeds()
         {
@@ -55,7 +56,8 @@ namespace TimeTracker.DAL.Seeds
                 JonhUser with { Activities = Array.Empty<ActivityEntity>(), Projects = Array.Empty<ProjectAmountEntity>(), CreatedProjects = Array.Empty<ProjectEntity>() },
                 AdamUser with { Activities = Array.Empty<ActivityEntity>(), Projects = Array.Empty<ProjectAmountEntity>(), CreatedProjects = Array.Empty<ProjectEntity>() },
                 Kris with { Activities = Array.Empty<ActivityEntity>(), Projects = Array.Empty<ProjectAmountEntity>(), CreatedProjects = Array.Empty<ProjectEntity>() },
-                KrisUpdate with { Activities = Array.Empty<ActivityEntity>(), Projects = Array.Empty<ProjectAmountEntity>(), CreatedProjects = Array.Empty<ProjectEntity>() }
+                KrisUpdate with { Activities = Array.Empty<ActivityEntity>(), Projects = Array.Empty<ProjectAmountEntity>(), CreatedProjects = Array.Empty<ProjectEntity>() },
+                KrisDelete with { Activities = Array.Empty<ActivityEntity>(), Projects = Array.Empty<ProjectAmountEntity>(), CreatedProjects = Array.Empty<ProjectEntity>() }
             );
     }
 }

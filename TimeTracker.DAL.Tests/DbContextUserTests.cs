@@ -16,6 +16,7 @@ public class DbContextUserTests : DbContextTestsBase
     [Fact]
     public async Task AddNewUserTest()
     {
+        // Arrange
         var newUser = new UserEntity
         {
             Id = Guid.NewGuid(),
@@ -24,32 +25,41 @@ public class DbContextUserTests : DbContextTestsBase
             PhotoUrl = "http://example.com/photo.jpg",
         };
 
+        // Act
         TimeTrackerDbContextSUT.Users.Add(newUser);
         await TimeTrackerDbContextSUT.SaveChangesAsync();
 
+        // Assert
         await using var dbx = await DbContextFactory.CreateDbContextAsync();
         var actualEntities = await dbx.Users.SingleAsync(i => i.Id == newUser.Id);
+
         DeepAssert.Equal(newUser, actualEntities);
     }
 
     [Fact]
-    //its not work. You are can delete this or fix
     public async Task GetAll_Users_ContainsSeededKris()
     {
         //Act
         var entities = await TimeTrackerDbContextSUT.Users
-            //.Where(i => i.Id == UserSeeds.KrisWithProject.Id)
+            .Where(i => i.Id == UserSeeds.Kris.Id)
             .ToArrayAsync();
 
+        var actual = entities.First();
+        var expected = UserSeeds.Kris with
+        {
+            Activities = new List<ActivityEntity>(),
+            CreatedProjects = new List<ProjectEntity>(),
+            Projects = new List<ProjectAmountEntity>()
+        };
+
         //Assert
-        Assert.Contains(
-            UserSeeds.Kris with
-            { 
-                Activities = Array.Empty<ActivityEntity>(),
-                CreatedProjects = Array.Empty<ProjectEntity>(), 
-                Projects = Array.Empty<ProjectAmountEntity>()
-            },
-            entities);
+        Assert.Equal(expected.Id, actual.Id);
+        Assert.Equal(expected.Name, actual.Name);
+        Assert.Equal(expected.Surname, actual.Surname);
+        Assert.Equal(expected.PhotoUrl, actual.PhotoUrl);
+        Assert.True(expected.Projects.SequenceEqual(actual.Projects));
+        Assert.True(expected.Activities.SequenceEqual(actual.Activities));
+        Assert.True(expected.CreatedProjects.SequenceEqual(actual.CreatedProjects));
     }
 
     [Fact]
@@ -65,6 +75,7 @@ public class DbContextUserTests : DbContextTestsBase
             {
                 Name = entity.Name + " Updated",
                 Surname = entity.Surname + " Updated",
+                PhotoUrl = entity.PhotoUrl + " Updated",
             };
 
         //Act
@@ -72,8 +83,22 @@ public class DbContextUserTests : DbContextTestsBase
         await TimeTrackerDbContextSUT.SaveChangesAsync();
 
         //Assert
-        
         var actualEntity = await dbx.Users.SingleAsync(i => i.Id == UpdatedEntity.Id);
         DeepAssert.Equal(UpdatedEntity, actualEntity);
+    }
+
+    [Fact]
+    public async Task DeleteById_User()
+    {
+        //Arrange
+        var baseEntity = UserSeeds.KrisDelete;
+
+        //Act
+        TimeTrackerDbContextSUT.Users.Remove(
+            TimeTrackerDbContextSUT.Users.Single(i => i.Id == baseEntity.Id));
+        await TimeTrackerDbContextSUT.SaveChangesAsync();
+
+        //Assert
+        Assert.False(await TimeTrackerDbContextSUT.Users.AnyAsync(i => i.Id == baseEntity.Id));
     }
 }
