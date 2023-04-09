@@ -11,14 +11,6 @@ namespace TimeTracker.DAL.Seeds
 {
     public static class ActivitySeeds
     {
-
-        /*
-        
-        
-        
-        
-        
-        */
         public static readonly ActivityEntity MovementLogic = new()
         {
             Id = Guid.Parse("6f8edb5a-7f72-45e0-8845-c28e69329753"),
