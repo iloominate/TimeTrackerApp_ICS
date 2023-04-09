@@ -1,4 +1,5 @@
 using System;
+using System.Collections.ObjectModel;
 
 namespace TimeTracker.BL.Models.DetailModels;
 
@@ -6,9 +7,6 @@ public record ProjectAmountDetailModel : ModelBase
 {
     public Guid ProjectId { get; set; }
     public Guid UserId { get; set; }
-    
-    public List<ProjectAmountDetailModel> Users { get; set; } = new();
-    public List<ProjectAmountDetailModel> Projects { get; set; } = new();
 
     public static ProjectAmountDetailModel Empty => new()
     {

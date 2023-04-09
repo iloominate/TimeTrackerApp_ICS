@@ -12,6 +12,6 @@ public record ProjectEntity : IEntity
     public ICollection<ActivityEntity> Activities { get; init; } = new List<ActivityEntity>();
 
     public required Guid CreatorId { get; set; }
-    public required UserEntity Creator { get; init; }
+    public UserEntity Creator { get; init; }
 
 }

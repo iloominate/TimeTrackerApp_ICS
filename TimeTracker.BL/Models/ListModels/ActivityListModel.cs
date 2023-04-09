@@ -1,5 +1,6 @@
 using System;
 using TimeTracker.Common.Enums;
+using TimeTracker.DAL.Entities;
 
 namespace TimeTracker.BL.Models.ListModels;
 
@@ -12,9 +13,6 @@ public record ActivityListModel : ModelBase
     public required Guid UserId { get; set; }
     public required Guid ProjectId { get; set; }
     
-    public List<UserListModel> Users { get; set; } = new();
-    public List<ProjectListModel> Projects { get; set; } = new();
-    
     public static ActivityListModel Empty => new()
     {
         Id = Guid.Empty,
@@ -23,6 +21,6 @@ public record ActivityListModel : ModelBase
         Type = ActivityType.Other,
         
         UserId = Guid.Empty,
-        ProjectId = Guid.Empty,
+        ProjectId = Guid.Empty
     };
 }
