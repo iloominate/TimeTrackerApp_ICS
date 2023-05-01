@@ -1,8 +1,6 @@
-﻿
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Internal;
 using TimeTracker.DAL.Entities;
-
 namespace TimeTracker.Common.Tests.Seeds
 {
     public static class UserSeeds
@@ -34,7 +32,6 @@ namespace TimeTracker.Common.Tests.Seeds
             Surname = default!,
             PhotoUrl = default!,
         };
-
         public static readonly UserEntity Kris = new()
         {
             Id = Guid.Parse("53525bb6-2647-417c-aaa8-545cec5c3b1c"),
@@ -42,9 +39,7 @@ namespace TimeTracker.Common.Tests.Seeds
             Surname = "Stratulat",
             PhotoUrl = "https://twizz.ru/wp-content/uploads/2019/02/bez-nazvaniya-7.jpg",
         };
-
         //public static readonly UserEntity KrisUpdate = 
-
         public static readonly UserEntity UserEntity1 = new()
         {
             Id = Guid.Parse("fabde0cd-eefe-443f-baf6-3d96cc2cbf2e"),
@@ -52,7 +47,6 @@ namespace TimeTracker.Common.Tests.Seeds
             Surname = "Seeded Surname User 1",
             PhotoUrl = "https://ps.w.org/user-avatar-reloaded/assets/icon-128x128.png?rev=2540745"
         };
-
         public static readonly UserEntity UserEntity2 = new()
         {
             Id = Guid.Parse("5147a000-6246-4dc3-8819-769b6db484b1"),
@@ -60,7 +54,6 @@ namespace TimeTracker.Common.Tests.Seeds
             Surname = "Seeded Surname User 2",
             PhotoUrl = "https://ps.w.org/user-avatar-reloaded/assets/icon-128x128.png?rev=2540745"
         };
-
         public static void Seed(this ModelBuilder modelBuilder)
         {
             modelBuilder.Entity<UserEntity>().HasData(
@@ -69,6 +62,5 @@ namespace TimeTracker.Common.Tests.Seeds
                 Kris
                 );
         }
-
     }
 }

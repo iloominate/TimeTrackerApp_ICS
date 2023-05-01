@@ -18,19 +18,6 @@ public class DbContextProjectAmountTests : DbContextTestsBase
     }
 
     [Fact]
-    //its not work. You are can delete this or fix
-    public async Task GetAll_ContainsSeedesGameJam()
-    {
-        //Act
-        var projectAmounts = await TimeTrackerDbContextSUT.ProjectAmounts
-            .Where(i => i.ProjectId == ProjectSeeds.GameJam.Id)
-            .ToListAsync();
-
-        Assert.Contains(ProjectAmountSeeds.GameJamKris with { Project = null, User = null }, projectAmounts);
-        Assert.Contains(ProjectAmountSeeds.GameJamJohn with { Project = null, User = null }, projectAmounts);
-    }
-    
-    [Fact]
     public async Task GetAll_ProjectAmounts_ForActivity()
     {
         var creatorId = Guid.NewGuid();

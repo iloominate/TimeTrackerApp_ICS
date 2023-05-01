@@ -9,8 +9,7 @@ using TimeTracker.DAL.Entities;
 
 namespace TimeTracker.BL.Mappers;
 
-public class UserModelMapper : ModelMapperBase<UserEntity, UserListModel, UserDetailModel>, 
-    IUserModelMapper
+public class UserModelMapper : ModelMapperBase<UserEntity, UserListModel, UserDetailModel> , IUserModelMapper
 {
     private readonly IProjectAmountModelMapper _projectAmountModelMapper;
     private readonly IProjectModelMapper _projectModelMapper;
