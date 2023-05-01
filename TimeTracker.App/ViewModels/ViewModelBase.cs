@@ -14,12 +14,12 @@ public abstract class ViewModelBase : ObservableRecipient , IViewModel
 {
     private bool isRefreshRequired = true;
 
-    protected readonly IMessengerService messengerService;
+    protected readonly IMessengerService MessengerService;
 
     protected ViewModelBase(IMessengerService messengerService)
         : base(messengerService.Messenger)
     {
-        this.messengerService = messengerService;
+        this.MessengerService = messengerService;
         IsActive = true; 
     }
     public async Task OnAppearingAsync()
