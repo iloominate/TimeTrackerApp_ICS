@@ -24,4 +24,13 @@ public class ActivityFacade : FacadeBase<ActivityEntity, ActivityListModel,
         : base(unitOfWorkFactory, activityModelMapper) =>
         _activityModelMapper = activityModelMapper;
 
+
+    private void CheckProjectTimeValidate(ActivityDetailModel model)
+    {
+        if( model.End < model.Start)
+        {
+            throw new Exception("End time must be greater then Start time");
+        }
+    }
+
 }
