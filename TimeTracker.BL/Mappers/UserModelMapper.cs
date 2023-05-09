@@ -22,8 +22,17 @@ public class UserModelMapper : ModelMapperBase<UserEntity, UserListModel, UserDe
             {
                 Id = entity.Id,
                 Name = entity.Name,
-                Surname = entity.Surname,
+                Surname = entity.Surname
             };
+
+
+    public UserListModel MapToListModel(UserDetailModel model)
+        => new()
+        {
+            Id = model.Id,
+            Name = model.Name,
+            Surname = model.Surname
+        };
 
     public override UserDetailModel MapToDetailModel (UserEntity? entity)
         => entity is null

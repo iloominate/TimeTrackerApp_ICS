@@ -22,4 +22,7 @@ public class ProjectFacade : FacadeBase<ProjectEntity, ProjectListModel,
         IProjectModelMapper projectModelMapper
         ) : base(unitOfWorkFactory, projectModelMapper) =>
         _projectModelMapper = projectModelMapper;
+
+    protected override string IncludesNavigationPathDetail =>
+        $"{nameof(ProjectEntity.Users)}.{nameof(ProjectAmountEntity.User)}";
 }
