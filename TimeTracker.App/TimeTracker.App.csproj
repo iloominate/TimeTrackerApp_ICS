@@ -49,6 +49,9 @@
     </ItemGroup>
 
     <ItemGroup>
+      <MauiXaml Update="View\ActivitiesList.xaml">
+        <Generator>MSBuild:Compile</Generator>
+      </MauiXaml>
       <MauiXaml Update="View\ProjectLits.xaml">
         <Generator>MSBuild:Compile</Generator>
       </MauiXaml>
@@ -58,6 +61,9 @@
     </ItemGroup>
 
     <ItemGroup>
+      <Compile Update="View\ActivitiesList.xaml.cs">
+        <DependentUpon>ActivitiesList.xaml</DependentUpon>
+      </Compile>
       <Compile Update="View\ProjectLits.xaml.cs">
         <DependentUpon>ProjectLits.xaml</DependentUpon>
       </Compile>
