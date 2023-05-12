@@ -49,20 +49,20 @@
     </ItemGroup>
 
     <ItemGroup>
-      <MauiXaml Update="View\MainPage.xaml">
+      <MauiXaml Update="View\UsersPage.xaml">
         <SubType>Designer</SubType>
       </MauiXaml>
     </ItemGroup>
 
     <ItemGroup>
-      <Compile Update="View\MainPage.xaml.cs">
-        <DependentUpon>MainPage.xaml</DependentUpon>
+      <Compile Update="View\UsersPage.xaml.cs">
+        <DependentUpon>UsersPage.xaml</DependentUpon>
         <SubType>Code</SubType>
       </Compile>
     </ItemGroup>
 
     <ItemGroup>
-      <AdditionalFiles Include="View\MainPage.xaml" />
+      <AdditionalFiles Include="View\UsersPage.xaml" />
     </ItemGroup>
 
 </Project>
