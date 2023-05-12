@@ -13,7 +13,7 @@
                             <Label Text="Project 1" FontSize="Large" />
                             <StackLayout Orientation="Horizontal" HorizontalOptions="EndAndExpand">
                             <Button Text="View" TextColor="Black" CornerRadius="15" Clicked="OnViewClicked" />
-                                <Button Text="Join" TextColor="Black" CornerRadius="15" />
+                            <Button Text="Join" TextColor="Black" CornerRadius="15" Clicked="OnViewClicked" />
                             </StackLayout>
                         </StackLayout>
                     </Frame>
@@ -22,7 +22,7 @@
                             <Label Text="Project 2" FontSize="Large" />
                             <StackLayout Orientation="Horizontal" HorizontalOptions="EndAndExpand">
                             <Button Text="View" TextColor="Black" CornerRadius="15" Clicked="OnViewClicked" />
-                                <Button Text="Join" TextColor="Black" CornerRadius="15" />
+                            <Button Text="Join" TextColor="Black" CornerRadius="15" Clicked="OnViewClicked" />
                             </StackLayout>
                         </StackLayout>
                     </Frame>
@@ -31,12 +31,12 @@
                             <Label Text="Project 3" FontSize="Large" />
                             <StackLayout Orientation="Horizontal" HorizontalOptions="EndAndExpand">
                             <Button Text="View" TextColor="Black" CornerRadius="15" Clicked="OnViewClicked" />
-                                <Button Text="Join" TextColor="Black" CornerRadius="15" />
+                            <Button Text="Join" TextColor="Black" CornerRadius="15" Clicked="OnViewClicked" />
                             </StackLayout>
                         </StackLayout>
                     </Frame>
                 </StackLayout>
-                <Button Text="Create Project"  TextColor="Black" VerticalOptions="End" />
+            <Button Text="Create Project"  TextColor="Black" VerticalOptions="End" Clicked="OnEditClicked" />
             </StackLayout>
         </ContentPage.Content>
 

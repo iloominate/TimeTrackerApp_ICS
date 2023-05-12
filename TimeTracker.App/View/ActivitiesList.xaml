@@ -30,7 +30,7 @@
                         <StackLayout Orientation="Horizontal">
                             <Label Text="Activity 1" FontSize="Large" />
                             <StackLayout Orientation="Horizontal" HorizontalOptions="EndAndExpand">
-                                <Button Text="Edit" TextColor="Black" CornerRadius="15" />
+                                <Button Text="Edit" TextColor="Black" CornerRadius="15" Clicked="OnEditClicked" />
                             </StackLayout>
                         </StackLayout>
                         <Label Text="Activity 1 description" FontSize="Medium" />
@@ -41,7 +41,7 @@
                         <StackLayout Orientation="Horizontal">
                             <Label Text="Activity 2" FontSize="Large" />
                             <StackLayout Orientation="Horizontal" HorizontalOptions="EndAndExpand">
-                                <Button Text="Edit" TextColor="Black" CornerRadius="15" />
+                                <Button Text="Edit" TextColor="Black" CornerRadius="15" Clicked="OnEditClicked" />
                             </StackLayout>
                         </StackLayout>
                         <Label Text="Activity 2 description" FontSize="Medium" />
@@ -52,14 +52,14 @@
                         <StackLayout Orientation="Horizontal">
                             <Label Text="Activity 3" FontSize="Large" />
                             <StackLayout Orientation="Horizontal" HorizontalOptions="EndAndExpand">
-                                <Button Text="Edit" TextColor="Black" CornerRadius="15" />
+                                <Button Text="Edit" TextColor="Black" CornerRadius="15" Clicked="OnEditClicked" />
                             </StackLayout>
                         </StackLayout>
                         <Label Text="Activity 3 description" FontSize="Medium" />
                     </StackLayout>
                 </Frame>
             </StackLayout>
-            <Button Text="Create Activity"  TextColor="Black" VerticalOptions="End" />
+            <Button Text="Create Activity"  TextColor="Black" VerticalOptions="End" Clicked="OnEditClicked" />
         </StackLayout>
     </ContentPage.Content>
 

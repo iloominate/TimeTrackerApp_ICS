@@ -11,4 +11,9 @@ public partial class ProjectList : ContentPage
     {
         await Navigation.PushAsync(new ActivitiesList());
     }
+
+    private async void OnEditClicked(object sender, EventArgs e)
+    {
+        await Navigation.PushAsync(new ProjectEdit());
+    }
 }

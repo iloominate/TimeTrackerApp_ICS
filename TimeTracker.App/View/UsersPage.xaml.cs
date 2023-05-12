@@ -15,5 +15,8 @@ public partial class UsersPage : ContentPage
         await Navigation.PushAsync(new ProjectList());
     }
 
-
+    private async void OnEditClicked(object sender, EventArgs e)
+    {
+        await Navigation.PushAsync(new UserEdit());
+    }
 }

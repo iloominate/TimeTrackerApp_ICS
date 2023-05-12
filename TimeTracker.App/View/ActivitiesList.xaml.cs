@@ -6,4 +6,9 @@ public partial class ActivitiesList : ContentPage
 	{
 		InitializeComponent();
 	}
+
+    private async void OnEditClicked(object sender, EventArgs e)
+    {
+        await Navigation.PushAsync(new ActivityEdit());
+    }
 }

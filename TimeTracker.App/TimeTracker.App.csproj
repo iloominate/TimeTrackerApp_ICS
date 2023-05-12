@@ -52,6 +52,15 @@
       <MauiXaml Update="View\ActivitiesList.xaml">
         <Generator>MSBuild:Compile</Generator>
       </MauiXaml>
+      <MauiXaml Update="View\ActivityEdit.xaml">
+        <Generator>MSBuild:Compile</Generator>
+      </MauiXaml>
+      <MauiXaml Update="View\ProjectEdit.xaml">
+        <Generator>MSBuild:Compile</Generator>
+      </MauiXaml>
+      <MauiXaml Update="View\UserEdit.xaml">
+        <Generator>MSBuild:Compile</Generator>
+      </MauiXaml>
       <MauiXaml Update="View\ProjectLits.xaml">
         <Generator>MSBuild:Compile</Generator>
       </MauiXaml>
@@ -63,6 +72,15 @@
     <ItemGroup>
       <Compile Update="View\ActivitiesList.xaml.cs">
         <DependentUpon>ActivitiesList.xaml</DependentUpon>
+      </Compile>
+      <Compile Update="View\ActivityEdit.xaml.cs">
+        <DependentUpon>ActivityEdit.xaml</DependentUpon>
+      </Compile>
+      <Compile Update="View\ProjectEdit.xaml.cs">
+        <DependentUpon>ProjectEdit.xaml</DependentUpon>
+      </Compile>
+      <Compile Update="View\UserEdit.xaml.cs">
+        <DependentUpon>UserEdit.xaml</DependentUpon>
       </Compile>
       <Compile Update="View\ProjectLits.xaml.cs">
         <DependentUpon>ProjectLits.xaml</DependentUpon>

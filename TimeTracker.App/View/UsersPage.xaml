@@ -27,7 +27,7 @@
                             <ColumnDefinition Width="*" />
                         </Grid.ColumnDefinitions>
 
-                        <Button Text="Edit" Grid.Column="0" HorizontalOptions="Center" TextColor="Black" CornerRadius="15" />
+                        <Button Text="Edit" Grid.Column="0" HorizontalOptions="Center" TextColor="Black" CornerRadius="15" Clicked="OnEditClicked" />
                         <Button Text="Log In" Grid.Column="1" HorizontalOptions="Center" TextColor="Black" CornerRadius="15" Clicked="OnLogInClicked" />
                     </Grid>
 
@@ -48,7 +48,7 @@
                             <ColumnDefinition Width="*" />
                         </Grid.ColumnDefinitions>
 
-                        <Button Text="Edit" Grid.Column="0" HorizontalOptions="Center" TextColor="Black" CornerRadius="15" />
+                        <Button Text="Edit" Grid.Column="0" HorizontalOptions="Center" TextColor="Black" CornerRadius="15" Clicked="OnEditClicked"  />
                         <Button Text="Log In" Grid.Column="1" HorizontalOptions="Center" TextColor="Black" CornerRadius="15" Clicked="OnLogInClicked" />
                     </Grid>
 
@@ -69,7 +69,7 @@
                             <ColumnDefinition Width="*" />
                         </Grid.ColumnDefinitions>
 
-                        <Button Text="Edit" Grid.Column="0" HorizontalOptions="Center" TextColor="Black" CornerRadius="15" />
+                        <Button Text="Edit" Grid.Column="0" HorizontalOptions="Center" TextColor="Black" CornerRadius="15" Clicked="OnEditClicked"  />
                         <Button Text="Log In" Grid.Column="1" HorizontalOptions="Center" TextColor="Black" CornerRadius="15" Clicked="OnLogInClicked" />
                     </Grid>
 
@@ -78,7 +78,7 @@
             
         </Grid>
 
-        <Button Text="Create User" HorizontalOptions="End" VerticalOptions="End" Margin="30" TextColor="Black" CornerRadius="15" />
+        <Button Text="Create User" HorizontalOptions="End" VerticalOptions="End" Margin="30" TextColor="Black" CornerRadius="15" Clicked="OnEditClicked" />
 
     </StackLayout>
 

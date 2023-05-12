@@ -1,0 +1,31 @@
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="TimeTracker.App.View.ActivityEdit"
+             Title="TimeTracker">
+    
+    <StackLayout>
+        <Label Text="Name" />
+        <Entry x:Name="ActivityNameEntry" />
+
+        <Label Text="Description" />
+        <Editor x:Name="ActivityDescriptionEditor" />
+
+        <Label Text="Start date" />
+        <DatePicker x:Name="StartDatePicker" />
+        <TimePicker x:Name="StartTimePicker" />
+
+        <Label Text="End date" />
+        <DatePicker x:Name="EndDatePicker" />
+        <TimePicker x:Name="EndTimePicker" />
+
+        <Label Text="Type" />
+        <Picker x:Name="activityTypePicker">
+            <Picker.Items>
+                <x:String>Studying</x:String>
+                <x:String>Work</x:String>
+                <x:String>Programming</x:String>
+            </Picker.Items>
+        </Picker>
+        <Button Text="SAVE" TextColor="Black" CornerRadius="15" />
+    </StackLayout>
+</ContentPage>
