@@ -1,6 +1,6 @@
 ﻿<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             x:Class="TimeTracker.App.MainPage"
+             x:Class="TimeTracker.App.UsersPage"
              Title="TimeTracker">
 
     <StackLayout>
@@ -24,8 +24,8 @@
                             <ColumnDefinition Width="*" />
                         </Grid.ColumnDefinitions>
 
-                        <Button Text="Edit" Grid.Column="0" HorizontalOptions="Center" CornerRadius="15" />
-                        <Button Text="Log In" Grid.Column="1" HorizontalOptions="Center" CornerRadius="15" />
+                        <Button Text="Edit" Grid.Column="0" HorizontalOptions="Center" TextColor="Black" CornerRadius="15" />
+                        <Button Text="Log In" Grid.Column="1" HorizontalOptions="Center" TextColor="Black" CornerRadius="15" Clicked="OnLogInClicked" />
                     </Grid>
 
                 </StackLayout>
@@ -42,8 +42,8 @@
                             <ColumnDefinition Width="*" />
                         </Grid.ColumnDefinitions>
 
-                        <Button Text="Edit" Grid.Column="0" HorizontalOptions="Center" CornerRadius="15" />
-                        <Button Text="Log In" Grid.Column="1" HorizontalOptions="Center" CornerRadius="15" />
+                        <Button Text="Edit" Grid.Column="0" HorizontalOptions="Center" TextColor="Black" CornerRadius="15" />
+                        <Button Text="Log In" Grid.Column="1" HorizontalOptions="Center" TextColor="Black" CornerRadius="15" Clicked="OnLogInClicked" />
                     </Grid>
 
                 </StackLayout>
@@ -60,13 +60,17 @@
                             <ColumnDefinition Width="*" />
                         </Grid.ColumnDefinitions>
 
-                        <Button Text="Edit" Grid.Column="0" HorizontalOptions="Center" CornerRadius="15" />
-                        <Button Text="Log In" Grid.Column="1" HorizontalOptions="Center" CornerRadius="15" />
+                        <Button Text="Edit" Grid.Column="0" HorizontalOptions="Center" TextColor="Black" CornerRadius="15" />
+                        <Button Text="Log In" Grid.Column="1" HorizontalOptions="Center" TextColor="Black" CornerRadius="15" Clicked="OnLogInClicked" />
                     </Grid>
 
                 </StackLayout>
             </Frame>
+            
         </Grid>
+
+        <Button Text="Create User" HorizontalOptions="End" VerticalOptions="End" Margin="30" TextColor="Black" CornerRadius="15" />
+
     </StackLayout>
 
 </ContentPage>

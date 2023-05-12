@@ -49,12 +49,18 @@
     </ItemGroup>
 
     <ItemGroup>
+      <MauiXaml Update="View\ProjectLits.xaml">
+        <Generator>MSBuild:Compile</Generator>
+      </MauiXaml>
       <MauiXaml Update="View\UsersPage.xaml">
         <SubType>Designer</SubType>
       </MauiXaml>
     </ItemGroup>
 
     <ItemGroup>
+      <Compile Update="View\ProjectLits.xaml.cs">
+        <DependentUpon>ProjectLits.xaml</DependentUpon>
+      </Compile>
       <Compile Update="View\UsersPage.xaml.cs">
         <DependentUpon>UsersPage.xaml</DependentUpon>
         <SubType>Code</SubType>

@@ -1,0 +1,43 @@
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="TimeTracker.App.View.ProjectList"
+             Title="TimeTracker">
+
+    <ContentPage.Content>
+            <StackLayout>
+                <Label Text="Project List" FontSize="Large" HorizontalOptions="Start" VerticalOptions="Start" Margin="10" />
+
+                <StackLayout>
+                    <Frame BackgroundColor="Black">
+                        <StackLayout Orientation="Horizontal">
+                            <Label Text="Project 1" FontSize="Large" />
+                            <StackLayout Orientation="Horizontal" HorizontalOptions="EndAndExpand">
+                                <Button Text="View" TextColor="Black" CornerRadius="15" />
+                                <Button Text="Join" TextColor="Black" CornerRadius="15" />
+                            </StackLayout>
+                        </StackLayout>
+                    </Frame>
+                    <Frame BackgroundColor="Black">
+                        <StackLayout Orientation="Horizontal">
+                            <Label Text="Project 2" FontSize="Large" />
+                            <StackLayout Orientation="Horizontal" HorizontalOptions="EndAndExpand">
+                                <Button Text="View" TextColor="Black" CornerRadius="15" />
+                                <Button Text="Join" TextColor="Black" CornerRadius="15" />
+                            </StackLayout>
+                        </StackLayout>
+                    </Frame>
+                    <Frame BackgroundColor="Black">
+                        <StackLayout Orientation="Horizontal">
+                            <Label Text="Project 3" FontSize="Large" />
+                            <StackLayout Orientation="Horizontal" HorizontalOptions="EndAndExpand">
+                                <Button Text="View" TextColor="Black" CornerRadius="15" />
+                                <Button Text="Join" TextColor="Black" CornerRadius="15" />
+                            </StackLayout>
+                        </StackLayout>
+                    </Frame>
+                </StackLayout>
+                <Button Text="Create Project"  TextColor="Black" VerticalOptions="End" />
+            </StackLayout>
+        </ContentPage.Content>
+
+    </ContentPage>

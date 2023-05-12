@@ -1,11 +1,19 @@
-﻿namespace TimeTracker.App;
+﻿using TimeTracker.App.View;
 
-public partial class MainPage : ContentPage
+namespace TimeTracker.App;
+
+public partial class UsersPage : ContentPage
 {
 
-    public MainPage()
+    public UsersPage()
     {
         InitializeComponent();
     }
+
+    private async void OnLogInClicked(object sender, EventArgs e)
+    {
+        await Navigation.PushAsync(new ProjectList());
+    }
+
 
 }
