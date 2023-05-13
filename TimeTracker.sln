@@ -15,11 +15,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TimeTracker.BL", "TimeTrack
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TimeTracker.BL.Tests", "TimeTracker.BL.Tests\TimeTracker.BL.Tests.csproj", "{F35F26B5-280B-4399-A570-997272E5DADE}"
 EndProject
-<<<<<<< HEAD
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TimeTracker.App", "TimeTracker.App\TimeTracker.App.csproj", "{127FBED3-2223-4FAE-BA45-AF6355C8F96F}"
-=======
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TimeTracker.App", "TimeTracker.App\TimeTracker.App.csproj", "{54ED6A2D-1433-4D2F-BC1D-20AA753C4664}"
->>>>>>> origin/view-addition
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TimeTracker.App", "TimeTracker.App\TimeTracker.App.csproj", "{127FBED3-2223-4FAE-BA45-AF6355C8F96F}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -51,19 +47,10 @@ Global
 		{F35F26B5-280B-4399-A570-997272E5DADE}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{F35F26B5-280B-4399-A570-997272E5DADE}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{F35F26B5-280B-4399-A570-997272E5DADE}.Release|Any CPU.Build.0 = Release|Any CPU
-<<<<<<< HEAD
 		{127FBED3-2223-4FAE-BA45-AF6355C8F96F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{127FBED3-2223-4FAE-BA45-AF6355C8F96F}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{127FBED3-2223-4FAE-BA45-AF6355C8F96F}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{127FBED3-2223-4FAE-BA45-AF6355C8F96F}.Release|Any CPU.Build.0 = Release|Any CPU
-=======
-		{54ED6A2D-1433-4D2F-BC1D-20AA753C4664}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{54ED6A2D-1433-4D2F-BC1D-20AA753C4664}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{54ED6A2D-1433-4D2F-BC1D-20AA753C4664}.Debug|Any CPU.Deploy.0 = Debug|Any CPU
-		{54ED6A2D-1433-4D2F-BC1D-20AA753C4664}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{54ED6A2D-1433-4D2F-BC1D-20AA753C4664}.Release|Any CPU.Build.0 = Release|Any CPU
-		{54ED6A2D-1433-4D2F-BC1D-20AA753C4664}.Release|Any CPU.Deploy.0 = Release|Any CPU
->>>>>>> origin/view-addition
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
