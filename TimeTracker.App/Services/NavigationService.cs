@@ -5,7 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using TimeTracker.App.Models;
 using TimeTracker.App.ViewModels;
-using TimeTracker.App.View;
+using TimeTracker.App.Views;
 using TimeTracker.App.Services.Interfaces;
 using TimeTracker.App.ViewModels.Activity;
 using TimeTracker.App.ViewModels.Project;
@@ -17,14 +17,14 @@ public class NavigationService : INavigationService
 {
     public IEnumerable<RouteModel> Routes { get; } = new List<RouteModel>
     {
-        new("//users", typeof(UsersPage), typeof(UserChooseListViewModel)),
-        new("//users/edit", typeof(UserEdit), typeof(UserEditViewModel)),
+        new("//users", typeof(UserListView), typeof(UserListViewModel)),
+        new("//users/edit", typeof(UserEditView), typeof(UserEditViewModel)),
 
-        new("//projects", typeof(ProjectList), typeof(ProjectListViewModel)),
-        new("//project/edit", typeof(ProjectEdit), typeof(ProjectEditViewModel)),
+        new("//projects", typeof(ProjectListView), typeof(ProjectListViewModel)),
+        new("//project/edit", typeof(ProjectEditView), typeof(ProjectEditViewModel)),
 
         new("//activities", typeof(ActivitiesList), typeof(ActivityListViewModel)),
-        new("//activities/edit", typeof(ActivityEdit), typeof(ActivityEditViewModel)),
+        new("//activities/edit", typeof(ActivityEditView), typeof(ActivityEditViewModel)),
     };
 
     public async Task GoToAsync<TViewModel>()

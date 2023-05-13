@@ -6,7 +6,7 @@ using System.Text;
 using System.Threading.Tasks;
 using TimeTracker.App.Services.Interfaces;
 using TimeTracker.App.Services;
-using TimeTracker.App.View;
+using TimeTracker.App.Views;
 using TimeTracker.App.ViewModels;
 
 namespace TimeTracker.App;

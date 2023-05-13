@@ -18,6 +18,7 @@ public partial class ActivityEditViewModel : ViewModelBase
     private readonly INavigationService _navigationService;
 
     public ActivityDetailModel Activity { get; init; } = ActivityDetailModel.Empty;
+    public ProjectDetailModel Project { get; set; } = ProjectDetailModel.Empty;
 
     public ActivityEditViewModel(
         IActivityFacade activityFacade,
@@ -30,7 +31,6 @@ public partial class ActivityEditViewModel : ViewModelBase
     }
 
     [RelayCommand]
-
     private async Task SaveAsync()
     {
         await _activityFacade.SaveAsync(Activity);

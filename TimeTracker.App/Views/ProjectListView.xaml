@@ -1,0 +1,36 @@
+<views:ContentPageBase xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+                       xmlns:views="clr-namespace:TimeTracker.App.Views"
+                       xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+                       x:Class="TimeTracker.App.Views.ProjectListView"
+                       Title="TimeTracker">
+
+        <StackLayout>
+            <Label Text="Project List" FontSize="Large" HorizontalOptions="Start" VerticalOptions="Start" Margin="10" />
+
+            <StackLayout>
+                <Frame BackgroundColor="Black">
+                    <StackLayout Orientation="Horizontal">
+                        <Label Text="Project 1" FontSize="Large" />
+                        <StackLayout Orientation="Horizontal" HorizontalOptions="EndAndExpand">
+                        </StackLayout>
+                    </StackLayout>
+                </Frame>
+                <Frame BackgroundColor="Black">
+                    <StackLayout Orientation="Horizontal">
+                        <Label Text="Project 2" FontSize="Large" />
+                        <StackLayout Orientation="Horizontal" HorizontalOptions="EndAndExpand">
+                        </StackLayout>
+                    </StackLayout>
+                </Frame>
+                <Frame BackgroundColor="Black">
+                    <StackLayout Orientation="Horizontal">
+                        <Label Text="Project 3" FontSize="Large" />
+                        <StackLayout Orientation="Horizontal" HorizontalOptions="EndAndExpand">
+                        </StackLayout>
+                    </StackLayout>
+                </Frame>
+            </StackLayout>
+        </StackLayout>
+
+
+</views:ContentPageBase>

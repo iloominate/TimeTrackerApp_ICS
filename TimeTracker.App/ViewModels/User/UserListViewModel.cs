@@ -17,14 +17,14 @@ using TimeTracker.BL.Models.ListModels;
 
 namespace TimeTracker.App.ViewModels.User;
 
-public partial class UserChooseListViewModel : ViewModelBase, IRecipient<UserCreateMessage>, IRecipient<UserEditMessage>, IRecipient<UserDeleteMessage>
+public partial class UserListViewModel : ViewModelBase, IRecipient<UserCreateMessage>, IRecipient<UserEditMessage>, IRecipient<UserDeleteMessage>
 {
     private readonly IUserFacade _userFacade;
     private readonly INavigationService _navigationService;
 
     public IEnumerable<UserListModel> users { get; set; } = null!; 
 
-    public UserChooseListViewModel(
+    public UserListViewModel(
         IUserFacade userFacade, 
         INavigationService navigationService, 
         IMessengerService messengerService)

@@ -15,7 +15,11 @@ using TimeTracker.BL.Models.ListModels;
 
 namespace TimeTracker.App.ViewModels.Project;
 
-public partial class ProjectDetailViewModel : ViewModelBase, IRecipient<ProjectEditMessage>, IRecipient<ProjectActivityAddMessage>, IRecipient<ProjectActivityDeleteMessage>
+public partial class ProjectDetailViewModel : ViewModelBase, 
+    IRecipient<ProjectEditMessage>,
+    IRecipient<ProjectActivityAddMessage>,
+    IRecipient<ProjectActivityDeleteMessage>,
+    IRecipient<UserToProjectAdd>
 {
     private readonly IProjectFacade _projectFacade;
     private readonly IUserFacade _userFacade;
@@ -70,23 +74,6 @@ public partial class ProjectDetailViewModel : ViewModelBase, IRecipient<ProjectE
         }
     }
 
-    [RelayCommand]
-    private async Task AddUserToProject(UserDetailModel user)
-    {
-
-    }
-
-
-    [RelayCommand]
-    private async Task GoToActivityEditAsync()
-    {
-        if (Project is not null)
-        {
-            // change navigation route
-            await _navigationService.GoToAsync("/edit",
-                new Dictionary<string, object?> { [nameof(ProjectEditViewModel.Project)] = Project with { } });
-        }
-    }
 
 
     public async void Receive(ProjectEditMessage message)
@@ -107,7 +94,7 @@ public partial class ProjectDetailViewModel : ViewModelBase, IRecipient<ProjectE
         await LoadDataAsync();
     }
 
-    public async void Receive(UserAddMessage message)
+    public async void Receive(UserToProjectAdd message)
     {
         await LoadDataAsync();
     }

@@ -1,6 +1,6 @@
 using TimeTracker.App.ViewModels;
 
-namespace TimeTracker.App.View;
+namespace TimeTracker.App.Views;
 
 public partial class ContentPageBase
 {

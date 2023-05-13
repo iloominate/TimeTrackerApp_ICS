@@ -95,6 +95,27 @@
 	</ItemGroup>
 
 	<ItemGroup>
+		<Compile Update="Views\ActivityEditView.xaml.cs">
+		  <DependentUpon>ActivityEditView.xaml</DependentUpon>
+		</Compile>
+		<Compile Update="Views\ProjectEditView.xaml.cs">
+		  <DependentUpon>ProjectEditView.xaml</DependentUpon>
+		</Compile>
+		<Compile Update="Views\UserEditView.xaml.cs">
+		  <DependentUpon>UserEditView.xaml</DependentUpon>
+		</Compile>
+		<Compile Update="Views\UserListView.xaml.cs">
+		  <DependentUpon>UsersPage.xaml</DependentUpon>
+		</Compile>
+		<Compile Update="Views\ProjectList.xaml.cs">
+		  <DependentUpon>ProjectListView.xaml</DependentUpon>
+		</Compile>
+		<Compile Update="Views\ProjectLits.xaml.cs">
+		  <DependentUpon>ProjectList.xaml</DependentUpon>
+		</Compile>
+		<Compile Update="Views\UserListView.xaml.cs">
+		  <DependentUpon>UserListView.xaml</DependentUpon>
+		</Compile>
 		<Compile Update="View\ActivitiesList.xaml.cs">
 			<DependentUpon>ActivitiesList.xaml</DependentUpon>
 		</Compile>

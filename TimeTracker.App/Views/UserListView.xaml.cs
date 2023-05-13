@@ -1,12 +1,12 @@
 ﻿using TimeTracker.App.ViewModels;
 using TimeTracker.App.ViewModels.User;
 
-namespace TimeTracker.App.View;
+namespace TimeTracker.App.Views;
 
-public partial class UsersPage : ContentPageBase
+public partial class UserListView
 {
 
-    public UsersPage(UserChooseListViewModel viewModel) 
+    public UserListView(UserListViewModel viewModel) 
         : base(viewModel)
     {
         InitializeComponent();
@@ -19,6 +19,6 @@ public partial class UsersPage : ContentPageBase
 
         private async void OnEditClicked(object sender, EventArgs e)
         {
-            await Navigation.PushAsync(new UserEdit());
+            await Navigation.PushAsync(new UserEditView());
         }*/
 }

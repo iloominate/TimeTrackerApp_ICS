@@ -1,6 +1,7 @@
-<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+<views:ContentPageBase xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:views="clr-namespace:TimeTracker.App.Views"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             x:Class="TimeTracker.App.View.ProjectEdit"
+             x:Class="TimeTracker.App.Views.ProjectEditView"
              Title="TimeTracker">
     <StackLayout>
         <Label Text="Project Name" />
@@ -8,4 +9,4 @@
 
         <Button Text="SAVE" TextColor="Black" CornerRadius="15" />
     </StackLayout>
-</ContentPage>
+</views:ContentPageBase>

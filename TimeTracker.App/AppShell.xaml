@@ -3,12 +3,12 @@
     x:Class="TimeTracker.App.AppShell"
     xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-    xmlns:local="clr-namespace:TimeTracker.App"
+    xmlns:local="clr-namespace:TimeTracker.App.Views"
     Shell.FlyoutBehavior="Disabled">
 
     <ShellContent
         Title="Home"
-        ContentTemplate="{DataTemplate local:UsersPage}"
+        ContentTemplate="{DataTemplate local:UserListView}"     
         Route="MainPage" />
 
 </Shell>
