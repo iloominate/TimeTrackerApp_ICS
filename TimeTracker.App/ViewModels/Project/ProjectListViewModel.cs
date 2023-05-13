@@ -78,7 +78,7 @@ public partial class ProjectListViewModel : ViewModelBase,
 
             UserDetailModel activeUser = await _userFacade.GetAsync (ActiveUserId);
 
-            if ( activeUser == null )
+            if (activeUser == null)
             {
                 throw new NullReferenceException("An error occured trying to join project.");
             }
