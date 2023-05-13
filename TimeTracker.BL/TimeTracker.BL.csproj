@@ -7,6 +7,12 @@
     </PropertyGroup>
 
     <ItemGroup>
+      <PackageReference Include="Microsoft.Extensions.DependencyInjection" Version="7.0.0" />
+      <PackageReference Include="Microsoft.Extensions.DependencyInjection.Abstractions" Version="7.0.0" />
+      <PackageReference Include="Scrutor" Version="4.2.2" />
+    </ItemGroup>
+
+    <ItemGroup>
       <ProjectReference Include="..\TimeTracker.Common\TimeTracker.Common.csproj" />
       <ProjectReference Include="..\TimeTracker.DAL\TimeTracker.DAL.csproj" />
     </ItemGroup>
