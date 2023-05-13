@@ -25,11 +25,12 @@ public sealed  class ActivityFacadeTests : FacadeTestsBase
         Assert.Null(activity);
     }
 
+
     [Fact]
-    public async Task CheckCrossingActivities()
+    public async Task AddNewActivity_Crossing()
     {
         var model = ActivityModelMapper.MapToDetailModel(ActivitySeeds.Generator);
-        _activityFacadeSUT.CheckCrossingBetweenActivities(model);
-        Assert.True(true);
+
+        _ = Assert.ThrowsAsync<DbUpdateException>(() => _activityFacadeSUT.SaveAsync(model));
     }
 }

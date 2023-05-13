@@ -11,6 +11,7 @@ using TimeTracker.BL.Models.ListModels;
 using TimeTracker.DAL.Entities;
 using TimeTracker.DAL.Mappers;
 using TimeTracker.DAL.UnitOfWork;
+using Microsoft.EntityFrameworkCore;
 
 namespace TimeTracker.BL.Facadesl;
 
@@ -33,16 +34,50 @@ public class ActivityFacade : FacadeBase<ActivityEntity, ActivityListModel,
         }
     }
 
-    public void CheckCrossingBetweenActivities(ActivityDetailModel model)
+    //private async Task<IEnumerable<ActivityListModel>> GetAllUsersActivitiesToList(Guid userId)
+    //{
+    //    await using IUnitOfWork uow = UnitOfWorkFactory.Create();
+
+    //    var activities = uow.GetRepository<ActivityEntity, ActivityEntityMapper>().Get()
+    //        .Where(act => act.UserId == userId)
+    //        .ToList();
+
+
+    //    return activities is null
+    //        ? null
+    //        : ModelMapper.MapToListModel(activities);
+    //}
+
+    private async Task CheckCrossingBetweenActivities(ActivityDetailModel model)
     {
-        IUnitOfWork uof = UnitOfWorkFactory.Create();
 
-        var checkedActivites = uof
-            .GetRepository<ProjectEntity, ProjectEntityMapper>()
+        if (model.UserId == Guid.Empty)
+        {
+            throw new NullReferenceException("Activity dont have a User");
+        }
+
+        await using var uow = UnitOfWorkFactory.Create();
+
+        var userActivitiesOnThisDay = uow
+            .GetRepository<ActivityEntity, ActivityEntityMapper>()
             .Get()
-            .ToList();
+            .Where(act => act.UserId == model.UserId &&
+                act.Start <= model.End &&
+                act.End >= model.Start)
+            .FirstOrDefault();
 
-        Console.WriteLine("ggwp");
+        if(userActivitiesOnThisDay is not null)
+        {
+            throw new DbUpdateException("Activity accros other user activity");
+        }
+    }
+
+    public override async Task<ActivityDetailModel> SaveAsync(ActivityDetailModel model)
+    {
+        CheckProjectTimeValidate(model);
+        await CheckCrossingBetweenActivities(model);
+
+        return await base.SaveAsync(model);
     }
 
 }
