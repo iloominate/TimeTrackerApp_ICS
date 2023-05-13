@@ -11,4 +11,6 @@ namespace TimeTracker.BL.Mappers;
 
 public interface IProjectAmountModelMapper : IModelMapper<ProjectAmountEntity, ProjectAmountListModel, ProjectAmountDetailModel>
 {
+    public ProjectAmountDetailModel MapToNewDetailModel(ProjectListModel project, Guid userId);
+    public ProjectAmountListModel MapToListModel(ProjectAmountDetailModel projectAmountDetailModel);
 }
