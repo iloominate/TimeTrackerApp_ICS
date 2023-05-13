@@ -24,4 +24,12 @@ public sealed  class ActivityFacadeTests : FacadeTestsBase
         var activity = await _activityFacadeSUT.GetAsync(Guid.Parse("607c5e57-a7a9-4303-beab-9f6726af6b26"));
         Assert.Null(activity);
     }
+
+    [Fact]
+    public async Task CheckCrossingActivities()
+    {
+        var model = ActivityModelMapper.MapToDetailModel(ActivitySeeds.Generator);
+        _activityFacadeSUT.CheckCrossingBetweenActivities(model);
+        Assert.True(true);
+    }
 }

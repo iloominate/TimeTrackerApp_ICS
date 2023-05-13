@@ -33,4 +33,16 @@ public class ActivityFacade : FacadeBase<ActivityEntity, ActivityListModel,
         }
     }
 
+    public void CheckCrossingBetweenActivities(ActivityDetailModel model)
+    {
+        IUnitOfWork uof = UnitOfWorkFactory.Create();
+
+        var checkedActivites = uof
+            .GetRepository<ProjectEntity, ProjectEntityMapper>()
+            .Get()
+            .ToList();
+
+        Console.WriteLine("ggwp");
+    }
+
 }
