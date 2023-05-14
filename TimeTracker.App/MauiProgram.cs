@@ -2,10 +2,10 @@
 using Microsoft.Extensions.Logging;
 using TimeTracker.App.Services;
 using TimeTracker.BL;
-using Microsoft.Extensions.Configuration;
 using System.Reflection;
 using TimeTracker.App.Services.Interfaces;
-using Microsoft.EntityFrameworkCore.Migrations;
+using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Configuration;
 
 namespace TimeTracker.App;
 
