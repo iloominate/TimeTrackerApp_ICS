@@ -17,6 +17,7 @@ using System.Diagnostics;
 
 namespace TimeTracker.App.ViewModels.Project;
 
+[QueryProperty(nameof(ActiveUserId), nameof(ActiveUserId))]
 public partial class ProjectListViewModel : ViewModelBase, 
     IRecipient<ProjectEditMessage>,
     IRecipient<ProjectDeleteMessage>,

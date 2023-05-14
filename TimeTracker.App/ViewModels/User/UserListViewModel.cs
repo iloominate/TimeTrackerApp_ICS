@@ -17,6 +17,8 @@ using TimeTracker.BL.Models.ListModels;
 
 namespace TimeTracker.App.ViewModels.User;
 
+
+
 public partial class UserListViewModel : ViewModelBase, IRecipient<UserCreateMessage>, IRecipient<UserEditMessage>, IRecipient<UserDeleteMessage>
 {
     private readonly IUserFacade _userFacade;
@@ -48,9 +50,9 @@ public partial class UserListViewModel : ViewModelBase, IRecipient<UserCreateMes
     }
 
     [RelayCommand]
-    private async Task GoToProjectList(Guid Id)
+    private async Task GoToProjectListAsync(Guid id)
         => await _navigationService.GoToAsync<ProjectListViewModel>(
-            new Dictionary<string, object?> { [nameof(ProjectListViewModel.ActiveUserId)] = Id });
+            new Dictionary<string, object?> { [nameof(ProjectListViewModel.ActiveUserId)] = id });
 
     public async void Receive(UserDeleteMessage message)
     {
