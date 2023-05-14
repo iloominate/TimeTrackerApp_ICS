@@ -81,14 +81,16 @@ public class ActivityFacade : FacadeBase<ActivityEntity, ActivityListModel,
     }
 
     public async Task<IEnumerable<ActivityListModel>> FilterAsync(DateTime? activityStart = null,
-                                                                    DateTime? activityEnd = null)
+                                                                    DateTime? activityEnd = null,
+                                                                    Guid? userId = null)
     {
         await using var uow = UnitOfWorkFactory.Create();
 
         var query = uow.GetRepository<ActivityEntity, ActivityEntityMapper>().Get()
             .Where(act => 
             (activityStart == null || act.Start >= activityStart) &&
-            (activityEnd == null || act.End <= activityEnd));
+            (activityEnd == null || act.End <= activityEnd) &&
+            (userId == null || act.UserId == userId));
 
         return  ModelMapper.MapToListModel(query);
     }

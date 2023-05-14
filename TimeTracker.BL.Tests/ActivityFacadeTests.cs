@@ -4,6 +4,7 @@ using TimeTracker.BL.Facadesl;
 using TimeTracker.BL.Models.DetailModels;
 using TimeTracker.Common.Enums;
 using TimeTracker.Common.Tests;
+using TimeTracker.DAL.Entities;
 using TimeTracker.DAL.Seeds;
 using Xunit.Abstractions;
 
@@ -32,5 +33,29 @@ public sealed  class ActivityFacadeTests : FacadeTestsBase
         var model = ActivityModelMapper.MapToDetailModel(ActivitySeeds.Generator);
 
         _ = Assert.ThrowsAsync<DbUpdateException>(() => _activityFacadeSUT.SaveAsync(model));
+    }
+
+    [Fact]
+    public async Task AddNewActivity_NotCrossing()
+    {
+        var model = ActivitySeeds.LevelDesign with
+        {
+            Id = Guid.Parse("836b3e93-fa20-4c93-a7ea-1ab4f59a32a8"),
+            Start = DateTime.Parse("05/05/2023 10:20:00"),
+            End = DateTime.Parse("05/05/2023 11:00:00"),
+        };
+        //ActivityEntity model = new ActivityEntity()
+        //{
+        //    Id = Guid.Parse("836b3e93-fa20-4c93-a7ea-1ab4f59a32a8"),
+        //    Start = DateTime.Parse("05/05/2023 10:20:00"),
+        //    End = DateTime.Parse("05/05/2023 11:00:00"),
+        //    Type = ActivityType.Studying,
+        //    Description = "Add new function to ICS project)",
+
+        //    UserId = UserSeeds.AdamUser.Id,
+        //    ProjectId = ProjectSeeds.SchoolProject.Id,
+        //};
+        await _activityFacadeSUT.SaveAsync(ActivityModelMapper.MapToDetailModel(model));
+        Assert.True(true);
     }
 }
