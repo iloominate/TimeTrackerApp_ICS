@@ -24,7 +24,9 @@ public partial class UserListViewModel : ViewModelBase, IRecipient<UserCreateMes
     private readonly IUserFacade _userFacade;
     private readonly INavigationService _navigationService;
 
-    public IEnumerable<UserListModel> users { get; set; } = null!; 
+    public IEnumerable<UserListModel> users { get; set; } = null!;
+
+    public Guid TEST_ID { get; set; } = new Guid();
 
     public UserListViewModel(
         IUserFacade userFacade, 

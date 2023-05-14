@@ -21,7 +21,7 @@ public class NavigationService : INavigationService
         new("//users/edit", typeof(UserEditView), typeof(UserEditViewModel)),
 
         new("//projects", typeof(ProjectListView), typeof(ProjectListViewModel)),
-        new("//project/edit", typeof(ProjectEditView), typeof(ProjectEditViewModel)),
+        new("//projects/edit", typeof(ProjectEditView), typeof(ProjectEditViewModel)),
 
         new("//activities", typeof(ActivitiesList), typeof(ActivityListViewModel)),
         new("//activities/edit", typeof(ActivityEditView), typeof(ActivityEditViewModel)),

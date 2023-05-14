@@ -77,12 +77,23 @@
         </Grid>
 
         <Button Text="Create User"
-                Command="{Binding Source={x:Reference UserListViewRoot}, Path=BindingContext.GoToCreateCommand}"
+                Command="{Binding GoToCreateCommand}"
                 HorizontalOptions="End" 
                 VerticalOptions="End" 
                 Margin="30" 
                 TextColor="Black" 
                 CornerRadius="15"/>
+
+        <Button Text="TEST_GoToProjectList"
+                Command="{Binding GoToProjectListCommand}"
+                CommandParameter="{Binding TEST_ID}"
+                HorizontalOptions="End" 
+                VerticalOptions="End" 
+                Margin="30" 
+                TextColor="Black" 
+                CornerRadius="15"/>
+
+
 
     </StackLayout>
 
