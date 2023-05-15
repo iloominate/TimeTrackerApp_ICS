@@ -22,7 +22,8 @@ public class UserModelMapper : ModelMapperBase<UserEntity, UserListModel, UserDe
             {
                 Id = entity.Id,
                 Name = entity.Name,
-                Surname = entity.Surname
+                Surname = entity.Surname,
+                PhotoUrl = entity.PhotoUrl,
             };
 
 
@@ -31,7 +32,8 @@ public class UserModelMapper : ModelMapperBase<UserEntity, UserListModel, UserDe
         {
             Id = model.Id,
             Name = model.Name,
-            Surname = model.Surname
+            Surname = model.Surname,
+            PhotoUrl = model.PhotoUrl,
         };
 
     public override UserDetailModel MapToDetailModel (UserEntity? entity)
@@ -43,12 +45,16 @@ public class UserModelMapper : ModelMapperBase<UserEntity, UserListModel, UserDe
                 Name = entity.Name,
                 Surname = entity.Surname,
                 PhotoUrl = entity.PhotoUrl,
-                Activities = _activityModelMapper.MapToListModel(entity.Activities)
-                    .ToObservableCollection(),
-                Projects = _projectAmountModelMapper.MapToListModel(entity.Projects)
-                    .ToObservableCollection(),
-                ProjectsCreared = _projectModelMapper.MapToListModel(entity.CreatedProjects)
-                    .ToObservableCollection()
+                // TEST
+                Activities = null,
+                Projects = null,
+                ProjectsCreared = null
+                // Activities = _activityModelMapper.MapToListModel(entity.Activities)
+                    //.ToObservableCollection(),
+                //Projects = _projectAmountModelMapper.MapToListModel(entity.Projects)
+                    //.ToObservableCollection(),
+                //ProjectsCreared = _projectModelMapper.MapToListModel(entity.CreatedProjects)
+                    //.ToObservableCollection()
             };
 
     public override UserEntity MapToEntity(UserDetailModel model)

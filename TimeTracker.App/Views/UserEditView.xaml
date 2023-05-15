@@ -16,7 +16,10 @@
         <Label Text="Photo URL" />
         <Entry x:Name="photoUrlEntry" />
 
-        <Button Text="SAVE" TextColor="Black" CornerRadius="15" />
+        <Button Text="SAVE"
+                Command="{Binding SaveCommand}"
+                TextColor="Black"
+                CornerRadius="15" />
     </StackLayout>
 
 </views:ContentPageBase>

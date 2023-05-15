@@ -2,99 +2,74 @@
                        xmlns:views="clr-namespace:TimeTracker.App.Views"
                        xmlns:vm="clr-namespace:TimeTracker.App.ViewModels.User"
                        xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+                       xmlns:m="clr-namespace:TimeTracker.BL.Models.ListModels;assembly=TimeTracker.BL"
                        x:Class="TimeTracker.App.Views.UserListView"
                        x:DataType="vm:UserListViewModel"
                        x:Name="UserListViewRoot"
                        Title="TimeTracker">
 
-    <StackLayout>
-        <Label Text="Users" FontSize="Large" HorizontalOptions="Start" VerticalOptions="Start" Margin="10" />
+    <Grid>
+        <Grid HorizontalOptions="FillAndExpand"
+              RowDefinitions="Auto, *"
+              RowSpacing="20"
+              Margin="{OnIdiom Phone='10, 0'}">
+            <Label Grid.Row="0"
+                   FontSize="24"
+                   Text="USERS LABEL" />
 
-        <Grid>
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="*" />
-                <ColumnDefinition Width="*" />
-                <ColumnDefinition Width="*" />
-            </Grid.ColumnDefinitions>
+            <CollectionView Grid.Row="1" ItemsSource="{Binding Users}"
+                            VerticalOptions="FillAndExpand">
+                <CollectionView.ItemsLayout>
+                    <GridItemsLayout Orientation="Horizontal"
+                                     HorizontalItemSpacing="10" VerticalItemSpacing="10"
+                                     Span="2" />
+                </CollectionView.ItemsLayout>
 
-            <Frame Grid.Column="0" Margin="10" CornerRadius="50">
-                <StackLayout>
-                    <Image Source="https://cdn.icon-icons.com/icons2/2483/PNG/512/user_icon_149851.png"
-                           Aspect="AspectFill"
-                           HeightRequest="200"
-                           WidthRequest="300" />
-                    <Label Text="User 1" FontSize="Medium" HorizontalOptions="Center" />
+                <CollectionView.ItemTemplate>
+                    <DataTemplate x:DataType="m:UserListModel">
+                        <Frame Padding="0"
+                               CornerRadius="10"
+                               WidthRequest="320" HeightRequest="240"
+                               IsClippedToBounds="True">
+                            <Grid>
+                                <Image Grid.Row="0"
+                                       HorizontalOptions="Fill" VerticalOptions="Fill"
+                                       Aspect="AspectFill"
+                                       WidthRequest="320" HeightRequest="240"
+                                       Source="{Binding PhotoUrl, TargetNullValue='user_place_holder.png'}" />
 
-                    <Grid>
-                        <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="*" />
-                            <ColumnDefinition Width="*" />
-                        </Grid.ColumnDefinitions>
-                    </Grid>
+                                <BoxView Grid.Row="0"
+                                         Opacity="0.25"
+                                         Color="Black" />
 
-                </StackLayout>
-            </Frame>
+                                <Label Grid.Row="0"
+                                       Margin="22,12"
+                                       FontSize="20" LineBreakMode="WordWrap"
+                                       Text="{Binding Name}"
+                                       TextColor="White" VerticalOptions="End" />
 
-            <Frame Grid.Column="1" Margin="10" CornerRadius="50">
-                <StackLayout>
-                    <Image Source="https://cdn.icon-icons.com/icons2/2483/PNG/512/user_icon_149851.png"
-                           Aspect="AspectFill" 
-                           HeightRequest="200" 
-                           WidthRequest="300"/>
-                    <Label Text="User 2" FontSize="Medium" HorizontalOptions="Center" />
+                                <Button Text="Edit User"
+                                        Command="{Binding Source={x:Reference UserListViewRoot}, Path=BindingContext.GoToUserEditCommand}"
+                                        CommandParameter="{Binding Id}"
+                                        HorizontalOptions="End" 
+                                        VerticalOptions="End" 
+                                        Margin="30" 
+                                        TextColor="Black" 
+                                        CornerRadius="15"/>
+                            </Grid>
+                        </Frame>
+                    </DataTemplate>
+                </CollectionView.ItemTemplate>
+            </CollectionView>
 
-                    <Grid>
-                        <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="*" />
-                            <ColumnDefinition Width="*" />
-                        </Grid.ColumnDefinitions>
-                    </Grid>
-
-                </StackLayout>
-            </Frame>
-
-            <Frame Grid.Column="2" Margin="10" CornerRadius="50">
-                <StackLayout>
-                    <Image Source="https://cdn.icon-icons.com/icons2/2483/PNG/512/user_icon_149851.png"
-                           Aspect="AspectFill" 
-                           HeightRequest="200" 
-                           WidthRequest="300"/>
-                    <Label Text="User 3" FontSize="Medium" HorizontalOptions="Center" />
-
-                    <Grid>
-                        <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="*" />
-                            <ColumnDefinition Width="*" />
-                        </Grid.ColumnDefinitions>
-
-                        <Button Text="Edit" Grid.Column="0" HorizontalOptions="Center" TextColor="Black" CornerRadius="15"/>
-                        <Button Text="Log In" Grid.Column="1" HorizontalOptions="Center" TextColor="Black" CornerRadius="15"/>
-                    </Grid>
-
-                </StackLayout>
-            </Frame>
-            
+            <Button Text="Create User"
+                    Command="{Binding Source={x:Reference UserListViewRoot}, Path=BindingContext.GoToCreateCommand}"
+                    HorizontalOptions="End" 
+                    VerticalOptions="End" 
+                    Margin="30" 
+                    TextColor="Black" 
+                    CornerRadius="15"/>
         </Grid>
-
-        <Button Text="Create User"
-                Command="{Binding GoToCreateCommand}"
-                HorizontalOptions="End" 
-                VerticalOptions="End" 
-                Margin="30" 
-                TextColor="Black" 
-                CornerRadius="15"/>
-
-        <Button Text="TEST_GoToProjectList"
-                Command="{Binding GoToProjectListCommand}"
-                CommandParameter="{Binding TEST_ID}"
-                HorizontalOptions="End" 
-                VerticalOptions="End" 
-                Margin="30" 
-                TextColor="Black" 
-                CornerRadius="15"/>
-
-
-
-    </StackLayout>
+    </Grid>
 
 </views:ContentPageBase>
