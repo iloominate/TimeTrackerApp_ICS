@@ -55,8 +55,6 @@ public class UserModelMapper : ModelMapperBase<UserEntity, UserListModel, UserDe
                 Name = entity.Name,
                 Surname = entity.Surname,
                 PhotoUrl = entity.PhotoUrl,
-                // TEST
-
                 Activities = _activityModelMapper.MapToListModel(entity.Activities)
                     .ToObservableCollection(),
                 Projects = _projectAmountModelMapper.MapToListModel(entity.Projects)

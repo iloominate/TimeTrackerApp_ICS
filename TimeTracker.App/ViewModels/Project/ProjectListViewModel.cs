@@ -14,6 +14,7 @@ using TimeTracker.BL.Mappers;
 using TimeTracker.DAL.Entities;
 using TimeTracker.BL.Models.DetailModels;
 using System.Diagnostics;
+using System.Runtime.CompilerServices;
 
 namespace TimeTracker.App.ViewModels.Project;
 
@@ -58,20 +59,18 @@ public partial class ProjectListViewModel : ViewModelBase,
 
         Projects = await _projectFacade.GetAsync();
     }
-
     [RelayCommand]
-    private async Task GoToEditAsync(Guid id)
-        => await _navigationService.GoToAsync<ProjectEditViewModel>(
-            new Dictionary<string, object?> { [nameof(ProjectEditViewModel.projectId)] = id });
-
-    [RelayCommand]
-    private async Task GoToCreateAsync()
+    private async Task GoToDetailAsync(Guid projectId)
     {
-        await _navigationService.GoToAsync("/edit");
+        Dictionary<string, object?> parametersToPass = new();
+        parametersToPass[nameof(ProjectDetailViewModel.ProjectId)] = projectId;
+        parametersToPass[nameof(ProjectDetailViewModel.ActiveUserId)] = ActiveUserId;
+
+        await _navigationService.GoToAsync<ProjectDetailViewModel>(parametersToPass);
     }
 
     [RelayCommand]
-    private async Task JoinAsync(ProjectListModel projectListModel)
+    private async Task JoinAsync(ProjectListModel? projectListModel)
     {
         if (ActiveUserId != Guid.Empty &&
             projectListModel != null
@@ -79,16 +78,16 @@ public partial class ProjectListViewModel : ViewModelBase,
         {
             ProjectAmountDetailModel projectAmountDetailModelNew = _projectAmountModelMapper.MapToNewDetailModel(projectListModel, ActiveUserId);
 
-            UserDetailModel activeUser = await _userFacade.GetAsync(ActiveUserId);
+            UserDetailModel? activeUser = await _userFacade.GetAsync(ActiveUserId);
 
             if (activeUser == null)
             {
-                throw new NullReferenceException("An error occured trying to join project.");
+                throw new NullReferenceException("An error occurred trying to join project.");
             }
 
             if (activeUser.Projects.Any(p => p.ProjectId == projectListModel.Id && p.UserId == ActiveUserId))
             {
-                await _alertService.DisplayAsync("JoinUserIsInProject", "User is already in project"); // fix alerts 
+                await _alertService.DisplayAsync("Join project error", "User is already in project"); // fix alerts 
             }
             else
             {
@@ -107,7 +106,7 @@ public partial class ProjectListViewModel : ViewModelBase,
     }
 
     [RelayCommand]
-    public async void LeaveAsync(ProjectListModel projectListModel)
+    private async Task LeaveAsync(ProjectListModel? projectListModel)
     {
         if (ActiveUserId != Guid.Empty &&
             projectListModel != null
@@ -118,10 +117,10 @@ public partial class ProjectListViewModel : ViewModelBase,
 
             if (activeUser == null)
             {
-                throw new NullReferenceException("An error occured trying to leave project.");
+                throw new NullReferenceException("An error occurred trying to leave project.");
             }
 
-            ProjectAmountListModel projectAmountToDelete = activeUser.Projects.SingleOrDefault<ProjectAmountListModel>(u => u.UserId == activeUser.Id && u.ProjectId == projectListModel.Id)!;
+            ProjectAmountListModel? projectAmountToDelete = activeUser.Projects.SingleOrDefault<ProjectAmountListModel>(u => u.UserId == activeUser.Id && u.ProjectId == projectListModel.Id);
             
             if (projectAmountToDelete != null)
             {
@@ -133,7 +132,7 @@ public partial class ProjectListViewModel : ViewModelBase,
             }
             else
             { 
-                await _alertService.DisplayAsync("JoinUserIsNotInProject", "User is not in this project"); // fix alerts
+                await _alertService.DisplayAsync("Leave project error", "User is not in this project"); // fix alerts
             }
         }
     }

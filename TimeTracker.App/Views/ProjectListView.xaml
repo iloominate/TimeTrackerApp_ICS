@@ -1,36 +1,100 @@
 <views:ContentPageBase xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
                        xmlns:views="clr-namespace:TimeTracker.App.Views"
+                       xmlns:vm="clr-namespace:TimeTracker.App.ViewModels.Project"
                        xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+                       xmlns:m="clr-namespace:TimeTracker.BL.Models.ListModels;assembly=TimeTracker.BL"
                        x:Class="TimeTracker.App.Views.ProjectListView"
+                       x:DataType="vm:ProjectListViewModel"
+                       x:Name="ProjectListViewRoot"
                        Title="TimeTracker">
 
-        <StackLayout>
-            <Label Text="Project List" FontSize="Large" HorizontalOptions="Start" VerticalOptions="Start" Margin="10" />
+    <Grid>
+        <Grid HorizontalOptions="FillAndExpand"
+              RowDefinitions="Auto, *"
+              RowSpacing="20"
+              Margin="{OnIdiom Phone='10, 0'}">
+        <Label Grid.Row="0"
+                   FontSize="24"
+                   Text="Project List" />
 
-            <StackLayout>
-                <Frame BackgroundColor="Black">
-                    <StackLayout Orientation="Horizontal">
-                        <Label Text="Project 1" FontSize="Large" />
-                        <StackLayout Orientation="Horizontal" HorizontalOptions="EndAndExpand">
-                        </StackLayout>
-                    </StackLayout>
-                </Frame>
-                <Frame BackgroundColor="Black">
-                    <StackLayout Orientation="Horizontal">
-                        <Label Text="Project 2" FontSize="Large" />
-                        <StackLayout Orientation="Horizontal" HorizontalOptions="EndAndExpand">
-                        </StackLayout>
-                    </StackLayout>
-                </Frame>
-                <Frame BackgroundColor="Black">
-                    <StackLayout Orientation="Horizontal">
-                        <Label Text="Project 3" FontSize="Large" />
-                        <StackLayout Orientation="Horizontal" HorizontalOptions="EndAndExpand">
-                        </StackLayout>
-                    </StackLayout>
-                </Frame>
-            </StackLayout>
-        </StackLayout>
+        <CollectionView Grid.Row="1" ItemsSource="{Binding Projects}"
+                            VerticalOptions="FillAndExpand">
+            <CollectionView.ItemsLayout>
+                <GridItemsLayout Orientation="Horizontal"
+                                     HorizontalItemSpacing="10"
+                                     VerticalItemSpacing="10"
+                                     Span="2" />
+            </CollectionView.ItemsLayout>
+
+            <CollectionView.ItemTemplate>
+                <DataTemplate x:DataType="m:ProjectListModel">
+                        <Frame Padding="0"
+                               CornerRadius="10"
+                               WidthRequest="320"
+                               HeightRequest="240"
+                               IsClippedToBounds="True">
+                        <Grid>
+
+                            <BoxView Grid.Row="0"
+                                         Opacity="0.25"
+                                         Color="Black" />
+
+                            <Frame Grid.Row="0"
+                                       Margin="22" Padding="6,0"
+                                       BackgroundColor="Black"
+                                       CornerRadius="5" HorizontalOptions="Start"
+                                       VerticalOptions="Start"
+                                       HeightRequest="20">
+
+                            </Frame>
+
+                            <Label Grid.Row="0"
+                                       Margin="22,12"
+                                       FontSize="20" LineBreakMode="WordWrap"
+                                       Text="{Binding Name}"
+                                       TextColor="White" VerticalOptions="End" />
+
+                            <Grid Grid.Column="0"
+                                  RowDefinitions="Auto, *"
+                                  RowSpacing="5"
+                                  >
+                                <Button Grid.Row="0"
+                                        Padding="12, 6"
+                                        HorizontalOptions="End" VerticalOptions="Start"
+                                        Text="View"
+                                        Command="{Binding Source={x:Reference ProjectListViewRoot}, Path= BindingContext.GoToDetailCommand}"
+                                        CommandParameter="{Binding Id}"
+                                        CornerRadius="5" FontFamily="MontserratMedium"
+                                        FontSize="14"/>
+
+                            
+                                <Button Grid.Row="1"
+                                        Padding="12, 6"
+                                        HorizontalOptions="End" VerticalOptions="Start"
+                                        Text="Join"
+                                        Command="{Binding Source={x:Reference ProjectListViewRoot}, Path= BindingContext.JoinCommand}"
+                                        CommandParameter="{Binding .}"
+                                        CornerRadius="5" FontFamily="MontserratMedium"
+                                        FontSize="14"/>
+
+                                <Button Grid.Row="-1"
+                                        Padding="12, 6"
+                                        HorizontalOptions="End" VerticalOptions="Start"
+                                        Text="Leave"
+                                        Command="{Binding Source={x:Reference ProjectListViewRoot}, Path= BindingContext.LeaveCommand}"
+                                        CommandParameter="{Binding .}"
+                                        CornerRadius="5" FontFamily="MontserratMedium"
+                                        FontSize="14"/>
+                                </Grid>
+
+                        </Grid>
+                    </Frame>
+                </DataTemplate>
+            </CollectionView.ItemTemplate>
+        </CollectionView>
+        </Grid>
+    </Grid>
 
 
 </views:ContentPageBase>
+

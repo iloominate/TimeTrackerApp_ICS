@@ -19,11 +19,7 @@
 
             <CollectionView Grid.Row="1" ItemsSource="{Binding Users}"
                             VerticalOptions="FillAndExpand">
-                <CollectionView.ItemsLayout>
-                    <GridItemsLayout Orientation="Horizontal"
-                                     HorizontalItemSpacing="10" VerticalItemSpacing="10"
-                                     Span="2" />
-                </CollectionView.ItemsLayout>
+
 
                 <CollectionView.ItemTemplate>
                     <DataTemplate x:DataType="m:UserListModel">
@@ -48,14 +44,27 @@
                                        Text="{Binding Name}"
                                        TextColor="White" VerticalOptions="End" />
 
+
                                 <Button Text="Edit User"
                                         Command="{Binding Source={x:Reference UserListViewRoot}, Path=BindingContext.GoToUserEditCommand}"
                                         CommandParameter="{Binding Id}"
+                                        HorizontalOptions="Start"
+                                        VerticalOptions="Start"
+                                        Margin="10"
+ Padding="5"
+                                        FontSize="14" TextColor="Black" 
+                                        CornerRadius="15"/>
+
+
+                                <Button Text="Log In"
+                                        Command="{Binding Source={x:Reference UserListViewRoot}, Path=BindingContext.GoToProjectListCommand}"
+                                        CommandParameter="{Binding Id}"
                                         HorizontalOptions="End" 
                                         VerticalOptions="End" 
-                                        Margin="30" 
+                                        Margin="15" 
                                         TextColor="Black" 
                                         CornerRadius="15"/>
+
                             </Grid>
                         </Frame>
                     </DataTemplate>

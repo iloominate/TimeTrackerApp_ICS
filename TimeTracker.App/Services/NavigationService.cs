@@ -10,6 +10,7 @@ using TimeTracker.App.Services.Interfaces;
 using TimeTracker.App.ViewModels.Activity;
 using TimeTracker.App.ViewModels.Project;
 using TimeTracker.App.ViewModels.User;
+using Microsoft.UI.Xaml.Media;
 
 namespace TimeTracker.App.Services;
 
@@ -41,6 +42,15 @@ public class NavigationService : INavigationService
         var route = GetRouteByViewModel<TViewModel>();
         await Shell.Current.GoToAsync(route, parameters);
     }
+
+    //public async Task GoToAsync<TViewModel>(Guid projectId, Guid activeUserId, IDictionary<string, object?> parameters)
+    //    where TViewModel : IViewModel
+    //{
+    //    var route = GetRouteByViewModel<TViewModel>();
+    //    parameters[nameof(ProjectDetailViewModel.ProjectId)] = projectId;
+    //    parameters[nameof(ProjectDetailViewModel.ActiveUserId)] = activeUserId;
+    //    await Shell.Current.GoToAsync(route, parameters);
+    //}
 
     public async Task GoToAsync(string route)
         => await Shell.Current.GoToAsync(route);

@@ -15,6 +15,9 @@ public interface INavigationService
     Task GoToAsync<TViewModel>(IDictionary<string, object?> parameters)
         where TViewModel : IViewModel;
 
+    //Task GoToAsync<TViewModel>(Guid projectId, Guid userId, IDictionary<string, object?> parameters)
+    //    where TViewModel : IViewModel;
+
     Task GoToAsync(string route);
 
     bool SendBackButtonPressed(); 

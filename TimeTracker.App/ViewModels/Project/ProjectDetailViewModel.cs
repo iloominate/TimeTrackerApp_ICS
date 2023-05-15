@@ -15,6 +15,8 @@ using TimeTracker.BL.Models.ListModels;
 
 namespace TimeTracker.App.ViewModels.Project;
 
+[QueryProperty(nameof(ProjectId), nameof(ProjectId))]
+[QueryProperty(nameof(ActiveUserId), nameof(ActiveUserId))]
 public partial class ProjectDetailViewModel : ViewModelBase, 
     IRecipient<ProjectEditMessage>,
     IRecipient<ProjectActivityAddMessage>,
@@ -28,7 +30,8 @@ public partial class ProjectDetailViewModel : ViewModelBase,
 
     private readonly INavigationService _navigationService;
 
-    public Guid Id { get; set; }
+    public Guid ProjectId { get; set; }
+    public Guid ActiveUserId { get; set; }
     public ProjectDetailModel? Project { get; set; }
 
     public ObservableCollection<ActivityListModel> ActivityList { get; set; } = new();
@@ -58,7 +61,7 @@ public partial class ProjectDetailViewModel : ViewModelBase,
     {
         await base.LoadDataAsync();
 
-        Project = await _projectFacade.GetAsync(Id);
+        Project = await _projectFacade.GetAsync(ProjectId);
     }
 
     [RelayCommand]
