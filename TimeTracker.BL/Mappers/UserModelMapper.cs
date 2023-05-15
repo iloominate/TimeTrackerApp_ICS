@@ -15,6 +15,16 @@ public class UserModelMapper : ModelMapperBase<UserEntity, UserListModel, UserDe
     private readonly IProjectModelMapper _projectModelMapper;
     private readonly IActivityModelMapper _activityModelMapper;
 
+    public UserModelMapper(
+        IActivityModelMapper activityModelMapper,
+        IProjectModelMapper projectModelMapper, 
+        IProjectAmountModelMapper projectAmountModelMapper
+        )
+    {
+        _activityModelMapper = activityModelMapper;
+        _projectModelMapper = projectModelMapper;
+        _projectAmountModelMapper = projectAmountModelMapper;
+    }
     public override UserListModel MapToListModel(UserEntity? entity)
         => entity is null
             ? UserListModel.Empty
@@ -46,15 +56,13 @@ public class UserModelMapper : ModelMapperBase<UserEntity, UserListModel, UserDe
                 Surname = entity.Surname,
                 PhotoUrl = entity.PhotoUrl,
                 // TEST
-                Activities = null,
-                Projects = null,
-                ProjectsCreared = null
-                // Activities = _activityModelMapper.MapToListModel(entity.Activities)
-                    //.ToObservableCollection(),
-                //Projects = _projectAmountModelMapper.MapToListModel(entity.Projects)
-                    //.ToObservableCollection(),
-                //ProjectsCreared = _projectModelMapper.MapToListModel(entity.CreatedProjects)
-                    //.ToObservableCollection()
+
+                Activities = _activityModelMapper.MapToListModel(entity.Activities)
+                    .ToObservableCollection(),
+                Projects = _projectAmountModelMapper.MapToListModel(entity.Projects)
+                    .ToObservableCollection(),
+                ProjectsCreared = _projectModelMapper.MapToListModel(entity.CreatedProjects)
+                    .ToObservableCollection()
             };
 
     public override UserEntity MapToEntity(UserDetailModel model)
