@@ -46,9 +46,9 @@ public partial class UserListViewModel : ViewModelBase, IRecipient<UserCreateMes
     }
 
     [RelayCommand]
-    private async Task GoToCreateAsync()
+    private async Task GoToCreateAsync()    
     {
-        await _navigationService.GoToAsync<UserEditViewModel>();
+        await _navigationService.GoToAsync("/edit");
     }
 
     [RelayCommand]

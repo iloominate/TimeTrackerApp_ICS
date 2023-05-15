@@ -20,11 +20,13 @@ public class NavigationService : INavigationService
         new("//users", typeof(UserListView), typeof(UserListViewModel)),
         new("//users/edit", typeof(UserEditView), typeof(UserEditViewModel)),
 
-        new("//projects", typeof(ProjectListView), typeof(ProjectListViewModel)),
-        new("//projects/edit", typeof(ProjectEditView), typeof(ProjectEditViewModel)),
+        new("//users/projects", typeof(ProjectListView), typeof(ProjectListViewModel)),
 
-        new("//activities", typeof(ActivitiesList), typeof(ActivityListViewModel)),
-        new("//activities/edit", typeof(ActivityEditView), typeof(ActivityEditViewModel)),
+        new("//users/projects/detail", typeof(ProjectDetailView), typeof(ProjectDetailViewModel)),
+        new("//users/projects/detail/edit", typeof(ProjectEditView), typeof(ProjectEditViewModel)),
+
+        new("//users/projects/detail/activity", typeof(ActivityDetailView), typeof(ActivityDetailViewModel)),
+        new("//users/projects/detail/activity/edit", typeof(ActivityEditView), typeof(ActivityEditViewModel))
     };
 
     public async Task GoToAsync<TViewModel>()

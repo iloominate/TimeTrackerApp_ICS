@@ -17,8 +17,8 @@ public partial class UserEditViewModel : ViewModelBase
     private readonly IUserFacade _userFacade;
     private readonly INavigationService _navigationService;
 
-    public UserDetailModel user { get; set; } = UserDetailModel.Empty; 
-    UserEditViewModel(
+    public UserDetailModel User { get; set; } = UserDetailModel.Empty; 
+    public UserEditViewModel(
         IUserFacade userFacade,
         INavigationService navigationService,
         IMessengerService messengerService)
@@ -31,9 +31,9 @@ public partial class UserEditViewModel : ViewModelBase
     [RelayCommand]
     private async Task SaveAsync()
     {
-        await _userFacade.SaveAsync(user with { Projects = default! });
+        await _userFacade.SaveAsync(User with { Projects = default! });
 
-        MessengerService.Send(new UserCreateMessage { UserId = user.Id });
+        MessengerService.Send(new UserCreateMessage { UserId = User.Id });
 
         _navigationService.SendBackButtonPressed();
     }
