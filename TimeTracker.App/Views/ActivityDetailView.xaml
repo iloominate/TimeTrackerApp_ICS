@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<views:ContentPageBase xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+                       xmlns:views="clr-namespace:TimeTracker.App.Views"
+                       xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+                       xmlns:vm="clr-namespace:TimeTracker.App.ViewModels.Activity"
+                       x:Class="TimeTracker.App.Views.ActivityDetailView"
+                       x:DataType="vm:ActivityDetailViewModel"
+                       Title="ActivityDetailView">
+    <VerticalStackLayout>
+        <Label 
+            Text="Welcome to .NET MAUI!"
+            VerticalOptions="Center" 
+            HorizontalOptions="Center" />
+    </VerticalStackLayout>
+</views:ContentPageBase>

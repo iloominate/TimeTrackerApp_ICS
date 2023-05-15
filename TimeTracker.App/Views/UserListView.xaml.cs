@@ -11,14 +11,4 @@ public partial class UserListView
     {
         InitializeComponent();
     }
-
-    /*    private async void OnLogInClicked(object sender, EventArgs e)
-        {
-            await Navigation.PushAsync(new ProjectList());
-        }
-
-        private async void OnEditClicked(object sender, EventArgs e)
-        {
-            await Navigation.PushAsync(new UserEditView());
-        }*/
 }
