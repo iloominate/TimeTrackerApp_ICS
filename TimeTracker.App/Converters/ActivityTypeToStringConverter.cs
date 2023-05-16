@@ -10,11 +10,20 @@ using System.Globalization;
 
 namespace TimeTracker.App.Converters;
 
-public static class ActivityTypeToStringConverter 
+public class ActivityTypeToStringConverter : IValueConverter
 {
-    public static string Convert(
-        ActivityType type)
+    public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
     {
-        return type.ToString();
+        if (value is Enum enumValue)
+        {
+            return enumValue.ToString();
+        }
+
+        return string.Empty;
+    }
+
+    public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
+    {
+        throw new NotImplementedException();
     }
 }

@@ -53,7 +53,7 @@ public partial class ActivityDetailViewModel : ViewModelBase, IRecipient<Activit
     private async Task GoToEditAsync()
     {
         Dictionary<string, object?> parametersToPass = new();
-        parametersToPass[nameof(ActivityEditViewModel.Activity)] = Activity;
+        parametersToPass[nameof(ActivityEditViewModel.ActivityId)] = ActivityId;
         await _navigationService.GoToAsync<ActivityEditViewModel>(parametersToPass);
         MessengerService.Send(new GetUserMessage());
     }

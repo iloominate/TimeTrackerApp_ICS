@@ -49,7 +49,7 @@
                         </CollectionView.ItemTemplate>
                     </CollectionView>
 
-                <Button Text="Create User"
+                <Button Text="Create Activity"
                         Command="{Binding Source={x:Reference ProjectEditViewRoot}, Path=BindingContext.GoToActivityEditCommand}"
                         HorizontalOptions="End" 
                         VerticalOptions="End" 

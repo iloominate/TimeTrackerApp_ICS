@@ -60,7 +60,12 @@ public abstract class
 
         if (string.IsNullOrWhiteSpace(IncludesNavigationPathDetail) is false)
         {
-            query = query.Include(IncludesNavigationPathDetail);
+            string[] paths = IncludesNavigationPathDetail.Split(',');
+            foreach (string path in paths)
+            {
+                query = query.Include(path);
+            }
+            
         }
 
         TEntity? entity = await query.SingleOrDefaultAsync(e => e.Id == id);

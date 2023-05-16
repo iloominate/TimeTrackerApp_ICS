@@ -39,6 +39,8 @@ public partial class ProjectDetailViewModel : ViewModelBase,
 
 
     public ObservableCollection<UserListModel> UserList { get; set; } = new();
+    public ObservableCollection<ActivityListModel> ActivityList { get; set; } = new();
+
 
 
     public ProjectDetailViewModel(
@@ -68,38 +70,12 @@ public partial class ProjectDetailViewModel : ViewModelBase,
         {
             foreach (ProjectAmountListModel User in Project.Users)
             {
-                UserList.Append<UserListModel>(_userModelMapper.MapToListModel(await _userFacade.GetAsync(User.UserId)));
+                UserList.Append<UserListModel>(
+                    _userModelMapper.MapToListModel(await _userFacade.GetAsync(User.UserId)));
             }
         }
+
         ActivityList = Project.Activities;
-    }
-    
-        MessengerService.Send(new GetUserMessage()); // ensures that Activity model will be loaded
-    }
-
-    [RelayCommand]
-    private async Task GoToActivityEditAsync()
-    {
-        Dictionary<string, object?> parametersToPass = new();
-        parametersToPass[nameof(ActivityEditViewModel.ProjectId)] = ProjectId;
-        parametersToPass[nameof(ActivityEditViewModel.ActiveUserId)] = ActiveUserId;
-
-        await _navigationService.GoToAsync<ActivityEditViewModel>(parametersToPass);
-        MessengerService.Send(new GetUserMessage()); // ensures that Activity model will be loaded
-    }
-
-        MessengerService.Send(new GetUserMessage()); // ensures that Activity model will be loaded
-    }
-
-    [RelayCommand]
-    private async Task GoToActivityEditAsync()
-    {
-        Dictionary<string, object?> parametersToPass = new();
-        parametersToPass[nameof(ActivityEditViewModel.ProjectId)] = ProjectId;
-        parametersToPass[nameof(ActivityEditViewModel.ActiveUserId)] = ActiveUserId;
-
-        await _navigationService.GoToAsync<ActivityEditViewModel>(parametersToPass);
-        MessengerService.Send(new GetUserMessage()); // ensures that Activity model will be loaded
     }
 
     public async void Receive(ProjectEditMessage message)

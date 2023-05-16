@@ -19,6 +19,7 @@ public class ActivityModelMapper : ModelMapperBase<ActivityEntity, ActivityListM
             ? ActivityListModel.Empty
             : new ActivityListModel { 
                 Id = entity.Id,
+                Name = entity.Name,
                 Start = entity.Start,
                 End = entity.End,
                 Type = entity.Type,
@@ -32,6 +33,7 @@ public class ActivityModelMapper : ModelMapperBase<ActivityEntity, ActivityListM
             : new ActivityDetailModel
             {
                 Id = entity.Id,
+                Name = entity.Name,
                 Start = entity.Start,
                 End = entity.End,
                 Type = entity.Type,
@@ -43,7 +45,8 @@ public class ActivityModelMapper : ModelMapperBase<ActivityEntity, ActivityListM
     public override ActivityEntity MapToEntity(ActivityDetailModel model)
         => new() 
         {
-            Id = model.Id, 
+            Id = model.Id,
+            Name = model.Name,
             Start = model.Start,
             End = model.End,
             Type = model.Type,
