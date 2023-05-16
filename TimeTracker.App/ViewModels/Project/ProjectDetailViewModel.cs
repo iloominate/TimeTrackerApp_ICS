@@ -11,6 +11,7 @@ using TimeTracker.BL.Facades.Interfaces;
 using TimeTracker.BL.Models.DetailModels;
 using TimeTracker.App.Messages;
 using System.Collections.ObjectModel;
+using TimeTracker.App.ViewModels.Activity;
 using TimeTracker.BL.Models.ListModels;
 
 namespace TimeTracker.App.ViewModels.Project;
@@ -19,8 +20,8 @@ namespace TimeTracker.App.ViewModels.Project;
 [QueryProperty(nameof(ActiveUserId), nameof(ActiveUserId))]
 public partial class ProjectDetailViewModel : ViewModelBase, 
     IRecipient<ProjectEditMessage>,
-    IRecipient<ProjectActivityAddMessage>,
-    IRecipient<ProjectActivityDeleteMessage>,
+    IRecipient<ActivityEditMessage>,
+    IRecipient<UserToProjectRemove>,
     IRecipient<UserToProjectAdd>
 {
     private readonly IProjectFacade _projectFacade;
@@ -65,19 +66,26 @@ public partial class ProjectDetailViewModel : ViewModelBase,
     }
 
     [RelayCommand]
-    private async Task DeleteProjectAsync()
+    private async Task GoToActivityDetailAsync(Guid activityId)
     {
-        if (Project is not null)
-        {
-            await _projectFacade.DeleteAsync(Project.Id);
+        Dictionary<string, object?> parametersToPass = new();
+        parametersToPass[nameof(ActivityDetailViewModel.Id)] = activityId;
+        parametersToPass[nameof(ActivityDetailViewModel.ActiveUserId)] = ActiveUserId;
 
-            MessengerService.Send(new ProjectDeleteMessage());
-
-            _navigationService.SendBackButtonPressed();
-        }
+        await _navigationService.GoToAsync<ActivityDetailViewModel>(parametersToPass);
+        MessengerService.Send(new GetUserMessage()); // ensures that Activity model will be loaded
     }
 
+    [RelayCommand]
+    private async Task GoToActivityEditAsync()
+    {
+        Dictionary<string, object?> parametersToPass = new();
+        parametersToPass[nameof(ActivityEditViewModel.ProjectId)] = ProjectId;
+        parametersToPass[nameof(ActivityEditViewModel.ActiveUserId)] = ActiveUserId;
 
+        await _navigationService.GoToAsync<ActivityEditViewModel>(parametersToPass);
+        MessengerService.Send(new GetUserMessage()); // ensures that Activity model will be loaded
+    }
 
     public async void Receive(ProjectEditMessage message)
     {
@@ -87,23 +95,28 @@ public partial class ProjectDetailViewModel : ViewModelBase,
         }
     }
 
-    public async void Receive(ProjectActivityAddMessage message)
+    public async void Receive(ActivityEditMessage message)
     {
-        await LoadDataAsync();
+        if (message.ProjectId == ProjectId)
+        {
+            await LoadDataAsync();
+        }
     }
 
-    public async void Receive(ProjectActivityDeleteMessage message)
-    {
-        await LoadDataAsync();
-    }
 
     public async void Receive(UserToProjectAdd message)
     {
-        await LoadDataAsync();
+        if (message.ProjectId == ProjectId)
+        {
+            await LoadDataAsync();
+        }
     }
 
-    public async void Recieve(UserDeleteMessage message)
+    public async void Receive(UserToProjectRemove message)
     {
-        await LoadDataAsync();
+        if (message.ProjectId == ProjectId)
+        {
+            await LoadDataAsync();
+        }
     }
 }

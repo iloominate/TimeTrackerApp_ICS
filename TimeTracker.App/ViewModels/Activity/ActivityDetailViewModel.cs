@@ -14,7 +14,8 @@ using System.Net.Http.Headers;
 
 namespace TimeTracker.App.ViewModels.Activity;
 
-[QueryProperty(nameof(Id), nameof(Id))]
+[QueryProperty(nameof(ActiveUserId), nameof(ActiveUserId))]
+[QueryProperty(nameof(ActivityId), nameof(ActivityId))]
 public partial class ActivityDetailViewModel : ViewModelBase, IRecipient<ActivityEditMessage>
 {
     private readonly IActivityFacade _activityFacade;
@@ -22,7 +23,8 @@ public partial class ActivityDetailViewModel : ViewModelBase, IRecipient<Activit
     private readonly IAlertService _alertService;
 
 
-    public Guid Id { get; set; }
+    public Guid ActivityId { get; set; }
+    public Guid ActiveUserId { get; set; }
 
     public ActivityDetailModel? Activity { get; private set; }
 
@@ -42,7 +44,7 @@ public partial class ActivityDetailViewModel : ViewModelBase, IRecipient<Activit
     {
         await base.LoadDataAsync(); 
 
-        Activity = await _activityFacade.GetAsync(Id);
+        Activity = await _activityFacade.GetAsync(ActivityId);
     }
 
     [RelayCommand]

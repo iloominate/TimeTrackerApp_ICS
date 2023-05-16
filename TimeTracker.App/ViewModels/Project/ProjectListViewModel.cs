@@ -128,7 +128,7 @@ public partial class ProjectListViewModel : ViewModelBase,
 
                 await _projectAmountFacade.DeleteAsync(projectAmountToDelete.Id);
 
-                MessengerService.Send(new UserToProjectAdd());
+                MessengerService.Send(new UserToProjectRemove {ProjectId = projectListModel.Id});
             }
             else
             { 

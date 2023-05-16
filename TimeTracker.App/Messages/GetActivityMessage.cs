@@ -6,8 +6,7 @@ using System.Threading.Tasks;
 
 namespace TimeTracker.App.Messages;
 
-public record ActivityEditMessage
+public record GetActivityMessage
 {
-    public required Guid ProjectId { get; set;}
-    public required Guid ActivityId { get; set;}
 }
+

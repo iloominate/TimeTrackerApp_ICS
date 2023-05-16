@@ -6,8 +6,8 @@ using System.Threading.Tasks;
 
 namespace TimeTracker.App.Messages;
 
-public record ActivityEditMessage
+public record UserToProjectRemove
 {
-    public required Guid ProjectId { get; set;}
-    public required Guid ActivityId { get; set;}
+    public Guid ProjectId { get; set; }
 }
+
