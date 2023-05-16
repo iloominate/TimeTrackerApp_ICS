@@ -35,6 +35,7 @@ public class ActivityModelMapper : ModelMapperBase<ActivityEntity, ActivityListM
                 Start = entity.Start,
                 End = entity.End,
                 Type = entity.Type,
+                Description = entity.Description,
                 UserId = entity.UserId,
                 ProjectId = entity.ProjectId,
             };
@@ -46,8 +47,10 @@ public class ActivityModelMapper : ModelMapperBase<ActivityEntity, ActivityListM
             Start = model.Start,
             End = model.End,
             Type = model.Type,
+            Description = model.Description,
             UserId = model.UserId,
             ProjectId = model.ProjectId
+            
         };
 
 

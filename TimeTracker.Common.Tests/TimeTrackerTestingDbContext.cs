@@ -21,9 +21,9 @@ public class TimeTrackerTestingDbContext : TimeTrackerDbContext
         if (_seedTestingData)
         {
             UserSeeds.Seed(modelBuilder);
-            //ProjectSeeds.Seed(modelBuilder);
-            //ProjectAmountSeeds.Seed(modelBuilder);
-            //ActivitySeeds.Seed(modelBuilder);
+            ProjectSeeds.Seed(modelBuilder);
+            ProjectAmountSeeds.Seed(modelBuilder);
+            ActivitySeeds.Seed(modelBuilder);
         }
     }
 }
