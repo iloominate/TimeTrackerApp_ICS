@@ -70,7 +70,6 @@ public partial class ProjectEditViewModel : ViewModelBase,
         }
         ActivityList = Project.Activities;
     }
-
     [RelayCommand]
     private async Task GoToActivityDetailAsync(Guid activityId)
     {
