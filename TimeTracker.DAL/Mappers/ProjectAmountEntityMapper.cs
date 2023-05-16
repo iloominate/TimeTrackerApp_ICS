@@ -12,7 +12,7 @@ public class ProjectAmountEntityMapper : IEntityMapper<ProjectAmountEntity>
     public void MapToExistingEntity(ProjectAmountEntity existingEntity,
         ProjectAmountEntity newEntity)
     {
-        newEntity.ProjectId = existingEntity.ProjectId; 
-        newEntity.UserId = existingEntity.UserId;
+        existingEntity.ProjectId = newEntity.ProjectId; 
+        existingEntity.UserId = newEntity.UserId;
     }
 }

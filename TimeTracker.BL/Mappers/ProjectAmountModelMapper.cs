@@ -22,6 +22,15 @@ public class ProjectAmountModelMapper : ModelMapperBase<ProjectAmountEntity, Pro
             ProjectId = entity.ProjectId
         };
 
+    public ProjectAmountDetailModel MapToNewDetailModel(ProjectListModel project, Guid userId)
+        => new()
+        {
+            Id = Guid.NewGuid(),
+            ProjectId = project.Id,
+            UserId = userId
+        };
+
+
     public override ProjectAmountListModel MapToListModel(ProjectAmountEntity? entity)
         => entity is null
         ? ProjectAmountListModel.Empty
@@ -32,7 +41,7 @@ public class ProjectAmountModelMapper : ModelMapperBase<ProjectAmountEntity, Pro
             ProjectId = entity.ProjectId
         };
 
-    public override ProjectAmountEntity MapToEntity(ProjectAmountDetailModel model)
+    public ProjectAmountListModel MapToListModel(ProjectAmountDetailModel model)
         => new()
         {
             Id = model.Id,
@@ -40,4 +49,11 @@ public class ProjectAmountModelMapper : ModelMapperBase<ProjectAmountEntity, Pro
             ProjectId = model.ProjectId
         };
 
+    public override ProjectAmountEntity MapToEntity(ProjectAmountDetailModel model)
+        => new()
+        {
+            Id = model.Id,
+            UserId = model.UserId,
+            ProjectId = model.ProjectId
+        };
 }

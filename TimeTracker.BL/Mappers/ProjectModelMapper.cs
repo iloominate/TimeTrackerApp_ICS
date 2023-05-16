@@ -17,6 +17,13 @@ public class ProjectModelMapper : ModelMapperBase<ProjectEntity, ProjectListMode
     private readonly IActivityModelMapper _activityModelMapper;
     private readonly IProjectAmountModelMapper _projectAmountModelMapper;
 
+    public ProjectModelMapper(IActivityModelMapper activityModelMapper,
+        IProjectAmountModelMapper projectAmountModelMapper)
+    {
+        _activityModelMapper = activityModelMapper;
+        _projectAmountModelMapper = projectAmountModelMapper;
+    }
+
     public override ProjectDetailModel MapToDetailModel(ProjectEntity? entity)
         => entity is null
             ? ProjectDetailModel.Empty

@@ -11,4 +11,5 @@ namespace TimeTracker.BL.Mappers;
 
 public interface IUserModelMapper : IModelMapper<UserEntity, UserListModel, UserDetailModel>
 {
+    public UserListModel MapToListModel (UserDetailModel model);
 }

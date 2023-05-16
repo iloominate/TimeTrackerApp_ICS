@@ -5,17 +5,23 @@
 
 pool:
   vmImage: windows-2022
+  
+variables:
+  solution: '**/*.sln'
+  buildPlatform: 'Any CPU'
+  buildConfiguration: 'Release'
 
 steps:
+
 - task: UseDotNet@2
   displayName: Use .NET 7.0
   inputs:
     packageType: 'sdk'
     version: '7.0.x'
 
-# - task: CmdLine@2
-#   inputs:
-#   script: 'dotnet workload install maui'
+- task: CmdLine@2
+  inputs:
+    script: 'dotnet workload install maui'
 
 - task: DotNetCoreCLI@2
   name: "Build"

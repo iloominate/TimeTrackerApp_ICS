@@ -11,8 +11,8 @@ public class UserEntityMapper : IEntityMapper<UserEntity>
 {
     public void MapToExistingEntity(UserEntity existingEntity, UserEntity newEntity)
     {
-        newEntity.PhotoUrl = existingEntity.PhotoUrl;
-        newEntity.Name = existingEntity.Name;
-        newEntity.Surname = existingEntity.Surname;
+        existingEntity.PhotoUrl = newEntity.PhotoUrl;
+        existingEntity.Name = newEntity.Name;
+        existingEntity.Surname = newEntity.Surname;
     }
 }
