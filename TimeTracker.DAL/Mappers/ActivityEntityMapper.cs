@@ -11,12 +11,12 @@ public class ActivityEntityMapper : IEntityMapper<ActivityEntity>
 {
     public void MapToExistingEntity(ActivityEntity existingEntity, ActivityEntity newEntity)
     {
-        newEntity.ProjectId = existingEntity.ProjectId;
-        newEntity.UserId = existingEntity.UserId;
-        newEntity.Type = existingEntity.Type;
-        newEntity.Start = existingEntity.Start;
-        newEntity.End = existingEntity.End;
-        newEntity.Description = existingEntity.Description;
+        existingEntity.ProjectId = newEntity.ProjectId;
+        existingEntity.UserId = newEntity.UserId;
+        existingEntity.Type = newEntity.Type;
+        existingEntity.Start = newEntity.Start;
+        existingEntity.End = newEntity.End;
+        existingEntity.Description = newEntity.Description;
 
     }
 }

@@ -11,7 +11,7 @@ public class ProjectEntityMapper : IEntityMapper<ProjectEntity>
 {
     public void MapToExistingEntity(ProjectEntity existingEntity, ProjectEntity newEntity)
     {
-        newEntity.Name = existingEntity.Name;
-        newEntity.CreatorId = existingEntity.CreatorId;
+        existingEntity.Name = newEntity.Name;
+        existingEntity.CreatorId = newEntity.CreatorId;
     }
 }
