@@ -11,49 +11,64 @@
     <Grid>
         <Grid HorizontalOptions="FillAndExpand"
               RowDefinitions="Auto, *"
-              RowSpacing="20"
-              Margin="{OnIdiom Phone='10, 0'}">
+              RowSpacing="10"
+              Margin="{OnIdiom Phone='15, 0'}">
             <Label Grid.Row="0"
-                   FontSize="24"
-                   Text="USERS LABEL" />
+                   FontSize="30"
+                   Margin="15"
+                   Text="Users List" />
 
             <CollectionView Grid.Row="1" ItemsSource="{Binding Users}"
                             VerticalOptions="FillAndExpand">
+                <CollectionView.ItemsLayout>
+                    <GridItemsLayout Orientation="Horizontal"
+                                     HorizontalItemSpacing="15" 
+                                     VerticalItemSpacing="15"
+                                     Span="2" />
+                </CollectionView.ItemsLayout>
 
 
                 <CollectionView.ItemTemplate>
                     <DataTemplate x:DataType="m:UserListModel">
                         <Frame Padding="0"
-                               CornerRadius="10"
-                               WidthRequest="320" HeightRequest="240"
+                               CornerRadius="25"
+                               WidthRequest="250" 
+                               HeightRequest="250"
                                IsClippedToBounds="True">
                             <Grid>
                                 <Image Grid.Row="0"
-                                       HorizontalOptions="Fill" VerticalOptions="Fill"
+                                       HorizontalOptions="FillAndExpand" 
+                                       VerticalOptions="FillAndExpand"
                                        Aspect="AspectFill"
-                                       WidthRequest="320" HeightRequest="240"
-                                       Source="{Binding PhotoUrl, TargetNullValue='user_place_holder.png'}" />
+                                       WidthRequest="250" HeightRequest="250"
+                                       Source="{Binding PhotoUrl, TargetNullValue='user_place_holder.png'}"/>
 
                                 <BoxView Grid.Row="0"
-                                         Opacity="0.25"
+                                         Opacity="0.2"
                                          Color="Black" />
 
                                 <Label Grid.Row="0"
-                                       Margin="22,12"
+                                       Margin="25"
                                        FontSize="20" LineBreakMode="WordWrap"
-                                       Text="{Binding Name}"
+                                       Text="{Binding Name}" 
                                        TextColor="White" VerticalOptions="End" />
 
 
-                                <Button Text="Edit User"
+                                <Button Text="Edit"
                                         Command="{Binding Source={x:Reference UserListViewRoot}, Path=BindingContext.GoToUserEditCommand}"
                                         CommandParameter="{Binding Id}"
                                         HorizontalOptions="Start"
                                         VerticalOptions="Start"
-                                        Margin="10"
- Padding="5"
-                                        FontSize="14" TextColor="Black" 
-                                        CornerRadius="15"/>
+                                        Margin="15"
+                                        FontSize="13" 
+                                        TextColor="Black" 
+                                        CornerRadius="15">
+                                    <Button.Triggers>
+                                        <Trigger TargetType="Button" Property="IsPressed" Value="True">
+                                            <Setter Property="BackgroundColor" Value="Gray" />
+                                        </Trigger>
+                                    </Button.Triggers>
+                                </Button>
 
 
                                 <Button Text="Log In"
@@ -61,9 +76,16 @@
                                         CommandParameter="{Binding Id}"
                                         HorizontalOptions="End" 
                                         VerticalOptions="End" 
-                                        Margin="15" 
+                                        Margin="15"
+                                        FontSize="13" 
                                         TextColor="Black" 
-                                        CornerRadius="15"/>
+                                        CornerRadius="15">
+                                    <Button.Triggers>
+                                        <Trigger TargetType="Button" Property="IsPressed" Value="True">
+                                            <Setter Property="BackgroundColor" Value="Gray" />
+                                        </Trigger>
+                                    </Button.Triggers>
+                                </Button>
 
                             </Grid>
                         </Frame>
@@ -75,9 +97,17 @@
                     Command="{Binding Source={x:Reference UserListViewRoot}, Path=BindingContext.GoToCreateCommand}"
                     HorizontalOptions="End" 
                     VerticalOptions="End" 
-                    Margin="30" 
+                    Margin="20" 
+                    FontSize="18" 
+                    BackgroundColor="LimeGreen" 
                     TextColor="Black" 
-                    CornerRadius="15"/>
+                    CornerRadius="15">
+                <Button.Triggers>
+                    <Trigger TargetType="Button" Property="IsPressed" Value="True">
+                        <Setter Property="BackgroundColor" Value="Green" />
+                    </Trigger>
+                </Button.Triggers>
+            </Button>
         </Grid>
     </Grid>
 
