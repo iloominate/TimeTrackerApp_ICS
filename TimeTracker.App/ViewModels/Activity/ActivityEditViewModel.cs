@@ -69,7 +69,6 @@ public partial class ActivityEditViewModel : ViewModelBase, IRecipient<GetActivi
     {
         try
         {
-            Activity.UserId = ActiveUserId;
 
             await _activityFacade.SaveAsync(Activity);
             MessengerService.Send(new ActivityEditMessage
@@ -83,12 +82,6 @@ public partial class ActivityEditViewModel : ViewModelBase, IRecipient<GetActivi
         {
             await _alertService.DisplayAsync("Activity save error", "Activities from one user can't intersect");
         }
-
-        MessengerService.Send(new ActivityEditMessage
-        {
-            ProjectId = ProjectId,
-            ActivityId = ActivityId
-        });
 
         _navigationService.SendBackButtonPressed();
         _navigationService.SendBackButtonPressed();

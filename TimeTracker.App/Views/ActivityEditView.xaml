@@ -25,15 +25,15 @@
         <Label Text="Start:"
                Margin="0,0,0,5 "/>
         <StackLayout>
-            <DatePicker Date="{Binding Activity.Start.Date, TargetNullValue='Select Date'}"/>
-            <TimePicker Time="{Binding Activity.Start.TimeOfDay, TargetNullValue='Select Time'}"/>
+            <DatePicker Date="{Binding Activity.Start.Date}"/>
+            <TimePicker Time="{Binding Activity.Start.TimeOfDay}"/>
         </StackLayout>
 
         <Label Text="End:"
                Margin="0,0,0,5 "/>
         <StackLayout>
-            <DatePicker Date="{Binding Activity.End.Date, TargetNullValue='Select Date'}"/>
-            <TimePicker Time="{Binding Activity.End.TimeOfDay, TargetNullValue='Select Time'}"/>
+            <DatePicker Date="{Binding Activity.End.Date}"/>
+            <TimePicker Time="{Binding Activity.End.TimeOfDay}"/>
         </StackLayout>
 
 
