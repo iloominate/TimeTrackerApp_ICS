@@ -69,7 +69,7 @@ public partial class ProjectDetailViewModel : ViewModelBase,
     private async Task GoToActivityDetailAsync(Guid activityId)
     {
         Dictionary<string, object?> parametersToPass = new();
-        parametersToPass[nameof(ActivityDetailViewModel.Id)] = activityId;
+        parametersToPass[nameof(ActivityDetailViewModel.ActivityId)] = activityId;
         parametersToPass[nameof(ActivityDetailViewModel.ActiveUserId)] = ActiveUserId;
 
         await _navigationService.GoToAsync<ActivityDetailViewModel>(parametersToPass);
