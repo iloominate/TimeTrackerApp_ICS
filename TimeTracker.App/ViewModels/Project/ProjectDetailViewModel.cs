@@ -35,11 +35,8 @@ public partial class ProjectDetailViewModel : ViewModelBase,
     public Guid ActiveUserId { get; set; }
     public ProjectDetailModel? Project { get; set; }
 
-    public ObservableCollection<ActivityListModel> ActivityList { get; set; } = new();
 
     public ObservableCollection<UserListModel> UserList { get; set; } = new();
-
-    public UserDetailModel ActiveUser { get; set; }
 
 
     public ProjectDetailViewModel(
@@ -65,27 +62,6 @@ public partial class ProjectDetailViewModel : ViewModelBase,
         Project = await _projectFacade.GetAsync(ProjectId);
     }
 
-    [RelayCommand]
-    private async Task GoToActivityDetailAsync(Guid activityId)
-    {
-        Dictionary<string, object?> parametersToPass = new();
-        parametersToPass[nameof(ActivityDetailViewModel.Id)] = activityId;
-        parametersToPass[nameof(ActivityDetailViewModel.ActiveUserId)] = ActiveUserId;
-
-        await _navigationService.GoToAsync<ActivityDetailViewModel>(parametersToPass);
-        MessengerService.Send(new GetUserMessage()); // ensures that Activity model will be loaded
-    }
-
-    [RelayCommand]
-    private async Task GoToActivityEditAsync()
-    {
-        Dictionary<string, object?> parametersToPass = new();
-        parametersToPass[nameof(ActivityEditViewModel.ProjectId)] = ProjectId;
-        parametersToPass[nameof(ActivityEditViewModel.ActiveUserId)] = ActiveUserId;
-
-        await _navigationService.GoToAsync<ActivityEditViewModel>(parametersToPass);
-        MessengerService.Send(new GetUserMessage()); // ensures that Activity model will be loaded
-    }
 
     public async void Receive(ProjectEditMessage message)
     {

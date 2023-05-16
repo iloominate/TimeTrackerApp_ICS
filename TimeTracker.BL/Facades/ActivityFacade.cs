@@ -12,6 +12,7 @@ using TimeTracker.DAL.Entities;
 using TimeTracker.DAL.Mappers;
 using TimeTracker.DAL.UnitOfWork;
 using Microsoft.EntityFrameworkCore;
+using TimeTracker.Common.Enums;
 
 namespace TimeTracker.BL.Facadesl;
 
@@ -34,26 +35,12 @@ public class ActivityFacade : FacadeBase<ActivityEntity, ActivityListModel,
         }
     }
 
-    //private async Task<IEnumerable<ActivityListModel>> GetAllUsersActivitiesToList(Guid userId)
-    //{
-    //    await using IUnitOfWork uow = UnitOfWorkFactory.Create();
-
-    //    var activities = uow.GetRepository<ActivityEntity, ActivityEntityMapper>().Get()
-    //        .Where(act => act.UserId == userId)
-    //        .ToList();
-
-
-    //    return activities is null
-    //        ? null
-    //        : ModelMapper.MapToListModel(activities);
-    //}
-
     private async Task CheckCrossingBetweenActivities(ActivityDetailModel model)
     {
 
         if (model.UserId == Guid.Empty)
         {
-            throw new NullReferenceException("Activity dont have a User");
+            throw new NullReferenceException("Activity doesn't have a User");
         }
 
         await using var uow = UnitOfWorkFactory.Create();
@@ -68,7 +55,7 @@ public class ActivityFacade : FacadeBase<ActivityEntity, ActivityListModel,
 
         if(userActivitiesOnThisDay is not null)
         {
-            throw new DbUpdateException("Activity accros other user activity");
+            throw new DbUpdateException("Activity across other user activity");
         }
     }
 
@@ -82,7 +69,8 @@ public class ActivityFacade : FacadeBase<ActivityEntity, ActivityListModel,
 
     public async Task<IEnumerable<ActivityListModel>> FilterAsync(DateTime? activityStart = null,
                                                                     DateTime? activityEnd = null,
-                                                                    Guid? userId = null)
+                                                                    Guid? userId = null,
+                                                                    ActivityType? activityType = null)
     {
         await using var uow = UnitOfWorkFactory.Create();
 
@@ -90,7 +78,8 @@ public class ActivityFacade : FacadeBase<ActivityEntity, ActivityListModel,
             .Where(act => 
             (activityStart == null || act.Start >= activityStart) &&
             (activityEnd == null || act.End <= activityEnd) &&
-            (userId == null || act.UserId == userId));
+            (userId == null || act.UserId == userId) &&
+            (activityType == null || act.Type == activityType));
 
         return  ModelMapper.MapToListModel(query);
     }

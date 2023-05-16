@@ -18,6 +18,7 @@ namespace TimeTracker.App.ViewModels.Activity;
 public partial class ActivityEditViewModel : ViewModelBase
 {
     private readonly IActivityFacade _activityFacade;
+    private readonly IAlertService _alertService;
     private readonly INavigationService _navigationService;
 
     public Guid ActivityId { get; set; } = Guid.Empty;
@@ -26,23 +27,30 @@ public partial class ActivityEditViewModel : ViewModelBase
     public Guid ProjectId { get; set; }
     public ActivityDetailModel? Activity { get; set; } = ActivityDetailModel.Empty;
 
-    
-    public ProjectDetailModel Project { get; set; } = ProjectDetailModel.Empty;
 
     public ActivityEditViewModel(
         IActivityFacade activityFacade,
         INavigationService navigationService,
+        IAlertService alertService,
         IMessengerService messengerService)
         : base(messengerService)
     {
         _activityFacade = activityFacade;
+        _alertService = alertService;
         _navigationService = navigationService;
     }
 
     [RelayCommand]
     private async Task SaveAsync()
     {
-        await _activityFacade.SaveAsync(Activity);
+        try
+        {
+            await _activityFacade.SaveAsync(Activity);
+        }
+        catch (Exception e)
+        {
+            await _alertService.DisplayAsync("Activity save error", "Activities from one user can't intersect");
+        }
 
         MessengerService.Send(new ActivityEditMessage
         {
