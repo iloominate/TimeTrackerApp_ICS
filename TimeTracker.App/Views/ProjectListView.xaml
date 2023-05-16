@@ -34,7 +34,7 @@
                                 <StackLayout Orientation="Horizontal" 
                                              HorizontalOptions="EndAndExpand">
                                     <Button Text="View"
-                                            Command="{Binding Source={x:Reference ProjectListViewRoot}, Path=BindingContext.GoToDetailCommand}"
+                                            Command="{Binding Source={x:Reference ProjectListViewRoot}, Path=BindingContext.GoToDetailOrEditCommand}"
                                             CommandParameter="{Binding Id}"
                                             Margin="6"
                                             WidthRequest="80"

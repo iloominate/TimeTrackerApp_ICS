@@ -4,7 +4,7 @@
                        xmlns:vm="clr-namespace:TimeTracker.App.ViewModels.User"
                        x:DataType="vm:UserEditViewModel"
                        x:Class="TimeTracker.App.Views.UserEditView"
-                       Title="TimeTracker">
+                       Title="UserEditView">
 
     <Grid>
         <Button Text="SAVE"

@@ -13,6 +13,8 @@ using TimeTracker.BL.Models.DetailModels;
 using TimeTracker.App.ViewModels.Activity;
 using System.Collections.ObjectModel;
 using TimeTracker.BL.Models.ListModels;
+using System.Diagnostics;
+using TimeTracker.BL.Mappers;
 
 namespace TimeTracker.App.ViewModels.Project;
 
@@ -28,11 +30,15 @@ public partial class ProjectEditViewModel : ViewModelBase,
     private readonly IUserFacade _userFacade;
     private readonly IActivityFacade _activityFacade;
     private readonly IProjectAmountFacade _projectAmountFacade;
+    private readonly IUserModelMapper _userModelMapper;
+
 
     private readonly INavigationService _navigationService;
 
     public Guid ProjectId { get; set; }
     public Guid ActiveUserId { get; set; }
+    public ObservableCollection<ActivityListModel> ActivityList { get; set; } = new();
+    public ObservableCollection<UserListModel> UserList { get; set; } = new();
     public ProjectDetailModel? Project { get; set; }
 
     public ProjectEditViewModel(
@@ -41,6 +47,7 @@ public partial class ProjectEditViewModel : ViewModelBase,
         IActivityFacade activityFacade,
         IProjectAmountFacade projectAmountFacade,
         INavigationService navigationService,
+        IUserModelMapper userModelMapper,
         IMessengerService messengerService)
         : base(messengerService)
     {
@@ -49,6 +56,7 @@ public partial class ProjectEditViewModel : ViewModelBase,
         _activityFacade = activityFacade;
         _projectAmountFacade = projectAmountFacade;
         _navigationService = navigationService;
+        _userModelMapper = userModelMapper;
     }
 
     protected override async Task LoadDataAsync()
@@ -56,6 +64,11 @@ public partial class ProjectEditViewModel : ViewModelBase,
         await base.LoadDataAsync();
 
         Project = await _projectFacade.GetAsync(ProjectId);
+        foreach (ProjectAmountListModel User in Project.Users)
+        {
+            UserList.Append<UserListModel>(_userModelMapper.MapToListModel(await _userFacade.GetAsync(User.UserId)));
+        }
+        ActivityList = Project.Activities;
     }
 
     [RelayCommand]
@@ -77,7 +90,7 @@ public partial class ProjectEditViewModel : ViewModelBase,
         parametersToPass[nameof(ActivityEditViewModel.ActiveUserId)] = ActiveUserId;
 
         await _navigationService.GoToAsync<ActivityEditViewModel>(parametersToPass);
-        MessengerService.Send(new GetUserMessage()); // ensures that Activity model will be loaded
+        MessengerService.Send(new GetActivityMessage()); // ensures that Activity model will be loaded
     }
 
     public async void Receive(ProjectEditMessage message)

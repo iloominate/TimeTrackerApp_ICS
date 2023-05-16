@@ -24,10 +24,10 @@ public class NavigationService : INavigationService
         new("//users/projects", typeof(ProjectListView), typeof(ProjectListViewModel)),
 
         new("//users/projects/detail", typeof(ProjectDetailView), typeof(ProjectDetailViewModel)),
-        new("//users/projects/detail/edit", typeof(ProjectEditView), typeof(ProjectEditViewModel)),
+        new("//users/projects/editProject", typeof(ProjectEditView), typeof(ProjectEditViewModel)),
 
-        new("//users/projects/detail/activity", typeof(ActivityDetailView), typeof(ActivityDetailViewModel)),
-        new("//users/projects/detail/activity/edit", typeof(ActivityEditView), typeof(ActivityEditViewModel))
+        new("//users/projects/editProject/activity", typeof(ActivityDetailView), typeof(ActivityDetailViewModel)),
+        new("//users/projects/editProject/activity/editActivity", typeof(ActivityEditView), typeof(ActivityEditViewModel))
     };
 
     public async Task GoToAsync<TViewModel>()
@@ -42,15 +42,6 @@ public class NavigationService : INavigationService
         var route = GetRouteByViewModel<TViewModel>();
         await Shell.Current.GoToAsync(route, parameters);
     }
-
-    //public async Task GoToAsync<TViewModel>(Guid projectId, Guid activeUserId, IDictionary<string, object?> parameters)
-    //    where TViewModel : IViewModel
-    //{
-    //    var route = GetRouteByViewModel<TViewModel>();
-    //    parameters[nameof(ProjectDetailViewModel.ProjectId)] = projectId;
-    //    parameters[nameof(ProjectDetailViewModel.ActiveUserId)] = activeUserId;
-    //    await Shell.Current.GoToAsync(route, parameters);
-    //}
 
     public async Task GoToAsync(string route)
         => await Shell.Current.GoToAsync(route);

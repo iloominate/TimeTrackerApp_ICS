@@ -13,6 +13,7 @@ using TimeTracker.App.Messages;
 using System.Collections.ObjectModel;
 using TimeTracker.App.ViewModels.Activity;
 using TimeTracker.BL.Models.ListModels;
+using TimeTracker.BL.Mappers;
 
 namespace TimeTracker.App.ViewModels.Project;
 
@@ -28,6 +29,7 @@ public partial class ProjectDetailViewModel : ViewModelBase,
     private readonly IUserFacade _userFacade;
     private readonly IActivityFacade _activityFacade; 
     private readonly IProjectAmountFacade _projectAmountFacade;
+    private readonly IUserModelMapper _userModelMapper;
 
     private readonly INavigationService _navigationService;
 
@@ -45,6 +47,7 @@ public partial class ProjectDetailViewModel : ViewModelBase,
         IActivityFacade activityFacade,
         IProjectAmountFacade projectAmountFacade,
         INavigationService navigationService,
+        IUserModelMapper userModelMapper,
         IMessengerService messengerService)
         : base(messengerService)
     {
@@ -52,6 +55,7 @@ public partial class ProjectDetailViewModel : ViewModelBase,
         _userFacade = userFacade;
         _activityFacade = activityFacade;
         _projectAmountFacade = projectAmountFacade;
+        _userModelMapper = userModelMapper;
         _navigationService = navigationService;
     }
 
@@ -60,8 +64,43 @@ public partial class ProjectDetailViewModel : ViewModelBase,
         await base.LoadDataAsync();
 
         Project = await _projectFacade.GetAsync(ProjectId);
+        if (Project.Users != null)
+        {
+            foreach (ProjectAmountListModel User in Project.Users)
+            {
+                UserList.Append<UserListModel>(_userModelMapper.MapToListModel(await _userFacade.GetAsync(User.UserId)));
+            }
+        }
+        ActivityList = Project.Activities;
+    }
+    
+        MessengerService.Send(new GetUserMessage()); // ensures that Activity model will be loaded
     }
 
+    [RelayCommand]
+    private async Task GoToActivityEditAsync()
+    {
+        Dictionary<string, object?> parametersToPass = new();
+        parametersToPass[nameof(ActivityEditViewModel.ProjectId)] = ProjectId;
+        parametersToPass[nameof(ActivityEditViewModel.ActiveUserId)] = ActiveUserId;
+
+        await _navigationService.GoToAsync<ActivityEditViewModel>(parametersToPass);
+        MessengerService.Send(new GetUserMessage()); // ensures that Activity model will be loaded
+    }
+
+        MessengerService.Send(new GetUserMessage()); // ensures that Activity model will be loaded
+    }
+
+    [RelayCommand]
+    private async Task GoToActivityEditAsync()
+    {
+        Dictionary<string, object?> parametersToPass = new();
+        parametersToPass[nameof(ActivityEditViewModel.ProjectId)] = ProjectId;
+        parametersToPass[nameof(ActivityEditViewModel.ActiveUserId)] = ActiveUserId;
+
+        await _navigationService.GoToAsync<ActivityEditViewModel>(parametersToPass);
+        MessengerService.Send(new GetUserMessage()); // ensures that Activity model will be loaded
+    }
 
     public async void Receive(ProjectEditMessage message)
     {
