@@ -10,7 +10,7 @@ using TimeTracker.App.Services;
 using TimeTracker.App.Messages;
 using TimeTracker.BL.Facades.Interfaces;
 using TimeTracker.BL.Models.DetailModels;
-
+using TimeTracker.App.ViewModels.Activity;
 
 namespace TimeTracker.App.ViewModels.Project;
 
@@ -21,6 +21,7 @@ public partial class ProjectEditViewModel : ViewModelBase, IRecipient<ProjectAct
     private readonly INavigationService _navigationService;
 
     public ProjectDetailModel Project { get; set; } = ProjectDetailModel.Empty;
+    public Guid projectId { get; set; }
 
     // Create Activity type??
 
@@ -40,17 +41,12 @@ public partial class ProjectEditViewModel : ViewModelBase, IRecipient<ProjectAct
  //       await _navigationService.GoToAsync("/ingredients",
  //           new Dictionary<string, object?> { [nameof(ProjectActivitiesEditViewModel.Project)] = Project });
  //   }
-
-    [RelayCommand]
-    private async Task SaveAsync()
+    
+    public async Task GoToActivityEditAsync (ProjectDetailModel projectDetail)
     {
-        await _projectFacade.SaveAsync(Project with { Activities = default! });
-
-        MessengerService.Send(new ProjectEditMessage { ProjectId = Project.Id });
-
-        _navigationService.SendBackButtonPressed();
+        await _navigationService.GoToAsync("/activities", 
+            new Dictionary<string, object?> { [nameof(ActivityEditViewModel.Project)] = projectDetail });
     }
-
     public async void Receive(ProjectActivityEditMessage message)
     {
         await ReloadDataAsync();

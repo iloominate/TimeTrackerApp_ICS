@@ -1,4 +1,5 @@
 ﻿using CommunityToolkit.Mvvm.Input;
+using CommunityToolkit.Mvvm.Messaging;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -12,13 +13,16 @@ using TimeTracker.BL.Models.DetailModels;
 
 namespace TimeTracker.App.ViewModels.User;
 
-public partial class UserEditViewModel : ViewModelBase
+[QueryProperty(nameof(UserId), nameof(UserId))]
+public partial class UserEditViewModel : ViewModelBase, IRecipient<GetUserMessage>
 {
     private readonly IUserFacade _userFacade;
     private readonly INavigationService _navigationService;
+    private readonly IAlertService _alertService;
 
-    public UserDetailModel user { get; set; } = UserDetailModel.Empty; 
-    UserEditViewModel(
+    public UserDetailModel User { get; set; } = UserDetailModel.Empty; 
+    public Guid UserId { get; set; } = Guid.Empty;
+    public UserEditViewModel(
         IUserFacade userFacade,
         INavigationService navigationService,
         IMessengerService messengerService)
@@ -31,10 +35,31 @@ public partial class UserEditViewModel : ViewModelBase
     [RelayCommand]
     private async Task SaveAsync()
     {
-        await _userFacade.SaveAsync(user with { Projects = default! });
+        await _userFacade.SaveAsync(User with { Projects = default! });
 
-        MessengerService.Send(new UserCreateMessage { UserId = user.Id });
+        MessengerService.Send(new UserEditMessage{ UserId = User.Id });
 
         _navigationService.SendBackButtonPressed();
+    }
+
+
+    public async void Receive(GetUserMessage message)
+    {
+        await LoadDataAsync();
+    }
+
+    private async Task LoadDataAsync()
+    {
+        User = await _userFacade.GetAsync(UserId);
+        if (User == null)
+        {
+            User = new()
+            {
+                Id = Guid.NewGuid(),
+                Name = "",
+                Surname = "",
+                PhotoUrl = null
+            };
+        }
     }
 }

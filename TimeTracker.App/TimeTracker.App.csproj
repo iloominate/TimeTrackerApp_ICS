@@ -8,12 +8,27 @@
   <ItemGroup>
     <PackageReference Include="CommunityToolkit.Maui" Version="5.1.0" />
     <PackageReference Include="CommunityToolkit.Mvvm" Version="8.2.0" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore" Version="7.0.5" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Sqlite" Version="7.0.5" />
+	<PackageReference Include="Microsoft.Extensions.Configuration.Binder" Version="7.0.4" />
+	<PackageReference Include="Microsoft.Extensions.Configuration.Json" Version="7.0.0" />
+	<PackageReference Include="Microsoft.Extensions.Configuration.UserSecrets" Version="7.0.0" />
+	<PackageReference Include="Microsoft.Extensions.DependencyInjection.Abstractions" Version="7.0.0" />
+	<PackageReference Include="Fody" Version="6.7.0" PrivateAssets="All">
+		<IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+	</PackageReference>
+	<PackageReference Include="PropertyChanged.Fody" Version="4.1.0" PrivateAssets="All" />
+	<PackageReference Include="Scrutor" Version="4.2.2" />
   </ItemGroup>
 
     <ItemGroup>
 	    <ProjectReference Include="..\TimeTracker.BL\TimeTracker.BL.csproj" />
     </ItemGroup>
-	
+
+	<ItemGroup>
+		<EmbeddedResource Include="appsettings.json" />
+	</ItemGroup>
+
 	<PropertyGroup>
 		<TargetFrameworks></TargetFrameworks>
 		<TargetFrameworks Condition="$([MSBuild]::IsOSPlatform('windows'))">$(TargetFrameworks);net7.0-windows10.0.19041.0</TargetFrameworks>
@@ -63,50 +78,30 @@
 	</ItemGroup>
 
 	<ItemGroup>
-		<MauiXaml Update="View\ActivitiesList.xaml">
-			<Generator>MSBuild:Compile</Generator>
-		</MauiXaml>
-		<MauiXaml Update="View\ActivityEdit.xaml">
-			<Generator>MSBuild:Compile</Generator>
-		</MauiXaml>
-		<MauiXaml Update="View\ProjectEdit.xaml">
-			<Generator>MSBuild:Compile</Generator>
-		</MauiXaml>
-		<MauiXaml Update="View\UserEdit.xaml">
-			<Generator>MSBuild:Compile</Generator>
-		</MauiXaml>
-		<MauiXaml Update="View\ProjectLits.xaml">
-			<Generator>MSBuild:Compile</Generator>
-		</MauiXaml>
-		<MauiXaml Update="View\UsersPage.xaml">
-			<SubType>Designer</SubType>
-		</MauiXaml>
-	</ItemGroup>
-
-	<ItemGroup>
-		<Compile Update="View\ActivitiesList.xaml.cs">
-			<DependentUpon>ActivitiesList.xaml</DependentUpon>
+		<Compile Update="Views\ActivityEditView.xaml.cs">
+		  <DependentUpon>ActivityEditView.xaml</DependentUpon>
 		</Compile>
-		<Compile Update="View\ActivityEdit.xaml.cs">
-			<DependentUpon>ActivityEdit.xaml</DependentUpon>
+		<Compile Update="Views\ProjectEditView.xaml.cs">
+		  <DependentUpon>ProjectEditView.xaml</DependentUpon>
 		</Compile>
-		<Compile Update="View\ProjectEdit.xaml.cs">
-			<DependentUpon>ProjectEdit.xaml</DependentUpon>
+		<Compile Update="Views\UserEditView.xaml.cs">
+			<DependentUpon>UserEditView.xaml</DependentUpon>
 		</Compile>
-		<Compile Update="View\UserEdit.xaml.cs">
-			<DependentUpon>UserEdit.xaml</DependentUpon>
+		<Compile Update="Views\ProjectList.xaml.cs">
+		  <DependentUpon>ProjectListView.xaml</DependentUpon>
 		</Compile>
-		<Compile Update="View\ProjectLits.xaml.cs">
-			<DependentUpon>ProjectLits.xaml</DependentUpon>
-		</Compile>
-		<Compile Update="View\UsersPage.xaml.cs">
-			<DependentUpon>UsersPage.xaml</DependentUpon>
-			<SubType>Code</SubType>
+		<Compile Update="Views\UserListView.xaml.cs">
+		  <DependentUpon>UserListView.xaml</DependentUpon>
 		</Compile>
 	</ItemGroup>
 
 	<ItemGroup>
-		<AdditionalFiles Include="View\UsersPage.xaml" />
+	  <MauiXaml Update="Views\ActivityDetailView.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
+	  <MauiXaml Update="Views\ProjectDetailView.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
 	</ItemGroup>
 	
 </Project>

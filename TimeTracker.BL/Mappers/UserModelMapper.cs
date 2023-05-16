@@ -15,6 +15,16 @@ public class UserModelMapper : ModelMapperBase<UserEntity, UserListModel, UserDe
     private readonly IProjectModelMapper _projectModelMapper;
     private readonly IActivityModelMapper _activityModelMapper;
 
+    public UserModelMapper(
+        IActivityModelMapper activityModelMapper,
+        IProjectModelMapper projectModelMapper, 
+        IProjectAmountModelMapper projectAmountModelMapper
+        )
+    {
+        _activityModelMapper = activityModelMapper;
+        _projectModelMapper = projectModelMapper;
+        _projectAmountModelMapper = projectAmountModelMapper;
+    }
     public override UserListModel MapToListModel(UserEntity? entity)
         => entity is null
             ? UserListModel.Empty
@@ -22,7 +32,8 @@ public class UserModelMapper : ModelMapperBase<UserEntity, UserListModel, UserDe
             {
                 Id = entity.Id,
                 Name = entity.Name,
-                Surname = entity.Surname
+                Surname = entity.Surname,
+                PhotoUrl = entity.PhotoUrl,
             };
 
 
@@ -31,7 +42,8 @@ public class UserModelMapper : ModelMapperBase<UserEntity, UserListModel, UserDe
         {
             Id = model.Id,
             Name = model.Name,
-            Surname = model.Surname
+            Surname = model.Surname,
+            PhotoUrl = model.PhotoUrl,
         };
 
     public override UserDetailModel MapToDetailModel (UserEntity? entity)
