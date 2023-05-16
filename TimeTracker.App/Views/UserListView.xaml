@@ -10,6 +10,7 @@
 
     <Grid>
         <Grid HorizontalOptions="FillAndExpand"
+              VerticalOptions="StartAndExpand"
               RowDefinitions="Auto, *"
               RowSpacing="10"
               Margin="{OnIdiom Phone='15, 0'}">
@@ -23,8 +24,7 @@
                 <CollectionView.ItemsLayout>
                     <GridItemsLayout Orientation="Horizontal"
                                      HorizontalItemSpacing="15" 
-                                     VerticalItemSpacing="15"
-                                     Span="2" />
+                                     VerticalItemSpacing="15"/>
                 </CollectionView.ItemsLayout>
 
 
