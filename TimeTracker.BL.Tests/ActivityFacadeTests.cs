@@ -54,4 +54,14 @@ public sealed  class ActivityFacadeTests : FacadeTestsBase
         await _activityFacadeSUT.SaveAsync(ActivityModelMapper.MapToDetailModel(model));
         Assert.True(true);
     }
+
+    [Fact]
+    public async Task DeleteSeededActivity_DeleteById()
+    {
+        await _activityFacadeSUT.DeleteAsync(ActivitySeeds.MovementLogic.Id);
+        await using var dbxAssert = await DbContextFactory.CreateDbContextAsync();
+        Assert.False(await dbxAssert.Activities.AnyAsync(i => i.Id == ActivitySeeds.MovementLogic.Id));
+
+
+    }
 }
