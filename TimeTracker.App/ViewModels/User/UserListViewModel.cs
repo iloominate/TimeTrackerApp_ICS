@@ -60,10 +60,9 @@ public partial class UserListViewModel : ViewModelBase, IRecipient<UserCreateMes
     [RelayCommand]
     private async Task GoToUserEditAsync(Guid id)
     {
-        MessengerService.Send(new GetUserMessage()); // ensures that User model will be loaded
         await _navigationService.GoToAsync<UserEditViewModel>(
             new Dictionary<string, object?> { [nameof(UserEditViewModel.UserId)] = id });
-
+        MessengerService.Send(new GetUserMessage()); // ensures that User model will be loaded
     } 
 
     public async void Receive(UserCreateMessage message)

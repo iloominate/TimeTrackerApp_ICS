@@ -56,8 +56,8 @@ public partial class UserEditViewModel : ViewModelBase, IRecipient<GetUserMessag
             User = new()
             {
                 Id = Guid.NewGuid(),
-                Name = "TEST",
-                Surname = "TEST",
+                Name = "",
+                Surname = "",
                 PhotoUrl = null
             };
         }
