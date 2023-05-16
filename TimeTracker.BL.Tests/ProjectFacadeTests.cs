@@ -25,5 +25,13 @@ public sealed class ProjectFacadeTests : FacadeTestsBase
         // Assert
         Assert.Null(project);
     }
+    [Fact]
+    public async Task GetById_Existent()
+    {
+        var projects = await _projectFacadeSUT.GetAsync();
+        var project = projects.Single(i => i.Id == ProjectSeeds.GameJam.Id);
+
+        DeepAssert.Equal(ProjectModelMapper.MapToListModel(ProjectSeeds.GameJam),project);
+    }
 
 }
