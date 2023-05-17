@@ -6,6 +6,7 @@ namespace TimeTracker.BL.Models.ListModels;
 
 public record ActivityListModel : ModelBase
 {
+    public required string Name { get; set; }
     public required DateTime Start { get; set; }
     public required DateTime End { get; set; }
     public required ActivityType Type { get; set; }
@@ -16,6 +17,7 @@ public record ActivityListModel : ModelBase
     public static ActivityListModel Empty => new()
     {
         Id = Guid.Empty,
+        Name = "",
         Start = DateTime.MinValue,
         End = DateTime.MinValue,
         Type = ActivityType.Other,

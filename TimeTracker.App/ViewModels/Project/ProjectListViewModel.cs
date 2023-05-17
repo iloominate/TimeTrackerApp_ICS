@@ -15,6 +15,7 @@ using TimeTracker.DAL.Entities;
 using TimeTracker.BL.Models.DetailModels;
 using System.Diagnostics;
 using System.Runtime.CompilerServices;
+using TimeTracker.App.ViewModels.User;
 
 namespace TimeTracker.App.ViewModels.Project;
 
@@ -60,13 +61,21 @@ public partial class ProjectListViewModel : ViewModelBase,
         Projects = await _projectFacade.GetAsync();
     }
     [RelayCommand]
-    private async Task GoToDetailAsync(Guid projectId)
+    private async Task GoToDetailOrEditAsync(Guid projectId)
     {
-        Dictionary<string, object?> parametersToPass = new();
-        parametersToPass[nameof(ProjectDetailViewModel.ProjectId)] = projectId;
-        parametersToPass[nameof(ProjectDetailViewModel.ActiveUserId)] = ActiveUserId;
+        UserDetailModel userToJoin = await _userFacade.GetAsync(ActiveUserId);
+        if (userToJoin.Projects.Any(p => p.ProjectId == projectId))
+        {
+            Dictionary<string, object?> parametersToPass = new();
+            parametersToPass[nameof(ProjectEditViewModel.ProjectId)] = projectId;
+            parametersToPass[nameof(ProjectEditViewModel.ActiveUserId)] = ActiveUserId;
 
-        await _navigationService.GoToAsync<ProjectDetailViewModel>(parametersToPass);
+            await _navigationService.GoToAsync<ProjectEditViewModel>(parametersToPass);
+        } else
+        {
+            await _navigationService.GoToAsync<ProjectDetailViewModel>(
+                new Dictionary<string, object?> { [nameof(ProjectDetailViewModel.ProjectId)] = projectId });
+        }
     }
 
     [RelayCommand]
@@ -128,7 +137,7 @@ public partial class ProjectListViewModel : ViewModelBase,
 
                 await _projectAmountFacade.DeleteAsync(projectAmountToDelete.Id);
 
-                MessengerService.Send(new UserToProjectAdd());
+                MessengerService.Send(new UserToProjectRemove {ProjectId = projectListModel.Id});
             }
             else
             { 

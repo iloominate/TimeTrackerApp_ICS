@@ -11,60 +11,119 @@ using TimeTracker.App.Messages;
 using TimeTracker.BL.Facades.Interfaces;
 using TimeTracker.BL.Models.DetailModels;
 using TimeTracker.App.ViewModels.Activity;
+using System.Collections.ObjectModel;
+using TimeTracker.BL.Models.ListModels;
+using System.Diagnostics;
+using TimeTracker.BL.Mappers;
 
 namespace TimeTracker.App.ViewModels.Project;
 
-[QueryProperty(nameof(Project), nameof(Project))]
-public partial class ProjectEditViewModel : ViewModelBase, IRecipient<ProjectActivityEditMessage>, IRecipient<ProjectActivityAddMessage>, IRecipient<ProjectActivityDeleteMessage>
+[QueryProperty(nameof(ProjectId), nameof(ProjectId))]
+[QueryProperty(nameof(ActiveUserId), nameof(ActiveUserId))]
+public partial class ProjectEditViewModel : ViewModelBase,
+    IRecipient<ProjectEditMessage>,
+    IRecipient<ActivityEditMessage>,
+    IRecipient<UserToProjectRemove>,
+    IRecipient<UserToProjectAdd>
 {
     private readonly IProjectFacade _projectFacade;
+    private readonly IUserFacade _userFacade;
+    private readonly IActivityFacade _activityFacade;
+    private readonly IProjectAmountFacade _projectAmountFacade;
+    private readonly IUserModelMapper _userModelMapper;
+
+
     private readonly INavigationService _navigationService;
 
-    public ProjectDetailModel Project { get; set; } = ProjectDetailModel.Empty;
-    public Guid projectId { get; set; }
-
-    // Create Activity type??
+    public Guid ProjectId { get; set; }
+    public Guid ActiveUserId { get; set; }
+    public ObservableCollection<ActivityListModel> ActivityList { get; set; } = new();
+    public ObservableCollection<UserListModel> UserList { get; set; } = new();
+    public ProjectDetailModel? Project { get; set; }
 
     public ProjectEditViewModel(
         IProjectFacade projectFacade,
+        IUserFacade userFacade,
+        IActivityFacade activityFacade,
+        IProjectAmountFacade projectAmountFacade,
         INavigationService navigationService,
+        IUserModelMapper userModelMapper,
         IMessengerService messengerService)
         : base(messengerService)
     {
         _projectFacade = projectFacade;
+        _userFacade = userFacade;
+        _activityFacade = activityFacade;
+        _projectAmountFacade = projectAmountFacade;
         _navigationService = navigationService;
+        _userModelMapper = userModelMapper;
     }
 
-//    [RelayCommand]
-//    private async Task GoToProjectActivityEditAsync()
- //   {
- //       await _navigationService.GoToAsync("/ingredients",
- //           new Dictionary<string, object?> { [nameof(ProjectActivitiesEditViewModel.Project)] = Project });
- //   }
-    
-    public async Task GoToActivityEditAsync (ProjectDetailModel projectDetail)
+    protected override async Task LoadDataAsync()
     {
-        await _navigationService.GoToAsync("/activities", 
-            new Dictionary<string, object?> { [nameof(ActivityEditViewModel.Project)] = projectDetail });
+        await base.LoadDataAsync();
+
+        Project = await _projectFacade.GetAsync(ProjectId);
+        foreach (ProjectAmountListModel User in Project.Users)
+        {
+            UserDetailModel? userDetailToAdd = await _userFacade.GetAsync(User.UserId);
+            UserListModel? userListToAdd = _userModelMapper.MapToListModel(userDetailToAdd);
+            UserList.Add(userListToAdd);
+        }
+        ActivityList = Project.Activities;
     }
-    public async void Receive(ProjectActivityEditMessage message)
+    [RelayCommand]
+    private async Task GoToActivityDetailAsync(Guid activityId)
     {
-        await ReloadDataAsync();
+        Dictionary<string, object?> parametersToPass = new();
+        parametersToPass[nameof(ActivityDetailViewModel.ActivityId)] = activityId;
+        parametersToPass[nameof(ActivityDetailViewModel.ActiveUserId)] = ActiveUserId;
+
+        await _navigationService.GoToAsync<ActivityDetailViewModel>(parametersToPass);
+        MessengerService.Send(new GetActivityMessage()); // ensures that Activity model will be loaded
     }
 
-    public async void Receive(ProjectActivityAddMessage message)
+    [RelayCommand]
+    private async Task GoToActivityEditAsync()
     {
-        await ReloadDataAsync();
+        Dictionary<string, object?> parametersToPass = new();
+        parametersToPass[nameof(ActivityEditViewModel.ProjectId)] = ProjectId;
+        parametersToPass[nameof(ActivityEditViewModel.ActiveUserId)] = ActiveUserId;
+
+            await _navigationService.GoToAsync<ActivityEditViewModel>(parametersToPass);
+        MessengerService.Send(new GetActivityMessage()); // ensures that Activity model will be loaded
     }
 
-    public async void Receive(ProjectActivityDeleteMessage message)
+    public async void Receive(ProjectEditMessage message)
     {
-        await ReloadDataAsync();
+        if (message.ProjectId == Project?.Id)
+        {
+            await LoadDataAsync();
+        }
     }
 
-    private async Task ReloadDataAsync()
+    public async void Receive(ActivityEditMessage message)
     {
-        Project = await _projectFacade.GetAsync(Project.Id)
-                 ?? ProjectDetailModel.Empty;
+        if (message.ProjectId == ProjectId)
+        {
+            await LoadDataAsync();
+        }
+    }
+
+
+    public async void Receive(UserToProjectAdd message)
+    {
+        if (message.ProjectId == ProjectId)
+        {
+            await LoadDataAsync();
+        }
+    }
+
+    public async void Receive(UserToProjectRemove message)
+    {
+        if (message.ProjectId == ProjectId)
+        {
+            await LoadDataAsync();
+        }
     }
 }

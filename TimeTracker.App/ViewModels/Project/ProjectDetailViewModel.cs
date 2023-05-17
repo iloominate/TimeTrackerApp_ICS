@@ -11,7 +11,9 @@ using TimeTracker.BL.Facades.Interfaces;
 using TimeTracker.BL.Models.DetailModels;
 using TimeTracker.App.Messages;
 using System.Collections.ObjectModel;
+using TimeTracker.App.ViewModels.Activity;
 using TimeTracker.BL.Models.ListModels;
+using TimeTracker.BL.Mappers;
 
 namespace TimeTracker.App.ViewModels.Project;
 
@@ -19,14 +21,15 @@ namespace TimeTracker.App.ViewModels.Project;
 [QueryProperty(nameof(ActiveUserId), nameof(ActiveUserId))]
 public partial class ProjectDetailViewModel : ViewModelBase, 
     IRecipient<ProjectEditMessage>,
-    IRecipient<ProjectActivityAddMessage>,
-    IRecipient<ProjectActivityDeleteMessage>,
+    IRecipient<ActivityEditMessage>,
+    IRecipient<UserToProjectRemove>,
     IRecipient<UserToProjectAdd>
 {
     private readonly IProjectFacade _projectFacade;
     private readonly IUserFacade _userFacade;
     private readonly IActivityFacade _activityFacade; 
     private readonly IProjectAmountFacade _projectAmountFacade;
+    private readonly IUserModelMapper _userModelMapper;
 
     private readonly INavigationService _navigationService;
 
@@ -34,11 +37,10 @@ public partial class ProjectDetailViewModel : ViewModelBase,
     public Guid ActiveUserId { get; set; }
     public ProjectDetailModel? Project { get; set; }
 
-    public ObservableCollection<ActivityListModel> ActivityList { get; set; } = new();
 
     public ObservableCollection<UserListModel> UserList { get; set; } = new();
+    public ObservableCollection<ActivityListModel> ActivityList { get; set; } = new();
 
-    public UserDetailModel ActiveUser { get; set; }
 
 
     public ProjectDetailViewModel(
@@ -47,6 +49,7 @@ public partial class ProjectDetailViewModel : ViewModelBase,
         IActivityFacade activityFacade,
         IProjectAmountFacade projectAmountFacade,
         INavigationService navigationService,
+        IUserModelMapper userModelMapper,
         IMessengerService messengerService)
         : base(messengerService)
     {
@@ -54,6 +57,7 @@ public partial class ProjectDetailViewModel : ViewModelBase,
         _userFacade = userFacade;
         _activityFacade = activityFacade;
         _projectAmountFacade = projectAmountFacade;
+        _userModelMapper = userModelMapper;
         _navigationService = navigationService;
     }
 
@@ -62,22 +66,14 @@ public partial class ProjectDetailViewModel : ViewModelBase,
         await base.LoadDataAsync();
 
         Project = await _projectFacade.GetAsync(ProjectId);
-    }
-
-    [RelayCommand]
-    private async Task DeleteProjectAsync()
-    {
-        if (Project is not null)
+        foreach (ProjectAmountListModel User in Project.Users)
         {
-            await _projectFacade.DeleteAsync(Project.Id);
-
-            MessengerService.Send(new ProjectDeleteMessage());
-
-            _navigationService.SendBackButtonPressed();
+            UserDetailModel? userDetailToAdd = await _userFacade.GetAsync(User.UserId);
+            UserListModel? userListToAdd = _userModelMapper.MapToListModel(userDetailToAdd);
+            UserList.Add(userListToAdd);
         }
+        ActivityList = Project.Activities;
     }
-
-
 
     public async void Receive(ProjectEditMessage message)
     {
@@ -87,23 +83,28 @@ public partial class ProjectDetailViewModel : ViewModelBase,
         }
     }
 
-    public async void Receive(ProjectActivityAddMessage message)
+    public async void Receive(ActivityEditMessage message)
     {
-        await LoadDataAsync();
+        if (message.ProjectId == ProjectId)
+        {
+            await LoadDataAsync();
+        }
     }
 
-    public async void Receive(ProjectActivityDeleteMessage message)
-    {
-        await LoadDataAsync();
-    }
 
     public async void Receive(UserToProjectAdd message)
     {
-        await LoadDataAsync();
+        if (message.ProjectId == ProjectId)
+        {
+            await LoadDataAsync();
+        }
     }
 
-    public async void Recieve(UserDeleteMessage message)
+    public async void Receive(UserToProjectRemove message)
     {
-        await LoadDataAsync();
+        if (message.ProjectId == ProjectId)
+        {
+            await LoadDataAsync();
+        }
     }
 }

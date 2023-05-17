@@ -8,4 +8,5 @@ namespace TimeTracker.App.Messages;
 
 public record UserToProjectAdd
 {
+    public Guid ProjectId { get; set; }
 }

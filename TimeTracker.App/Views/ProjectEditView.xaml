@@ -1,12 +1,134 @@
 <views:ContentPageBase xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
-             xmlns:views="clr-namespace:TimeTracker.App.Views"
-             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             x:Class="TimeTracker.App.Views.ProjectEditView"
-             Title="TimeTracker">
-    <StackLayout>
-        <Label Text="Project Name" />
-        <Entry x:Name="projectNameEntry" />
+                       xmlns:views="clr-namespace:TimeTracker.App.Views"
+                       xmlns:vm="clr-namespace:TimeTracker.App.ViewModels.Project"
+                       xmlns:m="clr-namespace:TimeTracker.BL.Models.ListModels;assembly=TimeTracker.BL"
+                       xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+                       x:Class="TimeTracker.App.Views.ProjectEditView"
+                       x:DataType="vm:ProjectEditViewModel"
+                       x:Name="ProjectEditViewRoot"
+                       Title="ProjectEditView">
+    <ContentPage.Content>
+            <StackLayout>
+                <Label Text="Activities List" FontSize="Large" HorizontalOptions="Start" VerticalOptions="Start" Margin="10" />
 
-        <Button Text="SAVE" TextColor="Black" CornerRadius="15" />
-    </StackLayout>
-</views:ContentPageBase>
+                <Button Text="Create Activity"
+                            Command="{Binding Source={x:Reference ProjectEditViewRoot}, Path=BindingContext.GoToActivityEditCommand}"
+                            HorizontalOptions="End" 
+                            VerticalOptions="End" 
+                            Margin="20" 
+                            FontSize="18" 
+                            BackgroundColor="LimeGreen" 
+                            TextColor="Black" 
+                            CornerRadius="15">
+                    <Button.Triggers>
+                        <Trigger TargetType="Button" Property="IsPressed" Value="True">
+                            <Setter Property="BackgroundColor" Value="Green" />
+                        </Trigger>
+                    </Button.Triggers>
+                </Button>
+
+
+            <StackLayout Orientation="Horizontal" HorizontalOptions="EndAndExpand">
+                <CollectionView ItemsSource="{Binding UserList}"
+                            VerticalOptions="FillAndExpand">
+                    <CollectionView.ItemsLayout>
+                        <LinearItemsLayout Orientation="Horizontal" />
+                    </CollectionView.ItemsLayout>
+                    <CollectionView.ItemTemplate>
+                        <DataTemplate x:DataType="m:UserListModel">
+                            <Frame Padding="0"
+                               CornerRadius="25"
+                               WidthRequest="150" 
+                               HeightRequest="150"
+                               IsClippedToBounds="True"
+                                   Margin="5">
+                                <Grid>
+                                    <Image Grid.Row="0"
+                                       HorizontalOptions="FillAndExpand" 
+                                       VerticalOptions="FillAndExpand"
+                                       Aspect="AspectFill"
+                                       WidthRequest="150" HeightRequest="150"
+                                       Source="{Binding PhotoUrl, TargetNullValue='user_place_holder.png'}"/>
+
+                                    <BoxView Grid.Row="0"
+                                         Opacity="0.2"
+                                         Color="Black" />
+
+                                    <Label Grid.Row="0"
+                                       Margin="10"
+                                       FontSize="17" LineBreakMode="WordWrap"
+                                       Text="{Binding Name}" 
+                                       TextColor="White" VerticalOptions="End" />
+                                </Grid>
+                            </Frame>
+                        </DataTemplate>
+                    </CollectionView.ItemTemplate>
+
+                </CollectionView>
+            </StackLayout>
+            <Button Text="Filter"
+                        Grid.Column="3"
+                        HorizontalOptions="Start" 
+                        VerticalOptions="Center" 
+                        Margin="17" 
+                        FontSize="18" 
+                        BackgroundColor="White" 
+                        TextColor="Black" 
+                        CornerRadius="15">
+                <Button.Triggers>
+                    <Trigger TargetType="Button" Property="IsPressed" Value="True">
+                        <Setter Property="BackgroundColor" Value="OrangeRed" />
+                    </Trigger>
+                </Button.Triggers>
+            </Button>
+            <StackLayout>
+                   
+                    <CollectionView ItemsSource="{Binding ActivityList}"
+                                    VerticalOptions="FillAndExpand">
+
+                    <CollectionView.ItemTemplate>
+                            <DataTemplate x:DataType="m:ActivityListModel">
+                            <Frame Margin="10"
+                                       Padding="10"
+                                       BackgroundColor="Black"
+                                       CornerRadius="10">
+                                <Grid>
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition/>
+                                        <ColumnDefinition/>
+                                        <ColumnDefinition/>
+                                        <ColumnDefinition/>
+                                    </Grid.ColumnDefinitions>
+                                    <Label Text="{Binding Name}" FontSize="Large" Grid.Column="0" VerticalOptions="Center"/>
+                                    <Label Text="{Binding Start, StringFormat='{0:dd/MM/yyyy HH:mm}'}" FontSize="Medium" Grid.Column="1" VerticalOptions="Center"/>
+                                    <Label Text="{Binding End, StringFormat='{0:dd/MM/yyyy HH:mm}'}" FontSize="Medium" Grid.Column="2" VerticalOptions="Center"/>
+                                    <Label Text="{Binding Type, Converter={StaticResource ActivityTypeToStringConverter}}" FontSize="Medium" Grid.Column="3" VerticalOptions="Center"/>
+                                    <Button Text="Details"
+                                            Grid.Column="3"
+                                            Command="{Binding Source={x:Reference ProjectEditViewRoot}, Path=BindingContext.GoToActivityDetailCommand}"
+                                            CommandParameter="{Binding Id}"
+                                            HorizontalOptions="End" 
+                                            VerticalOptions="End" 
+                                            Margin="17" 
+                                            FontSize="18" 
+                                            BackgroundColor="White" 
+                                            TextColor="Black" 
+                                            CornerRadius="15">
+                                        <Button.Triggers>
+                                            <Trigger TargetType="Button" Property="IsPressed" Value="True">
+                                                <Setter Property="BackgroundColor" Value="Green" />
+                                            </Trigger>
+                                        </Button.Triggers>
+                                    </Button>
+                                </Grid>
+                            </Frame>
+                        </DataTemplate>
+                        </CollectionView.ItemTemplate>
+                    </CollectionView>
+
+
+            </StackLayout>
+
+            </StackLayout>
+        </ContentPage.Content>
+    </views:ContentPageBase>

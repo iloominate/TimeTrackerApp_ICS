@@ -1,32 +1,78 @@
 <views:ContentPageBase xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
                        xmlns:views="clr-namespace:TimeTracker.App.Views"
                        xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+                       xmlns:vm="clr-namespace:TimeTracker.App.ViewModels.Activity"
+                       xmlns:enums="clr-namespace:TimeTracker.Common.Enums;assembly=TimeTracker.Common"
                        x:Class="TimeTracker.App.Views.ActivityEditView"
+                       x:Name="ActivityEditViewRoot"
+                       x:DataType="vm:ActivityEditViewModel"
                        Title="TimeTracker">
     
     <StackLayout>
-        <Label Text="Name" />
-        <Entry x:Name="ActivityNameEntry" />
+        <Label Text="Name:"
+               Margin="0,0,0,5 "/>
+        <Entry Placeholder="Activity"
+               Text="{Binding Activity.Name}"
+               Margin="0,0,0,15"
+               MaxLength="100"/>
+        <Label Text="Description:"
+               Margin="0,0,0,5 "/>
+        <Entry Placeholder="Description"
+               Text="{Binding Activity.Description}"
+               Margin="0,0,0,15"
+               MaxLength="500"/>
 
-        <Label Text="Description" />
-        <Editor x:Name="ActivityDescriptionEditor" />
+        <Label Text="Start:"
+               Margin="0,0,0,5 "/>
 
-        <Label Text="Start date" />
-        <DatePicker x:Name="StartDatePicker" />
-        <TimePicker x:Name="StartTimePicker" />
+        <Entry Placeholder="yyyy/mm/dd hh:mm"
+               Text="{Binding StartString}"
+               Margin="0,0,0,15"
+               MaxLength="16"/>
 
-        <Label Text="End date" />
-        <DatePicker x:Name="EndDatePicker" />
-        <TimePicker x:Name="EndTimePicker" />
+        <Label Text="End:"
+               Margin="0,0,0,5 "/>
 
-        <Label Text="Type" />
-        <Picker x:Name="activityTypePicker">
-            <Picker.Items>
-                <x:String>Studying</x:String>
-                <x:String>Work</x:String>
-                <x:String>Programming</x:String>
-            </Picker.Items>
-        </Picker>
-        <Button Text="SAVE" TextColor="Black" CornerRadius="15" />
+        <Entry Placeholder="yyyy/mm/dd hh:mm"
+               Text="{Binding EndString}"
+               Margin="0,0,0,15"
+               MaxLength="16"/>
+
+
+        <StackLayout>
+            <Picker SelectedItem="{Binding Activity.Type, Mode=TwoWay}">
+                <Picker.ItemsSource>
+                    <x:Array Type="{x:Type enums:ActivityType}">
+                        <enums:ActivityType>Work</enums:ActivityType>
+                        <enums:ActivityType>Studying</enums:ActivityType>
+                        <enums:ActivityType>Break</enums:ActivityType>      
+                        <enums:ActivityType>Lunch</enums:ActivityType>
+                        <enums:ActivityType>Meeting</enums:ActivityType>
+                        <enums:ActivityType>Training</enums:ActivityType>
+                        <enums:ActivityType>Other</enums:ActivityType>
+                    </x:Array>
+                </Picker.ItemsSource>
+                <Picker.ItemDisplayBinding>
+                    <Binding Converter="{StaticResource ActivityTypeToStringConverter}"/>
+                </Picker.ItemDisplayBinding>
+            </Picker>
+        </StackLayout>
+
+
+        <Button Text="SAVE"
+                Command="{Binding SaveCommand}"
+                HorizontalOptions="Start" 
+                VerticalOptions="Start" 
+                FontSize="20"
+                Margin="0,20,25,0"
+                BackgroundColor="LimeGreen" 
+                TextColor="Black" 
+                CornerRadius="15">
+            <Button.Triggers>
+                <Trigger TargetType="Button" Property="IsPressed" Value="True">
+                    <Setter Property="BackgroundColor" Value="Green" />
+                </Trigger>
+            </Button.Triggers>
+        </Button>
     </StackLayout>
 </views:ContentPageBase>

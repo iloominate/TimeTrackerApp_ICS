@@ -11,10 +11,12 @@ using TimeTracker.App.Services;
 using TimeTracker.App.Services.Interfaces;
 using TimeTracker.BL.Models.DetailModels;
 using System.Net.Http.Headers;
+using Microsoft.UI.Xaml.Media;
 
 namespace TimeTracker.App.ViewModels.Activity;
 
-[QueryProperty(nameof(Id), nameof(Id))]
+[QueryProperty(nameof(ActiveUserId), nameof(ActiveUserId))]
+[QueryProperty(nameof(ActivityId), nameof(ActivityId))]
 public partial class ActivityDetailViewModel : ViewModelBase, IRecipient<ActivityEditMessage>
 {
     private readonly IActivityFacade _activityFacade;
@@ -22,7 +24,8 @@ public partial class ActivityDetailViewModel : ViewModelBase, IRecipient<Activit
     private readonly IAlertService _alertService;
 
 
-    public Guid Id { get; set; }
+    public Guid ActivityId { get; set; }
+    public Guid ActiveUserId { get; set; }
 
     public ActivityDetailModel? Activity { get; private set; }
 
@@ -42,31 +45,17 @@ public partial class ActivityDetailViewModel : ViewModelBase, IRecipient<Activit
     {
         await base.LoadDataAsync(); 
 
-        Activity = await _activityFacade.GetAsync(Id);
+        Activity = await _activityFacade.GetAsync(ActivityId);
     }
 
-    [RelayCommand]
-    private async Task DeleteAsync()
-    {
-        if (Activity is not null) {
-            try
-            {
-                await _activityFacade.DeleteAsync(Activity.Id);
-                MessengerService.Send(new ActivityDeleteMessage());
-                _navigationService.SendBackButtonPressed();
-            }
-            catch
-            {
-                await _alertService.DisplayAsync(null, null); // INSERT ERROR TEXTS AS ARGUMENTS
-            }
-        }
-    }
 
     [RelayCommand]
     private async Task GoToEditAsync()
     {
-        await _navigationService.GoToAsync("/edit",
-            new Dictionary<string, object?> { [nameof(ActivityEditViewModel.Activity)] = Activity });
+        Dictionary<string, object?> parametersToPass = new();
+        parametersToPass[nameof(ActivityEditViewModel.ActivityId)] = ActivityId;
+        await _navigationService.GoToAsync<ActivityEditViewModel>(parametersToPass);
+        MessengerService.Send(new GetUserMessage());
     }
 
     public async void Receive (ActivityEditMessage message)

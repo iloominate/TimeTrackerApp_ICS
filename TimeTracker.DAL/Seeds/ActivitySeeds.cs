@@ -13,6 +13,7 @@ namespace TimeTracker.DAL.Seeds
     {
         public static readonly ActivityEntity MovementLogic = new()
         {
+            Name = "Working Movement Logic",
             Id = Guid.Parse("6f8edb5a-7f72-45e0-8845-c28e69329753"),
             Start = DateTime.Parse("01/01/2023 10:20:00"),
             End = DateTime.Parse("01/01/2023 23:00:00"),
@@ -25,7 +26,8 @@ namespace TimeTracker.DAL.Seeds
         };
 
         public static readonly ActivityEntity LevelDesign = new()
-        {
+        {   
+            Name = "Level Design",
             Id = Guid.Parse("ab6f9735-39f8-4517-a5f2-677552588f41"),
             Start = DateTime.Parse("01/01/2023 12:30:00"),
             End = DateTime.Parse("01/01/2023 16:00:00"),
@@ -39,6 +41,7 @@ namespace TimeTracker.DAL.Seeds
 
         public static readonly ActivityEntity Syntax = new()
         {
+            Name = "ITS HELL!!!",
             Id = Guid.Parse("42be7be1-2339-44ca-b484-6dda12452bca"),
             Start = DateTime.Parse("01/03/2023 10:00:00"),
             End = DateTime.Parse("01/03/2023 13:00:00"),
@@ -52,6 +55,7 @@ namespace TimeTracker.DAL.Seeds
 
         public static readonly ActivityEntity Generator = new()
         {
+            Name = "Add generator",
             Id = Guid.Parse("1848eb4c-9e4a-4aef-840c-7037236c1cc7"),
             Start = DateTime.Parse("01/03/2023 11:00:00"),
             End = DateTime.Parse("01/03/2023 15:00:00"),
