@@ -19,9 +19,7 @@
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="400"/>
                 <ColumnDefinition/>
-                <ColumnDefinition/>
-                <ColumnDefinition Width="63"/>
-                <ColumnDefinition/>
+                <ColumnDefinition Width="70"/>
                 <ColumnDefinition/>
             </Grid.ColumnDefinitions>
 
@@ -31,31 +29,21 @@
                        Grid.Row="0"
                        Grid.Column="0"/>
 
-            <Label Text="{Binding Activity.Start.Date}"
+            <Label Text="{Binding Activity.Start}"
                        VerticalOptions="Center"
                        FontSize="Title"
                        Grid.Row="0"
                        Grid.Column="1"/>
-            <Label Text="{Binding Activity.Start.TimeOfDay}"
-                       VerticalOptions="Center"
-                       FontSize="Title"
-                       Grid.Row="0"
-                       Grid.Column="2"/>
             <Label Text="-"
                        VerticalOptions="Center"
                        FontSize="Title"
                        Grid.Row="0"
-                       Grid.Column="3"/>
-            <Label Text="{Binding Activity.End.Date}"
-                       VerticalOptions="Center"
-                       FontSize="Title"
-                       Grid.Row="0"
-                       Grid.Column="4"/>
+                       Grid.Column="2"/>
             <Label Text="{Binding Activity.End}"
                        VerticalOptions="Center"
                        FontSize="Title"
                        Grid.Row="0"
-                       Grid.Column="5"/>
+                       Grid.Column="3"/>
             <Label Text="{Binding Activity.Description}"
                        FontSize="Medium"
                        Grid.Row="3"
