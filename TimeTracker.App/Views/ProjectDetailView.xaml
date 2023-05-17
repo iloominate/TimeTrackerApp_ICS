@@ -24,37 +24,34 @@
                             </Grid>
                         </DataTemplate>
                     </CollectionView.ItemTemplate>
-                    
                 </CollectionView>
-                
-    
-                
             </StackLayout>
 
             <StackLayout>
-                
-                <CollectionView ItemsSource="{Binding ActivityList}">
+                <CollectionView ItemsSource="{Binding ActivityList}"
+                                    VerticalOptions="FillAndExpand">
                     <CollectionView.ItemTemplate>
                         <DataTemplate x:DataType="m:ActivityListModel">
-                            <Frame BackgroundColor="Black">
-                                <StackLayout Orientation="Vertical">
-                                    <StackLayout Orientation="Horizontal">
-                                        <Label Text="{Binding Type}" FontSize="Large" />
-                                    </StackLayout>
-                                    <Label Text="{Binding Start}" FontSize="Medium" />
-                                    <Label Text="{Binding End}" FontSize="Medium" />
-                                </StackLayout>
+                            <Frame Margin="10"
+                                       Padding="10"
+                                       BackgroundColor="Black"
+                                       CornerRadius="10">
+                                <Grid>
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition/>
+                                        <ColumnDefinition/>
+                                        <ColumnDefinition/>
+                                        <ColumnDefinition/>
+                                    </Grid.ColumnDefinitions>
+                                    <Label Text="{Binding Type}" FontSize="Large" Grid.Column="0" Margin="20"/>
+                                    <Label Text="{Binding Start}" FontSize="Small" Grid.Column="1" Margin="33"/>
+                                    <Label Text="{Binding End}" FontSize="Small" Grid.Column="2" Margin="33"/>
+                                    
+                                </Grid>
                             </Frame>
                         </DataTemplate>
                     </CollectionView.ItemTemplate>
                 </CollectionView>
-
-                <Label Text="Only logged in users can create activities"
-                    HorizontalOptions="End" 
-                    VerticalOptions="End" 
-                    Margin="20" 
-                    FontSize="18" 
-                    TextColor="White" />
             </StackLayout>
         </StackLayout>
     </ContentPage.Content>

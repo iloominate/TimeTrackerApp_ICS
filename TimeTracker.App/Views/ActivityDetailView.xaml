@@ -5,11 +5,77 @@
                        xmlns:vm="clr-namespace:TimeTracker.App.ViewModels.Activity"
                        x:Class="TimeTracker.App.Views.ActivityDetailView"
                        x:DataType="vm:ActivityDetailViewModel"
+                       x:Name="ActivityDetailViewRoot"
                        Title="ActivityDetailView">
-    <VerticalStackLayout>
-        <Label 
-            Text="Welcome to .NET MAUI!"
-            VerticalOptions="Center" 
-            HorizontalOptions="Center" />
-    </VerticalStackLayout>
+
+    <StackLayout>
+        <Grid Margin="30">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="80"/>
+                <RowDefinition Height="80"/>
+                <RowDefinition Height="80"/>
+            </Grid.RowDefinitions>
+
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="400"/>
+                <ColumnDefinition/>
+                <ColumnDefinition/>
+                <ColumnDefinition Width="63"/>
+                <ColumnDefinition/>
+                <ColumnDefinition/>
+            </Grid.ColumnDefinitions>
+
+            <Label Text="{Binding Activity.Name}"
+                       VerticalOptions="Center"
+                       FontSize="Header"
+                       Grid.Row="0"
+                       Grid.Column="0"/>
+
+            <Label Text="{Binding Activity.Start.Date}"
+                       VerticalOptions="Center"
+                       FontSize="Title"
+                       Grid.Row="0"
+                       Grid.Column="1"/>
+            <Label Text="{Binding Activity.Start.TimeOfDay}"
+                       VerticalOptions="Center"
+                       FontSize="Title"
+                       Grid.Row="0"
+                       Grid.Column="2"/>
+            <Label Text="-"
+                       VerticalOptions="Center"
+                       FontSize="Title"
+                       Grid.Row="0"
+                       Grid.Column="3"/>
+            <Label Text="{Binding Activity.End.Date}"
+                       VerticalOptions="Center"
+                       FontSize="Title"
+                       Grid.Row="0"
+                       Grid.Column="4"/>
+            <Label Text="{Binding Activity.End}"
+                       VerticalOptions="Center"
+                       FontSize="Title"
+                       Grid.Row="0"
+                       Grid.Column="5"/>
+            <Label Text="{Binding Activity.Description}"
+                       FontSize="Medium"
+                       Grid.Row="3"
+                       Grid.Column="0"/>
+        </Grid>
+
+        <Button Text="Edit"
+                    Command="{Binding Source={x:Reference ActivityDetailViewRoot}, Path=BindingContext.GoToEditCommand}"
+                    HorizontalOptions="End" 
+                    VerticalOptions="End" 
+                    Margin="30" 
+                    FontSize="18" 
+                    BackgroundColor="LimeGreen" 
+                    TextColor="Black" 
+                    CornerRadius="15">
+            <Button.Triggers>
+                <Trigger TargetType="Button" Property="IsPressed" Value="True">
+                    <Setter Property="BackgroundColor" Value="Green" />
+                </Trigger>
+            </Button.Triggers>
+        </Button>
+    </StackLayout>
 </views:ContentPageBase>
