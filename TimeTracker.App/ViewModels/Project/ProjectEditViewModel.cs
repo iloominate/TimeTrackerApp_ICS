@@ -66,7 +66,9 @@ public partial class ProjectEditViewModel : ViewModelBase,
         Project = await _projectFacade.GetAsync(ProjectId);
         foreach (ProjectAmountListModel User in Project.Users)
         {
-            UserList.Append<UserListModel>(_userModelMapper.MapToListModel(await _userFacade.GetAsync(User.UserId)));
+            UserDetailModel? userDetailToAdd = await _userFacade.GetAsync(User.UserId);
+            UserListModel? userListToAdd = _userModelMapper.MapToListModel(userDetailToAdd);
+            UserList.Add(userListToAdd);
         }
         ActivityList = Project.Activities;
     }
