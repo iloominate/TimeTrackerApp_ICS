@@ -39,10 +39,11 @@
                                 <Frame BackgroundColor="Black">
                                     <StackLayout Orientation="Vertical">
                                         <StackLayout Orientation="Horizontal">
-                                            <Label Text="{Binding Type}" FontSize="Large" />
+                                            <Label Text="{Binding Name}" FontSize="Large" />
                                         </StackLayout>
-                                        <Label Text="{Binding Start}" FontSize="Medium" />
-                                        <Label Text="{Binding End}" FontSize="Medium" />
+                                    <Label Text="{Binding Start, StringFormat='{0:dd/MM/yyyy HH:mm}'}" FontSize="Medium" />
+                                    <Label Text="{Binding End, StringFormat='{0:dd/MM/yyyy HH:mm}'}" FontSize="Medium" />
+                                    <Label Text="{Binding Type, Converter={StaticResource ActivityTypeToStringConverter}}" FontSize="Medium"/>
                                     </StackLayout>
                                 </Frame>
                             </DataTemplate>
