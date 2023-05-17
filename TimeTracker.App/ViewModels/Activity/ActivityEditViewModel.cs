@@ -2,7 +2,9 @@
 using CommunityToolkit.Mvvm.Messaging;
 using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.Linq;
+using System.Runtime.InteropServices.JavaScript;
 using System.Text;
 using System.Threading.Tasks;
 using TimeTracker.App.Messages;
@@ -26,6 +28,13 @@ public partial class ActivityEditViewModel : ViewModelBase, IRecipient<GetActivi
     public Guid ActivityId { get; set; } = Guid.Empty;
     public Guid ActiveUserId { get; set; }
     public Guid ProjectId { get; set; }
+
+    public string StartString { get; set; }
+
+    public string EndString { get; set; }
+
+    private DateTime _startDateTime;
+    private DateTime _endDateTime;
     public ActivityDetailModel? Activity { get; set; } = ActivityDetailModel.Empty;
 
 
@@ -45,6 +54,7 @@ public partial class ActivityEditViewModel : ViewModelBase, IRecipient<GetActivi
     {
         await base.LoadDataAsync();
 
+
         Activity = await _activityFacade.GetAsync(ActivityId);
 
         if (Activity == null)
@@ -62,6 +72,8 @@ public partial class ActivityEditViewModel : ViewModelBase, IRecipient<GetActivi
                 ProjectId = ProjectId
             };
         }
+        StartString = Activity.Start.ToString("yyyy/MM/dd HH:mm");
+        EndString = Activity.End.ToString("yyyy/MM/dd HH:mm");
     }
 
     [RelayCommand]
@@ -69,14 +81,26 @@ public partial class ActivityEditViewModel : ViewModelBase, IRecipient<GetActivi
     {
         try
         {
-
-            await _activityFacade.SaveAsync(Activity);
-            MessengerService.Send(new ActivityEditMessage
+            if (DateTime.TryParseExact(StartString, "yyyy/MM/dd HH:mm", CultureInfo.InvariantCulture, DateTimeStyles.None, out _startDateTime) &&
+                 DateTime.TryParseExact(EndString, "yyyy/MM/dd HH:mm", CultureInfo.InvariantCulture, DateTimeStyles.None, out _endDateTime))
             {
-                ProjectId = Activity.ProjectId,
-                ActivityId = Activity.Id,
+                Activity.Start = _startDateTime;
+                Activity.End = _endDateTime;
 
-            });
+                await _activityFacade.SaveAsync(Activity);
+                MessengerService.Send(new ActivityEditMessage
+                {
+                    ProjectId = Activity.ProjectId,
+                    ActivityId = Activity.Id,
+
+                });
+            }
+            else
+            {
+                _alertService.DisplayAsync("Invalid DateTime format",
+                    "DateTime must be in the format 'yyyy/mm/dd hh/mm'");
+            }
+
         }
         catch (Exception e)
         {
