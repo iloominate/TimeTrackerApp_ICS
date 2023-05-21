@@ -52,7 +52,7 @@ namespace TimeTracker.DAL.Seeds
             modelBuilder.Entity<UserEntity>().HasData(
                 JonhUser with { Activities = Array.Empty<ActivityEntity>(), Projects = Array.Empty<ProjectAmountEntity>(), CreatedProjects = Array.Empty<ProjectEntity>() },
                 AdamUser with { Activities = Array.Empty<ActivityEntity>(), Projects = Array.Empty<ProjectAmountEntity>(), CreatedProjects = Array.Empty<ProjectEntity>() },
-                Kris with { Activities = Array.Empty<ActivityEntity>(), Projects = Array.Empty<ProjectAmountEntity>(), CreatedProjects = Array.Empty<ProjectEntity>() },
+                Kris with { Activities = Array.Empty<ActivityEntity>(), Projects = Array.Empty<ProjectAmountEntity>(), CreatedProjects = Array.Empty<ProjectEntity>() }
             );
     }
 }

@@ -99,9 +99,26 @@
 									</Button.Triggers>
 								</Button>
 
+                                <Button Text="Delete"
+                                        Command="{Binding Source={x:Reference UserListViewRoot}, Path=BindingContext.DeleteCommand}"
+                                        CommandParameter="{Binding Id}"
+                                        HorizontalOptions="End"
+                                        VerticalOptions="Start"
+                                        Margin="15"
+                                        FontSize="13"
+                                        BackgroundColor="White"
+                                        TextColor="Black"
+                                        CornerRadius="15">
+                                    <Button.Triggers>
+                                        <Trigger TargetType="Button" Property="IsPressed" Value="True">
+                                            <Setter Property="BackgroundColor" Value="Gray" />
+                                        </Trigger>
+                                    </Button.Triggers>
+                                </Button>
 
 
-							</Grid>
+
+                            </Grid>
 						</Frame>
 					</DataTemplate>
 				</CollectionView.ItemTemplate>

@@ -19,7 +19,7 @@ namespace TimeTracker.App.ViewModels.User;
 
 
 
-public partial class UserListViewModel : ViewModelBase, IRecipient<UserCreateMessage>, IRecipient<UserEditMessage>
+public partial class UserListViewModel : ViewModelBase, IRecipient<UserCreateMessage>, IRecipient<UserEditMessage>, IRecipient<UserDeleteMessage>
 {
     private readonly IUserFacade _userFacade;
     private readonly INavigationService _navigationService;
@@ -63,13 +63,26 @@ public partial class UserListViewModel : ViewModelBase, IRecipient<UserCreateMes
         await _navigationService.GoToAsync<UserEditViewModel>(
             new Dictionary<string, object?> { [nameof(UserEditViewModel.UserId)] = id });
         MessengerService.Send(new GetUserMessage()); // ensures that User model will be loaded
-    } 
+    }
+
+    [RelayCommand]
+    private async Task DeleteAsync(Guid id)
+    {
+         await _userFacade.DeleteAsync(id);
+
+         MessengerService.Send(new UserDeleteMessage());
+
+    }
 
     public async void Receive(UserCreateMessage message)
     {
         await LoadDataAsync();
     }
     public async void Receive(UserEditMessage message)
+    {
+        await LoadDataAsync();
+    }
+    public async void Receive(UserDeleteMessage message)
     {
         await LoadDataAsync();
     }
