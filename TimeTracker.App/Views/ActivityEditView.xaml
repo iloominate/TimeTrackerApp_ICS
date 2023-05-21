@@ -6,12 +6,15 @@
                        x:Class="TimeTracker.App.Views.ActivityEditView"
                        x:Name="ActivityEditViewRoot"
                        x:DataType="vm:ActivityEditViewModel"
-                       Title="TimeTracker">
-    
-    <StackLayout>
+                       NavigationPage.HasNavigationBar="false"
+                       Title="TimeTracker"
+                       WidthRequest="1120"
+                       HeightRequest="680">
+
+        <StackLayout BackgroundColor="Black" Margin="0, 0, 0, 0">
         <Label Text="Name:"
                Margin="0,0,0,5 "/>
-        <Entry Placeholder="Activity"
+        <Entry Placeholder="Name"
                Text="{Binding Activity.Name}"
                Margin="0,0,0,15"
                MaxLength="100"/>
@@ -59,7 +62,7 @@
         </StackLayout>
 
 
-        <Button Text="SAVE"
+        <Button Text="Save"
                 Command="{Binding SaveCommand}"
                 HorizontalOptions="Start" 
                 VerticalOptions="Start" 

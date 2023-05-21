@@ -6,109 +6,128 @@
                        x:Class="TimeTracker.App.Views.UserListView"
                        x:DataType="vm:UserListViewModel"
                        x:Name="UserListViewRoot"
-                       Title="TimeTracker">
+                       NavigationPage.HasNavigationBar="false"
+                       Title="TimeTracker"
+                       WidthRequest="1120"
+                       HeightRequest="680">
 
-    <Grid>
-        <Grid HorizontalOptions="FillAndExpand"
+	<Grid BackgroundColor="Black" Margin="0, 0, 0, 0">
+
+		<Grid HorizontalOptions="StartAndExpand"
               VerticalOptions="StartAndExpand"
               RowDefinitions="Auto, *"
               RowSpacing="10"
               Margin="{OnIdiom Phone='15, 0'}">
-            <Label Grid.Row="0"
+			<Label Grid.Row="0"
                    FontSize="30"
-                   Margin="15"
+                   Margin="30"
+                   TextColor="White"
                    Text="Users List" />
 
-            <CollectionView Grid.Row="1" ItemsSource="{Binding Users}"
-                            VerticalOptions="FillAndExpand">
-                <CollectionView.ItemsLayout>
-                    <GridItemsLayout Orientation="Horizontal"
-                                     HorizontalItemSpacing="15" 
-                                     VerticalItemSpacing="15"/>
-                </CollectionView.ItemsLayout>
+			<CollectionView Grid.Row="1" ItemsSource="{Binding Users}"
+							VerticalOptions="FillAndExpand">
+				<CollectionView.ItemsLayout>
+					<GridItemsLayout Orientation="Horizontal"
+									 HorizontalItemSpacing="15"
+									 VerticalItemSpacing="15"
+									 Span="2"/>
+				</CollectionView.ItemsLayout>
 
+				<CollectionView.ItemTemplate>
+					<DataTemplate x:DataType="m:UserListModel">
+						<Frame Padding="0"
+							   CornerRadius="25"
+							   WidthRequest="230"
+							   HeightRequest="230"
+							   IsClippedToBounds="True">
 
-                <CollectionView.ItemTemplate>
-                    <DataTemplate x:DataType="m:UserListModel">
-                        <Frame Padding="0"
-                               CornerRadius="25"
-                               WidthRequest="250" 
-                               HeightRequest="250"
-                               IsClippedToBounds="True">
-                            <Grid>
-                                <Image Grid.Row="0"
-                                       HorizontalOptions="FillAndExpand" 
-                                       VerticalOptions="FillAndExpand"
-                                       Aspect="AspectFill"
-                                       WidthRequest="250" HeightRequest="250"
-                                       Source="{Binding PhotoUrl, TargetNullValue='user_place_holder.png'}"/>
+							<Grid>
+								<Image Grid.Row="0"
+									   HorizontalOptions="FillAndExpand"
+									   VerticalOptions="FillAndExpand"
+									   Aspect="AspectFill"
+									   WidthRequest="230"
+									   HeightRequest="230"
+									   Source="{Binding PhotoUrl, TargetNullValue='user_place_holder.png'}"/>
 
-                                <BoxView Grid.Row="0"
-                                         Opacity="0.2"
-                                         Color="Black" />
+								<BoxView Grid.Row="0"
+										 Opacity="0.3"
+										 Color="Black"/>
 
-                                <Label Grid.Row="0"
-                                       Margin="25"
-                                       FontSize="20" LineBreakMode="WordWrap"
-                                       Text="{Binding Name}" 
-                                       TextColor="White" VerticalOptions="End" />
+								<Label Grid.Row="0"
+									   Margin="25"
+									   FontSize="20"
+									   LineBreakMode="WordWrap"
+									   Text="{Binding Name}"
+									   TextColor="White"
+									   VerticalOptions="End"/>
 
+								<Button Text="Edit"
+										Command="{Binding Source={x:Reference UserListViewRoot}, Path=BindingContext.GoToUserEditCommand}"
+										CommandParameter="{Binding Id}"
+										HorizontalOptions="Start"
+										VerticalOptions="Start"
+										Margin="15"
+										FontSize="13"
+										BackgroundColor="White"
+										TextColor="Black"
+										CornerRadius="15">
 
-                                <Button Text="Edit"
-                                        Command="{Binding Source={x:Reference UserListViewRoot}, Path=BindingContext.GoToUserEditCommand}"
-                                        CommandParameter="{Binding Id}"
-                                        HorizontalOptions="Start"
-                                        VerticalOptions="Start"
-                                        Margin="15"
-                                        FontSize="13" 
-                                        TextColor="Black" 
-                                        CornerRadius="15">
-                                    <Button.Triggers>
-                                        <Trigger TargetType="Button" Property="IsPressed" Value="True">
-                                            <Setter Property="BackgroundColor" Value="Gray" />
-                                        </Trigger>
-                                    </Button.Triggers>
-                                </Button>
+									<Button.Triggers>
+										<Trigger TargetType="Button" Property="IsPressed" Value="True">
+											<Setter Property="BackgroundColor" Value="Gray" />
+										</Trigger>
+									</Button.Triggers>
+
+								</Button>
 
 
                                 <Button Text="Log In"
                                         Command="{Binding Source={x:Reference UserListViewRoot}, Path=BindingContext.GoToProjectListCommand}"
                                         CommandParameter="{Binding Id}"
-                                        HorizontalOptions="End" 
-                                        VerticalOptions="End" 
+                                        HorizontalOptions="End"
+                                        VerticalOptions="End"
                                         Margin="15"
-                                        FontSize="13" 
-                                        TextColor="Black" 
+                                        FontSize="13"
+                                        BackgroundColor="White"
+                                        TextColor="Black"
                                         CornerRadius="15">
-                                    <Button.Triggers>
-                                        <Trigger TargetType="Button" Property="IsPressed" Value="True">
-                                            <Setter Property="BackgroundColor" Value="Gray" />
-                                        </Trigger>
-                                    </Button.Triggers>
-                                </Button>
+									<Button.Triggers>
+										<Trigger TargetType="Button" Property="IsPressed" Value="True">
+											<Setter Property="BackgroundColor" Value="Gray" />
+										</Trigger>
+									</Button.Triggers>
+								</Button>
 
-                            </Grid>
-                        </Frame>
-                    </DataTemplate>
-                </CollectionView.ItemTemplate>
-            </CollectionView>
 
-            <Button Text="Create User"
-                    Command="{Binding Source={x:Reference UserListViewRoot}, Path=BindingContext.GoToCreateCommand}"
-                    HorizontalOptions="End" 
-                    VerticalOptions="End" 
-                    Margin="20" 
-                    FontSize="18" 
-                    BackgroundColor="LimeGreen" 
-                    TextColor="Black" 
-                    CornerRadius="15">
-                <Button.Triggers>
-                    <Trigger TargetType="Button" Property="IsPressed" Value="True">
-                        <Setter Property="BackgroundColor" Value="Green" />
-                    </Trigger>
-                </Button.Triggers>
-            </Button>
-        </Grid>
-    </Grid>
+
+							</Grid>
+						</Frame>
+					</DataTemplate>
+				</CollectionView.ItemTemplate>
+			</CollectionView>
+
+		</Grid>
+
+        <Button Text="Create User"
+                Command="{Binding Source={x:Reference UserListViewRoot}, Path=BindingContext.GoToCreateCommand}"
+                HorizontalOptions="End"
+                VerticalOptions="Start"
+                Margin="35"
+                FontSize="18"
+                BackgroundColor="LimeGreen"
+                TextColor="Black"
+                CornerRadius="15"
+                IsEnabled="{Binding Source={x:Reference UserListViewRoot}, Path=WidthRequest, FallbackValue='False'}">
+
+            <Button.Triggers>
+                <Trigger TargetType="Button" Property="IsPressed" Value="True">
+                    <Setter Property="BackgroundColor" Value="Green" />
+                </Trigger>
+            </Button.Triggers>
+
+        </Button>
+
+	</Grid>
 
 </views:ContentPageBase>
