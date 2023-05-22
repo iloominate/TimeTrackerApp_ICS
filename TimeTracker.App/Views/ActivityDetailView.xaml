@@ -2,7 +2,6 @@
                        xmlns:views="clr-namespace:TimeTracker.App.Views"
                        xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
                        xmlns:vm="clr-namespace:TimeTracker.App.ViewModels.Activity"
-                       xmlns:listModels="clr-namespace:TimeTracker.BL.Models.ListModels;assembly=TimeTracker.BL"
                        x:Class="TimeTracker.App.Views.ActivityDetailView"
                        x:DataType="vm:ActivityDetailViewModel"
                        x:Name="ActivityDetailViewRoot"
@@ -11,25 +10,57 @@
                        WidthRequest="1120"
                        HeightRequest="680">
 
-    <StackLayout BackgroundColor="Black">
+	<StackLayout BackgroundColor="Black" Margin="0, 0, 0, 0">
+		<Grid Margin="100">
+			<Grid.RowDefinitions>
+				<RowDefinition Height="Auto"/>
+				<RowDefinition Height="Auto"/>
+				<RowDefinition Height="Auto"/>
+			</Grid.RowDefinitions>
 
-        <Label Text="{Binding Activity.Name}"
-               VerticalOptions="Center"
-               FontSize="Header"/>
+			<Grid.ColumnDefinitions>
+				<ColumnDefinition Width="600"/>
+				<ColumnDefinition Width="Auto"/>
+				<ColumnDefinition Width="Auto"/>
+            </Grid.ColumnDefinitions>
 
-        <Label Text="{Binding Activity.Description}"
-               FontSize="Medium"/>
 
-        <Label Text="{Binding Activity.Type}"
-               FontSize="Medium"/>
+				<Label Grid.Row="0"
+                       Grid.Column="0"
+                       Margin="5"
+                       Text="{Binding Activity.Name}"
+                       VerticalOptions="Center"
+                       FontSize="Header"/>
 
-        <Label Text="{Binding Activity.Start}"
-               VerticalOptions="Center"
-               FontSize="Title"/>
+				<Label Grid.Row="1"
+                       Grid.Column="0"
+                       Margin="8"
+                       Text="{Binding Activity.Description}"
+                       FontSize="Medium"/>
 
-        <Label Text="{Binding Activity.End}"
-               VerticalOptions="Center"
-               FontSize="Title"/>
+		</Grid>
 
-    </StackLayout>
+        <Frame Padding="10"
+               BorderColor="White"
+               CornerRadius="15"
+               HeightRequest="60"
+               WidthRequest="300"
+               Margin="5,100, -600, 5">
+            <Label Text="{Binding Activity.Start}"
+                   VerticalOptions="Center"
+                   FontSize="Title"/>
+        </Frame>
+
+		<Frame Padding="10"
+               BorderColor="White"
+               CornerRadius="15"
+               HeightRequest="60"
+               WidthRequest="300"
+               Margin="5">
+			<Label Text="{Binding Activity.End}"
+                                      VerticalOptions="Center"
+                                      FontSize="Title"/>
+		</Frame>
+
+	</StackLayout>
 </views:ContentPageBase>

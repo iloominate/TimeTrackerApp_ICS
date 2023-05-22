@@ -51,7 +51,7 @@
                Margin="0,0,0,15" 
                BackgroundColor="#292929"
                TextColor="White"
-               MaxLength="500" 
+               MaxLength="500"  
                FontSize="16"/>
 
         <StackLayout Orientation="Horizontal">

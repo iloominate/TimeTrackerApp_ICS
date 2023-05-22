@@ -177,7 +177,7 @@
 								<DataTrigger TargetType="Frame" Binding="{Binding Type}" Value="Studying">
 									<Setter Property="BorderColor" Value="Orange" />
 								</DataTrigger>
-								<DataTrigger TargetType="Frame" Binding="{Binding Type}" Value="Break">
+								<DataTrigger TargetType="Frame" Binding="{Binding Type}" Value="Lunch">
 									<Setter Property="BorderColor" Value="Yellow" />
 								</DataTrigger>
 								<DataTrigger TargetType="Frame" Binding="{Binding Type}" Value="Lunch">
