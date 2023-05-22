@@ -22,7 +22,7 @@
                    FontSize="30"
                    Margin="30"
                    TextColor="White"
-                   Text="Users List" />
+                   Text="Choose User" />
 
 			<CollectionView Grid.Row="1" ItemsSource="{Binding Users}"
 							VerticalOptions="FillAndExpand">
@@ -40,6 +40,11 @@
 							   WidthRequest="230"
 							   HeightRequest="230"
 							   IsClippedToBounds="True">
+							<Frame.GestureRecognizers>
+								<TapGestureRecognizer Command="{Binding Source={x:Reference UserListViewRoot}, Path=BindingContext.GoToProjectListCommand}"
+													  CommandParameter="{Binding Id}" />
+							</Frame.GestureRecognizers>
+
 
 							<Grid>
 								<Image Grid.Row="0"
@@ -50,8 +55,8 @@
 									   HeightRequest="230"
 									   Source="{Binding PhotoUrl, TargetNullValue='user_place_holder.png'}"/>
 
-								<BoxView Grid.Row="0"
-										 Opacity="0.3"
+								<BoxView Grid.Row="1"
+                                         Opacity="0.20"
 										 Color="Black"/>
 
 								<Label Grid.Row="0"
@@ -65,8 +70,8 @@
 								<Button Text="Edit"
 										Command="{Binding Source={x:Reference UserListViewRoot}, Path=BindingContext.GoToUserEditCommand}"
 										CommandParameter="{Binding Id}"
-										HorizontalOptions="Start"
-										VerticalOptions="Start"
+										HorizontalOptions="End"
+										VerticalOptions="End"
 										Margin="15"
 										FontSize="13"
 										BackgroundColor="White"
@@ -81,44 +86,21 @@
 
 								</Button>
 
+                                <Image Source="delete_icon.png"
+                                       Grid.Row="0"
+                                       Grid.Column="1"
+                                       WidthRequest="25"
+                                       HeightRequest="25"
+                                       HorizontalOptions="Start"
+                                       VerticalOptions="Start"
+                                       Margin="20">
+                                    <Image.GestureRecognizers>
+                                        <TapGestureRecognizer Command="{Binding Source={x:Reference UserListViewRoot}, Path=BindingContext.DeleteCommand}"
+                                                              CommandParameter="{Binding Id}" />
+                                    </Image.GestureRecognizers>
+                                </Image>
 
-                                <Button Text="Log In"
-                                        Command="{Binding Source={x:Reference UserListViewRoot}, Path=BindingContext.GoToProjectListCommand}"
-                                        CommandParameter="{Binding Id}"
-                                        HorizontalOptions="End"
-                                        VerticalOptions="End"
-                                        Margin="15"
-                                        FontSize="13"
-                                        BackgroundColor="White"
-                                        TextColor="Black"
-                                        CornerRadius="15">
-									<Button.Triggers>
-										<Trigger TargetType="Button" Property="IsPressed" Value="True">
-											<Setter Property="BackgroundColor" Value="Gray" />
-										</Trigger>
-									</Button.Triggers>
-								</Button>
-
-                                <Button Text="Delete"
-                                        Command="{Binding Source={x:Reference UserListViewRoot}, Path=BindingContext.DeleteCommand}"
-                                        CommandParameter="{Binding Id}"
-                                        HorizontalOptions="End"
-                                        VerticalOptions="Start"
-                                        Margin="15"
-                                        FontSize="13"
-                                        BackgroundColor="White"
-                                        TextColor="Black"
-                                        CornerRadius="15">
-                                    <Button.Triggers>
-                                        <Trigger TargetType="Button" Property="IsPressed" Value="True">
-                                            <Setter Property="BackgroundColor" Value="Gray" />
-                                        </Trigger>
-                                    </Button.Triggers>
-                                </Button>
-
-
-
-                            </Grid>
+							</Grid>
 						</Frame>
 					</DataTemplate>
 				</CollectionView.ItemTemplate>

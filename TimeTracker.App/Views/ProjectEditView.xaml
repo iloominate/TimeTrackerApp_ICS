@@ -12,7 +12,8 @@
                        HeightRequest="680">
 
 	<ContentPage.Content>
-		<Grid BackgroundColor="Black">
+
+        <Grid BackgroundColor="Black">
 			<Grid.RowDefinitions>
 				<RowDefinition Height="Auto" />
 				<RowDefinition Height="Auto" />
@@ -30,15 +31,15 @@
                    Margin="30"
                    FontSize="30"
                    TextColor="White"
-                   Text="Activities List" />
+                   Text="Choose Activity" />
 
 			<Button Grid.Row="0"
-                    Grid.Column="1"
+                    Grid.Column="2"
                     Text="Create Activity"
                     Command="{Binding Source={x:Reference ProjectEditViewRoot}, Path=BindingContext.GoToActivityEditCommand}"
                     HorizontalOptions="End"
                     VerticalOptions="End"
-                    Margin="20"
+                    Margin="20, 10, 30, 25"
                     FontSize="18"
                     BackgroundColor="LimeGreen"
                     TextColor="Black"
@@ -50,115 +51,192 @@
 				</Button.Triggers>
 			</Button>
 
-			<CollectionView Grid.Row="1"
-                            Grid.ColumnSpan="1"
-                            ItemsSource="{Binding UserList}"
-                            ItemsLayout="HorizontalList">
+			<StackLayout Grid.Row="1"
+                         Grid.Column="0"
+                         Orientation="Horizontal"
+                         HorizontalOptions="End"
+                         VerticalOptions="End"
+                         Margin="50, 0, 0, 10">
 
-				<CollectionView.ItemTemplate>
-					<DataTemplate x:DataType="m:UserListModel">
-						<Frame Padding="0"
-                               CornerRadius="25"
-                               WidthRequest="110"
-                               HeightRequest="110"
-                               Margin="10">
-							<Grid>
-								<Image Grid.Row="0"
-                                       HorizontalOptions="FillAndExpand"
-                                       VerticalOptions="FillAndExpand"
-                                       Aspect="AspectFill"
-                                       WidthRequest="110"
-                                       HeightRequest="110"
-                                       Source="{Binding PhotoUrl, TargetNullValue='user_place_holder.png'}" />
+                <Label Text="Filter by:"
+                       TextColor="White"
+                       FontSize="16"
+                       VerticalOptions="Center" />
+                <Button Text="Day"
+                        Command="{Binding Source={x:Reference ProjectEditViewRoot}, Path=BindingContext.FilterByDayCommand}"
+                        HorizontalOptions="End"
+                        VerticalOptions="End"
+                        Margin="5"
+                        FontSize="14"
+                        BackgroundColor="#292929"
+                        TextColor="White"
+                        CornerRadius="5"
+                        WidthRequest="80">
 
-								<Label Grid.Row="0"
-                                       Margin="5"
-                                       FontSize="17"
-                                       LineBreakMode="WordWrap"
-                                       Text="{Binding Name}"
-                                       TextColor="White"
-                                       VerticalOptions="End"
-                                       HorizontalOptions="Center" />
-							</Grid>
-						</Frame>
-					</DataTemplate>
-				</CollectionView.ItemTemplate>
-			</CollectionView>
+                    <Button.Triggers>
+                        <Trigger TargetType="Button" Property="IsPressed" Value="True">
+                            <Setter Property="BackgroundColor" Value="#151515" />
+                        </Trigger>
+                    </Button.Triggers>
+                </Button>
+                <Button Text="Week"
+                        Command="{Binding Source={x:Reference ProjectEditViewRoot}, Path=BindingContext.FilterByWeekCommand}"
+                        HorizontalOptions="End"
+                        VerticalOptions="End"
+                        Margin="5"
+                        FontSize="14"
+                        BackgroundColor="#292929"
+                        TextColor="White"
+                        CornerRadius="5"
+                        WidthRequest="80">
 
-			<Picker Grid.Row="1"
-                    Grid.ColumnSpan="2"
-                    Title="Filter:"
-                    x:Name="FilterPicker"
-                    HorizontalOptions="End"
-                    VerticalOptions="End"
-                    Margin="0, 0, 25, 5"
-                    FontSize="18"
-                    BackgroundColor="#292929"
-                    TextColor="White">
-                <Picker.ItemsSource>
-                    <x:Array Type="{x:Type x:String}">
-                        <x:String>Date</x:String>
-                        <x:String>Name</x:String>
-                        <x:String>Type</x:String>
-                    </x:Array>
-                </Picker.ItemsSource>
-            </Picker>
+                    <Button.Triggers>
+                        <Trigger TargetType="Button" Property="IsPressed" Value="True">
+                            <Setter Property="BackgroundColor" Value="#151515" />
+                        </Trigger>
+                    </Button.Triggers>
+                </Button>
+                <Button Text="Month"
+                        Command="{Binding Source={x:Reference ProjectEditViewRoot}, Path=BindingContext.FilterByMonthCommand}"
+                        HorizontalOptions="End"
+                        VerticalOptions="End"
+                        Margin="5"
+                        FontSize="13"
+                        BackgroundColor="#292929"
+                        TextColor="White"
+                        CornerRadius="5"
+                        WidthRequest="80">
 
-            <CollectionView Grid.Row="2"
+                    <Button.Triggers>
+                        <Trigger TargetType="Button" Property="IsPressed" Value="True">
+                            <Setter Property="BackgroundColor" Value="#151515" />
+                        </Trigger>
+                    </Button.Triggers>
+                </Button>
+
+                <Button Text="Year"
+                        Command="{Binding Source={x:Reference ProjectEditViewRoot}, Path=BindingContext.FilterByYearCommand}"
+                        HorizontalOptions="End"
+                        VerticalOptions="End"
+                        Margin="5"
+                        FontSize="14"
+                        BackgroundColor="#292929"
+                        TextColor="White"
+                        CornerRadius="5"
+                        WidthRequest="80">
+
+                    <Button.Triggers>
+                        <Trigger TargetType="Button" Property="IsPressed" Value="True">
+                            <Setter Property="BackgroundColor" Value="#151515" />
+                        </Trigger>
+                    </Button.Triggers>
+                </Button>
+			</StackLayout>
+			
+
+			<StackLayout Grid.Row="1"
+                         Grid.Column="2"
+                         Orientation="Horizontal"
+                         Margin="10, 10, 50, 10">
+				<Label Text="From:"
+                       TextColor="White"
+                       FontSize="16"
+                       VerticalOptions="Center" />
+				<DatePicker Date="{Binding Source={x:Reference ProjectEditViewRoot}, Path=BindingContext.StartDate}"
+                            FontSize="14"
+                            Margin="5"
+                            BackgroundColor="#292929"
+                            TextColor="White"
+                            WidthRequest="150" />
+				<Label Text="To:"
+                       TextColor="White"
+                       FontSize="16"
+                       VerticalOptions="Center" />
+				<DatePicker Date="{Binding Source={x:Reference ProjectEditViewRoot}, Path=BindingContext.EndDate}"
+                            FontSize="14"
+                            Margin="5"
+                            BackgroundColor="#292929"
+                            TextColor="White"
+                            WidthRequest="150" />
+
+                <Button Text="Apply"
+                        Command="{Binding Source={x:Reference ProjectEditViewRoot}, Path=BindingContext.ApplyFilterCommand}"
+                        HorizontalOptions="End"
+                        VerticalOptions="End"
+                        Margin="5"
+                        FontSize="14"
+                        BackgroundColor="#292929"
+                        TextColor="White"
+                        CornerRadius="5"
+                        WidthRequest="80">
+
+                    <Button.Triggers>
+                        <Trigger TargetType="Button" Property="IsPressed" Value="True">
+                            <Setter Property="BackgroundColor" Value="#151515" />
+                        </Trigger>
+                    </Button.Triggers>
+                </Button>
+			</StackLayout>
+
+			<CollectionView Grid.Row="2"
                             Grid.ColumnSpan="3"
                             ItemsSource="{Binding ActivityList}"
                             VerticalOptions="FillAndExpand">
 
 				<CollectionView.ItemTemplate>
 					<DataTemplate x:DataType="m:ActivityListModel">
-						<Frame Margin="10"
+						<Frame Margin="150, 10, 150, 10"
                                Padding="10"
-                               BackgroundColor="Black"
-                               CornerRadius="10">
+                               CornerRadius="20">
+							<Frame.Triggers>
+                                
+                                <DataTrigger TargetType="Frame" Binding="{Binding Type}" Value="Work">
+									<Setter Property="BorderColor" Value="Red" />
+								</DataTrigger>
+								<DataTrigger TargetType="Frame" Binding="{Binding Type}" Value="Studying">
+									<Setter Property="BorderColor" Value="Orange" />
+								</DataTrigger>
+								<DataTrigger TargetType="Frame" Binding="{Binding Type}" Value="Break">
+									<Setter Property="BorderColor" Value="Yellow" />
+								</DataTrigger>
+								<DataTrigger TargetType="Frame" Binding="{Binding Type}" Value="Lunch">
+									<Setter Property="BorderColor" Value="Green" />
+								</DataTrigger>
+								<DataTrigger TargetType="Frame" Binding="{Binding Type}" Value="Meeting">
+									<Setter Property="BorderColor" Value="Blue" />
+								</DataTrigger>
+								<DataTrigger TargetType="Frame" Binding="{Binding Type}" Value="Training">
+									<Setter Property="BorderColor" Value="Purple" />
+								</DataTrigger>
+								<DataTrigger TargetType="Frame" Binding="{Binding Type}" Value="Other">
+									<Setter Property="BorderColor" Value="Pink" />
+								</DataTrigger>
+							</Frame.Triggers>
+							<Frame.GestureRecognizers>
+								<TapGestureRecognizer Command="{Binding Source={x:Reference ProjectEditViewRoot}, Path=BindingContext.GoToActivityDetailCommand}"
+                                                      CommandParameter="{Binding Id}" />
+							</Frame.GestureRecognizers>
 							<Grid>
-								<Grid.ColumnDefinitions>
-									<ColumnDefinition/>
-									<ColumnDefinition/>
-									<ColumnDefinition/>
-									<ColumnDefinition/>
-								</Grid.ColumnDefinitions>
 								<Label Text="{Binding Name}"
+                                       Margin="20"
                                        FontSize="25"
                                        Grid.Column="0"
                                        TextColor="White"
                                        VerticalOptions="Center"/>
-								<Label Text="{Binding Start, StringFormat='{0:MMM dd yyyy HH:mm}'}"
-                                       FontSize="18"
+
+                                <Image Source="delete_icon.png"
+                                       Grid.Row="0"
                                        Grid.Column="1"
-                                       TextColor="White"
-                                       VerticalOptions="Center"/>
-								<Label Text="{Binding End, StringFormat='{0:MMM dd yyyy HH:mm}'}"
-                                       FontSize="18"
-                                       Grid.Column="2"
-                                       TextColor="White"
-                                       VerticalOptions="Center"/>
-								<Label Text="{Binding Type, Converter={StaticResource ActivityTypeToStringConverter}}"
-                                       FontSize="18"
-                                       Grid.Column="3"
-                                       TextColor="White"
-                                       VerticalOptions="Center"/>
-								<Button Text="Details"
-                                        Grid.Column="3"
-                                        Command="{Binding Source={x:Reference ProjectEditViewRoot}, Path=BindingContext.GoToActivityDetailCommand}"
-                                        CommandParameter="{Binding Id}"
-                                        HorizontalOptions="End"
-                                        VerticalOptions="End"
-                                        Margin="17"
-                                        FontSize="18"
-                                        BackgroundColor="White"
-                                        TextColor="Black"
-                                        CornerRadius="15">
-									<Button.Triggers>
-										<Trigger TargetType="Button" Property="IsPressed" Value="True">
-											<Setter Property="BackgroundColor" Value="Gray" />
-										</Trigger>
-									</Button.Triggers>
-								</Button>
+                                       WidthRequest="25"
+                                       HeightRequest="25"
+                                       HorizontalOptions="End"
+                                       VerticalOptions="Center"
+                                       Margin="20">
+                                    <Image.GestureRecognizers>
+                                        <TapGestureRecognizer Command="{Binding Source={x:Reference UserListViewRoot}, Path=BindingContext.DeleteCommand}"
+                                                              CommandParameter="{Binding Id}" />
+                                    </Image.GestureRecognizers>
+                                </Image>
 							</Grid>
 						</Frame>
 					</DataTemplate>
@@ -167,5 +245,6 @@
 
 		</Grid>
 	</ContentPage.Content>
+
 
 </views:ContentPageBase>
