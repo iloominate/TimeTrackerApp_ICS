@@ -57,7 +57,6 @@
 					<DataTemplate x:DataType="m:ProjectListModel">
 						<Frame Margin="150, 10, 150, 10"
                                Padding="10"
-                               BackgroundColor="Black"
                                CornerRadius="20">
                             <Frame.GestureRecognizers>
                                 <TapGestureRecognizer Command="{Binding Source={x:Reference ProjectListViewRoot}, Path=BindingContext.GoToDetailOrEditCommand}"
@@ -119,6 +118,25 @@
 											</Trigger>
 										</Button.Triggers>
 									</Button>
+
+                                    <Button Text="Edit"
+                                            Command="{Binding Source={x:Reference ProjectListViewRoot}, Path=BindingContext.GoToUserEditCommand}"
+                                            CommandParameter="{Binding Id}"
+                                            Margin="6"
+                                            WidthRequest="80"
+                                            CornerRadius="15"
+                                            BackgroundColor="White"
+                                            TextColor="Black"
+                                            FontSize="17"
+                                            HorizontalOptions="Start">
+
+                                        <Button.Triggers>
+                                            <Trigger TargetType="Button" Property="IsPressed" Value="True">
+                                                <Setter Property="BackgroundColor" Value="Gray" />
+                                            </Trigger>
+                                        </Button.Triggers>
+
+                                    </Button>
 
 								</StackLayout>
 

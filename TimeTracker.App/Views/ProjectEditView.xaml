@@ -143,7 +143,6 @@
                        FontSize="16"
                        VerticalOptions="Center" />
 				<Entry Placeholder="yyyy/mm/dd hh:mm"
-                       Text="{Binding StartString}"
                        Margin="5"
                        BackgroundColor="#292929"
                        TextColor="White"
@@ -155,7 +154,6 @@
                        FontSize="16"
                        VerticalOptions="Center" />
 				<Entry Placeholder="yyyy/mm/dd hh:mm"
-                       Text="{Binding EndString}"
                        Margin="5"
                        BackgroundColor="#292929"
                        TextColor="White"
@@ -245,6 +243,25 @@
                                        Grid.Column="0"
                                        TextColor="White"
                                        VerticalOptions="Center"/>
+
+                                <Button Text="Edit"
+                                        Command="{Binding Source={x:Reference ProjectEditViewRoot}, Path=BindingContext.GoToActivityEditCommand}"
+                                        CommandParameter="{Binding Id}"
+                                        HorizontalOptions="End"
+                                        VerticalOptions="End"
+                                        Margin="15, 0, 70, 15"
+                                        FontSize="13"
+                                        BackgroundColor="White"
+                                        TextColor="Black"
+                                        CornerRadius="15">
+
+                                    <Button.Triggers>
+                                        <Trigger TargetType="Button" Property="IsPressed" Value="True">
+                                            <Setter Property="BackgroundColor" Value="Gray" />
+                                        </Trigger>
+                                    </Button.Triggers>
+
+                                </Button>
 
                                 <Image Source="delete_icon.png"
                                        Grid.Row="0"

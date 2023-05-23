@@ -11,7 +11,7 @@
                        WidthRequest="1120"
                        HeightRequest="680">
 
-	<Grid BackgroundColor="Black" Margin="0, 0, 0, 0">
+	<Grid BackgroundColor="Black">
 
 		<Grid HorizontalOptions="StartAndExpand"
               VerticalOptions="StartAndExpand"
@@ -27,7 +27,7 @@
 			<CollectionView Grid.Row="1"
 							ItemsSource="{Binding Users}"
 							ItemsLayout="HorizontalList"
-							Margin="30">
+							Margin="30, 80, 0, 30">
 				<CollectionView.ItemTemplate>
 					<DataTemplate x:DataType="m:UserListModel">
 

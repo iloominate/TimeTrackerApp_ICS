@@ -125,7 +125,6 @@
                        FontSize="16"
                        VerticalOptions="Center" />
                 <Entry Placeholder="yyyy/mm/dd hh:mm"
-                       Text="{Binding StartString}"
                        Margin="5"
                        BackgroundColor="#292929"
                        TextColor="White"
@@ -137,7 +136,6 @@
                        FontSize="16"
                        VerticalOptions="Center" />
                 <Entry Placeholder="yyyy/mm/dd hh:mm"
-                       Text="{Binding EndString}"
                        Margin="5"
                        BackgroundColor="#292929"
                        TextColor="White"

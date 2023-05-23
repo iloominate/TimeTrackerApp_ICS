@@ -11,17 +11,19 @@
                        WidthRequest="1120"
                        HeightRequest="680">
 
-    <StackLayout BackgroundColor="Black" 
-                 Margin="100, 20, 100, 20">
+    <StackLayout BackgroundColor="Black" >
 
-		
+        <Label Margin="30"
+               FontSize="30"
+               TextColor="White"
+               Text="Enter activity information" />
 
         <Button Text="Save"
                 Command="{Binding SaveCommand}"
                 HorizontalOptions="End"
                 VerticalOptions="Start"
                 FontSize="20"
-                Margin="0,20,-40,20"
+                Margin="0,-60,40,20"
                 BackgroundColor="LimeGreen"
                 TextColor="Black"
                 CornerRadius="10">
@@ -34,10 +36,10 @@
 
         <Label Text="Name:" 
                FontSize="17" 
-               Margin="0,0,0,5"/>
+               Margin="100,90,0,5"/>
         <Entry Placeholder="Name" 
                Text="{Binding Activity.Name}" 
-               Margin="0,0,0,15" 
+               Margin="100,0,100,15" 
                BackgroundColor="#292929"
                TextColor="White"
                MaxLength="100" 
@@ -45,10 +47,10 @@
 
         <Label Text="Description:" 
                FontSize="17" 
-               Margin="0,0,0,5"/>
+               Margin="100,0,0,5"/>
         <Entry Placeholder="Description" 
                Text="{Binding Activity.Description}" 
-               Margin="0,0,0,15" 
+               Margin="100,0,100,15" 
                BackgroundColor="#292929"
                TextColor="White"
                MaxLength="500"  
@@ -58,10 +60,10 @@
             <StackLayout>
                 <Label Text="Start:" 
                        FontSize="17" 
-                       Margin="0,0,0,5"/>
+                       Margin="100,0,0,5"/>
                 <Entry Placeholder="yyyy/mm/dd hh:mm" 
                        Text="{Binding StartString}"
-                       Margin="0,0,0,15" 
+                       Margin="100,0,0,15" 
                        BackgroundColor="#292929" 
                        TextColor="White" 
                        MaxLength="16" 
