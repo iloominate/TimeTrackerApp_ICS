@@ -60,6 +60,12 @@ public partial class ProjectListViewModel : ViewModelBase,
 
         Projects = await _projectFacade.GetAsync();
     }
+    
+    [RelayCommand]
+    private async Task GoToCreateAsync(Guid id)
+        => await _navigationService.GoToAsync<ProjectCreateViewModel>(
+            new Dictionary<string, object?> { [nameof(ProjectCreateViewModel.ActiveUserId)] = id });
+
     [RelayCommand]
     private async Task GoToDetailOrEditAsync(Guid projectId)
     {

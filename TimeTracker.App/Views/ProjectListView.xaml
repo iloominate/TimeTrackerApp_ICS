@@ -34,6 +34,7 @@
                     Grid.Column="1"
                     Text="Create Project"
                     Command="{Binding Source={x:Reference ProjectListViewRoot}, Path=BindingContext.GoToCreateCommand}"
+                    CommandParameter="{Binding ActiveUserId}"
                     HorizontalOptions="End"
                     VerticalOptions="End"
                     Margin="20"
