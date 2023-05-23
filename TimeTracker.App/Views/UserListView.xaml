@@ -20,21 +20,23 @@
               Margin="{OnIdiom Phone='15, 0'}">
 			<Label Grid.Row="0"
                    FontSize="30"
-                   Margin="30"
+                   Margin="35"
                    TextColor="White"
                    Text="Choose User" />
 
 			<CollectionView Grid.Row="1"
-                            ItemsSource="{Binding Users}"
-							VerticalOptions="FillAndExpand">
-
+							ItemsSource="{Binding Users}"
+							ItemsLayout="HorizontalList"
+							Margin="30">
 				<CollectionView.ItemTemplate>
 					<DataTemplate x:DataType="m:UserListModel">
+
 						<Frame Padding="0"
-							   CornerRadius="25"
-							   WidthRequest="230"
-							   HeightRequest="230"
-							   IsClippedToBounds="True">
+                               Margin="20"
+                               CornerRadius="25"
+                               WidthRequest="230"
+                               HeightRequest="230"
+                               IsClippedToBounds="True">
 							<Frame.GestureRecognizers>
 								<TapGestureRecognizer Command="{Binding Source={x:Reference UserListViewRoot}, Path=BindingContext.GoToProjectListCommand}"
 													  CommandParameter="{Binding Id}" />
@@ -81,7 +83,7 @@
 
 								</Button>
 
-								<Image Source="delete_icon.png"
+                                <Image Source="delete_icon.png"
                                        Grid.Row="0"
                                        Grid.Column="1"
                                        WidthRequest="25"
@@ -89,11 +91,11 @@
                                        HorizontalOptions="Start"
                                        VerticalOptions="Start"
                                        Margin="20">
-									<Image.GestureRecognizers>
-										<TapGestureRecognizer Command="{Binding Source={x:Reference UserListViewRoot}, Path=BindingContext.DeleteCommand}"
+                                    <Image.GestureRecognizers>
+                                        <TapGestureRecognizer Command="{Binding Source={x:Reference UserListViewRoot}, Path=BindingContext.DeleteCommand}"
                                                               CommandParameter="{Binding Id}" />
-									</Image.GestureRecognizers>
-								</Image>
+                                    </Image.GestureRecognizers>
+                                </Image>
 
 							</Grid>
 						</Frame>

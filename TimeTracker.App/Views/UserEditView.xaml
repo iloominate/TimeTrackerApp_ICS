@@ -11,15 +11,22 @@
 
 <Grid BackgroundColor="Black" Margin="0, 0, 0, 0">
 
-        <Button Text="Save"
-                Command="{Binding SaveCommand}"
-                HorizontalOptions="End" 
-                VerticalOptions="Start" 
-                FontSize="20"
-                Margin="0,30,35,0"
-                BackgroundColor="LimeGreen" 
-                TextColor="Black" 
-                CornerRadius="15">
+    <Label Grid.Row="0"
+           Grid.Column="0"
+           Margin="30"
+           FontSize="30"
+           TextColor="White"
+           Text="Enter user information" />
+
+    <Button Text="Save"
+            Command="{Binding SaveCommand}"
+            HorizontalOptions="End" 
+            VerticalOptions="Start" 
+            FontSize="20"
+            Margin="0,30,35,0"
+            BackgroundColor="LimeGreen" 
+            TextColor="Black" 
+            CornerRadius="15">
             <Button.Triggers>
                 <Trigger TargetType="Button" Property="IsPressed" Value="True">
                     <Setter Property="BackgroundColor" Value="Green" />
@@ -28,7 +35,7 @@
         </Button>
 
         <Frame Padding="0"
-               Margin="75"
+               Margin="200, 190, 0, 0"
                WidthRequest="300"
                HeightRequest="300"
                CornerRadius="25"
@@ -45,7 +52,7 @@
 
         <StackLayout HorizontalOptions="Start"
                      VerticalOptions="Start"
-                     Margin="420,100,0,0">
+                     Margin="550,210,0,0">
             <Label Text="Name:" 
                    TextColor="White" 
                    Margin="0,0,0,5 "/>

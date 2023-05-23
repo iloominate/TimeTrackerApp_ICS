@@ -11,10 +11,10 @@
                        WidthRequest="1120"
                        HeightRequest="680">
 
-    <StackLayout 
-        
-		BackgroundColor="Black" 
+    <StackLayout BackgroundColor="Black" 
                  Margin="100, 20, 100, 20">
+
+		
 
         <Button Text="Save"
                 Command="{Binding SaveCommand}"
