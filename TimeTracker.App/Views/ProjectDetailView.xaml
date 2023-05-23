@@ -30,7 +30,9 @@
                    Margin="30"
                    FontSize="30"
                    TextColor="White"
-                   Text="Activities List" />
+                   Text="Choose Activity" />
+
+
 
 			<StackLayout Grid.Row="1"
                          Grid.Column="0"
@@ -112,8 +114,7 @@
 						</Trigger>
 					</Button.Triggers>
 				</Button>
-
-            </StackLayout>
+			</StackLayout>
 
 
 			<StackLayout Grid.Row="1"
@@ -124,7 +125,7 @@
                        TextColor="White"
                        FontSize="16"
                        VerticalOptions="Center" />
-                <Entry Placeholder="yyyy/mm/dd hh:mm"
+				<Entry Placeholder="yyyy/mm/dd hh:mm"
                        Margin="5"
                        BackgroundColor="#292929"
                        TextColor="White"
@@ -135,7 +136,7 @@
                        TextColor="White"
                        FontSize="16"
                        VerticalOptions="Center" />
-                <Entry Placeholder="yyyy/mm/dd hh:mm"
+				<Entry Placeholder="yyyy/mm/dd hh:mm"
                        Margin="5"
                        BackgroundColor="#292929"
                        TextColor="White"
@@ -160,7 +161,7 @@
 					</Button.Triggers>
 				</Button>
 
-                <Button Text="Cancel"
+				<Button Text="Cancel"
                         Command="{Binding Source={x:Reference ProjectEditViewRoot}, Path=BindingContext.CancelFilterCommand}"
                         HorizontalOptions="End"
                         VerticalOptions="End"
@@ -171,12 +172,12 @@
                         CornerRadius="5"
                         WidthRequest="80">
 
-                    <Button.Triggers>
-                        <Trigger TargetType="Button" Property="IsPressed" Value="True">
-                            <Setter Property="BackgroundColor" Value="DarkRed" />
-                        </Trigger>
-                    </Button.Triggers>
-                </Button>
+					<Button.Triggers>
+						<Trigger TargetType="Button" Property="IsPressed" Value="True">
+							<Setter Property="BackgroundColor" Value="DarkRed" />
+						</Trigger>
+					</Button.Triggers>
+				</Button>
 
 			</StackLayout>
 
@@ -198,7 +199,7 @@
 								<DataTrigger TargetType="Frame" Binding="{Binding Type}" Value="Studying">
 									<Setter Property="BorderColor" Value="Orange" />
 								</DataTrigger>
-								<DataTrigger TargetType="Frame" Binding="{Binding Type}" Value="Lunch">
+								<DataTrigger TargetType="Frame" Binding="{Binding Type}" Value="Break">
 									<Setter Property="BorderColor" Value="Yellow" />
 								</DataTrigger>
 								<DataTrigger TargetType="Frame" Binding="{Binding Type}" Value="Lunch">
@@ -215,14 +216,31 @@
 								</DataTrigger>
 							</Frame.Triggers>
 							<Grid>
+								<Grid.RowDefinitions>
+									<RowDefinition Height="Auto" />
+									<RowDefinition Height="Auto" />
+								</Grid.RowDefinitions>
+
+								<Grid.ColumnDefinitions>
+									<ColumnDefinition Width="*" />
+									<ColumnDefinition Width="100" />
+								</Grid.ColumnDefinitions>
 								<Label Text="{Binding Name}"
-                                       Margin="20"
+                                       Margin="20, 10, 0, 10"
                                        FontSize="25"
                                        Grid.Column="0"
                                        TextColor="White"
-                                       VerticalOptions="Center"/>
+                                       VerticalOptions="Center"
+                                       HorizontalOptions="Start"/>
+								<Label Text="there is has to be a name"
+                                       Margin="20, -15, 10, 15"
+                                       FontSize="20"
+                                       Grid.Row="1"
+                                       TextColor="White"
+                                       VerticalOptions="Center"
+                                       HorizontalOptions="Start"/>
 
-							</Grid>
+                            </Grid>
 						</Frame>
 					</DataTemplate>
 				</CollectionView.ItemTemplate>

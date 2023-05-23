@@ -236,20 +236,36 @@
 								<TapGestureRecognizer Command="{Binding Source={x:Reference ProjectEditViewRoot}, Path=BindingContext.GoToActivityDetailCommand}"
                                                       CommandParameter="{Binding Id}" />
 							</Frame.GestureRecognizers>
-							<Grid>
-								<Label Text="{Binding Name}"
-                                       Margin="20"
+                            <Grid>
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="Auto" />
+                                    <RowDefinition Height="Auto" />
+                                </Grid.RowDefinitions>
+
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="*" />
+                                    <ColumnDefinition Width="200" />
+                                </Grid.ColumnDefinitions>
+                                <Label Text="{Binding Name}"
+                                       Margin="20, 0, 0, 10"
                                        FontSize="25"
                                        Grid.Column="0"
                                        TextColor="White"
-                                       VerticalOptions="Center"/>
-
+                                       VerticalOptions="Center"
+                                       HorizontalOptions="Start"/>
+                                <Label Text="there is has to be a name"
+                                       Margin="20, -15, 10, 15"
+                                       FontSize="20"
+                                       Grid.Row="1"
+                                       TextColor="White"
+                                       VerticalOptions="Center"
+                                       HorizontalOptions="Start"/>
                                 <Button Text="Edit"
                                         Command="{Binding Source={x:Reference ProjectEditViewRoot}, Path=BindingContext.GoToActivityEditCommand}"
                                         CommandParameter="{Binding Id}"
                                         HorizontalOptions="End"
-                                        VerticalOptions="End"
-                                        Margin="15, 0, 70, 15"
+                                        VerticalOptions="Center"
+                                        Margin="0, 20, -130, 0"
                                         FontSize="13"
                                         BackgroundColor="White"
                                         TextColor="Black"
@@ -270,7 +286,7 @@
                                        HeightRequest="25"
                                        HorizontalOptions="End"
                                        VerticalOptions="Center"
-                                       Margin="20">
+                                       Margin="0, 20, 20, 0">
                                     <Image.GestureRecognizers>
                                         <TapGestureRecognizer Command="{Binding Source={x:Reference UserListViewRoot}, Path=BindingContext.DeleteCommand}"
                                                               CommandParameter="{Binding Id}" />
