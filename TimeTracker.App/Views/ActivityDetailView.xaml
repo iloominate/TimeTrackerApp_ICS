@@ -14,11 +14,10 @@
 
 		<Frame BorderColor="White"
                CornerRadius="15"
-               HasShadow="True"
                Padding="50"
                Margin="50">
 
-			<Grid>
+            <Grid>
 				<Grid.RowDefinitions>
 					<RowDefinition Height="Auto"/>
 					<RowDefinition Height="Auto"/>

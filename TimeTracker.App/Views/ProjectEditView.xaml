@@ -17,14 +17,16 @@
 			<Grid.RowDefinitions>
 				<RowDefinition Height="Auto" />
 				<RowDefinition Height="Auto" />
-				<RowDefinition Height="*" />
-			</Grid.RowDefinitions>
+				<RowDefinition Height="30" />
+                <RowDefinition Height="*" />
+            </Grid.RowDefinitions>
 
 			<Grid.ColumnDefinitions>
 				<ColumnDefinition Width="Auto" />
 				<ColumnDefinition Width="*" />
 				<ColumnDefinition Width="Auto" />
-			</Grid.ColumnDefinitions>
+                <ColumnDefinition Width="Auto" />
+            </Grid.ColumnDefinitions>
 
 			<Label Grid.Row="0"
                    Grid.Column="0"
@@ -76,6 +78,7 @@
                     <Button.Triggers>
                         <Trigger TargetType="Button" Property="IsPressed" Value="True">
                             <Setter Property="BackgroundColor" Value="#151515" />
+                            <Setter Property="TextColor" Value="DarkGray"/>
                         </Trigger>
                     </Button.Triggers>
                 </Button>
@@ -93,6 +96,7 @@
                     <Button.Triggers>
                         <Trigger TargetType="Button" Property="IsPressed" Value="True">
                             <Setter Property="BackgroundColor" Value="#151515" />
+                            <Setter Property="TextColor" Value="DarkGray"/>
                         </Trigger>
                     </Button.Triggers>
                 </Button>
@@ -110,6 +114,7 @@
                     <Button.Triggers>
                         <Trigger TargetType="Button" Property="IsPressed" Value="True">
                             <Setter Property="BackgroundColor" Value="#151515" />
+                            <Setter Property="TextColor" Value="DarkGray"/>
                         </Trigger>
                     </Button.Triggers>
                 </Button>
@@ -128,6 +133,7 @@
                     <Button.Triggers>
                         <Trigger TargetType="Button" Property="IsPressed" Value="True">
                             <Setter Property="BackgroundColor" Value="#151515" />
+                            <Setter Property="TextColor" Value="DarkGray"/>
                         </Trigger>
                     </Button.Triggers>
                 </Button>
@@ -142,24 +148,23 @@
                        TextColor="White"
                        FontSize="16"
                        VerticalOptions="Center" />
-				<Entry Placeholder="yyyy/mm/dd hh:mm"
-                       Margin="5"
-                       BackgroundColor="#292929"
-                       TextColor="White"
-                       MaxLength="16"
-                       FontSize="14"
-                       WidthRequest="170"/>
-				<Label Text="To:"
+                <DatePicker Date="{Binding Source={x:Reference ProjectEditViewRoot}, Path=BindingContext.StartDate}"
+                            FontSize="14"
+                            Margin="5"
+                            BackgroundColor="#292929"
+                            TextColor="White"
+                            WidthRequest="150" />
+                <Label Text="To:"
                        TextColor="White"
                        FontSize="16"
                        VerticalOptions="Center" />
-				<Entry Placeholder="yyyy/mm/dd hh:mm"
-                       Margin="5"
-                       BackgroundColor="#292929"
-                       TextColor="White"
-                       MaxLength="16"
-                       FontSize="14"
-                       WidthRequest="170"/>
+                <DatePicker Date="{Binding Source={x:Reference ProjectEditViewRoot}, Path=BindingContext.EndDate}"
+                            FontSize="14"
+                            Margin="5"
+                            BackgroundColor="#292929"
+                            TextColor="White"
+                            WidthRequest="150" />
+
 				<Button Text="Apply"
                         Command="{Binding Source={x:Reference ProjectEditViewRoot}, Path=BindingContext.ApplyFilterCommand}"
                         HorizontalOptions="End"
@@ -173,8 +178,9 @@
 
 					<Button.Triggers>
 						<Trigger TargetType="Button" Property="IsPressed" Value="True">
-							<Setter Property="BackgroundColor" Value="#151515" />
-						</Trigger>
+							<Setter Property="BackgroundColor" Value="#151515"/>
+                            <Setter Property="TextColor" Value="DarkGray"/>
+                        </Trigger>
 					</Button.Triggers>
 				</Button>
 
@@ -185,7 +191,7 @@
                         Margin="5"
                         FontSize="14"
                         BackgroundColor="Red"
-                        TextColor="White"
+                        TextColor="Black"
                         CornerRadius="5"
                         WidthRequest="80">
 
@@ -198,14 +204,37 @@
 
 			</StackLayout>
 
-			<CollectionView Grid.Row="2"
+			<StackLayout Grid.Row="2" 
+                         Grid.ColumnSpan="3"
+                         Orientation="Horizontal"
+>
+                    <Label Text="Name"
+                           FontSize="18"
+                           Margin="95,0, 0,0"
+                           TextColor="Gray"/>
+                    <Label Text="User"
+                           FontSize="18"                           
+                           Margin="300,0, 0,0"
+                           TextColor="Gray"/>
+                    <Label Text="Start"
+                           FontSize="18"
+                           Margin="110,0, 0,0"
+                           TextColor="Gray"/>
+                    <Label Text="End"
+                           FontSize="18"
+                           Margin="115,0, 0,0"
+                           TextColor="Gray"/>
+                </StackLayout>
+
+
+			<CollectionView Grid.Row="3"
                             Grid.ColumnSpan="3"
                             ItemsSource="{Binding ActivityList}"
                             VerticalOptions="FillAndExpand">
 
 				<CollectionView.ItemTemplate>
 					<DataTemplate x:DataType="m:ActivityListModel">
-						<Frame Margin="150, 10, 150, 10"
+						<Frame Margin="70, 10, 70, 10"
                                Padding="10"
                                CornerRadius="20">
 							<Frame.Triggers>
@@ -237,56 +266,68 @@
                                                       CommandParameter="{Binding Id}" />
 							</Frame.GestureRecognizers>
                             <Grid>
-                                <Grid.RowDefinitions>
-                                    <RowDefinition Height="Auto" />
-                                    <RowDefinition Height="Auto" />
-                                </Grid.RowDefinitions>
 
                                 <Grid.ColumnDefinitions>
-                                    <ColumnDefinition Width="*" />
+                                    <ColumnDefinition Width="350" />
+                                    <ColumnDefinition Width="150" />
+                                    <ColumnDefinition Width="160" />
                                     <ColumnDefinition Width="200" />
-                                </Grid.ColumnDefinitions>
+									<ColumnDefinition Width="Auto" />
+									<ColumnDefinition Width="Auto" />
+								</Grid.ColumnDefinitions>
+
                                 <Label Text="{Binding Name}"
-                                       Margin="20, 0, 0, 10"
-                                       FontSize="25"
+                                       Margin="15"
+                                       FontSize="24"
                                        Grid.Column="0"
                                        TextColor="White"
                                        VerticalOptions="Center"
                                        HorizontalOptions="Start"/>
-                                <Label Text="there is has to be a name"
-                                       Margin="20, -15, 10, 15"
+
+                                <Label Text="Bob"
+                                       Margin="15"
                                        FontSize="20"
-                                       Grid.Row="1"
+                                       Grid.Column="1"
                                        TextColor="White"
                                        VerticalOptions="Center"
                                        HorizontalOptions="Start"/>
-                                <Button Text="Edit"
-                                        Command="{Binding Source={x:Reference ProjectEditViewRoot}, Path=BindingContext.GoToActivityEditCommand}"
-                                        CommandParameter="{Binding Id}"
-                                        HorizontalOptions="End"
-                                        VerticalOptions="Center"
-                                        Margin="0, 20, -130, 0"
-                                        FontSize="13"
-                                        BackgroundColor="White"
-                                        TextColor="Black"
-                                        CornerRadius="15">
 
-                                    <Button.Triggers>
-                                        <Trigger TargetType="Button" Property="IsPressed" Value="True">
-                                            <Setter Property="BackgroundColor" Value="Gray" />
-                                        </Trigger>
-                                    </Button.Triggers>
+                                <Label Text="{Binding Start, StringFormat='{0:dd.MM.yyyy}'}"
+                                       Margin="15"
+                                       FontSize="20"
+                                       Grid.Column="2"
+                                       TextColor="White"
+                                       VerticalOptions="Center"
+                                       HorizontalOptions="Start"/>
 
-                                </Button>
+                                <Label Text="{Binding End, StringFormat='{0:dd.MM.yyyy}'}"
+                                       Margin="15"
+                                       FontSize="20"
+                                       Grid.Column="3"
+                                       TextColor="White"
+                                       VerticalOptions="Center"
+                                       HorizontalOptions="Start"/>
 
-                                <Image Source="delete_icon.png"
-                                       Grid.Row="0"
-                                       Grid.Column="1"
+                                <Image Source="edit_icon.png"
+                                       Grid.Column="4"
                                        WidthRequest="25"
                                        HeightRequest="25"
                                        HorizontalOptions="End"
                                        VerticalOptions="Center"
-                                       Margin="0, 20, 20, 0">
+                                       Margin="15">
+                                    <Image.GestureRecognizers>
+                                        <TapGestureRecognizer Command="{Binding Source={x:Reference ProjectEditViewRoot}, Path=BindingContext.GoToActivityEditCommand}"
+                                                              CommandParameter="{Binding Id}" />
+                                    </Image.GestureRecognizers>
+                                </Image>
+
+                                <Image Source="delete_icon.png"
+                                       Grid.Column="5"
+                                       WidthRequest="25"
+                                       HeightRequest="25"
+                                       HorizontalOptions="End"
+                                       VerticalOptions="Center"
+                                       Margin="10">
                                     <Image.GestureRecognizers>
                                         <TapGestureRecognizer Command="{Binding Source={x:Reference UserListViewRoot}, Path=BindingContext.DeleteCommand}"
                                                               CommandParameter="{Binding Id}" />
