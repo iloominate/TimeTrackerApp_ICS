@@ -38,21 +38,26 @@ namespace TimeTracker.DAL.Seeds
         {
             JonhUser.Projects.Add(ProjectAmountSeeds.GameJamJohn);
             JonhUser.Activities.Add(ActivitySeeds.LevelDesign);
+            JonhUser.CreatedProjects.Add(ProjectSeeds.GrillDay);
 
             AdamUser.Projects.Add(ProjectAmountSeeds.SchoolAdam);
             AdamUser.Activities.Add(ActivitySeeds.Generator);
+            AdamUser.CreatedProjects.Add(ProjectSeeds.GameJam);
+            AdamUser.CreatedProjects.Add(ProjectSeeds.Startup);
 
             Kris.Projects.Add(ProjectAmountSeeds.GameJamKris);
             Kris.Projects.Add(ProjectAmountSeeds.SchoolKris);
             Kris.Activities.Add(ActivitySeeds.Syntax);
             Kris.Activities.Add(ActivitySeeds.MovementLogic);
+            Kris.CreatedProjects.Add(ProjectSeeds.SchoolProject);
+            Kris.CreatedProjects.Add(ProjectSeeds.HouseBuilding);
         }
 
         public static void Seed(this ModelBuilder modelBuilder) =>
             modelBuilder.Entity<UserEntity>().HasData(
                 JonhUser with { Activities = Array.Empty<ActivityEntity>(), Projects = Array.Empty<ProjectAmountEntity>(), CreatedProjects = Array.Empty<ProjectEntity>() },
                 AdamUser with { Activities = Array.Empty<ActivityEntity>(), Projects = Array.Empty<ProjectAmountEntity>(), CreatedProjects = Array.Empty<ProjectEntity>() },
-                Kris with { Activities = Array.Empty<ActivityEntity>(), Projects = Array.Empty<ProjectAmountEntity>(), CreatedProjects = Array.Empty<ProjectEntity>() },
+                Kris with { Activities = Array.Empty<ActivityEntity>(), Projects = Array.Empty<ProjectAmountEntity>(), CreatedProjects = Array.Empty<ProjectEntity>() }
             );
     }
 }

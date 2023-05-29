@@ -47,12 +47,22 @@ namespace TimeTracker.DAL.Seeds
             User = UserSeeds.JonhUser
         };
 
+        public static readonly ProjectAmountEntity HouseKris = new ProjectAmountEntity
+        {
+            Id = Guid.Parse("d2c378f0-10d6-4875-bdfe-6cb46d06ada6"),
+            ProjectId = ProjectSeeds.HouseBuilding.Id,
+            UserId = UserSeeds.Kris.Id,
+            Project = ProjectSeeds.HouseBuilding,
+            User = UserSeeds.Kris
+        };
+
         public static void Seed(this ModelBuilder modelBuilder) =>
             modelBuilder.Entity<ProjectAmountEntity>().HasData(
-                SchoolKris with { Project = null, User = null },
                 SchoolAdam with { Project = null, User = null },
+                SchoolKris with { Project = null, User = null },
                 GameJamJohn with { Project = null, User = null },
-                GameJamKris with { Project = null, User = null }
+                GameJamKris with { Project = null, User = null },
+                HouseKris with { Project = null, User = null}
                 );
     }
 }

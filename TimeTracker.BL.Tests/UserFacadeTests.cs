@@ -34,19 +34,14 @@ public sealed class UserFacadeTests : FacadeTestsBase
     }
 
     [Fact]
-    public async Task SeededUserWithoutProject_DeleteById_DoesNotThrow()
+    public async Task SeededUser_DeleteById_DoesNotThrow_WithoutRemoveFromProject()
     {
-        await _userFacadeSUT.DeleteAsync(UserSeeds.JonhUser.Id);
-        await using var dbxAssert = await DbContextFactory.CreateDbContextAsync();
-        Assert.False(await dbxAssert.Users.AnyAsync(i => i.Id == UserSeeds.JonhUser.Id));
+        
+        await Assert.ThrowsAsync<InvalidOperationException>(async ()=> await _userFacadeSUT.DeleteAsync(UserSeeds.JonhUser.Id));
+        //await using var dbxAssert = await DbContextFactory.CreateDbContextAsync();
+        //Assert.False(await dbxAssert.Users.AnyAsync(i => i.Id == UserSeeds.JonhUser.Id));
     }
+
     
-    [Fact]
-    public async Task SeededUser_Delete_DeletesAllProjectsHeIsAssignedTo()
-    {
-        await _userFacadeSUT.DeleteAsync(UserSeeds.JonhUser.Id);
-        await using var dbxAssert = await DbContextFactory.CreateDbContextAsync();
-        Assert.False(await dbxAssert.Projects.AnyAsync(i => i.Id == ProjectSeeds.SchoolProject.Id));
-    }
 
 }

@@ -24,16 +24,20 @@ public class ProjectAmountFacade : FacadeBase<ProjectAmountEntity, ProjectAmount
         : base(unitOfWorkFactory, projectAmountModelMapper) =>
         _projectAmountModelMapper = projectAmountModelMapper;
 
-    public async Task SaveAsync(ProjectAmountDetailModel model)
+    public override async Task<ProjectAmountDetailModel> SaveAsync(ProjectAmountDetailModel model)
     {
-        ProjectAmountEntity entity = _projectAmountModelMapper.MapToEntity(model);
+        var entity = ModelMapper.MapToEntity(model);
 
-        await using IUnitOfWork uow = UnitOfWorkFactory.Create();
-        IRepository<ProjectAmountEntity> repository =
-            uow.GetRepository<ProjectAmountEntity, ProjectAmountEntityMapper>();
+        //var newModel = 
+        //if (await GetAsync(entity.Id) is not null)
+        //{
+        //    throw new InvalidOperationException("This relationship already exist");
+        //}
 
-        await repository.InsertAsync(entity);
-        await uow.CommitAsync();
+        return await base.SaveAsync(model);
     }
+
+
+    //private Task<ProjectAmountDetailModel> GetByProject
 
 }

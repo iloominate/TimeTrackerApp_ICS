@@ -7,6 +7,7 @@ using TimeTracker.Common.Enums;
 using Xunit;
 using Xunit.Abstractions;
 using TimeTracker.Common.Tests;
+using TimeTracker.DAL.Seeds;
 
 namespace TimeTracker.DAL.Tests;
 
@@ -23,7 +24,7 @@ public class DbContextActivityTests : DbContextTestsBase
         var newActivity = new ActivityEntity
         {
             Id = Guid.NewGuid(),
-            //Dont use DateTime.Now!!!!
+            Name = "Test activity",
             Start = new DateTime(2020, 1, 1),
             End = new DateTime(2020, 2, 2),
             Type = ActivityType.Studying,
@@ -63,5 +64,18 @@ public class DbContextActivityTests : DbContextTestsBase
             .SingleAsync(i => i.Id == newActivity.Id);
         DeepAssert.Equal(newActivity, actualEntities);
         
+    }
+
+    [Fact]
+    public async Task DeleteActivityById()
+    {
+        var activity = ActivitySeeds.MovementLogic;
+
+        //TimeTrackerDbContextSUT.Activities.Remove(activity);
+        TimeTrackerDbContextSUT.Activities.Remove(
+            TimeTrackerDbContextSUT.Activities.Single(i => i.Id == activity.Id));
+        await TimeTrackerDbContextSUT.SaveChangesAsync();
+
+        Assert.False(await TimeTrackerDbContextSUT.Activities.AnyAsync(i => i.Id == activity.Id));
     }
 }

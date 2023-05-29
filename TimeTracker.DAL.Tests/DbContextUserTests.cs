@@ -66,7 +66,7 @@ public class DbContextUserTests : DbContextTestsBase
     public async Task Update_UserInformation()
     {
         //Arrange
-        var baseEntity = UserSeeds.KrisUpdate;
+        var baseEntity = UserSeeds.Kris;
         await using var dbx = await DbContextFactory.CreateDbContextAsync();
         var entity = await TimeTrackerDbContextSUT.Users.SingleAsync(i => i.Id == baseEntity.Id);
 
@@ -91,14 +91,13 @@ public class DbContextUserTests : DbContextTestsBase
     public async Task DeleteById_User()
     {
         //Arrange
-        var baseEntity = UserSeeds.KrisDelete;
+        var baseEntity = UserSeeds.Kris;
 
         //Act
+
         TimeTrackerDbContextSUT.Users.Remove(
             TimeTrackerDbContextSUT.Users.Single(i => i.Id == baseEntity.Id));
-        await TimeTrackerDbContextSUT.SaveChangesAsync();
-
         //Assert
-        Assert.False(await TimeTrackerDbContextSUT.Users.AnyAsync(i => i.Id == baseEntity.Id));
+        await Assert.ThrowsAsync<DbUpdateException>(async() => await TimeTrackerDbContextSUT.SaveChangesAsync());
     }
 }

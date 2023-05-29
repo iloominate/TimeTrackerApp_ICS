@@ -23,8 +23,8 @@ namespace TimeTracker.DAL.Seeds
         {
             Id = Guid.Parse("e6790563-6d01-4032-8b3e-3466b4ba43a8"),
             Name = "GAME JAM 2077",
-            Creator = UserSeeds.AdamUser,
-            CreatorId = UserSeeds.AdamUser.Id
+            Creator = UserSeeds.JonhUser,
+            CreatorId = UserSeeds.JonhUser.Id
         };
 
         public static readonly ProjectEntity Startup = new()
@@ -37,7 +37,7 @@ namespace TimeTracker.DAL.Seeds
 
         public static readonly ProjectEntity GrillDay = new()
         {
-            Id = Guid.Parse("72155100-067f-4585-878e-e79335d0a8b0"),
+            Id = Guid.Parse("72e6029a-2294-4e74-96a1-6b57bf648fd5"),
             Name = "Grill day organazation (TeamBuilding)",
             Creator = UserSeeds.JonhUser,
             CreatorId = UserSeeds.JonhUser.Id
@@ -62,12 +62,20 @@ namespace TimeTracker.DAL.Seeds
             GameJam.Users.Add(ProjectAmountSeeds.GameJamJohn);
             GameJam.Activities.Add(ActivitySeeds.LevelDesign);
             GameJam.Activities.Add(ActivitySeeds.MovementLogic);
+
+            HouseBuilding.Users.Add(ProjectAmountSeeds.HouseKris);
+
+            Startup.Activities.Add(ActivitySeeds.WoodChopping);
         }
 
         public static void Seed(ModelBuilder modelBuilder) =>
             modelBuilder.Entity<ProjectEntity>().HasData(
+                HouseBuilding with { Creator = null, Users = Array.Empty<ProjectAmountEntity>(), Activities = Array.Empty<ActivityEntity>() },
+                GrillDay with { Creator = null, Users = Array.Empty<ProjectAmountEntity>(), Activities = Array.Empty<ActivityEntity>() },
+                Startup with { Creator = null, Users = Array.Empty<ProjectAmountEntity>(), Activities = Array.Empty<ActivityEntity>() },
                 SchoolProject with {Creator = null, Users = Array.Empty<ProjectAmountEntity>(), Activities = Array.Empty<ActivityEntity>() },
                 GameJam with { Creator = null, Users = Array.Empty<ProjectAmountEntity>(), Activities = Array.Empty<ActivityEntity>() }
+                
                 );
     }
 }

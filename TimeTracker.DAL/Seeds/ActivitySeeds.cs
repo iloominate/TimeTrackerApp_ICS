@@ -67,8 +67,24 @@ namespace TimeTracker.DAL.Seeds
             ProjectId = ProjectSeeds.SchoolProject.Id
         };
 
+        public static readonly ActivityEntity WoodChopping = new()
+        {
+            Id = Guid.Parse("1848eb4c-9e4a-4aef-840c-7037236c1cc5"),
+            Name = "Chop chop!",
+            Start = DateTime.Parse("01/03/2023 12:00:00"),
+            End = DateTime.Parse("01/03/2023 15:00:00"),
+            Type = ActivityType.Other,
+            Description = "Will go to forest and chop woods",
+            User = UserSeeds.AdamUser,
+            UserId = UserSeeds.AdamUser.Id,
+            Project = ProjectSeeds.Startup,
+            ProjectId = ProjectSeeds.Startup.Id
+
+        };
+
         public static void Seed(ModelBuilder modelBuilder) =>
             modelBuilder.Entity<ActivityEntity>().HasData(
+                WoodChopping with { Project = null, User = null },
                 Generator with { Project = null, User = null},
                 Syntax with { Project = null, User = null },
                 LevelDesign with { Project = null, User = null },

@@ -5,8 +5,6 @@ using System.Text;
 using System.Threading.Tasks;
 using TimeTracker.DAL.Entities;
 using TimeTracker.DAL.Seeds;
-
-using TimeTracker.DAL.Entities;
 using Microsoft.EntityFrameworkCore;
 
 namespace TimeTracker.DAL
@@ -29,33 +27,37 @@ namespace TimeTracker.DAL
             base.OnModelCreating(modelBuilder);
             
             modelBuilder.Entity<UserEntity>()
-                .HasMany<ProjectAmountEntity>(i => i.Projects)
+                .HasMany(i => i.Projects)
                 .WithOne(i => i.User)
                 .OnDelete(DeleteBehavior.Restrict);
-            
+
+            modelBuilder.Entity<UserEntity>()
+                .HasMany(i => i.CreatedProjects)
+                .WithOne(i => i.Creator)
+                .OnDelete(DeleteBehavior.Cascade);
+
+            modelBuilder.Entity<UserEntity>()
+                .HasMany(i => i.Activities)
+                .WithOne(i => i.User)
+                .OnDelete(DeleteBehavior.Cascade);
+
             modelBuilder.Entity<ProjectEntity>()
-                .HasMany<ProjectAmountEntity>(i => i.Users)
+                .HasMany(i => i.Users)
                 .WithOne(i => i.Project)
                 .OnDelete(DeleteBehavior.Cascade);
 
-            modelBuilder.Entity<ActivityEntity>()
-                .HasOne<ProjectEntity>(i => i.Project)
-                .WithMany(i => i.Activities)
-                .HasForeignKey(i => i.ProjectId)
+            modelBuilder.Entity<ProjectEntity>()
+                .HasMany<ActivityEntity>()
+                .WithOne(i => i.Project)
                 .OnDelete(DeleteBehavior.Cascade);
-            
-            modelBuilder.Entity<ActivityEntity>()
-                .HasOne(i => i.User)
-                .WithMany(i => i.Activities)
-                .HasForeignKey(i => i.UserId)
-                .OnDelete(DeleteBehavior.Cascade);
-                
+
             if (!_seedDemoData) return;
             
             UserSeeds.Seed(modelBuilder);   
             ProjectSeeds.Seed(modelBuilder);
             ProjectAmountSeeds.Seed(modelBuilder);
             ActivitySeeds.Seed(modelBuilder);
+
         }
 
     }
