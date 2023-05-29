@@ -40,14 +40,22 @@
                        Text="{Binding Activity.Description}"
                        FontSize="Medium"/>
 
-                <Label Text="there is has to be a name"
-                       Margin="5"
-                       FontSize="20"
-                       Grid.Row="0"
-                       Grid.Column="0"
-                       TextColor="White"
-                       VerticalOptions="Center"
-                       HorizontalOptions="Start"/>
+                <!-- 	<CollectionView Grid.Row="0"
+								Grid.Column="0"
+				                ItemsSource="{Binding Users}"
+				                ItemsLayout="VerticalList">
+					<CollectionView.ItemTemplate>
+						<DataTemplate x:DataType="views:ActivityDetailView">
+
+									<Label Margin="25"
+                                           FontSize="20"
+                                           LineBreakMode="WordWrap"
+                                           Text="{Binding Name}"
+                                           TextColor="White"
+                                           VerticalOptions="End"/>
+                        </DataTemplate>
+					</CollectionView.ItemTemplate>
+				</CollectionView> -->
 
 				<Label Text="{Binding Activity.Type}"
                        HorizontalOptions="End"

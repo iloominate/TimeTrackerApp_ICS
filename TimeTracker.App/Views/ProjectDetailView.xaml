@@ -34,90 +34,91 @@
                    TextColor="White"
                    Text="Choose Activity" />
 
-            <StackLayout Grid.Row="1"
+			<StackLayout Grid.Row="1"
                          Grid.Column="0"
-                         Orientation="Horizontal"
+                         Margin="40, 0, 0, 10"
                          HorizontalOptions="End"
-                         VerticalOptions="End"
-                         Margin="40, 0, 0, 10">
-
+                         VerticalOptions="End">
 				<Label Text="Filter by:"
-                       TextColor="White"
-                       FontSize="16"
+                       Margin="5, 0, 0, 0"
+                       TextColor="Gray"
+                       FontSize="14"
                        VerticalOptions="Center" />
-				<Button Text="Day"
-                        Command="{Binding Source={x:Reference ProjectEditViewRoot}, Path=BindingContext.FilterByDayCommand}"
-                        HorizontalOptions="End"
-                        VerticalOptions="End"
-                        Margin="5"
-                        FontSize="14"
-                        BackgroundColor="#292929"
-                        TextColor="White"
-                        CornerRadius="5"
-                        WidthRequest="80">
+				<StackLayout Orientation="Horizontal">
+					<Button Text="Day"
+                            Command="{Binding Source={x:Reference ProjectEditViewRoot}, Path=BindingContext.FilterByDayCommand}"
+                            HorizontalOptions="End"
+                            VerticalOptions="End"
+                            Margin="5"
+                            FontSize="14"
+                            BackgroundColor="#292929"
+                            TextColor="White"
+                            CornerRadius="5"
+                            WidthRequest="80">
 
-					<Button.Triggers>
-						<Trigger TargetType="Button" Property="IsPressed" Value="True">
-							<Setter Property="BackgroundColor" Value="#151515" />
-							<Setter Property="TextColor" Value="DarkGray"/>
-						</Trigger>
-					</Button.Triggers>
-				</Button>
-				<Button Text="Week"
-                        Command="{Binding Source={x:Reference ProjectEditViewRoot}, Path=BindingContext.FilterByWeekCommand}"
-                        HorizontalOptions="End"
-                        VerticalOptions="End"
-                        Margin="5"
-                        FontSize="14"
-                        BackgroundColor="#292929"
-                        TextColor="White"
-                        CornerRadius="5"
-                        WidthRequest="80">
+						<Button.Triggers>
+							<Trigger TargetType="Button" Property="IsPressed" Value="True">
+								<Setter Property="BackgroundColor" Value="#151515" />
+								<Setter Property="TextColor" Value="DarkGray"/>
+							</Trigger>
+						</Button.Triggers>
+					</Button>
+					<Button Text="Week"
+							Command="{Binding Source={x:Reference ProjectEditViewRoot}, Path=BindingContext.FilterByWeekCommand}"
+							HorizontalOptions="End"
+							VerticalOptions="End"
+							Margin="5"
+							FontSize="14"
+							BackgroundColor="#292929"
+							TextColor="White"
+							CornerRadius="5"
+							WidthRequest="80">
 
-					<Button.Triggers>
-						<Trigger TargetType="Button" Property="IsPressed" Value="True">
-							<Setter Property="BackgroundColor" Value="#151515" />
-							<Setter Property="TextColor" Value="DarkGray"/>
-						</Trigger>
-					</Button.Triggers>
-				</Button>
-				<Button Text="Month"
-                        Command="{Binding Source={x:Reference ProjectEditViewRoot}, Path=BindingContext.FilterByMonthCommand}"
-                        HorizontalOptions="End"
-                        VerticalOptions="End"
-                        Margin="5"
-                        FontSize="13"
-                        BackgroundColor="#292929"
-                        TextColor="White"
-                        CornerRadius="5"
-                        WidthRequest="80">
+						<Button.Triggers>
+							<Trigger TargetType="Button" Property="IsPressed" Value="True">
+								<Setter Property="BackgroundColor" Value="#151515" />
+								<Setter Property="TextColor" Value="DarkGray"/>
+							</Trigger>
+						</Button.Triggers>
+					</Button>
+					<Button Text="Month"
+							Command="{Binding Source={x:Reference ProjectEditViewRoot}, Path=BindingContext.FilterByMonthCommand}"
+							HorizontalOptions="End"
+							VerticalOptions="End"
+							Margin="5"
+							FontSize="13"
+							BackgroundColor="#292929"
+							TextColor="White"
+							CornerRadius="5"
+							WidthRequest="80">
 
-					<Button.Triggers>
-						<Trigger TargetType="Button" Property="IsPressed" Value="True">
-							<Setter Property="BackgroundColor" Value="#151515" />
-							<Setter Property="TextColor" Value="DarkGray"/>
-						</Trigger>
-					</Button.Triggers>
-				</Button>
+						<Button.Triggers>
+							<Trigger TargetType="Button" Property="IsPressed" Value="True">
+								<Setter Property="BackgroundColor" Value="#151515" />
+								<Setter Property="TextColor" Value="DarkGray"/>
+							</Trigger>
+						</Button.Triggers>
+					</Button>
 
-				<Button Text="Year"
-                        Command="{Binding Source={x:Reference ProjectEditViewRoot}, Path=BindingContext.FilterByYearCommand}"
-                        HorizontalOptions="End"
-                        VerticalOptions="End"
-                        Margin="5"
-                        FontSize="14"
-                        BackgroundColor="#292929"
-                        TextColor="White"
-                        CornerRadius="5"
-                        WidthRequest="80">
+					<Button Text="Year"
+							Command="{Binding Source={x:Reference ProjectEditViewRoot}, Path=BindingContext.FilterByYearCommand}"
+							HorizontalOptions="End"
+							VerticalOptions="End"
+							Margin="5"
+							FontSize="14"
+							BackgroundColor="#292929"
+							TextColor="White"
+							CornerRadius="5"
+							WidthRequest="80">
 
-					<Button.Triggers>
-						<Trigger TargetType="Button" Property="IsPressed" Value="True">
-							<Setter Property="BackgroundColor" Value="#151515" />
-							<Setter Property="TextColor" Value="DarkGray"/>
-						</Trigger>
-					</Button.Triggers>
-				</Button>
+						<Button.Triggers>
+							<Trigger TargetType="Button" Property="IsPressed" Value="True">
+								<Setter Property="BackgroundColor" Value="#151515" />
+								<Setter Property="TextColor" Value="DarkGray"/>
+							</Trigger>
+						</Button.Triggers>
+					</Button>
+				</StackLayout>
 			</StackLayout>
 
 
@@ -125,26 +126,60 @@
                          Grid.Column="2"
                          Orientation="Horizontal"
                          Margin="10, 10, 50, 10">
-				<Label Text="From:"
-                       TextColor="White"
-                       FontSize="16"
-                       VerticalOptions="Center" />
-				<DatePicker Date="{Binding Source={x:Reference ProjectEditViewRoot}, Path=BindingContext.StartDate}"
+				<StackLayout>
+					<Label Text="From:"
+                           Margin="5, 0, 0, 0"
+						   TextColor="Gray"
+						   FontSize="14"
+						   VerticalOptions="Center" />
+					<DatePicker Date="{Binding Source={x:Reference ProjectEditViewRoot}, Path=BindingContext.StartDate}"
+								FontSize="14"
+								Margin="5"
+								BackgroundColor="#292929"
+								TextColor="White"
+								WidthRequest="130" />
+				</StackLayout>
+
+				<StackLayout>
+					<Label Text="To:"
+						   Margin="5, 0, 0, 0"
+						   TextColor="Gray"
+						   FontSize="14"
+						   VerticalOptions="Center" />
+					<DatePicker Date="{Binding Source={x:Reference ProjectEditViewRoot}, Path=BindingContext.EndDate}"
+                            
+								FontSize="14"
+								Margin="5"
+								BackgroundColor="#292929"
+								TextColor="White"
+								WidthRequest="130" />
+				</StackLayout>
+				<StackLayout>
+					<Label Text="Type:"
+                           Margin="5, 0, 0, 0"
+                           TextColor="Gray"
+                           FontSize="14"
+                           VerticalOptions="Center" />
+					<Picker x:Name="ActivityPicker"
                             FontSize="14"
                             Margin="5"
                             BackgroundColor="#292929"
                             TextColor="White"
-                            WidthRequest="150" />
-				<Label Text="To:"
-                       TextColor="White"
-                       FontSize="16"
-                       VerticalOptions="Center" />
-				<DatePicker Date="{Binding Source={x:Reference ProjectEditViewRoot}, Path=BindingContext.EndDate}"
-                            FontSize="14"
-                            Margin="5"
-                            BackgroundColor="#292929"
-                            TextColor="White"
-                            WidthRequest="150" />
+                            WidthRequest="106">
+						<Picker.ItemsSource>
+							<x:Array Type="{x:Type x:String}">
+								<x:String>Work</x:String>
+								<x:String>Studying</x:String>
+								<x:String>Break</x:String>
+								<x:String>Lunch</x:String>
+								<x:String>Meeting</x:String>
+								<x:String>Training</x:String>
+								<x:String>Other</x:String>
+							</x:Array>
+						</Picker.ItemsSource>
+					</Picker>
+				</StackLayout>
+
 
 				<Button Text="Apply"
                         Command="{Binding Source={x:Reference ProjectEditViewRoot}, Path=BindingContext.ApplyFilterCommand}"
@@ -190,20 +225,20 @@
                          Orientation="Horizontal"
 >
 				<Label Text="Name"
-					   FontSize="18"
-					   Margin="95,0, 0,0"
+					   FontSize="17"
+					   Margin="96, 3, 0,0"
 					   TextColor="Gray"/>
 				<Label Text="User"
-					   FontSize="18"
-					   Margin="428,0, 0,0"
+					   FontSize="17"
+					   Margin="421,3, 0,0"
 					   TextColor="Gray"/>
 				<Label Text="Start"
-					   FontSize="18"
-					   Margin="110,0, 0,0"
+					   FontSize="17"
+					   Margin="112,3, 0,0"
 					   TextColor="Gray"/>
 				<Label Text="End"
-					   FontSize="18"
-					   Margin="115,0, 0,0"
+					   FontSize="17"
+					   Margin="121,3, 0,0"
 					   TextColor="Gray"/>
 			</StackLayout>
 
@@ -242,10 +277,14 @@
 									<Setter Property="BorderColor" Value="Pink" />
 								</DataTrigger>
 							</Frame.Triggers>
-                            <Grid>
+							<Frame.GestureRecognizers>
+								<TapGestureRecognizer Command="{Binding Source={x:Reference ProjectEditViewRoot}, Path=BindingContext.GoToActivityDetailCommand}"
+                                                      CommandParameter="{Binding Id}" />
+							</Frame.GestureRecognizers>
+							<Grid>
 
 								<Grid.ColumnDefinitions>
-									<ColumnDefinition Width="480" />
+									<ColumnDefinition Width="470" />
 									<ColumnDefinition Width="150" />
 									<ColumnDefinition Width="160" />
 									<ColumnDefinition Width="200" />
@@ -261,13 +300,22 @@
                                        VerticalOptions="Center"
                                        HorizontalOptions="Start"/>
 
-								<Label Text="Bob"
-                                       Margin="15"
-                                       FontSize="20"
-                                       Grid.Column="1"
-                                       TextColor="White"
-                                       VerticalOptions="Center"
-                                       HorizontalOptions="Start"/>
+								<!-- 	<CollectionView Grid.Row="0"
+								Grid.Column="0"
+				                ItemsSource="{Binding Users}"
+				                ItemsLayout="VerticalList">
+					                <CollectionView.ItemTemplate>
+						                <DataTemplate x:DataType="views:ActivityDetailView">
+
+									                <Label Margin="25"
+                                                           FontSize="20"
+                                                           LineBreakMode="WordWrap"
+                                                           Text="{Binding Name}"
+                                                           TextColor="White"
+                                                           VerticalOptions="End"/>
+                                        </DataTemplate>
+					                </CollectionView.ItemTemplate>
+				                </CollectionView> -->
 
 								<Label Text="{Binding Start, StringFormat='{0:dd.MM.yyyy}'}"
                                        Margin="15"
