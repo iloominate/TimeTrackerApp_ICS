@@ -42,6 +42,22 @@ public sealed class UserFacadeTests : FacadeTestsBase
         //Assert.False(await dbxAssert.Users.AnyAsync(i => i.Id == UserSeeds.JonhUser.Id));
     }
 
+    [Fact]
+    public async Task SeededUser_NewUser()
+    {
+        await _userFacadeSUT.DeleteAsync(UserSeeds.NewUser.Id);
+
+        Assert.True(await _userFacadeSUT.GetAsync(UserSeeds.NewUser.Id) is null);
+    }
+
+    [Fact]
+    public async Task SeededUser_WithCreatedProject()
+    {
+        await _userFacadeSUT.DeleteAsync(UserSeeds.UserWithCreatedProject.Id);
+
+        Assert.True(await _userFacadeSUT.GetAsync(UserSeeds.UserWithCreatedProject.Id) is null);
+    }
+
     
 
 }

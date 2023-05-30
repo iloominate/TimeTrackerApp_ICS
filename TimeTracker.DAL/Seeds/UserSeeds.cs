@@ -34,11 +34,26 @@ namespace TimeTracker.DAL.Seeds
             PhotoUrl = "https://images.unsplash.com/photo-1438761681033-6461ffad8d80?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1470&q=80",
         };
 
+        public static readonly UserEntity NewUser = new()
+        {
+            Id = Guid.Parse("9cd38b1e-e53a-45b2-bd7c-60ae5ffbd359"),
+            Name = "New",
+            Surname = "New"
+        };
+
+        public static readonly UserEntity UserWithCreatedProject = new()
+        {
+            Id = Guid.Parse("9cd38b1e-e53a-45b2-bd7c-60ae5ffbd354"),
+            Name = "HaveProject",
+            Surname = "Haha"
+        };
+
+
         static UserSeeds()
         {
             JonhUser.Projects.Add(ProjectAmountSeeds.GameJamJohn);
             JonhUser.Activities.Add(ActivitySeeds.LevelDesign);
-            JonhUser.CreatedProjects.Add(ProjectSeeds.GrillDay);
+            
 
             AdamUser.Projects.Add(ProjectAmountSeeds.SchoolAdam);
             AdamUser.Activities.Add(ActivitySeeds.Generator);
@@ -51,13 +66,17 @@ namespace TimeTracker.DAL.Seeds
             Kris.Activities.Add(ActivitySeeds.MovementLogic);
             Kris.CreatedProjects.Add(ProjectSeeds.SchoolProject);
             Kris.CreatedProjects.Add(ProjectSeeds.HouseBuilding);
+
+            UserWithCreatedProject.CreatedProjects.Add(ProjectSeeds.GrillDay);
         }
 
         public static void Seed(this ModelBuilder modelBuilder) =>
             modelBuilder.Entity<UserEntity>().HasData(
                 JonhUser with { Activities = Array.Empty<ActivityEntity>(), Projects = Array.Empty<ProjectAmountEntity>(), CreatedProjects = Array.Empty<ProjectEntity>() },
                 AdamUser with { Activities = Array.Empty<ActivityEntity>(), Projects = Array.Empty<ProjectAmountEntity>(), CreatedProjects = Array.Empty<ProjectEntity>() },
-                Kris with { Activities = Array.Empty<ActivityEntity>(), Projects = Array.Empty<ProjectAmountEntity>(), CreatedProjects = Array.Empty<ProjectEntity>() }
+                Kris with { Activities = Array.Empty<ActivityEntity>(), Projects = Array.Empty<ProjectAmountEntity>(), CreatedProjects = Array.Empty<ProjectEntity>() },
+                NewUser with { Activities = Array.Empty<ActivityEntity>(), Projects = Array.Empty<ProjectAmountEntity>(), CreatedProjects = Array.Empty<ProjectEntity>() },
+                UserWithCreatedProject with { Activities = Array.Empty<ActivityEntity>(), Projects = Array.Empty<ProjectAmountEntity>(), CreatedProjects = Array.Empty<ProjectEntity>() }
             );
     }
 }

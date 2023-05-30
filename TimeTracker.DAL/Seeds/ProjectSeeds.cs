@@ -39,8 +39,8 @@ namespace TimeTracker.DAL.Seeds
         {
             Id = Guid.Parse("72e6029a-2294-4e74-96a1-6b57bf648fd5"),
             Name = "Grill day organazation (TeamBuilding)",
-            Creator = UserSeeds.JonhUser,
-            CreatorId = UserSeeds.JonhUser.Id
+            Creator = UserSeeds.UserWithCreatedProject,
+            CreatorId = UserSeeds.UserWithCreatedProject.Id
         };
 
         public static readonly ProjectEntity HouseBuilding = new()
