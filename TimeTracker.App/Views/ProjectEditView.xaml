@@ -150,12 +150,13 @@
 						   TextColor="Gray"
 						   FontSize="14"
 						   VerticalOptions="Center" />
-					<DatePicker Date="{Binding Source={x:Reference ProjectEditViewRoot}, Path=BindingContext.StartDate}"
-								FontSize="14"
-								Margin="5"
-								BackgroundColor="#292929"
-								TextColor="White"
-								WidthRequest="130" />
+                    <Entry Placeholder="yyyy/mm/dd hh:mm"
+                           Text="{Binding StartString}"
+                           Margin="5, 5, 0, 0"
+                           MaxLength="16"
+                           BackgroundColor="#292929"
+                           TextColor="White"
+                           WidthRequest="150"/>
 				</StackLayout>
 
                 <StackLayout>
@@ -164,13 +165,13 @@
                        TextColor="Gray"
                        FontSize="14"
                        VerticalOptions="Center" />
-                <DatePicker Date="{Binding Source={x:Reference ProjectEditViewRoot}, Path=BindingContext.EndDate}"
-                            
-                            FontSize="14"
-                            Margin="5"
-                            BackgroundColor="#292929"
-                            TextColor="White"
-                            WidthRequest="130" />
+					<Entry Placeholder="yyyy/mm/dd hh:mm"
+                           Text="{Binding EndString}"
+                           Margin="5, 5, 0, 0"
+                           MaxLength="16"
+                           BackgroundColor="#292929"
+                           TextColor="White"   
+                           WidthRequest="150"/>
                 </StackLayout>
                 <StackLayout>
                     <Label Text="Type:"
@@ -318,22 +319,13 @@
                                        VerticalOptions="Center"
                                        HorizontalOptions="Start"/>
 
-								<!-- 	<CollectionView Grid.Row="0"
-								Grid.Column="0"
-				                ItemsSource="{Binding Users}"
-				                ItemsLayout="VerticalList">
-					                <CollectionView.ItemTemplate>
-						                <DataTemplate x:DataType="views:ActivityDetailView">
-
-									                <Label Margin="25"
-                                                           FontSize="20"
-                                                           LineBreakMode="WordWrap"
-                                                           Text="{Binding Name}"
-                                                           TextColor="White"
-                                                           VerticalOptions="End"/>
-                                        </DataTemplate>
-					                </CollectionView.ItemTemplate>
-				                </CollectionView> -->
+                                <Label Text="Bob"
+                                       Margin="15"
+                                       FontSize="20"
+                                       Grid.Column="1"
+                                       TextColor="White"
+                                       VerticalOptions="Center"
+                                       HorizontalOptions="Start"/>
 
                                 <Label Text="{Binding Start, StringFormat='{0:dd.MM.yyyy}'}"
                                        Margin="15"

@@ -6,7 +6,7 @@
                        x:Class="TimeTracker.App.Views.UserListView"
                        x:DataType="vm:UserListViewModel"
                        x:Name="UserListViewRoot"
-                       NavigationPage.HasNavigationBar="false"
+                       NavigationPage.HasNavigationBar="True"
                        Title="TimeTracker"
                        WidthRequest="1120"
                        HeightRequest="680">
@@ -117,7 +117,8 @@
                 </Trigger>
             </Button.Triggers>
 
-        </Button>
+
+		</Button>
 
 	</Grid>
 
