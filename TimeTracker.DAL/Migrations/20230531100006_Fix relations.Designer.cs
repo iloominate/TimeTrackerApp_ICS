@@ -11,7 +11,7 @@ using TimeTracker.DAL;
 namespace TimeTracker.DAL.Migrations
 {
     [DbContext(typeof(TimeTrackerDbContext))]
-    [Migration("20230529213303_Fix relations")]
+    [Migration("20230531100006_Fix relations")]
     partial class Fixrelations
     {
         /// <inheritdoc />
@@ -159,7 +159,7 @@ namespace TimeTracker.DAL.Migrations
                     b.HasOne("TimeTracker.DAL.Entities.UserEntity", "User")
                         .WithMany("Projects")
                         .HasForeignKey("UserId")
-                        .OnDelete(DeleteBehavior.Restrict)
+                        .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
                     b.Navigation("Project");

@@ -156,7 +156,7 @@ namespace TimeTracker.DAL.Migrations
                     b.HasOne("TimeTracker.DAL.Entities.UserEntity", "User")
                         .WithMany("Projects")
                         .HasForeignKey("UserId")
-                        .OnDelete(DeleteBehavior.Restrict)
+                        .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
                     b.Navigation("Project");

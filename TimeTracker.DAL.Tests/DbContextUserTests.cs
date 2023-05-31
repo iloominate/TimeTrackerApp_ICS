@@ -97,7 +97,11 @@ public class DbContextUserTests : DbContextTestsBase
 
         TimeTrackerDbContextSUT.Users.Remove(
             TimeTrackerDbContextSUT.Users.Single(i => i.Id == baseEntity.Id));
+        await TimeTrackerDbContextSUT.SaveChangesAsync();
+
+
         //Assert
-        await Assert.ThrowsAsync<DbUpdateException>(async() => await TimeTrackerDbContextSUT.SaveChangesAsync());
+        
+        Assert.False(TimeTrackerDbContextSUT.Users.AnyAsync(i => i.Id == baseEntity.Id).Result);
     }
 }

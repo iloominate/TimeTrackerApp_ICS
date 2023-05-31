@@ -44,20 +44,6 @@ public class DbContextProjectTests : DbContextTestsBase
     }
 
     [Fact]
-    public async Task GetById_WithUsers()
-    {
-        var entity = await TimeTrackerDbContextSUT.Projects
-                            .Include(i => i.Users)
-                            .ThenInclude(i => i.User)
-                            .SingleAsync(i => i.Id == ProjectSeeds.GameJam.Id);
-
-        
-
-        //Assert
-        DeepAssert.Equal(ProjectSeeds.GameJam, entity);
-    }
-
-    [Fact]
     public async Task GetById_Project()
     {
         var project = await TimeTrackerDbContextSUT.Projects

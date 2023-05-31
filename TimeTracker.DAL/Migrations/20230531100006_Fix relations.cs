@@ -11,6 +11,10 @@ namespace TimeTracker.DAL.Migrations
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
         {
+            migrationBuilder.DropForeignKey(
+                name: "FK_ProjectAmounts_Users_UserId",
+                table: "ProjectAmounts");
+
             migrationBuilder.AddColumn<Guid>(
                 name: "ProjectEntityId",
                 table: "Activities",
@@ -28,6 +32,14 @@ namespace TimeTracker.DAL.Migrations
                 column: "ProjectEntityId",
                 principalTable: "Projects",
                 principalColumn: "Id");
+
+            migrationBuilder.AddForeignKey(
+                name: "FK_ProjectAmounts_Users_UserId",
+                table: "ProjectAmounts",
+                column: "UserId",
+                principalTable: "Users",
+                principalColumn: "Id",
+                onDelete: ReferentialAction.Cascade);
         }
 
         /// <inheritdoc />
@@ -37,6 +49,10 @@ namespace TimeTracker.DAL.Migrations
                 name: "FK_Activities_Projects_ProjectEntityId",
                 table: "Activities");
 
+            migrationBuilder.DropForeignKey(
+                name: "FK_ProjectAmounts_Users_UserId",
+                table: "ProjectAmounts");
+
             migrationBuilder.DropIndex(
                 name: "IX_Activities_ProjectEntityId",
                 table: "Activities");
@@ -44,6 +60,14 @@ namespace TimeTracker.DAL.Migrations
             migrationBuilder.DropColumn(
                 name: "ProjectEntityId",
                 table: "Activities");
+
+            migrationBuilder.AddForeignKey(
+                name: "FK_ProjectAmounts_Users_UserId",
+                table: "ProjectAmounts",
+                column: "UserId",
+                principalTable: "Users",
+                principalColumn: "Id",
+                onDelete: ReferentialAction.Restrict);
         }
     }
 }
