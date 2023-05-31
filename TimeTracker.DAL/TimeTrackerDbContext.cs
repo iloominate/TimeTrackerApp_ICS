@@ -44,6 +44,7 @@ namespace TimeTracker.DAL
             modelBuilder.Entity<ProjectEntity>()
                 .HasMany(i => i.Users)
                 .WithOne(i => i.Project)
+                .HasForeignKey(i => i.ProjectId)
                 .OnDelete(DeleteBehavior.Cascade);
 
             modelBuilder.Entity<ProjectEntity>()
@@ -57,7 +58,6 @@ namespace TimeTracker.DAL
             ProjectSeeds.Seed(modelBuilder);
             ProjectAmountSeeds.Seed(modelBuilder);
             ActivitySeeds.Seed(modelBuilder);
-
         }
 
     }

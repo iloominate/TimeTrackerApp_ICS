@@ -6,46 +6,99 @@
                        x:Class="TimeTracker.App.Views.ActivityEditView"
                        x:Name="ActivityEditViewRoot"
                        x:DataType="vm:ActivityEditViewModel"
-                       Title="TimeTracker">
-    
-    <StackLayout>
-        <Label Text="Name:"
-               Margin="0,0,0,5 "/>
-        <Entry Placeholder="Activity"
-               Text="{Binding Activity.Name}"
-               Margin="0,0,0,15"
-               MaxLength="100"/>
-        <Label Text="Description:"
-               Margin="0,0,0,5 "/>
-        <Entry Placeholder="Description"
-               Text="{Binding Activity.Description}"
-               Margin="0,0,0,15"
-               MaxLength="500"/>
+                       NavigationPage.HasNavigationBar="false"
+                       Title="TimeTracker"
+                       WidthRequest="1120"
+                       HeightRequest="680">
 
-        <Label Text="Start:"
-               Margin="0,0,0,5 "/>
+    <StackLayout BackgroundColor="Black" >
 
-        <Entry Placeholder="yyyy/mm/dd hh:mm"
-               Text="{Binding StartString}"
-               Margin="0,0,0,15"
-               MaxLength="16"/>
+        <Label Margin="30"
+               FontSize="30"
+               TextColor="White"
+               Text="Enter activity information" />
 
-        <Label Text="End:"
-               Margin="0,0,0,5 "/>
+        <Button Text="Save"
+                Command="{Binding SaveCommand}"
+                HorizontalOptions="End"
+                VerticalOptions="Start"
+                FontSize="20"
+                Margin="0,-60,40,20"
+                BackgroundColor="LimeGreen"
+                TextColor="Black"
+                CornerRadius="10">
+            <Button.Triggers>
+                <Trigger TargetType="Button" Property="IsPressed" Value="True">
+                    <Setter Property="BackgroundColor" Value="#388E3C" />
+                </Trigger>
+            </Button.Triggers>
+        </Button>
 
-        <Entry Placeholder="yyyy/mm/dd hh:mm"
-               Text="{Binding EndString}"
-               Margin="0,0,0,15"
-               MaxLength="16"/>
+        <Label Text="Name:" 
+               FontSize="17" 
+               Margin="100,90,0,5"/>
+        <Entry Placeholder="Name" 
+               Text="{Binding Activity.Name}" 
+               Margin="100,0,100,15" 
+               BackgroundColor="#292929"
+               TextColor="White"
+               MaxLength="100" 
+               FontSize="16"/>
+
+        <Label Text="Description:" 
+               FontSize="17" 
+               Margin="100,0,0,5"/>
+        <Entry Placeholder="Description" 
+               Text="{Binding Activity.Description}" 
+               Margin="100,0,100,15" 
+               BackgroundColor="#292929"
+               TextColor="White"
+               MaxLength="500"  
+               FontSize="16"/>
+
+        <StackLayout Orientation="Horizontal">
+            <StackLayout>
+                <Label Text="Start:" 
+                       FontSize="17" 
+                       Margin="100,0,0,5"/>
+                <Entry Placeholder="yyyy/mm/dd hh:mm" 
+                       Text="{Binding StartString}"
+                       Margin="100,0,0,15" 
+                       BackgroundColor="#292929" 
+                       TextColor="White" 
+                       MaxLength="16" 
+                       FontSize="16"
+                       WidthRequest="170"/>
+            </StackLayout>
+
+            <StackLayout Margin="20,0,0,0">
+                <Label Text="End:" 
+                       FontSize="17" 
+                       Margin="0,0,0,5"/>
+                <Entry Placeholder="yyyy/mm/dd hh:mm" 
+                       Text="{Binding EndString}" 
+                       Margin="0,0,0,15" 
+                       BackgroundColor="#292929" 
+                       TextColor="White" 
+                       MaxLength="16" 
+                       FontSize="16"
+                       WidthRequest="170"/>
+            </StackLayout>
 
 
-        <StackLayout>
-            <Picker SelectedItem="{Binding Activity.Type, Mode=TwoWay}">
+            <StackLayout Margin="450,5,0,0">
+            <Label Text="Type:" 
+                   FontSize="16" 
+                   Margin="0,0,0,5"/>
+            <Picker SelectedItem="{Binding Activity.Type, Mode=TwoWay}" 
+                    FontSize="16"
+                    BackgroundColor="#292929"
+                    TextColor="White">
                 <Picker.ItemsSource>
                     <x:Array Type="{x:Type enums:ActivityType}">
                         <enums:ActivityType>Work</enums:ActivityType>
                         <enums:ActivityType>Studying</enums:ActivityType>
-                        <enums:ActivityType>Break</enums:ActivityType>      
+                        <enums:ActivityType>Break</enums:ActivityType>
                         <enums:ActivityType>Lunch</enums:ActivityType>
                         <enums:ActivityType>Meeting</enums:ActivityType>
                         <enums:ActivityType>Training</enums:ActivityType>
@@ -56,23 +109,10 @@
                     <Binding Converter="{StaticResource ActivityTypeToStringConverter}"/>
                 </Picker.ItemDisplayBinding>
             </Picker>
+            </StackLayout>
+
         </StackLayout>
 
-
-        <Button Text="SAVE"
-                Command="{Binding SaveCommand}"
-                HorizontalOptions="Start" 
-                VerticalOptions="Start" 
-                FontSize="20"
-                Margin="0,20,25,0"
-                BackgroundColor="LimeGreen" 
-                TextColor="Black" 
-                CornerRadius="15">
-            <Button.Triggers>
-                <Trigger TargetType="Button" Property="IsPressed" Value="True">
-                    <Setter Property="BackgroundColor" Value="Green" />
-                </Trigger>
-            </Button.Triggers>
-        </Button>
+        
     </StackLayout>
 </views:ContentPageBase>

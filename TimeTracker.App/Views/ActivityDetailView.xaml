@@ -1,4 +1,3 @@
-<?xml version="1.0" encoding="utf-8" ?>
 <views:ContentPageBase xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
                        xmlns:views="clr-namespace:TimeTracker.App.Views"
                        xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
@@ -6,64 +5,89 @@
                        x:Class="TimeTracker.App.Views.ActivityDetailView"
                        x:DataType="vm:ActivityDetailViewModel"
                        x:Name="ActivityDetailViewRoot"
-                       Title="ActivityDetailView">
+                       NavigationPage.HasNavigationBar="false"
+                       Title="TimeTracker"
+                       WidthRequest="1120"
+                       HeightRequest="680">
 
-    <StackLayout>
-        <Grid Margin="30">
-            <Grid.RowDefinitions>
-                <RowDefinition Height="80"/>
-                <RowDefinition Height="80"/>
-                <RowDefinition Height="80"/>
-            </Grid.RowDefinitions>
+	<StackLayout BackgroundColor="Black">
 
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="400"/>
-                <ColumnDefinition/>
-                <ColumnDefinition Width="70"/>
-                <ColumnDefinition/>
-            </Grid.ColumnDefinitions>
+		<Frame BorderColor="White"
+               CornerRadius="15"
+               Padding="50"
+               Margin="50">
 
-            <Label Text="{Binding Activity.Name}"
-                       VerticalOptions="Center"
-                       FontSize="Header"
-                       Grid.Row="0"
-                       Grid.Column="0"/>
+            <Grid>
+				<Grid.RowDefinitions>
+					<RowDefinition Height="Auto"/>
+					<RowDefinition Height="Auto"/>
+					<RowDefinition Height="Auto"/>
+				</Grid.RowDefinitions>
 
-            <Label Text="{Binding Activity.Start}"
+				<Grid.ColumnDefinitions>
+					<ColumnDefinition Width="600"/>
+					<ColumnDefinition Width="Auto"/>
+				</Grid.ColumnDefinitions>
+
+				<Label Grid.Row="1"
+                       Grid.Column="0"
+                       Text="{Binding Activity.Name}"
                        VerticalOptions="Center"
-                       FontSize="Title"
-                       Grid.Row="0"
-                       Grid.Column="1"/>
-            <Label Text="-"
-                       VerticalOptions="Center"
-                       FontSize="Title"
-                       Grid.Row="0"
-                       Grid.Column="2"/>
-            <Label Text="{Binding Activity.End}"
-                       VerticalOptions="Center"
-                       FontSize="Title"
-                       Grid.Row="0"
-                       Grid.Column="3"/>
-            <Label Text="{Binding Activity.Description}"
+                       FontSize="Header"/>
+
+				<Label Grid.Row="2"
+                       Grid.Column="0"
+                       Text="{Binding Activity.Description}"
+                       FontSize="Medium"/>
+
+                <!-- 	<CollectionView Grid.Row="0"
+								Grid.Column="0"
+				                ItemsSource="{Binding Users}"
+				                ItemsLayout="VerticalList">
+					<CollectionView.ItemTemplate>
+						<DataTemplate x:DataType="views:ActivityDetailView">
+
+									<Label Margin="25"
+                                           FontSize="20"
+                                           LineBreakMode="WordWrap"
+                                           Text="{Binding Name}"
+                                           TextColor="White"
+                                           VerticalOptions="End"/>
+                        </DataTemplate>
+					</CollectionView.ItemTemplate>
+				</CollectionView> -->
+
+				<Label Text="{Binding Activity.Type}"
+                       HorizontalOptions="End"
                        FontSize="Medium"
-                       Grid.Row="3"
-                       Grid.Column="0"/>
-        </Grid>
+                       Margin="5"
+                       Grid.Row="2"
+                       Grid.Column="2"/>
 
-        <Button Text="Edit"
-                    Command="{Binding Source={x:Reference ActivityDetailViewRoot}, Path=BindingContext.GoToEditCommand}"
-                    HorizontalOptions="End" 
-                    VerticalOptions="End" 
-                    Margin="30" 
-                    FontSize="18" 
-                    BackgroundColor="LimeGreen" 
-                    TextColor="Black" 
-                    CornerRadius="15">
-            <Button.Triggers>
-                <Trigger TargetType="Button" Property="IsPressed" Value="True">
-                    <Setter Property="BackgroundColor" Value="Green" />
-                </Trigger>
-            </Button.Triggers>
-        </Button>
-    </StackLayout>
+				<StackLayout Grid.Row="0"
+                             Grid.Column="1"
+                             Orientation="Vertical"
+                             Margin="5">
+					<Label Text="From:" FontSize="Subtitle" TextColor="White"/>
+					<Label Text="{Binding Activity.Start}"
+                           VerticalOptions="Center"
+                           FontSize="Title"
+                           TextColor="White"/>
+				</StackLayout>
+
+				<StackLayout Grid.Row="1"
+                             Grid.Column="1"
+                             Orientation="Vertical"
+                             Margin="5">
+					<Label Text="To:" FontSize="Subtitle" TextColor="White"/>
+					<Label Text="{Binding Activity.End}"
+                           VerticalOptions="Center"
+                           FontSize="Title"
+                           TextColor="White"/>
+
+				</StackLayout>
+			</Grid>
+		</Frame>
+
+	</StackLayout>
 </views:ContentPageBase>

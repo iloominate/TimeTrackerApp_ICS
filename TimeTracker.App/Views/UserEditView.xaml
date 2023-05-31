@@ -4,18 +4,29 @@
                        xmlns:vm="clr-namespace:TimeTracker.App.ViewModels.User"
                        x:DataType="vm:UserEditViewModel"
                        x:Class="TimeTracker.App.Views.UserEditView"
-                       Title="UserEditView">
+                       NavigationPage.HasNavigationBar="false"
+                       Title="TimeTracker"
+                       WidthRequest="1120"
+                       HeightRequest="680">
 
-    <Grid>
-        <Button Text="SAVE"
-                Command="{Binding SaveCommand}"
-                HorizontalOptions="End" 
-                VerticalOptions="Start" 
-                FontSize="20"
-                Margin="0,20,25,0"
-                BackgroundColor="LimeGreen" 
-                TextColor="Black" 
-                CornerRadius="15">
+<Grid BackgroundColor="Black">
+
+    <Label Grid.Row="0"
+           Grid.Column="0"
+           Margin="30"
+           FontSize="30"
+           TextColor="White"
+           Text="Enter user information" />
+
+    <Button Text="Save"
+            Command="{Binding SaveCommand}"
+            HorizontalOptions="End" 
+            VerticalOptions="Start" 
+            FontSize="20"
+            Margin="0,30,35,0"
+            BackgroundColor="LimeGreen" 
+            TextColor="Black" 
+            CornerRadius="15">
             <Button.Triggers>
                 <Trigger TargetType="Button" Property="IsPressed" Value="True">
                     <Setter Property="BackgroundColor" Value="Green" />
@@ -24,7 +35,7 @@
         </Button>
 
         <Frame Padding="0"
-               Margin="65"
+               Margin="200, 190, 0, 0"
                WidthRequest="300"
                HeightRequest="300"
                CornerRadius="25"
@@ -34,28 +45,38 @@
             <Image HorizontalOptions="FillAndExpand" 
                        VerticalOptions="FillAndExpand"
                        Aspect="AspectFill"
-                       WidthRequest="300" HeightRequest="300"
+                       WidthRequest="300" 
+                       HeightRequest="300"
                        Source="{Binding User.PhotoUrl, TargetNullValue='user_place_holder.png'}"/>
         </Frame>
 
         <StackLayout HorizontalOptions="Start"
                      VerticalOptions="Start"
-                     Margin="400,90,0,0">
+                     Margin="550,210,0,0">
             <Label Text="Name:" 
+                   TextColor="White" 
                    Margin="0,0,0,5 "/>
-            <Entry Placeholder="Name" Text="{Binding User.Name}" 
+            <Entry Placeholder="Name" Text="{Binding User.Name}"
+                   BackgroundColor="#292929"
+                   TextColor="White"
                    Margin="0,0,0,15"
                    MaxLength="500"/>
             <Label Text="Surname:"
+                   TextColor="White"
                    Margin="0,0,0,5 "/>
-            <Entry Placeholder="Surname" Text="{Binding User.Surname}" 
+            <Entry Placeholder="Surname" Text="{Binding User.Surname}"
+                   BackgroundColor="#292929"
+                   TextColor="White"
                    Margin="0,0,0,15"
                    MaxLength="500"/>
             <Label Text="Photo URL:"
+                   TextColor="White"
                    Margin="0,0,0,5 "/>
-            <Entry Placeholder="https://example.com/images/photo.png" Text="{Binding User.PhotoUrl}" 
+            <Entry Placeholder="https://example.com/images/photo.png" Text="{Binding User.PhotoUrl}"
+                   BackgroundColor="#292929"
+                   TextColor="White"
                    Margin="0,0,0,15"
-                   MaxLength="500"/>
+                   MaxLength="400"/>
         </StackLayout>
     </Grid>
 </views:ContentPageBase>
