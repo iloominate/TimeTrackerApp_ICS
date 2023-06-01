@@ -12,12 +12,10 @@
 
 	<StackLayout BackgroundColor="Black">
 
-		<Frame BorderColor="White"
+        <Frame BorderColor="White"
                CornerRadius="15"
                Padding="50"
-               Margin="50"
-               HeightRequest="600">
-
+               Margin="50">
             <Grid>
 				<Grid.RowDefinitions>
 					<RowDefinition Height="Auto"/>
@@ -34,32 +32,39 @@
                        Grid.Column="0"
                        Text="{Binding Activity.Name}"
                        VerticalOptions="Center"
-                       FontSize="Header"/>
+                       FontSize="Header"
+                       Margin="0,0,20,0"/>
 
                 <StackLayout>
                     <Label Text="Created by:" 
-                   TextColor="White" 
-                   Margin="0,0,0,5 "/>
+                           TextColor="White" 
+                           Margin="0,0,0,5 "/>  
                     <Label Grid.Row="0"
-                       Grid.Column="0"
-                       Text="{Binding UserOwnerName}"
-                       FontSize="Medium"/>
+                           Grid.Column="0"
+                           Text="{Binding UserOwnerName}"
+                           FontSize="Medium"
+                           Margin="0,0,20,0"/>
                 </StackLayout>
                 
              
                 <Label Grid.Row="3"
                        Grid.Column="0"
                        Text="{Binding Activity.Description}"
-                       FontSize="Medium"/>
-
-				<Label Text="{Binding Activity.Type}"
-                       HorizontalOptions="Start"
                        FontSize="Medium"
-                       Margin="5"
-                       Grid.Row="2"
-                       Grid.Column="2"/>
+                       Margin="0,0,20,0"/>
 
-				<StackLayout Grid.Row="0"
+                <StackLayout Grid.Row="2"
+                             Grid.Column="1"
+                             Orientation="Vertical"
+                             Margin="5">
+                    <Label Text="Actitvity type:" FontSize="Subtitle" TextColor="White"/>
+                    <Label Text="{Binding Activity.Type}"
+                           VerticalOptions="Center"
+                           FontSize="Title"
+                           TextColor="White"/>
+                </StackLayout>
+
+                <StackLayout Grid.Row="0"
                              Grid.Column="1"
                              Orientation="Vertical"
                              Margin="5">

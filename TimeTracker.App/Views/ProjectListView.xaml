@@ -70,123 +70,79 @@
                                BorderColor="White"
                                CornerRadius="20">
                             <Grid>
-                                <Grid.RowDefinitions>
-                                    <RowDefinition Height="Auto" />
-                                    <RowDefinition Height="Auto" />
-                                    <RowDefinition Height="Auto" />
-                                </Grid.RowDefinitions>
-
                                 <Grid.ColumnDefinitions>
-                                    <ColumnDefinition Width="*" />
-                                    <ColumnDefinition Width="Auto" />
-                                    <ColumnDefinition Width="Auto" />
+                                    <ColumnDefinition Width="500" />
+                                    <ColumnDefinition Width="50" />
+                                    <ColumnDefinition Width="50" />
+                                    <ColumnDefinition Width="10" />
+                                    <ColumnDefinition Width="10" />
+                                    <ColumnDefinition Width="100" />
                                 </Grid.ColumnDefinitions>
 
-                                <Label Grid.Row="0"
-                                       Grid.Column="0"
-                                       Margin="20, 20, 50, 15"
+                                <Label Grid.Column="0"
+                                       Margin="10"
                                        FontSize="25"
                                        Text="{Binding Name}"
-                                       TextColor="White"
-                                       VerticalOptions="Start"
-                                       >
+                                       TextColor="White">
                                     <Label.GestureRecognizers>
                                         <TapGestureRecognizer Command="{Binding Source={x:Reference ProjectListViewRoot}, Path=BindingContext.GoToDetailOrEditCommand}"
                                                               CommandParameter="{Binding Id}"/>
                                     </Label.GestureRecognizers>
                                 </Label>
-                                <StackLayout Grid.Row="1"
-                                             Grid.Column="0"
-                                             Orientation="Horizontal">
 
 
-                                    <Button Grid.Row="0"
-                                            Text="Join"
-											Command="{Binding Source={x:Reference ProjectListViewRoot}, Path=BindingContext.JoinCommand}"
-											CommandParameter="{Binding .}"
-                                            Margin="20, 00, 0, 20"
-											WidthRequest="80"
-											CornerRadius="15"
-											BackgroundColor="White"
-											TextColor="Black"
-											FontSize="17"
-											HorizontalOptions="Start">
-                                        <Button.Triggers>
-                                            <Trigger TargetType="Button" Property="IsPressed" Value="True">
-                                                <Setter Property="BackgroundColor" Value="Gray" />
-                                            </Trigger>
-                                        </Button.Triggers>
-                                        <Button.IsVisible>
-                                            <MultiBinding Converter="{StaticResource ProjectJoinIsVisible}"
-                                                      Mode="OneWay">
-                                                <Binding Source="{x:Reference ProjectListViewRoot}" Path="BindingContext.ActiveUser"/>
-                                                <Binding Path="Id"/>
-                                            </MultiBinding>
-                                        </Button.IsVisible>
+                                <Button Grid.Column="5"
+                                        Text="Join"											
+										Command="{Binding Source={x:Reference ProjectListViewRoot}, Path=BindingContext.JoinCommand}"
+										CommandParameter="{Binding .}"
+										WidthRequest="80"
+										CornerRadius="15"
+										BackgroundColor="White"
+										TextColor="Black"
+										FontSize="17">
+                                    <Button.Triggers>
+                                        <Trigger TargetType="Button" Property="IsPressed" Value="True">
+                                            <Setter Property="BackgroundColor" Value="Gray" />
+                                        </Trigger>
+                                    </Button.Triggers>
+                                    <Button.IsVisible>
+                                        <MultiBinding Converter="{StaticResource ProjectJoinIsVisible}"
+                                                    Mode="OneWay">
+                                            <Binding Source="{x:Reference ProjectListViewRoot}" Path="BindingContext.ActiveUser"/>
+                                            <Binding Path="Id"/>
+                                        </MultiBinding>
+                                    </Button.IsVisible>
 
-                                    </Button>
+                                </Button>
 
-                                    <Button Grid.Row="1"
-                                            Grid.Column="0"
+                                <Button Grid.Column="5"
                                             Text="Leave"
 											Command="{Binding Source={x:Reference ProjectListViewRoot}, Path=BindingContext.LeaveCommand}"
-											CommandParameter="{Binding .}"
-                                            Margin="20, 0, 0, 0"											
+											CommandParameter="{Binding .}"									
                                             WidthRequest="80"
 											CornerRadius="15"
 											BackgroundColor="White"
 											TextColor="Black"
-											FontSize="17"
-											HorizontalOptions="Start"
-                                            VerticalOptions="Start">
-                                        <Button.Triggers>
-                                            <Trigger TargetType="Button" Property="IsPressed" Value="True">
-                                                <Setter Property="BackgroundColor" Value="Gray" />
-                                            </Trigger>
-                                        </Button.Triggers>
-                                        <Button.IsVisible>
-                                            <MultiBinding Converter="{StaticResource ProjectLeaveIsVisible}"
+											FontSize="17">
+                                    <Button.Triggers>
+                                        <Trigger TargetType="Button" Property="IsPressed" Value="True">
+                                            <Setter Property="BackgroundColor" Value="Gray" />
+                                        </Trigger>
+                                    </Button.Triggers>
+                                    <Button.IsVisible>
+                                        <MultiBinding Converter="{StaticResource ProjectLeaveIsVisible}"
                                                       Mode="OneWay">
-                                                <Binding Source="{x:Reference ProjectListViewRoot}" Path="BindingContext.ActiveUser"/>
-                                                <Binding Path="Id"/>
-                                            </MultiBinding>
-                                        </Button.IsVisible>
-                                    </Button>
-
-
-                                </StackLayout>
-
-
-
-                                <Image Source="delete_icon.png"
-                                       Grid.Row="0"
-                                       Grid.Column="1"
-                                       WidthRequest="25"
-                                       HeightRequest="25"
-                                       HorizontalOptions="Start"
-                                       VerticalOptions="Start"
-                                       Margin="20">
-                                    <Image.IsVisible>
-                                        <MultiBinding Converter="{StaticResource UserIsProjectOwnerToIsVisibleConverter}"
-                                                      Mode="OneWay">
-                                            <Binding Path="CreatorId"/>
-                                            <Binding Source="{x:Reference ProjectListViewRoot}" Path="BindingContext.ActiveUserId"/>
+                                            <Binding Source="{x:Reference ProjectListViewRoot}" Path="BindingContext.ActiveUser"/>
+                                            <Binding Path="Id"/>
                                         </MultiBinding>
-                                    </Image.IsVisible>
-                                    <Image.GestureRecognizers>
-                                        <TapGestureRecognizer Command="{Binding Source={x:Reference ProjectListViewRoot}, Path=BindingContext.DeleteCommand}"
-                                                              CommandParameter="{Binding Id}" />
-                                    </Image.GestureRecognizers>
-                                </Image>
+                                    </Button.IsVisible>
+                                </Button>
 
                                 <Image Source="edit_icon.png"
-                                       Grid.Row="0"
-                                       Grid.Column="1"
+                                       Margin="10"
+                                       Grid.Column="2"
                                        WidthRequest="25"
-                                       HeightRequest="25"
-                                       HorizontalOptions="Start"
-                                       VerticalOptions="Center"
-                                       Margin="-25, 20, 20, 20">
+                                       HeightRequest="25">
                                     <Image.IsVisible>
                                         <MultiBinding Converter="{StaticResource UserIsProjectOwnerToIsVisibleConverter}"
                                                       Mode="OneWay">
@@ -197,6 +153,23 @@
                                     <Image.GestureRecognizers>
                                         <TapGestureRecognizer Command="{Binding Source={x:Reference ProjectListViewRoot}, Path=BindingContext.GoToProjectEditCommand}"
                                             CommandParameter="{Binding Id}" />
+                                    </Image.GestureRecognizers>
+                                </Image>
+
+                                <Image Source="delete_icon.png"
+                                       Grid.Column="3"
+                                       WidthRequest="25"
+                                       HeightRequest="25">
+                                    <Image.IsVisible>
+                                        <MultiBinding Converter="{StaticResource UserIsProjectOwnerToIsVisibleConverter}"
+                                                      Mode="OneWay">
+                                            <Binding Path="CreatorId"/>
+                                            <Binding Source="{x:Reference ProjectListViewRoot}" Path="BindingContext.ActiveUserId"/>
+                                        </MultiBinding>
+                                    </Image.IsVisible>
+                                    <Image.GestureRecognizers>
+                                        <TapGestureRecognizer Command="{Binding Source={x:Reference ProjectListViewRoot}, Path=BindingContext.DeleteCommand}"
+                                                              CommandParameter="{Binding Id}" />
                                     </Image.GestureRecognizers>
                                 </Image>
                             </Grid>
