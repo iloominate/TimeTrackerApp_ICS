@@ -87,6 +87,12 @@ public partial class ActivityEditViewModel : ViewModelBase, IRecipient<GetActivi
                 Activity.Start = _startDateTime;
                 Activity.End = _endDateTime;
 
+                if (Activity.Name == "") {
+                    await _alertService.DisplayAsync("Activity must have a name",
+                    "Please enter activity name");
+                    return;
+                }
+
                 await _activityFacade.SaveAsync(Activity);
                 MessengerService.Send(new ActivityEditMessage
                 {
