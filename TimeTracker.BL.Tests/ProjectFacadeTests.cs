@@ -34,6 +34,25 @@ public sealed class ProjectFacadeTests : FacadeTestsBase
         DeepAssert.Equal(ProjectModelMapper.MapToListModel(ProjectSeeds.GameJam),project);
     }
 
+    [Fact]
+    public async Task DeleteById_WithoutUsersAndActivities()
+    {
+        //var project = await _projectFacadeSUT.GetAsync(ProjectSeeds.GrillDay.Id);
+        //Assert.Null(project);
+
+        await _projectFacadeSUT.DeleteAsync(ProjectSeeds.GrillDay.Id);
+
+        Assert.True(await _projectFacadeSUT.GetAsync(ProjectSeeds.GrillDay.Id) is null);
+    }
+
+    [Fact]
+    public async Task DeleteById_WithUsersAndActivities()
+    {
+        await _projectFacadeSUT.DeleteAsync(ProjectSeeds.GameJam.Id);
+
+        Assert.True(await _projectFacadeSUT.GetAsync(ProjectSeeds.GameJam.Id) is null);
+    }
+
 
 
 }
