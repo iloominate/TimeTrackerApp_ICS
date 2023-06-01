@@ -145,7 +145,7 @@
                                         </MultiBinding>
                                     </Image.IsVisible>
                                     <Image.GestureRecognizers>
-                                        <TapGestureRecognizer Command="{Binding Source={x:Reference UserListViewRoot}, Path=BindingContext.DeleteCommand}"
+                                        <TapGestureRecognizer Command="{Binding Source={x:Reference ProjectListViewRoot}, Path=BindingContext.DeleteCommand}"
                                                               CommandParameter="{Binding Id}" />
                                     </Image.GestureRecognizers>
                                 </Image>

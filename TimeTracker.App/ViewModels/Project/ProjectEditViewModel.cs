@@ -27,7 +27,8 @@ public partial class ProjectEditViewModel : ViewModelBase,
     IRecipient<ProjectEditMessage>,
     IRecipient<ActivityEditMessage>,
     IRecipient<UserToProjectRemove>,
-    IRecipient<UserToProjectAdd>
+    IRecipient<UserToProjectAdd>,
+    IRecipient<ActivityDeleteMessage>
 {
     private readonly IProjectFacade _projectFacade;
     private readonly IUserFacade _userFacade;
@@ -170,10 +171,10 @@ public partial class ProjectEditViewModel : ViewModelBase,
     }
 
     [RelayCommand]
-    public async void DeleteAsync(ActivityListModel activity)
+    private async Task DeleteAsync(Guid Id)
     {
-        await _activityFacade.DeleteAsync(activity.Id);
-        MessengerService.Send( new ActivityDeleteMessage { ProjectId = ProjectId });
+        await _activityFacade.DeleteAsync(Id);
+        MessengerService.Send( new ActivityDeleteMessage { ProjectId = Id });
     }
     public async void Receive(ProjectEditMessage message)
     {

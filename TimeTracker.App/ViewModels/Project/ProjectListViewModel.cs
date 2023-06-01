@@ -152,6 +152,15 @@ public partial class ProjectListViewModel : ViewModelBase,
         }
     }
 
+    [RelayCommand]
+    private async Task DeleteAsync(Guid Id)
+    {
+        await _projectFacade.DeleteAsync(Id);
+
+        MessengerService.Send(new ProjectDeleteMessage());
+
+    }
+
     public async void Receive(UserToProjectAdd message)
     {
 
