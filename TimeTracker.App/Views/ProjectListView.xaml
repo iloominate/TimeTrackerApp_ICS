@@ -64,7 +64,7 @@
                             VerticalOptions="FillAndExpand">
 				<CollectionView.ItemTemplate>
 					<DataTemplate x:DataType="m:ProjectListModel">
-                        <Frame Margin="150, 10, 150, 10"
+                        <Frame Margin="70, 10, 70, 10"
                                Padding="10"
                                BackgroundColor="Black"
                                BorderColor="White"
@@ -72,7 +72,7 @@
                             <Grid>
                                 <Grid.ColumnDefinitions>
                                     <ColumnDefinition Width="650" />
-                                    <ColumnDefinition Width="60" />
+                                    <ColumnDefinition Width="220" />
                                     <ColumnDefinition Width="80" />
                                 </Grid.ColumnDefinitions>
 

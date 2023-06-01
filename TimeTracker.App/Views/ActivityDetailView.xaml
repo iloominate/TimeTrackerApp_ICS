@@ -57,7 +57,7 @@
                              Grid.Column="1"
                              Orientation="Vertical"
                              Margin="5">
-                    <Label Text="Actitvity type:" FontSize="Subtitle" TextColor="White"/>
+                    <Label Text="Actitvity type:" FontSize="Micro" TextColor="White"/>
                     <Label Text="{Binding Activity.Type}"
                            VerticalOptions="Center"
                            FontSize="Title"
@@ -68,7 +68,7 @@
                              Grid.Column="1"
                              Orientation="Vertical"
                              Margin="5">
-					<Label Text="From:" FontSize="Subtitle" TextColor="White"/>
+					<Label Text="From:" FontSize="Micro" TextColor="White"/>
 					<Label Text="{Binding Activity.Start}"
                            VerticalOptions="Center"
                            FontSize="Title"
@@ -79,7 +79,7 @@
                              Grid.Column="1"
                              Orientation="Vertical"
                              Margin="5">
-					<Label Text="To:" FontSize="Subtitle" TextColor="White"/>
+					<Label Text="To:" FontSize="Micro" TextColor="White"/>
 					<Label Text="{Binding Activity.End}"
                            VerticalOptions="Center"
                            FontSize="Title"

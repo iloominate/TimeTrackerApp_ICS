@@ -303,7 +303,7 @@
                            FontSize="17"
                            Margin="96, 3, 0,0"
                            TextColor="Gray"/>
-                    <Label Text="User"
+                    <Label Text="Type"
                            FontSize="17"                           
                            Margin="301,3, 0,0"
                            TextColor="Gray"/>
@@ -375,7 +375,7 @@
                                        VerticalOptions="Center"
                                        HorizontalOptions="Start"/>
 
-                                <Label Text="Bob"
+                                <Label Text="{Binding Type}"
                                        Margin="15"
                                        FontSize="20"
                                        Grid.Column="1"
