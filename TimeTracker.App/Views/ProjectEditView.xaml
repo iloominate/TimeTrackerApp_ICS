@@ -25,14 +25,16 @@
 			<Grid.RowDefinitions>
 				<RowDefinition Height="Auto" />
 				<RowDefinition Height="Auto" />
-				<RowDefinition Height="*" />
-			</Grid.RowDefinitions>
+				<RowDefinition Height="30" />
+                <RowDefinition Height="*" />
+            </Grid.RowDefinitions>
 
 			<Grid.ColumnDefinitions>
 				<ColumnDefinition Width="Auto" />
 				<ColumnDefinition Width="*" />
 				<ColumnDefinition Width="Auto" />
-			</Grid.ColumnDefinitions>
+                <ColumnDefinition Width="Auto" />
+            </Grid.ColumnDefinitions>
 
 			<Label Grid.Row="0"
                    Grid.Column="0"
@@ -47,7 +49,7 @@
                     Command="{Binding Source={x:Reference ProjectEditViewRoot}, Path=BindingContext.GoToActivityEditCommand}"
                     HorizontalOptions="End"
                     VerticalOptions="End"
-                    Margin="20, 10, 30, 25"
+                    Margin="20, 0, 30, 25"
                     FontSize="18"
                     BackgroundColor="LimeGreen"
                     TextColor="Black"
@@ -58,17 +60,15 @@
 					</Trigger>
 				</Button.Triggers>
 			</Button>
-
 			<StackLayout Grid.Row="1"
                          Grid.Column="0"
-                         Orientation="Horizontal"
+                         Margin="40, 0, 0, 10"
                          HorizontalOptions="End"
-                         VerticalOptions="End"
-                         Margin="50, 0, 0, 10">
-
+                         VerticalOptions="End">
                 <Label Text="Filter by:"
-                       TextColor="White"
-                       FontSize="16"
+                       Margin="5, 0, 0, 0"
+                       TextColor="Gray"
+                       FontSize="14"
                        VerticalOptions="Center" />
                 <Button Text="Day"
                         Command="{Binding Source={x:Reference ProjectEditViewRoot}, Path=BindingContext.FastFilterByTypeCommand}"
@@ -118,12 +118,13 @@
                         CornerRadius="5"
                         WidthRequest="80">
 
-                    <Button.Triggers>
-                        <Trigger TargetType="Button" Property="IsPressed" Value="True">
-                            <Setter Property="BackgroundColor" Value="#151515" />
-                        </Trigger>
-                    </Button.Triggers>
-                </Button>
+						<Button.Triggers>
+							<Trigger TargetType="Button" Property="IsPressed" Value="True">
+								<Setter Property="BackgroundColor" Value="#151515" />
+								<Setter Property="TextColor" Value="DarkGray"/>
+							</Trigger>
+						</Button.Triggers>
+					</Button>
 
                 <Button Text="Year"
                         Command="{Binding Source={x:Reference ProjectEditViewRoot}, Path=BindingContext.FastFilterByTypeCommand}"
@@ -202,22 +203,65 @@
                         CornerRadius="5"
                         WidthRequest="80">
 
-                    <Button.Triggers>
-                        <Trigger TargetType="Button" Property="IsPressed" Value="True">
-                            <Setter Property="BackgroundColor" Value="#151515" />
+					<Button.Triggers>
+						<Trigger TargetType="Button" Property="IsPressed" Value="True">
+							<Setter Property="BackgroundColor" Value="#151515"/>
+                            <Setter Property="TextColor" Value="DarkGray"/>
                         </Trigger>
-                    </Button.Triggers>
-                </Button>
+					</Button.Triggers>
+				</Button>
+
+				<Button Text="Cancel"
+                        Command="{Binding Source={x:Reference ProjectEditViewRoot}, Path=BindingContext.CancelFilterCommand}"
+                        HorizontalOptions="End"
+                        VerticalOptions="End"
+                        Margin="5"
+                        FontSize="14"
+                        BackgroundColor="Red"
+                        TextColor="Black"
+                        CornerRadius="5"
+                        WidthRequest="80">
+
+					<Button.Triggers>
+						<Trigger TargetType="Button" Property="IsPressed" Value="True">
+							<Setter Property="BackgroundColor" Value="DarkRed" />
+						</Trigger>
+					</Button.Triggers>
+				</Button>
+
 			</StackLayout>
 
-			<CollectionView Grid.Row="2"
+			<StackLayout Grid.Row="2" 
+                         Grid.ColumnSpan="3"
+                         Orientation="Horizontal"
+>
+                    <Label Text="Name"
+                           FontSize="17"
+                           Margin="96, 3, 0,0"
+                           TextColor="Gray"/>
+                    <Label Text="User"
+                           FontSize="17"                           
+                           Margin="301,3, 0,0"
+                           TextColor="Gray"/>
+                    <Label Text="Start"
+                           FontSize="17"
+                           Margin="112,3, 0,0"
+                           TextColor="Gray"/>
+                    <Label Text="End"
+                           FontSize="17"
+                           Margin="121,3, 0,0"
+                           TextColor="Gray"/>
+                </StackLayout>
+
+
+			<CollectionView Grid.Row="3"
                             Grid.ColumnSpan="3"
                             ItemsSource="{Binding ActivityList}"
                             VerticalOptions="FillAndExpand">
 
 				<CollectionView.ItemTemplate>
 					<DataTemplate x:DataType="m:ActivityListModel">
-						<Frame Margin="150, 10, 150, 10"
+						<Frame Margin="70, 10, 70, 10"
                                Padding="10"
                                CornerRadius="20">
 							<Frame.Triggers>
@@ -248,17 +292,64 @@
 								<TapGestureRecognizer Command="{Binding Source={x:Reference ProjectEditViewRoot}, Path=BindingContext.GoToActivityDetailCommand}"
                                                       CommandParameter="{Binding Id}" />
 							</Frame.GestureRecognizers>
-							<Grid>
-								<Label Text="{Binding Name}"
-                                       Margin="20"
-                                       FontSize="25"
+                            <Grid>
+
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="350" />
+                                    <ColumnDefinition Width="150" />
+                                    <ColumnDefinition Width="160" />
+                                    <ColumnDefinition Width="200" />
+									<ColumnDefinition Width="Auto" />
+									<ColumnDefinition Width="Auto" />
+								</Grid.ColumnDefinitions>
+
+                                <Label Text="{Binding Name}"
+                                       Margin="15"
+                                       FontSize="24"
                                        Grid.Column="0"
                                        TextColor="White"
-                                       VerticalOptions="Center"/>
+                                       VerticalOptions="Center"
+                                       HorizontalOptions="Start"/>
+
+                                <Label Text="Bob"
+                                       Margin="15"
+                                       FontSize="20"
+                                       Grid.Column="1"
+                                       TextColor="White"
+                                       VerticalOptions="Center"
+                                       HorizontalOptions="Start"/>
+
+                                <Label Text="{Binding Start, StringFormat='{0:dd.MM.yyyy}'}"
+                                       Margin="15"
+                                       FontSize="20"
+                                       Grid.Column="2"
+                                       TextColor="White"
+                                       VerticalOptions="Center"
+                                       HorizontalOptions="Start"/>
+
+                                <Label Text="{Binding End, StringFormat='{0:dd.MM.yyyy}'}"
+                                       Margin="15"
+                                       FontSize="20"
+                                       Grid.Column="3"
+                                       TextColor="White"
+                                       VerticalOptions="Center"
+                                       HorizontalOptions="Start"/>
+
+                                <Image Source="edit_icon.png"
+                                       Grid.Column="4"
+                                       WidthRequest="25"
+                                       HeightRequest="25"
+                                       HorizontalOptions="End"
+                                       VerticalOptions="Center"
+                                       Margin="15">
+                                    <Image.GestureRecognizers>
+                                        <TapGestureRecognizer Command="{Binding Source={x:Reference ProjectEditViewRoot}, Path=BindingContext.GoToActivityEditCommand}"
+                                                              CommandParameter="{Binding Id}" />
+                                    </Image.GestureRecognizers>
+                                </Image>
 
                                 <Image Source="delete_icon.png"
-                                       Grid.Row="0"
-                                       Grid.Column="1"
+                                       Grid.Column="5"
                                        WidthRequest="25"
                                        HeightRequest="25"
                                        HorizontalOptions="End"

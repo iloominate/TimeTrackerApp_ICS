@@ -14,11 +14,10 @@
 
 		<Frame BorderColor="White"
                CornerRadius="15"
-               HasShadow="True"
                Padding="50"
                Margin="50">
 
-			<Grid>
+            <Grid>
 				<Grid.RowDefinitions>
 					<RowDefinition Height="Auto"/>
 					<RowDefinition Height="Auto"/>
@@ -40,6 +39,15 @@
                        Grid.Column="0"
                        Text="{Binding Activity.Description}"
                        FontSize="Medium"/>
+
+                <Label Text="there is has to be a name"
+                       Margin="5"
+                       FontSize="20"
+                       Grid.Row="0"
+                       Grid.Column="0"
+                       TextColor="White"
+                       VerticalOptions="Center"
+                       HorizontalOptions="Start"/>
 
 				<Label Text="{Binding Activity.Type}"
                        HorizontalOptions="End"
@@ -68,6 +76,7 @@
                            VerticalOptions="Center"
                            FontSize="Title"
                            TextColor="White"/>
+
 				</StackLayout>
 			</Grid>
 		</Frame>

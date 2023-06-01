@@ -65,6 +65,7 @@
 						<Frame Margin="150, 10, 150, 10"
                                Padding="10"
                                BackgroundColor="Black"
+                               BorderColor="White"
                                CornerRadius="20">
                             <Frame.GestureRecognizers>
                                 <TapGestureRecognizer Command="{Binding Source={x:Reference ProjectListViewRoot}, Path=BindingContext.GoToDetailOrEditCommand}"
@@ -83,7 +84,7 @@
 
 								<Label Grid.Row="0"
                                        Grid.Column="0"
-                                       Margin="20"
+                                       Margin="20, 20, 50, 15"
                                        FontSize="25"
                                        Text="{Binding Name}"
                                        TextColor="White"
@@ -96,7 +97,7 @@
 									<Button Text="Join"
 											Command="{Binding Source={x:Reference ProjectListViewRoot}, Path=BindingContext.JoinCommand}"
 											CommandParameter="{Binding .}"
-											Margin="6"
+                                            Margin="20, 00, 0, 20"
 											WidthRequest="80"
 											CornerRadius="15"
 											BackgroundColor="White"
@@ -113,8 +114,7 @@
 									<Button Text="Leave"
 											Command="{Binding Source={x:Reference ProjectListViewRoot}, Path=BindingContext.LeaveCommand}"
 											CommandParameter="{Binding .}"
-											Margin="6"
-											WidthRequest="80"
+                                            Margin="15, 0, 0, 20"											WidthRequest="80"
 											CornerRadius="15"
 											BackgroundColor="White"
 											TextColor="Black"
@@ -127,7 +127,7 @@
 										</Button.Triggers>
 									</Button>
 
-								</StackLayout>
+                                </StackLayout>
 
                                 <Image Source="delete_icon.png"
                                        Grid.Row="0"
@@ -147,6 +147,20 @@
                                     <Image.GestureRecognizers>
                                         <TapGestureRecognizer Command="{Binding Source={x:Reference UserListViewRoot}, Path=BindingContext.DeleteCommand}"
                                                               CommandParameter="{Binding Id}" />
+                                    </Image.GestureRecognizers>
+                                </Image>
+
+                                <Image Source="edit_icon.png"
+                                       Grid.Row="0"
+                                       Grid.Column="1"
+                                       WidthRequest="25"
+                                       HeightRequest="25"
+                                       HorizontalOptions="Start"
+                                       VerticalOptions="Center"
+                                       Margin="-25, 20, 20, 20">
+                                    <Image.GestureRecognizers>
+                                        <TapGestureRecognizer Command="{Binding Source={x:Reference ProjectListViewRoot}, Path=BindingContext.GoToUserEditCommand}"
+                                            CommandParameter="{Binding Id}" />
                                     </Image.GestureRecognizers>
                                 </Image>
                             </Grid>

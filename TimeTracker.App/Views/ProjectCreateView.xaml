@@ -9,7 +9,14 @@
                        WidthRequest="1120"
                        HeightRequest="680">
 
-    <Grid BackgroundColor="Black" Margin="0, 0, 0, 0">
+    <Grid BackgroundColor="Black">
+
+        <Label Grid.Row="0"
+               Grid.Column="0"
+               Margin="30"
+               FontSize="30"
+               TextColor="White"
+               Text="Enter project name" />
 
         <Button Text="Save"
                 Command="{Binding SaveCommand}"
@@ -29,7 +36,7 @@
 
         <StackLayout HorizontalOptions="Start"
                      VerticalOptions="Start"
-                     Margin="420,100,0,0">
+                     Margin="250,270,0,0">
             <Label Text="Name:" 
                    TextColor="White" 
                    Margin="0,0,0,5 "/>
@@ -37,7 +44,8 @@
                    BackgroundColor="#292929"
                    TextColor="White"
                    Margin="0,0,0,15"
-                   MaxLength="500"/>
+                   MaxLength="500"
+                   WidthRequest="600"/>
         </StackLayout>
     </Grid>
 </views:ContentPageBase>

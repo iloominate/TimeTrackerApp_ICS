@@ -6,12 +6,12 @@
                        x:Class="TimeTracker.App.Views.UserListView"
                        x:DataType="vm:UserListViewModel"
                        x:Name="UserListViewRoot"
-                       NavigationPage.HasNavigationBar="false"
+                       NavigationPage.HasNavigationBar="True"
                        Title="TimeTracker"
                        WidthRequest="1120"
                        HeightRequest="680">
 
-	<Grid BackgroundColor="Black" Margin="0, 0, 0, 0">
+	<Grid BackgroundColor="Black">
 
 		<Grid HorizontalOptions="StartAndExpand"
               VerticalOptions="StartAndExpand"
@@ -20,21 +20,23 @@
               Margin="{OnIdiom Phone='15, 0'}">
 			<Label Grid.Row="0"
                    FontSize="30"
-                   Margin="30"
+                   Margin="35"
                    TextColor="White"
                    Text="Choose User" />
 
 			<CollectionView Grid.Row="1"
-                            ItemsSource="{Binding Users}"
-							VerticalOptions="FillAndExpand">
-
+							ItemsSource="{Binding Users}"
+							ItemsLayout="HorizontalList"
+							Margin="30, 80, 0, 30">
 				<CollectionView.ItemTemplate>
 					<DataTemplate x:DataType="m:UserListModel">
+
 						<Frame Padding="0"
-							   CornerRadius="25"
-							   WidthRequest="230"
-							   HeightRequest="230"
-							   IsClippedToBounds="True">
+                               Margin="20"
+                               CornerRadius="25"
+                               WidthRequest="230"
+                               HeightRequest="230"
+                               IsClippedToBounds="True">
 							<Frame.GestureRecognizers>
 								<TapGestureRecognizer Command="{Binding Source={x:Reference UserListViewRoot}, Path=BindingContext.GoToProjectListCommand}"
 													  CommandParameter="{Binding Id}" />
@@ -62,38 +64,33 @@
 									   TextColor="White"
 									   VerticalOptions="End"/>
 
-								<Button Text="Edit"
-										Command="{Binding Source={x:Reference UserListViewRoot}, Path=BindingContext.GoToUserEditCommand}"
-										CommandParameter="{Binding Id}"
-										HorizontalOptions="End"
-										VerticalOptions="End"
-										Margin="15"
-										FontSize="13"
-										BackgroundColor="White"
-										TextColor="Black"
-										CornerRadius="15">
-
-									<Button.Triggers>
-										<Trigger TargetType="Button" Property="IsPressed" Value="True">
-											<Setter Property="BackgroundColor" Value="Gray" />
-										</Trigger>
-									</Button.Triggers>
-
-								</Button>
-
-								<Image Source="delete_icon.png"
+                                <Image Source="edit_icon.png"
                                        Grid.Row="0"
                                        Grid.Column="1"
                                        WidthRequest="25"
                                        HeightRequest="25"
                                        HorizontalOptions="Start"
                                        VerticalOptions="Start"
-                                       Margin="20">
-									<Image.GestureRecognizers>
-										<TapGestureRecognizer Command="{Binding Source={x:Reference UserListViewRoot}, Path=BindingContext.DeleteCommand}"
+                                       Margin="22">
+                                    <Image.GestureRecognizers>
+                                        <TapGestureRecognizer Command="{Binding Source={x:Reference UserListViewRoot}, Path=BindingContext.GoToUserEditCommand}"
                                                               CommandParameter="{Binding Id}" />
-									</Image.GestureRecognizers>
-								</Image>
+                                    </Image.GestureRecognizers>
+                                </Image>
+
+                                <Image Source="delete_icon.png"
+                                       Grid.Row="0"
+                                       Grid.Column="1"
+                                       WidthRequest="25"
+                                       HeightRequest="25"
+                                       HorizontalOptions="End"
+                                       VerticalOptions="Start"
+                                       Margin="22">
+                                    <Image.GestureRecognizers>
+                                        <TapGestureRecognizer Command="{Binding Source={x:Reference UserListViewRoot}, Path=BindingContext.DeleteCommand}"
+                                                              CommandParameter="{Binding Id}" />
+                                    </Image.GestureRecognizers>
+                                </Image>
 
 							</Grid>
 						</Frame>
@@ -120,7 +117,8 @@
                 </Trigger>
             </Button.Triggers>
 
-        </Button>
+
+		</Button>
 
 	</Grid>
 
