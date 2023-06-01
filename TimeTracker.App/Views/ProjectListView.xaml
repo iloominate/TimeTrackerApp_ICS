@@ -72,11 +72,11 @@
                             <Grid>
                                 <Grid.ColumnDefinitions>
                                     <ColumnDefinition Width="500" />
-                                    <ColumnDefinition Width="50" />
+                                    <ColumnDefinition Width="120" />
+                                    <ColumnDefinition Width="40" />
+                                    <ColumnDefinition Width="40" />
                                     <ColumnDefinition Width="50" />
                                     <ColumnDefinition Width="10" />
-                                    <ColumnDefinition Width="10" />
-                                    <ColumnDefinition Width="100" />
                                 </Grid.ColumnDefinitions>
 
                                 <Label Grid.Column="0"
