@@ -25,8 +25,9 @@
 			<Grid.RowDefinitions>
 				<RowDefinition Height="Auto" />
 				<RowDefinition Height="Auto" />
-				<RowDefinition Height="30" />
-                <RowDefinition Height="*" />
+				<RowDefinition Height="Auto" />
+                <RowDefinition Height="30" />
+				<RowDefinition Height="*" />
             </Grid.RowDefinitions>
 
 			<Grid.ColumnDefinitions>
@@ -34,7 +35,8 @@
 				<ColumnDefinition Width="*" />
 				<ColumnDefinition Width="Auto" />
                 <ColumnDefinition Width="Auto" />
-            </Grid.ColumnDefinitions>
+                <ColumnDefinition Width="Auto" />
+			</Grid.ColumnDefinitions>
 
 			<Label Grid.Row="0"
                    Grid.Column="0"
@@ -42,6 +44,48 @@
                    FontSize="30"
                    TextColor="White"
                    Text="Choose Activity" />
+
+			    <StackLayout Grid.Row="1"
+                             Grid.Column="0"
+                             Orientation="Horizontal" 
+                             HorizontalOptions="Start" 
+							 Margin="10">
+                    <CollectionView ItemsSource="{Binding UserList}"
+                                    ItemsLayout="HorizontalList"
+                                    Margin="20, 0, 0, 0">
+                        <CollectionView.ItemTemplate>
+                            <DataTemplate x:DataType="m:UserListModel">
+								<Frame Padding="0"
+                                       Margin="20"
+                                       CornerRadius="25"
+                                       WidthRequest="100"
+                                       HeightRequest="100"
+                                       IsClippedToBounds="True">
+                                    <Grid>
+                                        <Image Source="{Binding PhotoUrl, TargetNullValue='user_place_holder.png'}"
+                                               Aspect="AspectFill"
+                                               HeightRequest="100"
+                                               WidthRequest="100"/>
+
+                                        <BoxView Opacity="0.20"
+                                                 Color="Black"/>
+                                        
+                                        <Label Grid.Row="0"
+                                               Margin="10"
+                                               FontSize="15"
+                                               LineBreakMode="WordWrap"
+                                               Text="{Binding Name}"
+                                               TextColor="White"
+                                               VerticalOptions="End"
+                                               HorizontalOptions="Center"/>
+									</Grid>
+								</Frame>
+                            </DataTemplate>
+                        </CollectionView.ItemTemplate>
+
+                </CollectionView>
+
+                </StackLayout>
 
 			<Button Grid.Row="0"
                     Grid.Column="2"
@@ -61,7 +105,7 @@
 				</Button.Triggers>
 			</Button>
 
-            <StackLayout Grid.Row="1"
+            <StackLayout Grid.Row="2"
                          Grid.Column="0"
                          Margin="40, 0, 0, 10"
                          HorizontalOptions="End"
@@ -149,7 +193,7 @@
 			</StackLayout>
             </StackLayout>
 
-			<StackLayout Grid.Row="1"
+			<StackLayout Grid.Row="2"
                          Grid.Column="2"
                          Orientation="Horizontal"
                          Margin="10, 10, 50, 10">
@@ -251,7 +295,7 @@
 
 			</StackLayout>
 
-			<StackLayout Grid.Row="2" 
+			<StackLayout Grid.Row="3" 
                          Grid.ColumnSpan="3"
                          Orientation="Horizontal"
 >
@@ -274,7 +318,7 @@
                 </StackLayout>
 
 
-			<CollectionView Grid.Row="3"
+			<CollectionView Grid.Row="4"
                             Grid.ColumnSpan="3"
                             ItemsSource="{Binding ActivityList}"
                             VerticalOptions="FillAndExpand">
