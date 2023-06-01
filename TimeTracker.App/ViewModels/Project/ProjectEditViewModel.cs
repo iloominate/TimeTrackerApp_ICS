@@ -163,23 +163,34 @@ public partial class ProjectEditViewModel : ViewModelBase,
     {
         DateTime _startDateTime;
         DateTime _finishDateTime;
-        if (DateTime.TryParseExact(FilterStartDate, "yyyy/MM/dd HH:mm", CultureInfo.InvariantCulture, DateTimeStyles.None, out _startDateTime) &&
-                 DateTime.TryParseExact(FilterFinishDate, "yyyy/MM/dd HH:mm", CultureInfo.InvariantCulture, DateTimeStyles.None, out _finishDateTime))
+        if (FilterStartDate == "")
         {
-
-            await base.LoadDataAsync();
-            ActivityList.Clear();
-            IEnumerable<ActivityListModel> activitiesEnumerable = await _activityFacade.GetFilteredAsync(ProjectId, _startDateTime, _finishDateTime, FilterUserId, FilterActivityType);
-            foreach (ActivityListModel act in activitiesEnumerable)
-            {
-                ActivityList.Add(act);
-            }
-        }
-        else
+            _startDateTime = DateTime.MinValue;
+        } else if (!DateTime.TryParseExact(FilterStartDate, "yyyy/MM/dd HH:mm", CultureInfo.InvariantCulture, DateTimeStyles.None, out _startDateTime))
         {
             await _alertService.DisplayAsync("Invalid Date Time format",
                    "DateTime must be in the format 'yyyy/mm/dd hh/mm'");
         }
+
+        if (FilterFinishDate == "")
+        {
+            _finishDateTime = DateTime.MaxValue;
+        } else if (!DateTime.TryParseExact(FilterFinishDate, "yyyy/MM/dd HH:mm", CultureInfo.InvariantCulture, DateTimeStyles.None, out _finishDateTime))
+        {
+            await _alertService.DisplayAsync("Invalid Date Time format",
+                   "DateTime must be in the format 'yyyy/mm/dd hh/mm'");
+        }
+            
+
+        await base.LoadDataAsync();
+
+        ActivityList.Clear();
+
+        IEnumerable<ActivityListModel> activitiesEnumerable = await _activityFacade.GetFilteredAsync(ProjectId, _startDateTime, _finishDateTime, FilterUserId, FilterActivityType);
+        foreach (ActivityListModel act in activitiesEnumerable)
+        {
+            ActivityList.Add(act);
+        }        
     }
 
     [RelayCommand]

@@ -64,7 +64,7 @@
                              Orientation="Vertical"
                              Margin="5">
 					<Label Text="From:" FontSize="Subtitle" TextColor="White"/>
-					<Label Text="{Binding Activity.Start}"
+                    <Label Text="{Binding Activity.Start, StringFormat='{0:HH:mm dd/MM/yyyy}'}"
                            VerticalOptions="Center"
                            FontSize="Title"
                            TextColor="White"/>

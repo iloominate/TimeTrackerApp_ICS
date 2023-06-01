@@ -192,23 +192,24 @@
                            TextColor="Gray"
                            FontSize="14"
                            VerticalOptions="Center" />
-                    <Picker x:Name="ActivityPicker"
-                            FontSize="14"
-                            Margin="5"
-                            BackgroundColor="#292929"
-                            TextColor="White"
-                            WidthRequest="106">
+                    <Picker SelectedItem="{Binding FilterActivityType, Mode=TwoWay}" 
+                    FontSize="16"
+                    BackgroundColor="#292929"
+                    TextColor="White">
                         <Picker.ItemsSource>
-                            <x:Array Type="{x:Type x:String}">
-                                <x:String>Work</x:String>
-                                <x:String>Studying</x:String>
-                                <x:String>Break</x:String>
-                                <x:String>Lunch</x:String>
-                                <x:String>Meeting</x:String>
-                                <x:String>Training</x:String>
-                                <x:String>Other</x:String>
+                            <x:Array Type="{x:Type enums:ActivityType}">
+                                <enums:ActivityType>Work</enums:ActivityType>
+                                <enums:ActivityType>Studying</enums:ActivityType>
+                                <enums:ActivityType>Break</enums:ActivityType>
+                                <enums:ActivityType>Lunch</enums:ActivityType>
+                                <enums:ActivityType>Meeting</enums:ActivityType>
+                                <enums:ActivityType>Training</enums:ActivityType>
+                                <enums:ActivityType>Other</enums:ActivityType>
                             </x:Array>
                         </Picker.ItemsSource>
+                        <Picker.ItemDisplayBinding>
+                            <Binding Converter="{StaticResource ActivityTypeToStringConverter}"/>
+                        </Picker.ItemDisplayBinding>
                     </Picker>
                 </StackLayout>
 
@@ -339,7 +340,7 @@
                                        VerticalOptions="Center"
                                        HorizontalOptions="Start"/>
 
-                                <Label Text="{Binding Start, StringFormat='{0:dd.MM.yyyy}'}"
+                                <Label Text="{Binding Start, StringFormat='{0:yyyy/MM/dd}'}"
                                        Margin="15"
                                        FontSize="20"
                                        Grid.Column="2"
@@ -347,7 +348,7 @@
                                        VerticalOptions="Center"
                                        HorizontalOptions="Start"/>
 
-                                <Label Text="{Binding End, StringFormat='{0:dd.MM.yyyy}'}"
+                                <Label Text="{Binding End, StringFormat='{0:yyyy/MM/dd}'}"
                                        Margin="15 "
                                        FontSize="20"
                                        Grid.Column="3"
