@@ -46,7 +46,7 @@
 			<Button Grid.Row="0"
                     Grid.Column="2"
                     Text="Create Activity"
-                    Command="{Binding Source={x:Reference ProjectEditViewRoot}, Path=BindingContext.GoToActivityEditCommand}"
+                    Command="{Binding Source={x:Reference ProjectEditViewRoot}, Path=BindingContext.GoToActivityCreateCommand}"
                     HorizontalOptions="End"
                     VerticalOptions="End"
                     Margin="20, 0, 30, 25"

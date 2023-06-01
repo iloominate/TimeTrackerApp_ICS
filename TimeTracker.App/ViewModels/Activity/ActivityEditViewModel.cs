@@ -96,7 +96,6 @@ public partial class ActivityEditViewModel : ViewModelBase, IRecipient<GetActivi
                 });
 
                 _navigationService.SendBackButtonPressed();
-                _navigationService.SendBackButtonPressed();
             }
             else
             {

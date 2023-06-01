@@ -97,14 +97,26 @@ public partial class ProjectEditViewModel : ViewModelBase,
     }
 
     [RelayCommand]
-    private async Task GoToActivityEditAsync()
+    private async Task GoToActivityEditAsync(Guid activityId)
+    {
+        Dictionary<string, object?> parametersToPass = new();
+        parametersToPass[nameof(ActivityEditViewModel.ProjectId)] = ProjectId;
+        parametersToPass[nameof(ActivityEditViewModel.ActiveUserId)] = ActiveUserId;
+        parametersToPass[nameof(ActivityEditViewModel.ActivityId)] = activityId;
+
+        await _navigationService.GoToAsync("/createActivity", parametersToPass);
+        MessengerService.Send(new GetActivityMessage()); 
+    }
+
+    [RelayCommand]
+    private async Task GoToActivityCreateAsync()
     {
         Dictionary<string, object?> parametersToPass = new();
         parametersToPass[nameof(ActivityEditViewModel.ProjectId)] = ProjectId;
         parametersToPass[nameof(ActivityEditViewModel.ActiveUserId)] = ActiveUserId;
 
-            await _navigationService.GoToAsync<ActivityEditViewModel>(parametersToPass);
-        MessengerService.Send(new GetActivityMessage()); // ensures that Activity model will be loaded
+        await _navigationService.GoToAsync("/createActivity", parametersToPass);
+        MessengerService.Send(new GetActivityMessage()); 
     }
 
     [RelayCommand]
@@ -174,7 +186,7 @@ public partial class ProjectEditViewModel : ViewModelBase,
     private async Task DeleteAsync(Guid Id)
     {
         await _activityFacade.DeleteAsync(Id);
-        MessengerService.Send( new ActivityDeleteMessage { ProjectId = Id });
+        MessengerService.Send( new ActivityDeleteMessage { ProjectId = ProjectId });
     }
     public async void Receive(ProjectEditMessage message)
     {

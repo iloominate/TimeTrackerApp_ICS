@@ -15,7 +15,8 @@
 		<Frame BorderColor="White"
                CornerRadius="15"
                Padding="50"
-               Margin="50">
+               Margin="50"
+               HeightRequest="600">
 
             <Grid>
 				<Grid.RowDefinitions>
@@ -29,28 +30,30 @@
 					<ColumnDefinition Width="Auto"/>
 				</Grid.ColumnDefinitions>
 
-				<Label Grid.Row="1"
+                <Label Grid.Row="1"
                        Grid.Column="0"
                        Text="{Binding Activity.Name}"
                        VerticalOptions="Center"
                        FontSize="Header"/>
 
-				<Label Grid.Row="2"
+                <StackLayout>
+                    <Label Text="Created by:" 
+                   TextColor="White" 
+                   Margin="0,0,0,5 "/>
+                    <Label Grid.Row="0"
+                       Grid.Column="0"
+                       Text="{Binding UserOwnerName}"
+                       FontSize="Medium"/>
+                </StackLayout>
+                
+             
+                <Label Grid.Row="3"
                        Grid.Column="0"
                        Text="{Binding Activity.Description}"
                        FontSize="Medium"/>
 
-                <Label Text="there is has to be a name"
-                       Margin="5"
-                       FontSize="20"
-                       Grid.Row="0"
-                       Grid.Column="0"
-                       TextColor="White"
-                       VerticalOptions="Center"
-                       HorizontalOptions="Start"/>
-
 				<Label Text="{Binding Activity.Type}"
-                       HorizontalOptions="End"
+                       HorizontalOptions="Start"
                        FontSize="Medium"
                        Margin="5"
                        Grid.Row="2"

@@ -28,6 +28,7 @@ public class NavigationService : INavigationService
         new("//users/projects/createProject", typeof(ProjectCreateView), typeof(ProjectCreateViewModel)),
 
         new("//users/projects/editProject/activity", typeof(ActivityDetailView), typeof(ActivityDetailViewModel)),
+        new("//users/projects/editProject/createActivity", typeof(ActivityEditView), typeof(ActivityEditViewModel)),
         new("//users/projects/editProject/activity/editActivity", typeof(ActivityEditView), typeof(ActivityEditViewModel))
     };
 

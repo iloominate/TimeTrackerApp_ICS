@@ -14,10 +14,12 @@ using Windows.System;
 using CommunityToolkit.Mvvm.Messaging;
 using TimeTracker.BL.Models.ListModels;
 using TimeTracker.BL.Mappers;
+using Windows.Security.EnterpriseData;
 
 namespace TimeTracker.App.ViewModels.Project;
 
 [QueryProperty(nameof(ActiveUserId), nameof(ActiveUserId))]
+[QueryProperty(nameof(ProjectId), nameof(ProjectId))]
 public partial class ProjectCreateViewModel : ViewModelBase
 {
     private readonly IProjectFacade _projectFacade;
@@ -25,8 +27,9 @@ public partial class ProjectCreateViewModel : ViewModelBase
     private readonly IProjectAmountFacade _projectAmountFacade;
     private readonly IProjectAmountModelMapper _projectAmountModelMapper;
 
-    public ProjectDetailModel Project { get; set; } = ProjectDetailModel.Empty;
+    public ProjectDetailModel? Project { get; set; } = ProjectDetailModel.Empty;
     public Guid ActiveUserId { get; set; }
+    public Guid ProjectId { get; set; } = Guid.Empty;
 
     public ProjectCreateViewModel(
         IProjectFacade projectFacade,
@@ -46,40 +49,41 @@ public partial class ProjectCreateViewModel : ViewModelBase
     private async Task SaveAsync()
     {
         
-        var newProjectDetailModel = await _projectFacade.SaveAsync(Project with {
-                                    Id = Guid.Empty,
-                                    CreatorId = ActiveUserId,
-                                    Users = default!,
-                                    Activities = default! });
+        if ( ProjectId  == Guid.Empty ) {
+            var newProjectDetailModel = await _projectFacade.SaveAsync(Project with
+            {
+                Id = Guid.Empty,
+                CreatorId = ActiveUserId,
+                Users = default!,
+                Activities = default!
+            });
 
+            ProjectAmountDetailModel projectAmountDetailModelNew = new()
+            {
+                Id = Guid.NewGuid(),
+                ProjectId = newProjectDetailModel.Id,
+                UserId = ActiveUserId
+            };
+            await _projectAmountFacade.SaveAsync(projectAmountDetailModelNew);
+            MessengerService.Send(new ProjectEditMessage { ProjectId = newProjectDetailModel.Id });
 
-        ProjectAmountDetailModel projectAmountDetailModelNew = new()
+        } else
         {
-            Id = Guid.NewGuid(),
-            ProjectId = newProjectDetailModel.Id,
-            UserId = ActiveUserId
-        };
-        await _projectAmountFacade.SaveAsync(projectAmountDetailModelNew);
-
-
-        MessengerService.Send(new ProjectEditMessage { ProjectId = newProjectDetailModel.Id });
+            await _projectFacade.SaveAsync(Project!);
+            MessengerService.Send(new ProjectEditMessage { ProjectId = Project!.Id });
+        }
 
         _navigationService.SendBackButtonPressed();
     }
 
-    /*private async Task LoadDataAsync()
+    protected override async Task LoadDataAsync()
     {
-        Project = new()
-        {
-            Id = Guid.NewGuid(),
-            Name = "",
-            CreatorId = ActiveUserId
+        await base.LoadDataAsync();
 
-        };
+        if (ProjectId != Guid.Empty )
+        {
+            Project = await _projectFacade.GetAsync(ProjectId);
+        }
     }
-    public async void Receive(ProjectEditMessage message)
-    {
-        await LoadDataAsync();
-    }*/
 
 }
