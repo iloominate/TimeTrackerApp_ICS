@@ -18,7 +18,8 @@ public class ProjectLeaveIsVisible : IMultiValueConverter
             UserDetailModel user = (UserDetailModel)values[0];
             Guid projectId = (Guid)values[1];
 
-            if (user.Projects.Any(project => project.ProjectId == projectId))
+            if (user.Projects.Any(project => project.ProjectId == projectId) 
+                && !user.ProjectsCreared.Any(createdProject => createdProject.Id == projectId))
             {
                 isVisible = true;
                 return isVisible;

@@ -15,6 +15,7 @@ using CommunityToolkit.Mvvm.Messaging;
 using TimeTracker.BL.Models.ListModels;
 using TimeTracker.BL.Mappers;
 using Windows.Security.EnterpriseData;
+using CookBook.App.Services;
 
 namespace TimeTracker.App.ViewModels.Project;
 
@@ -26,6 +27,7 @@ public partial class ProjectCreateViewModel : ViewModelBase
     private readonly INavigationService _navigationService;
     private readonly IProjectAmountFacade _projectAmountFacade;
     private readonly IProjectAmountModelMapper _projectAmountModelMapper;
+    private readonly IAlertService _alertService;
 
     public ProjectDetailModel? Project { get; set; } = ProjectDetailModel.Empty;
     public Guid ActiveUserId { get; set; }
@@ -36,6 +38,7 @@ public partial class ProjectCreateViewModel : ViewModelBase
         INavigationService navigationService,
         IProjectAmountFacade projectAmountFacade,
         IProjectAmountModelMapper projectAmountModelMapper,
+        IAlertService alertService,
         IMessengerService messengerService)
         : base(messengerService)
     {
@@ -43,12 +46,19 @@ public partial class ProjectCreateViewModel : ViewModelBase
         _projectAmountFacade = projectAmountFacade;
         _navigationService = navigationService;
         _projectAmountModelMapper = projectAmountModelMapper;
+        _alertService = alertService;
     }
 
     [RelayCommand]
     private async Task SaveAsync()
     {
-        
+        if (Project.Name == "")
+        {
+            await _alertService.DisplayAsync("Activity must have a name",
+                "Please enter activity name");
+            return;
+        }
+
         if ( ProjectId  == Guid.Empty ) {
             var newProjectDetailModel = await _projectFacade.SaveAsync(Project with
             {
