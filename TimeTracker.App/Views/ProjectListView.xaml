@@ -3,6 +3,7 @@
                        xmlns:vm="clr-namespace:TimeTracker.App.ViewModels.Project"
                        xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
                        xmlns:m="clr-namespace:TimeTracker.BL.Models.ListModels;assembly=TimeTracker.BL"
+                       xmlns:local="clr-namespace:TimeTracker.App"
                        x:Class="TimeTracker.App.Views.ProjectListView"
                        x:DataType="vm:ProjectListViewModel"
                        x:Name="ProjectListViewRoot"
@@ -11,6 +12,12 @@
                        WidthRequest="1120"
                        HeightRequest="680">
 
+    <ContentPage.Resources>
+        <ResourceDictionary>
+            <local:UserIsProjectOwnerToIsVisibleConverter x:Key="UserIsProjectOwnerToIsVisibleConverter" />
+        </ResourceDictionary>
+    </ContentPage.Resources>
+    
 	<ContentPage.Content>
 		<Grid BackgroundColor="Black">
 			<Grid.RowDefinitions>
@@ -130,6 +137,13 @@
                                        HorizontalOptions="Start"
                                        VerticalOptions="Start"
                                        Margin="20">
+                                    <Image.IsVisible>
+                                        <MultiBinding Converter="{StaticResource UserIsProjectOwnerToIsVisibleConverter}"
+                                                      Mode="OneWay">
+                                            <Binding Path="CreatorId"/>
+                                            <Binding Source="{x:Reference ProjectListViewRoot}" Path="BindingContext.ActiveUserId"/>
+                                        </MultiBinding>
+                                    </Image.IsVisible>
                                     <Image.GestureRecognizers>
                                         <TapGestureRecognizer Command="{Binding Source={x:Reference UserListViewRoot}, Path=BindingContext.DeleteCommand}"
                                                               CommandParameter="{Binding Id}" />

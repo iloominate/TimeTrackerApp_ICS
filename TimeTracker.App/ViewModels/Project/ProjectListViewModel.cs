@@ -108,7 +108,7 @@ public partial class ProjectListViewModel : ViewModelBase,
             {
                 await _projectAmountFacade.SaveAsync(projectAmountDetailModelNew);
 
-                ProjectDetailModel projectToJoin = await _projectFacade.GetAsync(projectListModel.Id);
+                ProjectDetailModel? projectToJoin = await _projectFacade.GetAsync(projectListModel.Id);
 
                 if (projectToJoin == null)
                 {

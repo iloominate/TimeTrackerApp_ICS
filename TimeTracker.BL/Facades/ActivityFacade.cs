@@ -27,10 +27,10 @@ public class ActivityFacade : FacadeBase<ActivityEntity, ActivityListModel,
         _activityModelMapper = activityModelMapper;
 
 
-    private void CheckProjectTimeValidate(ActivityDetailModel model)
+    private void CheckProjectTimeValidate(DateTime? start, DateTime? end)
     {
-        if( model.End < model.Start)
-        {
+        if (start.HasValue && end.HasValue && end < start)
+        { 
             throw new Exception("End time must be greater then Start time");
         }
     }
@@ -61,27 +61,30 @@ public class ActivityFacade : FacadeBase<ActivityEntity, ActivityListModel,
 
     public override async Task<ActivityDetailModel> SaveAsync(ActivityDetailModel model)
     {
-        CheckProjectTimeValidate(model);
+        CheckProjectTimeValidate(model.Start, model.End);
         await CheckCrossingBetweenActivities(model);
 
         return await base.SaveAsync(model);
     }
 
-    public async Task<IEnumerable<ActivityListModel>> FilterAsync(DateTime? activityStart = null,
+    public async Task<IEnumerable<ActivityListModel>> GetFilteredAsync(Guid projectId,
+                                                                    DateTime? activityStart = null,
                                                                     DateTime? activityEnd = null,
                                                                     Guid? userId = null,
                                                                     ActivityType? activityType = null)
     {
+        CheckProjectTimeValidate(activityStart, activityEnd);
         await using var uow = UnitOfWorkFactory.Create();
 
-        var query = uow.GetRepository<ActivityEntity, ActivityEntityMapper>().Get()
+        List<ActivityEntity> activities = uow.GetRepository<ActivityEntity, ActivityEntityMapper>().Get()
             .Where(act => 
+            (act.ProjectId == projectId) &&
             (activityStart == null || act.Start >= activityStart) &&
             (activityEnd == null || act.End <= activityEnd) &&
             (userId == null || act.UserId == userId) &&
-            (activityType == null || act.Type == activityType));
+            (activityType == null || act.Type == activityType)).ToList();
 
-        return  ModelMapper.MapToListModel(query);
+        return ModelMapper.MapToListModel(activities);
     }
 
 }

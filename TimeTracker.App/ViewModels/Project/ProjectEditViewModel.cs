@@ -15,6 +15,9 @@ using System.Collections.ObjectModel;
 using TimeTracker.BL.Models.ListModels;
 using System.Diagnostics;
 using TimeTracker.BL.Mappers;
+using TimeTracker.Common.Enums;
+using Windows.Graphics.Printing;
+using System.Globalization;
 
 namespace TimeTracker.App.ViewModels.Project;
 
@@ -31,6 +34,7 @@ public partial class ProjectEditViewModel : ViewModelBase,
     private readonly IActivityFacade _activityFacade;
     private readonly IProjectAmountFacade _projectAmountFacade;
     private readonly IUserModelMapper _userModelMapper;
+    private readonly IAlertService _alertService;
 
 
     private readonly INavigationService _navigationService;
@@ -41,6 +45,11 @@ public partial class ProjectEditViewModel : ViewModelBase,
     public ObservableCollection<UserListModel> UserList { get; set; } = new();
     public ProjectDetailModel? Project { get; set; }
 
+    public string FilterStartDate { get; set; } = "";
+    public string FilterFinishDate { get; set; } = "";
+    public ActivityType? FilterActivityType { get; set; } = null;
+    public Guid? FilterUserId { get; set; } = null;
+
     public ProjectEditViewModel(
         IProjectFacade projectFacade,
         IUserFacade userFacade,
@@ -48,7 +57,8 @@ public partial class ProjectEditViewModel : ViewModelBase,
         IProjectAmountFacade projectAmountFacade,
         INavigationService navigationService,
         IUserModelMapper userModelMapper,
-        IMessengerService messengerService)
+        IMessengerService messengerService,
+        IAlertService alertService)
         : base(messengerService)
     {
         _projectFacade = projectFacade;
@@ -57,8 +67,10 @@ public partial class ProjectEditViewModel : ViewModelBase,
         _projectAmountFacade = projectAmountFacade;
         _navigationService = navigationService;
         _userModelMapper = userModelMapper;
+        _alertService = alertService;
     }
 
+    [RelayCommand]
     protected override async Task LoadDataAsync()
     {
         await base.LoadDataAsync();
@@ -94,6 +106,75 @@ public partial class ProjectEditViewModel : ViewModelBase,
         MessengerService.Send(new GetActivityMessage()); // ensures that Activity model will be loaded
     }
 
+    [RelayCommand]
+    private async Task FastFilterByTypeAsync(FastFilterType type)
+    {
+        switch (type)
+        {
+            case FastFilterType.Day:
+                {
+                    await FastFilterAsync(DateTime.Now.AddHours(-24), DateTime.Now);
+                    break;
+                }
+            case FastFilterType.Week:
+                {
+                    await FastFilterAsync(DateTime.Now.AddDays(-7), DateTime.Now);
+                    break;
+                }
+            case FastFilterType.Month:
+                {
+                    await FastFilterAsync(DateTime.Now.AddDays(-31), DateTime.Now);
+                    break;
+                }
+            case FastFilterType.Year:
+                {
+                    await FastFilterAsync(DateTime.Now.AddDays(-365), DateTime.Now);
+                    break;
+                }
+        }
+    }
+
+    private async Task FastFilterAsync(DateTime start, DateTime finish)
+    {
+        await base.LoadDataAsync();
+        ActivityList.Clear();
+        IEnumerable<ActivityListModel> activitiesEnumerable = await _activityFacade.GetFilteredAsync(ProjectId, start, finish);
+        foreach (ActivityListModel act in activitiesEnumerable)
+        {
+            ActivityList.Add(act);
+        }
+    }
+
+    [RelayCommand]
+    private async Task FilterAsync()
+    {
+        DateTime _startDateTime;
+        DateTime _finishDateTime;
+        if (DateTime.TryParseExact(FilterStartDate, "yyyy/MM/dd HH:mm", CultureInfo.InvariantCulture, DateTimeStyles.None, out _startDateTime) &&
+                 DateTime.TryParseExact(FilterFinishDate, "yyyy/MM/dd HH:mm", CultureInfo.InvariantCulture, DateTimeStyles.None, out _finishDateTime))
+        {
+
+            await base.LoadDataAsync();
+            ActivityList.Clear();
+            IEnumerable<ActivityListModel> activitiesEnumerable = await _activityFacade.GetFilteredAsync(ProjectId, _startDateTime, _finishDateTime, FilterUserId, FilterActivityType);
+            foreach (ActivityListModel act in activitiesEnumerable)
+            {
+                ActivityList.Add(act);
+            }
+        }
+        else
+        {
+            await _alertService.DisplayAsync("Invalid Date Time format",
+                   "DateTime must be in the format 'yyyy/mm/dd hh/mm'");
+        }
+    }
+
+    [RelayCommand]
+    public async void DeleteAsync(ActivityListModel activity)
+    {
+        await _activityFacade.DeleteAsync(activity.Id);
+        MessengerService.Send( new ActivityDeleteMessage { ProjectId = ProjectId });
+    }
     public async void Receive(ProjectEditMessage message)
     {
         if (message.ProjectId == Project?.Id)
@@ -110,6 +191,13 @@ public partial class ProjectEditViewModel : ViewModelBase,
         }
     }
 
+    public async void Receive(ActivityDeleteMessage message)
+    {
+        if (message.ProjectId == ProjectId)
+        {
+            await LoadDataAsync();
+        }
+    }
 
     public async void Receive(UserToProjectAdd message)
     {

@@ -29,9 +29,9 @@ public partial class ActivityEditViewModel : ViewModelBase, IRecipient<GetActivi
     public Guid ActiveUserId { get; set; }
     public Guid ProjectId { get; set; }
 
-    public string StartString { get; set; }
+    public string? StartString { get; set; }
 
-    public string EndString { get; set; }
+    public string? EndString { get; set; }
 
     private DateTime _startDateTime;
     private DateTime _endDateTime;
@@ -94,11 +94,14 @@ public partial class ActivityEditViewModel : ViewModelBase, IRecipient<GetActivi
                     ActivityId = Activity.Id,
 
                 });
+
+                _navigationService.SendBackButtonPressed();
+                _navigationService.SendBackButtonPressed();
             }
             else
             {
-                _alertService.DisplayAsync("Invalid DateTime format",
-                    "DateTime must be in the format 'yyyy/mm/dd hh/mm'");
+                await _alertService.DisplayAsync("Invalid DateTime format",
+                    "DateTime must be in the format 'yyyy/mm/dd hh:mm'");
             }
 
         }
@@ -106,9 +109,6 @@ public partial class ActivityEditViewModel : ViewModelBase, IRecipient<GetActivi
         {
             await _alertService.DisplayAsync("Activity save error", "Activities from one user can't intersect");
         }
-
-        _navigationService.SendBackButtonPressed();
-        _navigationService.SendBackButtonPressed();
     }
 
     public async void Receive(GetActivityMessage message)

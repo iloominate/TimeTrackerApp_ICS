@@ -3,6 +3,8 @@
                        xmlns:vm="clr-namespace:TimeTracker.App.ViewModels.Project"
                        xmlns:m="clr-namespace:TimeTracker.BL.Models.ListModels;assembly=TimeTracker.BL"
                        xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+                       xmlns:enums="clr-namespace:TimeTracker.Common.Enums;assembly=TimeTracker.Common"
+                       xmlns:local="clr-namespace:TimeTracker.App"
                        x:Class="TimeTracker.App.Views.ProjectEditView"
                        x:DataType="vm:ProjectEditViewModel"
                        x:Name="ProjectEditViewRoot"
@@ -11,6 +13,12 @@
                        WidthRequest="1120"
                        HeightRequest="680">
 
+    <ContentPage.Resources>
+        <ResourceDictionary>
+            <local:ActivityDeleteIsVisableConverter x:Key="ActivityDeleteIsVisableConverter" />
+        </ResourceDictionary>
+    </ContentPage.Resources>
+    
 	<ContentPage.Content>
 
         <Grid BackgroundColor="Black">
@@ -63,7 +71,8 @@
                        FontSize="16"
                        VerticalOptions="Center" />
                 <Button Text="Day"
-                        Command="{Binding Source={x:Reference ProjectEditViewRoot}, Path=BindingContext.FilterByDayCommand}"
+                        Command="{Binding Source={x:Reference ProjectEditViewRoot}, Path=BindingContext.FastFilterByTypeCommand}"
+                        CommandParameter="{x:Static enums:FastFilterType.Day}"
                         HorizontalOptions="End"
                         VerticalOptions="End"
                         Margin="5"
@@ -80,7 +89,8 @@
                     </Button.Triggers>
                 </Button>
                 <Button Text="Week"
-                        Command="{Binding Source={x:Reference ProjectEditViewRoot}, Path=BindingContext.FilterByWeekCommand}"
+                        Command="{Binding Source={x:Reference ProjectEditViewRoot}, Path=BindingContext.FastFilterByTypeCommand}"
+                        CommandParameter="{x:Static enums:FastFilterType.Week}"
                         HorizontalOptions="End"
                         VerticalOptions="End"
                         Margin="5"
@@ -97,7 +107,8 @@
                     </Button.Triggers>
                 </Button>
                 <Button Text="Month"
-                        Command="{Binding Source={x:Reference ProjectEditViewRoot}, Path=BindingContext.FilterByMonthCommand}"
+                        Command="{Binding Source={x:Reference ProjectEditViewRoot}, Path=BindingContext.FastFilterByTypeCommand}"
+                        CommandParameter="{x:Static enums:FastFilterType.Month}"
                         HorizontalOptions="End"
                         VerticalOptions="End"
                         Margin="5"
@@ -115,7 +126,8 @@
                 </Button>
 
                 <Button Text="Year"
-                        Command="{Binding Source={x:Reference ProjectEditViewRoot}, Path=BindingContext.FilterByYearCommand}"
+                        Command="{Binding Source={x:Reference ProjectEditViewRoot}, Path=BindingContext.FastFilterByTypeCommand}"
+                        CommandParameter="{x:Static enums:FastFilterType.Year}"
                         HorizontalOptions="End"
                         VerticalOptions="End"
                         Margin="5"
@@ -131,7 +143,26 @@
                         </Trigger>
                     </Button.Triggers>
                 </Button>
-			</StackLayout>
+
+                <Button Text="None"
+                        Command="{Binding Source={x:Reference ProjectEditViewRoot}, Path=BindingContext.LoadDataCommand}"
+                        HorizontalOptions="End"
+                        VerticalOptions="End"
+                        Margin="5"
+                        FontSize="14"
+                        BackgroundColor="#292929"
+                        TextColor="White"
+                        CornerRadius="5"
+                        WidthRequest="80">
+
+                    <Button.Triggers>
+                        <Trigger TargetType="Button" Property="IsPressed" Value="True">
+                            <Setter Property="BackgroundColor" Value="#151515" />
+                        </Trigger>
+                    </Button.Triggers>
+                </Button>
+                
+            </StackLayout>
 			
 
 			<StackLayout Grid.Row="1"
@@ -142,25 +173,26 @@
                        TextColor="White"
                        FontSize="16"
                        VerticalOptions="Center" />
-				<DatePicker Date="{Binding Source={x:Reference ProjectEditViewRoot}, Path=BindingContext.StartDate}"
-                            FontSize="14"
-                            Margin="5"
-                            BackgroundColor="#292929"
-                            TextColor="White"
-                            WidthRequest="150" />
+                <Entry Placeholder="yyyy/mm/dd hh:mm"
+                       Text="{Binding Source={x:Reference ProjectEditViewRoot}, Path=BindingContext.FilterStartDate}"
+                       FontSize="14"
+                       Margin="5"
+                       TextColor="White"
+                       WidthRequest="150"/>
+
 				<Label Text="To:"
                        TextColor="White"
                        FontSize="16"
                        VerticalOptions="Center" />
-				<DatePicker Date="{Binding Source={x:Reference ProjectEditViewRoot}, Path=BindingContext.EndDate}"
-                            FontSize="14"
-                            Margin="5"
-                            BackgroundColor="#292929"
-                            TextColor="White"
-                            WidthRequest="150" />
+                <Entry Placeholder="yyyy/mm/dd hh:mm"
+                       Text="{Binding Source={x:Reference ProjectEditViewRoot}, Path=BindingContext.FilterFinishDate}"
+                       FontSize="14"
+                       Margin="5"
+                       TextColor="White"
+                       WidthRequest="150"/>
 
                 <Button Text="Apply"
-                        Command="{Binding Source={x:Reference ProjectEditViewRoot}, Path=BindingContext.ApplyFilterCommand}"
+                        Command="{Binding Source={x:Reference ProjectEditViewRoot}, Path=BindingContext.FilterCommand}"
                         HorizontalOptions="End"
                         VerticalOptions="End"
                         Margin="5"
@@ -232,6 +264,14 @@
                                        HorizontalOptions="End"
                                        VerticalOptions="Center"
                                        Margin="20">
+                                    <Image.IsVisible>
+                                        <MultiBinding Converter="{StaticResource ActivityDeleteIsVisableConverter}"
+                                                      Mode="OneWay">
+                                            <Binding Source="{x:Reference ProjectEditViewRoot}" Path="BindingContext.ActiveUserId"/>
+                                            <Binding Path="UserId"/>
+                                            <Binding Source="{x:Reference ProjectEditViewRoot}" Path="BindingContext.Project.CreatorId"/>
+                                        </MultiBinding>
+                                    </Image.IsVisible>
                                     <Image.GestureRecognizers>
                                         <TapGestureRecognizer Command="{Binding Source={x:Reference UserListViewRoot}, Path=BindingContext.DeleteCommand}"
                                                               CommandParameter="{Binding Id}" />

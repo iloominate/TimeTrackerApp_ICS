@@ -35,7 +35,7 @@ public partial class UserEditViewModel : ViewModelBase, IRecipient<GetUserMessag
     [RelayCommand]
     private async Task SaveAsync()
     {
-        await _userFacade.SaveAsync(User with { Projects = default! });
+        await _userFacade.SaveAsync(User with { Projects = default!, ProjectsCreared = default!});
 
         MessengerService.Send(new UserEditMessage{ UserId = User.Id });
 
