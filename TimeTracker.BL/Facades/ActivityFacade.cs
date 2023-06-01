@@ -50,7 +50,8 @@ public class ActivityFacade : FacadeBase<ActivityEntity, ActivityListModel,
             .Get()
             .Where(act => act.UserId == model.UserId &&
                 act.Start <= model.End &&
-                act.End >= model.Start)
+                act.End >= model.Start &&
+                act.Id != model.Id)
             .FirstOrDefault();
 
         if(userActivitiesOnThisDay is not null)

@@ -1,4 +1,5 @@
 using Microsoft.EntityFrameworkCore;
+using System.Text.RegularExpressions;
 using TimeTracker.BL.Facades.Interfaces;
 using TimeTracker.BL.Facadesl;
 using TimeTracker.BL.Models.DetailModels;
@@ -36,7 +37,17 @@ public sealed  class ActivityFacadeTests : FacadeTestsBase
         var model = ActivityModelMapper.MapToDetailModel(ActivitySeeds.Generator);
 
         // Assert
-        _ = Assert.ThrowsAsync<DbUpdateException>(() => _activityFacadeSUT.SaveAsync(model));
+        _ = Assert.ThrowsAsync<DbUpdateException>(async () => await _activityFacadeSUT.SaveAsync(model));
+    }
+
+    [Fact]
+    public async Task UpdateActivity_WithYouselfCrossing()
+    {
+        var model = ActivityModelMapper.MapToDetailModel(ActivitySeeds.MovementLogic);
+        model.Start = model.Start.AddHours(1);
+        model.End = model.End.AddHours(1);
+
+        await _activityFacadeSUT.SaveAsync(model);
     }
 
     [Fact]
