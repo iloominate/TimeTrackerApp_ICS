@@ -206,10 +206,7 @@ public partial class ProjectEditViewModel : ViewModelBase,
 
     public async void Receive(ActivityDeleteMessage message)
     {
-        if (message.ProjectId == ProjectId)
-        {
-            await LoadDataAsync();
-        }
+        await LoadDataAsync();
     }
 
     public async void Receive(UserToProjectAdd message)
