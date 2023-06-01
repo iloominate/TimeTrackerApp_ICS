@@ -71,12 +71,9 @@
                                CornerRadius="20">
                             <Grid>
                                 <Grid.ColumnDefinitions>
-                                    <ColumnDefinition Width="500" />
-                                    <ColumnDefinition Width="120" />
-                                    <ColumnDefinition Width="40" />
-                                    <ColumnDefinition Width="40" />
-                                    <ColumnDefinition Width="50" />
-                                    <ColumnDefinition Width="10" />
+                                    <ColumnDefinition Width="650" />
+                                    <ColumnDefinition Width="60" />
+                                    <ColumnDefinition Width="80" />
                                 </Grid.ColumnDefinitions>
 
                                 <Label Grid.Column="0"
@@ -91,11 +88,12 @@
                                 </Label>
 
 
-                                <Button Grid.Column="5"
+                                <Button Grid.Column="2"
                                         Text="Join"											
 										Command="{Binding Source={x:Reference ProjectListViewRoot}, Path=BindingContext.JoinCommand}"
 										CommandParameter="{Binding .}"
 										WidthRequest="80"
+                                        HeightRequest="50"
 										CornerRadius="15"
 										BackgroundColor="White"
 										TextColor="Black"
@@ -115,11 +113,12 @@
 
                                 </Button>
 
-                                <Button Grid.Column="5"
+                                <Button Grid.Column="2"
                                             Text="Leave"
 											Command="{Binding Source={x:Reference ProjectListViewRoot}, Path=BindingContext.LeaveCommand}"
 											CommandParameter="{Binding .}"									
                                             WidthRequest="80"
+                                            HeightRequest="50"
 											CornerRadius="15"
 											BackgroundColor="White"
 											TextColor="Black"
@@ -142,7 +141,8 @@
                                        Margin="10"
                                        Grid.Column="2"
                                        WidthRequest="25"
-                                       HeightRequest="25">
+                                       HeightRequest="25"
+                                       HorizontalOptions="Start">
                                     <Image.IsVisible>
                                         <MultiBinding Converter="{StaticResource UserIsProjectOwnerToIsVisibleConverter}"
                                                       Mode="OneWay">
@@ -157,9 +157,10 @@
                                 </Image>
 
                                 <Image Source="delete_icon.png"
-                                       Grid.Column="3"
+                                       Grid.Column="2"
                                        WidthRequest="25"
-                                       HeightRequest="25">
+                                       HeightRequest="25"
+                                       HorizontalOptions="End">
                                     <Image.IsVisible>
                                         <MultiBinding Converter="{StaticResource UserIsProjectOwnerToIsVisibleConverter}"
                                                       Mode="OneWay">
