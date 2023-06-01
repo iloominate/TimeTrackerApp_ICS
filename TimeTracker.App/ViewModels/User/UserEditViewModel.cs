@@ -25,17 +25,26 @@ public partial class UserEditViewModel : ViewModelBase, IRecipient<GetUserMessag
     public UserEditViewModel(
         IUserFacade userFacade,
         INavigationService navigationService,
+        IAlertService alertService,
         IMessengerService messengerService)
         : base(messengerService)
     {
         _userFacade = userFacade;
         _navigationService = navigationService;
+        _alertService = alertService;
     }
 
     [RelayCommand]
     private async Task SaveAsync()
     {
-        await _userFacade.SaveAsync(User with { Projects = default!, ProjectsCreared = default!});
+        if (User.Name == "")
+        {
+            await _alertService.DisplayAsync("User must have a name",
+            "Please enter users name");
+            return;
+        }
+
+        await _userFacade.SaveAsync(User with { Projects = default!, ProjectsCreared = default! });
 
         MessengerService.Send(new UserEditMessage{ UserId = User.Id });
 
@@ -48,8 +57,9 @@ public partial class UserEditViewModel : ViewModelBase, IRecipient<GetUserMessag
         await LoadDataAsync();
     }
 
-    private async Task LoadDataAsync()
+    protected override async Task LoadDataAsync()
     {
+        await base.LoadDataAsync();
         User = await _userFacade.GetAsync(UserId);
         if (User == null)
         {

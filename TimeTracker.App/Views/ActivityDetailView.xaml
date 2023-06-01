@@ -64,7 +64,7 @@
                              Orientation="Vertical"
                              Margin="5">
 					<Label Text="From:" FontSize="Subtitle" TextColor="White"/>
-                    <Label Text="{Binding Activity.Start, StringFormat='{0:HH:mm dd/MM/yyyy}'}"
+                    <Label Text="{Binding Activity.Start, StringFormat='{0:dd/MM/yyyy HH:mm}'}"
                            VerticalOptions="Center"
                            FontSize="Title"
                            TextColor="White"/>
@@ -75,7 +75,7 @@
                              Orientation="Vertical"
                              Margin="5">
 					<Label Text="To:" FontSize="Subtitle" TextColor="White"/>
-					<Label Text="{Binding Activity.End}"
+                    <Label Text="{Binding Activity.End, StringFormat='{0:dd/MM/yyyy HH:mm}'}"
                            VerticalOptions="Center"
                            FontSize="Title"
                            TextColor="White"/>

@@ -50,7 +50,7 @@ public partial class ActivityEditViewModel : ViewModelBase, IRecipient<GetActivi
         _navigationService = navigationService;
     }
 
-    private async Task LoadDataAsync()
+    protected override async Task LoadDataAsync()
     {
         await base.LoadDataAsync();
 
@@ -110,7 +110,7 @@ public partial class ActivityEditViewModel : ViewModelBase, IRecipient<GetActivi
             }
 
         }
-        catch (Exception e)
+        catch
         {
             await _alertService.DisplayAsync("Activity save error", "Activities from one user can't intersect");
         }

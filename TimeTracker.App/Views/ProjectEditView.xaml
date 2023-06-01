@@ -41,7 +41,7 @@
                    Margin="30"
                    FontSize="30"
                    TextColor="White"
-                   Text="Choose Activity" />
+                   Text="List of Activities" />
 
 			<Button Grid.Row="0"
                     Grid.Column="2"

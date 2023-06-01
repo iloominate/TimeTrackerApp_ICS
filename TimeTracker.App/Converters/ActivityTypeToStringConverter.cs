@@ -6,7 +6,7 @@ using System.Text;
 using System.Threading.Tasks;
 using CommunityToolkit.Maui.Converters;
 using TimeTracker.Common.Enums;
-using System.Globalization;
+
 
 namespace TimeTracker.App.Converters;
 

@@ -93,7 +93,7 @@ public partial class ProjectEditViewModel : ViewModelBase,
         parametersToPass[nameof(ActivityDetailViewModel.ActiveUserId)] = ActiveUserId;
 
         await _navigationService.GoToAsync<ActivityDetailViewModel>(parametersToPass);
-        MessengerService.Send(new GetActivityMessage()); // ensures that Activity model will be loaded
+        MessengerService.Send(new GetActivityMessage());
     }
 
     [RelayCommand]

@@ -82,7 +82,8 @@ public partial class ProjectListViewModel : ViewModelBase,
     [RelayCommand]
     private async Task GoToDetailOrEditAsync(Guid projectId)
     {
-        UserDetailModel userToJoin = await _userFacade.GetAsync(ActiveUserId);
+        UserDetailModel? userToJoin = await _userFacade.GetAsync(ActiveUserId);
+
         if (userToJoin.Projects.Any(p => p.ProjectId == projectId))
         {
             Dictionary<string, object?> parametersToPass = new();
@@ -135,7 +136,7 @@ public partial class ProjectListViewModel : ViewModelBase,
             )
         {
 
-            UserDetailModel activeUser = await _userFacade.GetAsync(ActiveUserId);
+            UserDetailModel? activeUser = await _userFacade.GetAsync(ActiveUserId);
 
             ProjectAmountListModel? projectAmountToDelete = activeUser.Projects.SingleOrDefault<ProjectAmountListModel>(u => u.UserId == activeUser.Id && u.ProjectId == projectListModel.Id);
             

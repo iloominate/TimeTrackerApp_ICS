@@ -30,7 +30,7 @@ public partial class ActivityDetailViewModel : ViewModelBase, IRecipient<Activit
 
     public ActivityDetailModel? Activity { get; private set; }
 
-    public String UserOwnerName { get; set; }
+    public String UserOwnerName { get; set; } = "";
 
     public ActivityDetailViewModel (
         IActivityFacade activityFacade,
