@@ -238,6 +238,23 @@
                          Grid.ColumnSpan="3"
                          Orientation="Horizontal"
 >
+				<Label Text="Name"
+					   FontSize="17"
+					   Margin="96, 3, 0,0"
+					   TextColor="Gray"/>
+				<Label Text="Type"
+					   FontSize="17"
+					   Margin="451,3, 0,0"
+					   TextColor="Gray"/>
+				<Label Text="Start"
+					   FontSize="17"
+					   Margin="112,3, 0,0"
+					   TextColor="Gray"/>
+				<Label Text="End"
+					   FontSize="17"
+					   Margin="121,3, 0,0"
+					   TextColor="Gray"/>
+			</StackLayout>
                 <Label Text="Name"
                            FontSize="17"
                            Margin="96, 3, 0,0"
@@ -293,14 +310,14 @@
                             </Frame.Triggers>
                             <Grid>
 
-                                <Grid.ColumnDefinitions>
-                                    <ColumnDefinition Width="350" />
-                                    <ColumnDefinition Width="150" />
-                                    <ColumnDefinition Width="160" />
-                                    <ColumnDefinition Width="200" />
-                                    <ColumnDefinition Width="Auto" />
-                                    <ColumnDefinition Width="Auto" />
-                                </Grid.ColumnDefinitions>
+								<Grid.ColumnDefinitions>
+									<ColumnDefinition Width="500" />
+									<ColumnDefinition Width="150" />
+									<ColumnDefinition Width="160" />
+									<ColumnDefinition Width="200" />
+									<ColumnDefinition Width="Auto" />
+									<ColumnDefinition Width="Auto" />
+								</Grid.ColumnDefinitions>
 
                                 <Label Text="{Binding Name}"
                                        Margin="15"
@@ -310,7 +327,7 @@
                                        VerticalOptions="Center"
                                        HorizontalOptions="Start"/>
 
-                                <Label Text="Bob"
+								<Label Text="{Binding Type}"
                                        Margin="15"
                                        FontSize="20"
                                        Grid.Column="1"

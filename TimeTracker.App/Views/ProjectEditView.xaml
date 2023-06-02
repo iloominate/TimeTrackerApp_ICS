@@ -31,18 +31,53 @@
             </Grid.RowDefinitions>
 
 			<Grid.ColumnDefinitions>
-				<ColumnDefinition Width="Auto" />
 				<ColumnDefinition Width="*" />
-				<ColumnDefinition Width="Auto" />
+				<ColumnDefinition Width="*" />
+				<ColumnDefinition Width="*" />
                 <ColumnDefinition Width="Auto" />
             </Grid.ColumnDefinitions>
 
-			<Label Grid.Row="0"
-                   Grid.Column="0"
-                   Margin="30"
-                   FontSize="30"
-                   TextColor="White"
-                   Text="List of Activities" />
+			    <StackLayout Grid.Row="0"
+                             Grid.Column="0"
+                             Orientation="Horizontal" 
+                             HorizontalOptions="Start" 
+							 Margin="10">
+					<CollectionView ItemsSource="{Binding UserList}"
+                                    ItemsLayout="HorizontalList">
+						<CollectionView.ItemTemplate>
+							<DataTemplate x:DataType="m:UserListModel">
+								<Frame Padding="0"
+                                       Margin="5"
+                                       CornerRadius="25"
+                                       WidthRequest="100"
+                                       HeightRequest="100"
+                                       IsClippedToBounds="True">
+									<Grid>
+										<Image 
+                                               Source="{Binding PhotoUrl, TargetNullValue='user_place_holder.png'}"
+                                               Aspect="AspectFill"
+                                               HeightRequest="100"
+                                               WidthRequest="100"/>
+
+										<BoxView Opacity="0.20"
+                                                 Color="Black"/>
+
+										<Label Grid.Row="0"
+                                               Margin="10"
+                                               FontSize="15"
+                                               LineBreakMode="WordWrap"
+                                               Text="{Binding Name}"
+                                               TextColor="White"
+                                               VerticalOptions="End"
+                                               HorizontalOptions="Center"/>
+									</Grid>
+								</Frame>
+							</DataTemplate>
+						</CollectionView.ItemTemplate>
+
+					</CollectionView>
+
+                </StackLayout>
 
 			<Button Grid.Row="0"
                     Grid.Column="2"
@@ -151,9 +186,9 @@
             </StackLayout>
 
 			<StackLayout Grid.Row="1"
-                         Grid.Column="2"
+                         Grid.Column="1"
                          Orientation="Horizontal"
-                         Margin="10, 10, 50, 10">
+                         Margin="100, 10, 50, 10">
 
                 <StackLayout>
                     <Label Text="From:"
@@ -261,7 +296,7 @@
                            FontSize="17"
                            Margin="96, 3, 0,0"
                            TextColor="Gray"/>
-                    <Label Text="User"
+                    <Label Text="Type"
                            FontSize="17"                           
                            Margin="301,3, 0,0"
                            TextColor="Gray"/>
@@ -310,7 +345,7 @@
                                        VerticalOptions="Center"
                                        HorizontalOptions="Start"/>
 
-                                <Label Text="Bob"
+                                <Label Text="{Binding Type}"
                                        Margin="15"
                                        FontSize="20"
                                        Grid.Column="1"

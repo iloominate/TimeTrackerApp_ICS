@@ -39,12 +39,12 @@
                      Margin="250,270,0,0">
             <Label Text="Name:" 
                    TextColor="White" 
-                   Margin="0,0,0,5 "/>
-            <Entry Placeholder="Name" Text="{Binding Project.Name}"
+                   Margin="3,0,0,5 "/>
+            <Entry Placeholder="Enter project name" Text="{Binding Project.Name}"
                    BackgroundColor="#292929"
                    TextColor="White"
                    Margin="0,0,0,15"
-                   MaxLength="500"
+                   MaxLength="25"
                    WidthRequest="600"/>
         </StackLayout>
     </Grid>
