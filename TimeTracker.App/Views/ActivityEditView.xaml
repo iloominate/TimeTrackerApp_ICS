@@ -42,7 +42,7 @@
                Margin="100,0,100,15" 
                BackgroundColor="#292929"
                TextColor="White"
-               MaxLength="100" 
+               MaxLength="20" 
                FontSize="16"/>
 
         <Label Text="Description:" 
