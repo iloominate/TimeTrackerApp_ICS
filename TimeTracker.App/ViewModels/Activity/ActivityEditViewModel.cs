@@ -84,6 +84,10 @@ public partial class ActivityEditViewModel : ViewModelBase, IRecipient<GetActivi
             if (DateTime.TryParseExact(StartString, "yyyy/MM/dd HH:mm", CultureInfo.InvariantCulture, DateTimeStyles.None, out _startDateTime) &&
                  DateTime.TryParseExact(EndString, "yyyy/MM/dd HH:mm", CultureInfo.InvariantCulture, DateTimeStyles.None, out _endDateTime))
             {
+                if (Activity == null)
+                {
+                    throw new NullReferenceException("ActivityEditViewModel Activity is null");
+                }    
                 Activity.Start = _startDateTime;
                 Activity.End = _endDateTime;
 

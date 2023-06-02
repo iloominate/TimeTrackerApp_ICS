@@ -30,6 +30,7 @@ public partial class ProjectListViewModel : ViewModelBase,
     private readonly IProjectAmountModelMapper _projectAmountModelMapper;
     private readonly IUserFacade _userFacade;
     private readonly IAlertService _alertService;
+    private readonly IActivityFacade _activityFacade;
     private readonly INavigationService _navigationService;
 
     public IEnumerable<ProjectListModel> Projects { get; set; } = null!;
@@ -41,9 +42,10 @@ public partial class ProjectListViewModel : ViewModelBase,
         IProjectFacade projectFacade,
         IProjectAmountFacade projectAmountFacade,
         IProjectAmountModelMapper projectAmountModelMapper,
-        IUserFacade userFacade, 
+        IUserFacade userFacade,
         INavigationService navigationService,
         IMessengerService messengerService,
+        IActivityFacade activityFacade,
         IAlertService alertService)
         : base(messengerService)
     {
@@ -51,6 +53,7 @@ public partial class ProjectListViewModel : ViewModelBase,
         _projectAmountFacade = projectAmountFacade;
         _userFacade = userFacade;
         _projectAmountModelMapper = projectAmountModelMapper;
+        _activityFacade = activityFacade;
         _navigationService = navigationService;
         _alertService = alertService;
     }
@@ -83,6 +86,10 @@ public partial class ProjectListViewModel : ViewModelBase,
     private async Task GoToDetailOrEditAsync(Guid projectId)
     {
         UserDetailModel? userToJoin = await _userFacade.GetAsync(ActiveUserId);
+        if (userToJoin == null)
+        {
+            throw new NullReferenceException("ProjectListViewModel userToJoin is null");
+        }
 
         if (userToJoin.Projects.Any(p => p.ProjectId == projectId))
         {
@@ -108,6 +115,12 @@ public partial class ProjectListViewModel : ViewModelBase,
             ProjectAmountDetailModel projectAmountDetailModelNew = _projectAmountModelMapper.MapToNewDetailModel(projectListModel, ActiveUserId);
 
             UserDetailModel? activeUser = await _userFacade.GetAsync(ActiveUserId);
+
+            if (activeUser == null)
+            {
+                throw new NullReferenceException("ProjectListViewModel activeUser is null");
+            }
+
 
             if (activeUser.Projects.Any(p => p.ProjectId == projectListModel.Id && p.UserId == ActiveUserId))
             {
@@ -138,8 +151,18 @@ public partial class ProjectListViewModel : ViewModelBase,
 
             UserDetailModel? activeUser = await _userFacade.GetAsync(ActiveUserId);
 
+            if (activeUser == null)
+            {
+                throw new NullReferenceException("ProjectListViewModel activeUser is null");
+            }
             ProjectAmountListModel? projectAmountToDelete = activeUser.Projects.SingleOrDefault<ProjectAmountListModel>(u => u.UserId == activeUser.Id && u.ProjectId == projectListModel.Id);
-            
+            var activitiesToDele = activeUser.Activities.Where(act => act.ProjectId == projectListModel.Id);
+
+            foreach(var activity in activitiesToDele)
+            {
+                await _activityFacade.DeleteAsync(activity.Id);
+            }
+
             if (projectAmountToDelete != null)
             {
                 activeUser.Projects.Remove(projectAmountToDelete);
