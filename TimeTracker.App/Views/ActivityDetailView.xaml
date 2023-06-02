@@ -37,7 +37,7 @@
 
                 <StackLayout>
                     <Label Text="Created by:" 
-                           TextColor="White"
+                           TextColor="Gray"
                            FontSize="17"
                            Margin="0,0,0,5 "/>  
                     <Label Grid.Row="0"
@@ -60,7 +60,7 @@
                              Margin="5">
                     <Label Text="Actitvity type:"
                            FontSize="17"
-                           TextColor="White"/>
+                           TextColor="Gray"/>
                     <Label Text="{Binding Activity.Type}"
                            VerticalOptions="Center"
                            FontSize="Title"
@@ -71,7 +71,7 @@
                              Grid.Column="1"
                              Orientation="Vertical"
                              Margin="5">
-					<Label Text="From:" FontSize="17" TextColor="White"/>
+					<Label Text="From:" FontSize="17" TextColor="Gray"/>
                     <Label Text="{Binding Activity.Start, StringFormat='{0:dd/MM/yyyy HH:mm}'}"
                            VerticalOptions="Center"
                            FontSize="Title"
@@ -82,7 +82,7 @@
                              Grid.Column="1"
                              Orientation="Vertical"
                              Margin="5">
-					<Label Text="To:" FontSize="17" TextColor="White"/>
+					<Label Text="To:" FontSize="17" TextColor="Gray"/>
                     <Label Text="{Binding Activity.End, StringFormat='{0:dd/MM/yyyy HH:mm}'}"
                            VerticalOptions="Center"
                            FontSize="Title"
