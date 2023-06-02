@@ -22,6 +22,7 @@ public partial class ActivityDetailViewModel : ViewModelBase, IRecipient<Activit
     private readonly IActivityFacade _activityFacade;
     private readonly INavigationService _navigationService;
     private readonly IAlertService _alertService;
+    private readonly IUserFacade _userFacade;
 
 
     public Guid ActivityId { get; set; }
@@ -29,16 +30,20 @@ public partial class ActivityDetailViewModel : ViewModelBase, IRecipient<Activit
 
     public ActivityDetailModel? Activity { get; private set; }
 
+    public String UserOwnerName { get; set; } = "";
+
     public ActivityDetailViewModel (
         IActivityFacade activityFacade,
         INavigationService navigationService,
         IMessengerService messengerService,
+        IUserFacade userFacade,
         IAlertService alertService) 
         : base (messengerService)
     {
         _activityFacade = activityFacade;
         _navigationService = navigationService;
         _alertService = alertService;
+        _userFacade = userFacade;
     }
 
     protected override async Task LoadDataAsync()
@@ -46,6 +51,8 @@ public partial class ActivityDetailViewModel : ViewModelBase, IRecipient<Activit
         await base.LoadDataAsync(); 
 
         Activity = await _activityFacade.GetAsync(ActivityId);
+        UserDetailModel? userOwner = await _userFacade.GetAsync(Activity.UserId);
+        UserOwnerName = userOwner.Name;
     }
 
 

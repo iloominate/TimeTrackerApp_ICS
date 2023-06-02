@@ -1,24 +1,37 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-namespace TimeTracker.App.Converters;
-public static class UserIdToColorConverter
+using Microsoft.Maui.Graphics;
+
+namespace TimeTracker.App;
+public class UserIdToColorConverter : IValueConverter
 {
-    public static Color Convert(Guid userId)
+    public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
     {
-        // Convert the Guid to a byte array
-        byte[] bytes = userId.ToByteArray();
+        Color returnColor = new Color(255, 255, 255);
+        if (value is Guid id)
+        {
+            int hash = id.GetHashCode();
+            returnColor = GetColorFromHash(hash);
+        }
+        return returnColor;
+    }
+    private Color GetColorFromHash(int hash)
+    {
+        byte r = (byte)(hash & 0xFF);
+        byte g = (byte)((hash >> 8) & 0xFF);
+        byte b = (byte)((hash >> 16) & 0xFF);
 
-        // Take the first three bytes from the array
-        byte r = bytes[0];
-        byte g = bytes[1];
-        byte b = bytes[2];
-
-        // Create a Color object from the RGB values
-        Color color = Color.FromRgb(r, g, b);
+        Color color = new Color((float)(r / 255.0), (float)(g / 255.0), (float)(b / 255.0));
 
         return color;
     }
+    public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
+    {
+        throw new NotImplementedException();
+    }
+
 }

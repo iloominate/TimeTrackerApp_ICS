@@ -67,7 +67,10 @@ namespace TimeTracker.DAL.Seeds
         public static void Seed(ModelBuilder modelBuilder) =>
             modelBuilder.Entity<ProjectEntity>().HasData(
                 SchoolProject with {Creator = null, Users = Array.Empty<ProjectAmountEntity>(), Activities = Array.Empty<ActivityEntity>() },
-                GameJam with { Creator = null, Users = Array.Empty<ProjectAmountEntity>(), Activities = Array.Empty<ActivityEntity>() }
+                GameJam with { Creator = null, Users = Array.Empty<ProjectAmountEntity>(), Activities = Array.Empty<ActivityEntity>() },
+                Startup with { Creator = null, Users = Array.Empty<ProjectAmountEntity>(), Activities = Array.Empty<ActivityEntity>() },
+                GrillDay with { Creator = null, Users = Array.Empty<ProjectAmountEntity>(), Activities = Array.Empty<ActivityEntity>() },
+                HouseBuilding with { Creator = null, Users = Array.Empty<ProjectAmountEntity>(), Activities = Array.Empty<ActivityEntity>() }
                 );
     }
 }

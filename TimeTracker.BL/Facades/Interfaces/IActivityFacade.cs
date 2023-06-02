@@ -12,7 +12,9 @@ namespace TimeTracker.BL.Facades.Interfaces;
 
 public interface IActivityFacade : IFacade<ActivityEntity, ActivityListModel, ActivityDetailModel>
 {
-    public Task<IEnumerable<ActivityListModel>> FilterAsync(DateTime? activityStart = null,
+    public Task<IEnumerable<ActivityListModel>> GetFilteredAsync(
+        Guid projectId,
+        DateTime? activityStart = null,
         DateTime? activityEnd = null,
         Guid? userId = null,
         ActivityType? activityType = null);

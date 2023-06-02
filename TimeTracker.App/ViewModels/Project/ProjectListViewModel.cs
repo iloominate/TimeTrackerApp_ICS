@@ -36,6 +36,7 @@ public partial class ProjectListViewModel : ViewModelBase,
 
     public Guid ActiveUserId { get; set; }
 
+    public UserDetailModel? ActiveUser { get; set; }
     public ProjectListViewModel(
         IProjectFacade projectFacade,
         IProjectAmountFacade projectAmountFacade,
@@ -59,11 +60,30 @@ public partial class ProjectListViewModel : ViewModelBase,
         await base.LoadDataAsync();
 
         Projects = await _projectFacade.GetAsync();
+        ActiveUser = await _userFacade.GetAsync(ActiveUserId);
+    }
+    
+    [RelayCommand]
+    private async Task GoToCreateAsync(Guid activeUserId)
+        => await _navigationService.GoToAsync<ProjectCreateViewModel>(
+            new Dictionary<string, object?> { [nameof(ProjectCreateViewModel.ActiveUserId)] = activeUserId });
+
+    [RelayCommand]
+    private async Task GoToProjectEditAsync(Guid projectId)
+    {
+
+        Dictionary<string, object?> parametersToPass = new();
+        parametersToPass[nameof(ProjectEditViewModel.ActiveUserId)] = ActiveUserId;
+        parametersToPass[nameof(ProjectEditViewModel.ProjectId)] = projectId;
+
+        await _navigationService.GoToAsync<ProjectCreateViewModel>(parametersToPass);
+
     }
     [RelayCommand]
     private async Task GoToDetailOrEditAsync(Guid projectId)
     {
-        UserDetailModel userToJoin = await _userFacade.GetAsync(ActiveUserId);
+        UserDetailModel? userToJoin = await _userFacade.GetAsync(ActiveUserId);
+
         if (userToJoin.Projects.Any(p => p.ProjectId == projectId))
         {
             Dictionary<string, object?> parametersToPass = new();
@@ -89,29 +109,23 @@ public partial class ProjectListViewModel : ViewModelBase,
 
             UserDetailModel? activeUser = await _userFacade.GetAsync(ActiveUserId);
 
-            if (activeUser == null)
-            {
-                throw new NullReferenceException("An error occurred trying to join project.");
-            }
-
             if (activeUser.Projects.Any(p => p.ProjectId == projectListModel.Id && p.UserId == ActiveUserId))
             {
-                await _alertService.DisplayAsync("Join project error", "User is already in project"); // fix alerts 
+                await _alertService.DisplayAsync("Join project error", "User is already in project"); 
             }
             else
             {
                 await _projectAmountFacade.SaveAsync(projectAmountDetailModelNew);
 
-                ProjectDetailModel projectToJoin = await _projectFacade.GetAsync(projectListModel.Id);
+                ProjectDetailModel? projectToJoin = await _projectFacade.GetAsync(projectListModel.Id);
 
                 if (projectToJoin == null)
                 {
                     throw new NullReferenceException("An error occurred trying to add user to project.");
                 }
-
-                MessengerService.Send(new UserToProjectAdd());
             }
         }
+        await LoadDataAsync();
     }
 
     [RelayCommand]
@@ -122,12 +136,7 @@ public partial class ProjectListViewModel : ViewModelBase,
             )
         {
 
-            UserDetailModel activeUser = await _userFacade.GetAsync(ActiveUserId);
-
-            if (activeUser == null)
-            {
-                throw new NullReferenceException("An error occurred trying to leave project.");
-            }
+            UserDetailModel? activeUser = await _userFacade.GetAsync(ActiveUserId);
 
             ProjectAmountListModel? projectAmountToDelete = activeUser.Projects.SingleOrDefault<ProjectAmountListModel>(u => u.UserId == activeUser.Id && u.ProjectId == projectListModel.Id);
             
@@ -136,19 +145,32 @@ public partial class ProjectListViewModel : ViewModelBase,
                 activeUser.Projects.Remove(projectAmountToDelete);
 
                 await _projectAmountFacade.DeleteAsync(projectAmountToDelete.Id);
-
-                MessengerService.Send(new UserToProjectRemove {ProjectId = projectListModel.Id});
             }
             else
             { 
                 await _alertService.DisplayAsync("Leave project error", "User is not in this project"); // fix alerts
             }
         }
+        await LoadDataAsync();
+    }
+
+    [RelayCommand]
+    private async Task DeleteAsync(Guid Id)
+    {
+        await _projectFacade.DeleteAsync(Id);
+
+        MessengerService.Send(new ProjectDeleteMessage());
+
     }
 
     public async void Receive(UserToProjectAdd message)
     {
 
+        await LoadDataAsync();
+    }
+
+    public async void Receive(UserToProjectRemove message)
+    {
         await LoadDataAsync();
     }
 

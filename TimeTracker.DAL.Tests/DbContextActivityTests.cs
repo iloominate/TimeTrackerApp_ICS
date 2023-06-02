@@ -26,6 +26,7 @@ public class DbContextActivityTests : DbContextTestsBase
             //Dont use DateTime.Now!!!!
             Start = new DateTime(2020, 1, 1),
             End = new DateTime(2020, 2, 2),
+            Name = "",
             Type = ActivityType.Studying,
             Description = "Coding some stuff",
             UserId = Guid.NewGuid(),

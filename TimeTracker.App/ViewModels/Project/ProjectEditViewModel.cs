@@ -15,6 +15,9 @@ using System.Collections.ObjectModel;
 using TimeTracker.BL.Models.ListModels;
 using System.Diagnostics;
 using TimeTracker.BL.Mappers;
+using TimeTracker.Common.Enums;
+using Windows.Graphics.Printing;
+using System.Globalization;
 
 namespace TimeTracker.App.ViewModels.Project;
 
@@ -24,13 +27,15 @@ public partial class ProjectEditViewModel : ViewModelBase,
     IRecipient<ProjectEditMessage>,
     IRecipient<ActivityEditMessage>,
     IRecipient<UserToProjectRemove>,
-    IRecipient<UserToProjectAdd>
+    IRecipient<UserToProjectAdd>,
+    IRecipient<ActivityDeleteMessage>
 {
     private readonly IProjectFacade _projectFacade;
     private readonly IUserFacade _userFacade;
     private readonly IActivityFacade _activityFacade;
     private readonly IProjectAmountFacade _projectAmountFacade;
     private readonly IUserModelMapper _userModelMapper;
+    private readonly IAlertService _alertService;
 
 
     private readonly INavigationService _navigationService;
@@ -41,6 +46,11 @@ public partial class ProjectEditViewModel : ViewModelBase,
     public ObservableCollection<UserListModel> UserList { get; set; } = new();
     public ProjectDetailModel? Project { get; set; }
 
+    public string FilterStartDate { get; set; } = "";
+    public string FilterFinishDate { get; set; } = "";
+    public ActivityType? FilterActivityType { get; set; } = null;
+    public Guid? FilterUserId { get; set; } = null;
+
     public ProjectEditViewModel(
         IProjectFacade projectFacade,
         IUserFacade userFacade,
@@ -48,7 +58,8 @@ public partial class ProjectEditViewModel : ViewModelBase,
         IProjectAmountFacade projectAmountFacade,
         INavigationService navigationService,
         IUserModelMapper userModelMapper,
-        IMessengerService messengerService)
+        IMessengerService messengerService,
+        IAlertService alertService)
         : base(messengerService)
     {
         _projectFacade = projectFacade;
@@ -57,15 +68,18 @@ public partial class ProjectEditViewModel : ViewModelBase,
         _projectAmountFacade = projectAmountFacade;
         _navigationService = navigationService;
         _userModelMapper = userModelMapper;
+        _alertService = alertService;
     }
 
+    [RelayCommand]
     protected override async Task LoadDataAsync()
     {
         await base.LoadDataAsync();
 
         Project = await _projectFacade.GetAsync(ProjectId);
+        UserList.Clear();
         foreach (ProjectAmountListModel User in Project.Users)
-        {
+        { 
             UserDetailModel? userDetailToAdd = await _userFacade.GetAsync(User.UserId);
             UserListModel? userListToAdd = _userModelMapper.MapToListModel(userDetailToAdd);
             UserList.Add(userListToAdd);
@@ -80,20 +94,112 @@ public partial class ProjectEditViewModel : ViewModelBase,
         parametersToPass[nameof(ActivityDetailViewModel.ActiveUserId)] = ActiveUserId;
 
         await _navigationService.GoToAsync<ActivityDetailViewModel>(parametersToPass);
-        MessengerService.Send(new GetActivityMessage()); // ensures that Activity model will be loaded
+        MessengerService.Send(new GetActivityMessage());
     }
 
     [RelayCommand]
-    private async Task GoToActivityEditAsync()
+    private async Task GoToActivityEditAsync(Guid activityId)
+    {
+        Dictionary<string, object?> parametersToPass = new();
+        parametersToPass[nameof(ActivityEditViewModel.ProjectId)] = ProjectId;
+        parametersToPass[nameof(ActivityEditViewModel.ActiveUserId)] = ActiveUserId;
+        parametersToPass[nameof(ActivityEditViewModel.ActivityId)] = activityId;
+
+        await _navigationService.GoToAsync("/createActivity", parametersToPass);
+        MessengerService.Send(new GetActivityMessage()); 
+    }
+
+    [RelayCommand]
+    private async Task GoToActivityCreateAsync()
     {
         Dictionary<string, object?> parametersToPass = new();
         parametersToPass[nameof(ActivityEditViewModel.ProjectId)] = ProjectId;
         parametersToPass[nameof(ActivityEditViewModel.ActiveUserId)] = ActiveUserId;
 
-            await _navigationService.GoToAsync<ActivityEditViewModel>(parametersToPass);
-        MessengerService.Send(new GetActivityMessage()); // ensures that Activity model will be loaded
+        await _navigationService.GoToAsync("/createActivity", parametersToPass);
+        MessengerService.Send(new GetActivityMessage()); 
     }
 
+    [RelayCommand]
+    private async Task FastFilterByTypeAsync(FastFilterType type)
+    {
+        switch (type)
+        {
+            case FastFilterType.Day:
+                {
+                    await FastFilterAsync(DateTime.Now.AddHours(-24), DateTime.Now);
+                    break;
+                }
+            case FastFilterType.Week:
+                {
+                    await FastFilterAsync(DateTime.Now.AddDays(-7), DateTime.Now);
+                    break;
+                }
+            case FastFilterType.Month:
+                {
+                    await FastFilterAsync(DateTime.Now.AddDays(-31), DateTime.Now);
+                    break;
+                }
+            case FastFilterType.Year:
+                {
+                    await FastFilterAsync(DateTime.Now.AddDays(-365), DateTime.Now);
+                    break;
+                }
+        }
+    }
+
+    private async Task FastFilterAsync(DateTime start, DateTime finish)
+    {
+        await base.LoadDataAsync();
+        ActivityList.Clear();
+        IEnumerable<ActivityListModel> activitiesEnumerable = await _activityFacade.GetFilteredAsync(ProjectId, start, finish);
+        foreach (ActivityListModel act in activitiesEnumerable)
+        {
+            ActivityList.Add(act);
+        }
+    }
+
+    [RelayCommand]
+    private async Task FilterAsync()
+    {
+        DateTime _startDateTime;
+        DateTime _finishDateTime;
+        if (FilterStartDate == "")
+        {
+            _startDateTime = DateTime.MinValue;
+        } else if (!DateTime.TryParseExact(FilterStartDate, "yyyy/MM/dd HH:mm", CultureInfo.InvariantCulture, DateTimeStyles.None, out _startDateTime))
+        {
+            await _alertService.DisplayAsync("Invalid Date Time format",
+                   "DateTime must be in the format 'yyyy/mm/dd hh/mm'");
+        }
+
+        if (FilterFinishDate == "")
+        {
+            _finishDateTime = DateTime.MaxValue;
+        } else if (!DateTime.TryParseExact(FilterFinishDate, "yyyy/MM/dd HH:mm", CultureInfo.InvariantCulture, DateTimeStyles.None, out _finishDateTime))
+        {
+            await _alertService.DisplayAsync("Invalid Date Time format",
+                   "DateTime must be in the format 'yyyy/mm/dd hh/mm'");
+        }
+            
+
+        await base.LoadDataAsync();
+
+        ActivityList.Clear();
+
+        IEnumerable<ActivityListModel> activitiesEnumerable = await _activityFacade.GetFilteredAsync(ProjectId, _startDateTime, _finishDateTime, FilterUserId, FilterActivityType);
+        foreach (ActivityListModel act in activitiesEnumerable)
+        {
+            ActivityList.Add(act);
+        }        
+    }
+
+    [RelayCommand]
+    private async Task DeleteAsync(Guid Id)
+    {
+        await _activityFacade.DeleteAsync(Id);
+        MessengerService.Send( new ActivityDeleteMessage { ProjectId = ProjectId });
+    }
     public async void Receive(ProjectEditMessage message)
     {
         if (message.ProjectId == Project?.Id)
@@ -110,6 +216,13 @@ public partial class ProjectEditViewModel : ViewModelBase,
         }
     }
 
+    public async void Receive(ActivityDeleteMessage message)
+    {
+        if (message.ProjectId == ProjectId)
+        {
+            await LoadDataAsync();
+        }
+    }
 
     public async void Receive(UserToProjectAdd message)
     {

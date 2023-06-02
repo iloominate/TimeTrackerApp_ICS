@@ -31,11 +31,13 @@ namespace TimeTracker.DAL
             modelBuilder.Entity<UserEntity>()
                 .HasMany<ProjectAmountEntity>(i => i.Projects)
                 .WithOne(i => i.User)
-                .OnDelete(DeleteBehavior.Restrict);
+                .HasForeignKey(i => i.UserId)
+                .OnDelete(DeleteBehavior.Cascade);
             
             modelBuilder.Entity<ProjectEntity>()
                 .HasMany<ProjectAmountEntity>(i => i.Users)
                 .WithOne(i => i.Project)
+                .HasForeignKey(i => i.ProjectId)
                 .OnDelete(DeleteBehavior.Cascade);
 
             modelBuilder.Entity<ActivityEntity>()
@@ -43,19 +45,19 @@ namespace TimeTracker.DAL
                 .WithMany(i => i.Activities)
                 .HasForeignKey(i => i.ProjectId)
                 .OnDelete(DeleteBehavior.Cascade);
-            
+
             modelBuilder.Entity<ActivityEntity>()
                 .HasOne(i => i.User)
                 .WithMany(i => i.Activities)
                 .HasForeignKey(i => i.UserId)
                 .OnDelete(DeleteBehavior.Cascade);
-                
+
             if (!_seedDemoData) return;
             
-            UserSeeds.Seed(modelBuilder);   
+            /*UserSeeds.Seed(modelBuilder);   
             ProjectSeeds.Seed(modelBuilder);
             ProjectAmountSeeds.Seed(modelBuilder);
-            ActivitySeeds.Seed(modelBuilder);
+            ActivitySeeds.Seed(modelBuilder);*/
         }
 
     }

@@ -103,7 +103,7 @@ public abstract class
             result = ModelMapper.MapToDetailModel(updatedEntity);
         }
         else
-        {
+        { 
             entity.Id = Guid.NewGuid();
             TEntity insertedEntity = await repository.InsertAsync(entity);
             result = ModelMapper.MapToDetailModel(insertedEntity);

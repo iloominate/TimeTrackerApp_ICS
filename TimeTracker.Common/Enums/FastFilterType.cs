@@ -4,9 +4,12 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace TimeTracker.App.Messages;
+namespace TimeTracker.Common.Enums;
 
-public record ActivityDeleteMessage
+public enum FastFilterType
 {
-    public Guid ProjectId { get; set; }
+    Day = 0,
+    Week = 1,
+    Month = 2,
+    Year = 3
 }
