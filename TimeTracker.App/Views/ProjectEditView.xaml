@@ -16,6 +16,7 @@
     <ContentPage.Resources>
         <ResourceDictionary>
             <local:ActivityDeleteIsVisableConverter x:Key="ActivityDeleteIsVisableConverter" />
+            <local:UserIdToColorConverter x:Key="UserIdToColorConverter"/>
         </ResourceDictionary>
     </ContentPage.Resources>
     
@@ -284,31 +285,8 @@
 					<DataTemplate x:DataType="m:ActivityListModel">
 						<Frame Margin="70, 10, 70, 10"
                                Padding="10"
-                               CornerRadius="20">
-							<Frame.Triggers>
-                                
-                                <DataTrigger TargetType="Frame" Binding="{Binding Type}" Value="Work">
-									<Setter Property="BorderColor" Value="Red" />
-								</DataTrigger>
-								<DataTrigger TargetType="Frame" Binding="{Binding Type}" Value="Studying">
-									<Setter Property="BorderColor" Value="Orange" />
-								</DataTrigger>
-								<DataTrigger TargetType="Frame" Binding="{Binding Type}" Value="Break">
-									<Setter Property="BorderColor" Value="Yellow" />
-								</DataTrigger>
-								<DataTrigger TargetType="Frame" Binding="{Binding Type}" Value="Lunch">
-									<Setter Property="BorderColor" Value="Green" />
-								</DataTrigger>
-								<DataTrigger TargetType="Frame" Binding="{Binding Type}" Value="Meeting">
-									<Setter Property="BorderColor" Value="Blue" />
-								</DataTrigger>
-								<DataTrigger TargetType="Frame" Binding="{Binding Type}" Value="Training">
-									<Setter Property="BorderColor" Value="Purple" />
-								</DataTrigger>
-								<DataTrigger TargetType="Frame" Binding="{Binding Type}" Value="Other">
-									<Setter Property="BorderColor" Value="Pink" />
-								</DataTrigger>
-							</Frame.Triggers>
+                               CornerRadius="20"
+                               BorderColor ="{Binding UserId, Converter={StaticResource UserIdToColorConverter}}">
 							<Frame.GestureRecognizers>
 								<TapGestureRecognizer Command="{Binding Source={x:Reference ProjectEditViewRoot}, Path=BindingContext.GoToActivityDetailCommand}"
                                                       CommandParameter="{Binding Id}" />
@@ -363,6 +341,14 @@
                                        HorizontalOptions="End"
                                        VerticalOptions="Center"
                                        Margin="15, 0, 0, 0">
+                                    <Image.IsVisible>
+                                        <MultiBinding Converter="{StaticResource ActivityDeleteIsVisableConverter}"
+                                                      Mode="OneWay">
+                                            <Binding Source="{x:Reference ProjectEditViewRoot}" Path="BindingContext.ActiveUserId"/>
+                                            <Binding Path="UserId"/>
+                                            <Binding Source="{x:Reference ProjectEditViewRoot}" Path="BindingContext.Project.CreatorId"/>
+                                        </MultiBinding>
+                                    </Image.IsVisible>
                                     <Image.GestureRecognizers>
                                         <TapGestureRecognizer Command="{Binding Source={x:Reference ProjectEditViewRoot}, Path=BindingContext.GoToActivityEditCommand}"
                                                               CommandParameter="{Binding Id}" />
