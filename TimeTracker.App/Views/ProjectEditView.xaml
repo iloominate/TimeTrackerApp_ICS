@@ -231,9 +231,10 @@
                            FontSize="14"
                            VerticalOptions="Center" />
                     <Picker SelectedItem="{Binding FilterActivityType, Mode=TwoWay}" 
-                    FontSize="16"
-                    BackgroundColor="#292929"
-                    TextColor="White">
+                            FontSize="16"
+                            Margin="5"
+                            BackgroundColor="#292929"
+                            TextColor="White">
                         <Picker.ItemsSource>
                             <x:Array Type="{x:Type enums:ActivityType}">
                                 <enums:ActivityType>Work</enums:ActivityType>
