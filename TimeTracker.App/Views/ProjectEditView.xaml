@@ -24,7 +24,7 @@
 
         <Grid BackgroundColor="Black">
 			<Grid.RowDefinitions>
-				<RowDefinition Height="Auto" />
+				<RowDefinition Height="200" />
 				<RowDefinition Height="Auto" />
 				<RowDefinition Height="30" />
                 <RowDefinition Height="*" />
@@ -46,12 +46,18 @@
                                     ItemsLayout="HorizontalList">
 						<CollectionView.ItemTemplate>
 							<DataTemplate x:DataType="m:UserListModel">
-								<Frame Padding="0"
+                            <Frame BackgroundColor="{Binding Id, Converter={StaticResource UserIdToColorConverter}}"
+                                   WidthRequest="120"
+                                   HeightRequest="100"
+                                   Padding="1"
+                                   CornerRadius="25"> 
+                                <Frame Padding="10"
                                        Margin="5"
                                        CornerRadius="25"
                                        WidthRequest="100"
                                        HeightRequest="100"
-                                       IsClippedToBounds="True">
+                                       IsClippedToBounds="True"
+                                       >
 									<Grid>
 										<Image 
                                                Source="{Binding PhotoUrl, TargetNullValue='user_place_holder.png'}"
@@ -60,7 +66,7 @@
                                                WidthRequest="100"/>
 
 										<BoxView Opacity="0.20"
-                                                 Color="Black"/>
+                                                 />
 
 										<Label Grid.Row="0"
                                                Margin="10"
@@ -72,7 +78,8 @@
                                                HorizontalOptions="Center"/>
 									</Grid>
 								</Frame>
-							</DataTemplate>
+                            </Frame>
+                        </DataTemplate>
 						</CollectionView.ItemTemplate>
 
 					</CollectionView>

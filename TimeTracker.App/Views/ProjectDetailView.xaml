@@ -238,41 +238,23 @@
                          Grid.ColumnSpan="3"
                          Orientation="Horizontal"
 >
-				<Label Text="Name"
+                <Label Text="Name"
 					   FontSize="17"
 					   Margin="96, 3, 0,0"
 					   TextColor="Gray"/>
-				<Label Text="Type"
+                <Label Text="Type"
 					   FontSize="17"
 					   Margin="451,3, 0,0"
 					   TextColor="Gray"/>
-				<Label Text="Start"
+                <Label Text="Start"
 					   FontSize="17"
 					   Margin="112,3, 0,0"
 					   TextColor="Gray"/>
-				<Label Text="End"
+                <Label Text="End"
 					   FontSize="17"
 					   Margin="121,3, 0,0"
 					   TextColor="Gray"/>
-			</StackLayout>
-                <Label Text="Name"
-                           FontSize="17"
-                           Margin="96, 3, 0,0"
-                           TextColor="Gray"/>
-                <Label Text="User"
-                           FontSize="17"                           
-                           Margin="301,3, 0,0"
-                           TextColor="Gray"/>
-                <Label Text="Start"
-                           FontSize="17"
-                           Margin="112,3, 0,0"
-                           TextColor="Gray"/>
-                <Label Text="End"
-                           FontSize="17"
-                           Margin="121,3, 0,0"
-                           TextColor="Gray"/>
             </StackLayout>
-
 
             <CollectionView Grid.Row="3"
                             Grid.ColumnSpan="3"
