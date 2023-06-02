@@ -16,6 +16,7 @@
     <ContentPage.Resources>
         <ResourceDictionary>
             <local:ActivityDeleteIsVisableConverter x:Key="ActivityDeleteIsVisableConverter" />
+            <local:UserIdToColorConverter x:Key="UserIdToColorConverter"/>
         </ResourceDictionary>
     </ContentPage.Resources>
 
@@ -30,19 +31,57 @@
             </Grid.RowDefinitions>
 
             <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="Auto" />
                 <ColumnDefinition Width="*" />
-                <ColumnDefinition Width="Auto" />
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="*" />
                 <ColumnDefinition Width="Auto" />
             </Grid.ColumnDefinitions>
 
-            <Label Grid.Row="0"
-                   Grid.Column="0"
-                   Margin="30"
-                   FontSize="30"
-                   TextColor="White"
-                   Text="List of Activities" />
-            
+            <StackLayout Grid.Row="0"
+                             Grid.Column="0"
+                             Orientation="Horizontal" 
+                             HorizontalOptions="Start" 
+							 Margin="10">
+                <CollectionView ItemsSource="{Binding UserList}"
+                                    ItemsLayout="HorizontalList">
+                    <CollectionView.ItemTemplate>
+                        <DataTemplate x:DataType="m:UserListModel">
+                            <Frame Padding="0"
+                                       Margin="5"
+                                       CornerRadius="25"
+                                       WidthRequest="100"
+                                       HeightRequest="100"
+                                       IsClippedToBounds="True"
+                                       BorderColor ="{Binding Id, Converter={StaticResource UserIdToColorConverter}}"
+                                       >
+                                <Grid>
+                                    <Image 
+                                               Source="{Binding PhotoUrl, TargetNullValue='user_place_holder.png'}"
+                                               Aspect="AspectFill"
+                                               HeightRequest="100"
+                                               WidthRequest="100"/>
+
+                                    <BoxView Opacity="0.20"
+                                                 Color="Black"/>
+
+                                    <Label Grid.Row="0"
+                                               Margin="10"
+                                               FontSize="15"
+                                               LineBreakMode="WordWrap"
+                                               Text="{Binding Name}"
+                                               TextColor="White"
+                                               VerticalOptions="End"
+                                               HorizontalOptions="Center"/>
+                                </Grid>
+                            </Frame>
+                        </DataTemplate>
+                    </CollectionView.ItemTemplate>
+
+                </CollectionView>
+
+            </StackLayout>
+
+
             <StackLayout Grid.Row="1"
                          Grid.Column="0"
                          Margin="40, 0, 0, 10"
@@ -132,9 +171,9 @@
             </StackLayout>
 
             <StackLayout Grid.Row="1"
-                         Grid.Column="2"
+                         Grid.Column="1"
                          Orientation="Horizontal"
-                         Margin="10, 10, 50, 10">
+                         Margin="100, 10, 50, 10">
 
                 <StackLayout>
                     <Label Text="From:"
@@ -175,9 +214,11 @@
                            FontSize="14"
                            VerticalOptions="Center" />
                     <Picker SelectedItem="{Binding FilterActivityType, Mode=TwoWay}" 
-                    FontSize="16"
-                    BackgroundColor="#292929"
-                    TextColor="White">
+                            FontSize="16"
+                            WidthRequest="120"
+                            Margin="5"
+                            BackgroundColor="#292929"
+                            TextColor="White">
                         <Picker.ItemsSource>
                             <x:Array Type="{x:Type enums:ActivityType}">
                                 <enums:ActivityType>Work</enums:ActivityType>
@@ -239,22 +280,23 @@
                          Orientation="Horizontal"
 >
                 <Label Text="Name"
-					   FontSize="17"
-					   Margin="96, 3, 0,0"
-					   TextColor="Gray"/>
+                           FontSize="17"
+                           Margin="96, 3, 0,0"
+                           TextColor="Gray"/>
                 <Label Text="Type"
-					   FontSize="17"
-					   Margin="451,3, 0,0"
-					   TextColor="Gray"/>
+                           FontSize="17"                           
+                           Margin="301,3, 0,0"
+                           TextColor="Gray"/>
                 <Label Text="Start"
-					   FontSize="17"
-					   Margin="112,3, 0,0"
-					   TextColor="Gray"/>
+                           FontSize="17"
+                           Margin="112,3, 0,0"
+                           TextColor="Gray"/>
                 <Label Text="End"
-					   FontSize="17"
-					   Margin="121,3, 0,0"
-					   TextColor="Gray"/>
+                           FontSize="17"
+                           Margin="121,3, 0,0"
+                           TextColor="Gray"/>
             </StackLayout>
+
 
             <CollectionView Grid.Row="3"
                             Grid.ColumnSpan="3"
@@ -265,41 +307,18 @@
                     <DataTemplate x:DataType="m:ActivityListModel">
                         <Frame Margin="70, 10, 70, 10"
                                Padding="10"
-                               CornerRadius="20">
-                            <Frame.Triggers>
-
-                                <DataTrigger TargetType="Frame" Binding="{Binding Type}" Value="Work">
-                                    <Setter Property="BorderColor" Value="Red" />
-                                </DataTrigger>
-                                <DataTrigger TargetType="Frame" Binding="{Binding Type}" Value="Studying">
-                                    <Setter Property="BorderColor" Value="Orange" />
-                                </DataTrigger>
-                                <DataTrigger TargetType="Frame" Binding="{Binding Type}" Value="Break">
-                                    <Setter Property="BorderColor" Value="Yellow" />
-                                </DataTrigger>
-                                <DataTrigger TargetType="Frame" Binding="{Binding Type}" Value="Lunch">
-                                    <Setter Property="BorderColor" Value="Green" />
-                                </DataTrigger>
-                                <DataTrigger TargetType="Frame" Binding="{Binding Type}" Value="Meeting">
-                                    <Setter Property="BorderColor" Value="Blue" />
-                                </DataTrigger>
-                                <DataTrigger TargetType="Frame" Binding="{Binding Type}" Value="Training">
-                                    <Setter Property="BorderColor" Value="Purple" />
-                                </DataTrigger>
-                                <DataTrigger TargetType="Frame" Binding="{Binding Type}" Value="Other">
-                                    <Setter Property="BorderColor" Value="Pink" />
-                                </DataTrigger>
-                            </Frame.Triggers>
+                               CornerRadius="20"
+                               BorderColor ="{Binding UserId, Converter={StaticResource UserIdToColorConverter}}">
                             <Grid>
 
-								<Grid.ColumnDefinitions>
-									<ColumnDefinition Width="500" />
-									<ColumnDefinition Width="150" />
-									<ColumnDefinition Width="160" />
-									<ColumnDefinition Width="200" />
-									<ColumnDefinition Width="Auto" />
-									<ColumnDefinition Width="Auto" />
-								</Grid.ColumnDefinitions>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="350" />
+                                    <ColumnDefinition Width="150" />
+                                    <ColumnDefinition Width="160" />
+                                    <ColumnDefinition Width="200" />
+                                    <ColumnDefinition Width="Auto" />
+                                    <ColumnDefinition Width="Auto" />
+                                </Grid.ColumnDefinitions>
 
                                 <Label Text="{Binding Name}"
                                        Margin="15"
@@ -309,7 +328,7 @@
                                        VerticalOptions="Center"
                                        HorizontalOptions="Start"/>
 
-								<Label Text="{Binding Type}"
+                                <Label Text="{Binding Type}"
                                        Margin="15"
                                        FontSize="20"
                                        Grid.Column="1"

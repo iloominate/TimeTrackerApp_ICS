@@ -85,6 +85,7 @@ public partial class ProjectDetailViewModel : ViewModelBase,
             throw new NullReferenceException("ProjectDetailViewModel Project is null");
         }
 
+        UserList.Clear();
         foreach (ProjectAmountListModel User in Project.Users)
         {
             UserDetailModel? userDetailToAdd = await _userFacade.GetAsync(User.UserId);
@@ -95,7 +96,7 @@ public partial class ProjectDetailViewModel : ViewModelBase,
             }
 
             UserListModel? userListToAdd = _userModelMapper.MapToListModel(userDetailToAdd);
-            UserList.Add(userListToAdd);
+            UserList.Insert(0, userListToAdd);
         }
         ActivityList = Project.Activities;
     }

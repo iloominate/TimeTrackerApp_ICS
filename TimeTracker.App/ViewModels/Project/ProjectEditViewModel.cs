@@ -93,7 +93,7 @@ public partial class ProjectEditViewModel : ViewModelBase,
             }
 
             UserListModel? userListToAdd = _userModelMapper.MapToListModel(userDetailToAdd);
-            UserList.Add(userListToAdd);
+            UserList.Insert(0, userListToAdd);
         }
         ActivityList = Project.Activities;
     }

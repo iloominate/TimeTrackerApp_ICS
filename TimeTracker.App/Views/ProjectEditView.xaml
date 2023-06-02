@@ -233,6 +233,7 @@
                     <Picker SelectedItem="{Binding FilterActivityType, Mode=TwoWay}" 
                             FontSize="16"
                             Margin="5"
+                            WidthRequest="120"
                             BackgroundColor="#292929"
                             TextColor="White">
                         <Picker.ItemsSource>
