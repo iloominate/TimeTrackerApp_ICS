@@ -24,7 +24,7 @@
 
         <Grid BackgroundColor="Black">
 			<Grid.RowDefinitions>
-				<RowDefinition Height="200" />
+				<RowDefinition Height="Auto" />
 				<RowDefinition Height="Auto" />
 				<RowDefinition Height="30" />
                 <RowDefinition Height="*" />
@@ -46,17 +46,13 @@
                                     ItemsLayout="HorizontalList">
 						<CollectionView.ItemTemplate>
 							<DataTemplate x:DataType="m:UserListModel">
-                            <Frame BackgroundColor="{Binding Id, Converter={StaticResource UserIdToColorConverter}}"
-                                   WidthRequest="120"
-                                   HeightRequest="100"
-                                   Padding="1"
-                                   CornerRadius="25"> 
-                                <Frame Padding="10"
+								<Frame Padding="0"
                                        Margin="5"
                                        CornerRadius="25"
                                        WidthRequest="100"
                                        HeightRequest="100"
                                        IsClippedToBounds="True"
+                                       BorderColor ="{Binding Id, Converter={StaticResource UserIdToColorConverter}}"
                                        >
 									<Grid>
 										<Image 
@@ -66,7 +62,7 @@
                                                WidthRequest="100"/>
 
 										<BoxView Opacity="0.20"
-                                                 />
+                                                 Color="Black"/>
 
 										<Label Grid.Row="0"
                                                Margin="10"
@@ -78,8 +74,7 @@
                                                HorizontalOptions="Center"/>
 									</Grid>
 								</Frame>
-                            </Frame>
-                        </DataTemplate>
+							</DataTemplate>
 						</CollectionView.ItemTemplate>
 
 					</CollectionView>
