@@ -80,9 +80,20 @@ public partial class ProjectDetailViewModel : ViewModelBase,
         await base.LoadDataAsync();
 
         Project = await _projectFacade.GetAsync(ProjectId);
+        if (Project == null)
+        {
+            throw new NullReferenceException("ProjectDetailViewModel Project is null");
+        }
+
         foreach (ProjectAmountListModel User in Project.Users)
         {
             UserDetailModel? userDetailToAdd = await _userFacade.GetAsync(User.UserId);
+
+            if (userDetailToAdd == null)
+            {
+                throw new NullReferenceException("ProjectDetailViewModel userDetailToAdd is null");
+            }
+
             UserListModel? userListToAdd = _userModelMapper.MapToListModel(userDetailToAdd);
             UserList.Add(userListToAdd);
         }
@@ -133,6 +144,7 @@ public partial class ProjectDetailViewModel : ViewModelBase,
     {
         DateTime _startDateTime;
         DateTime _finishDateTime;
+
         if (FilterStartDate == "")
         {
             _startDateTime = DateTime.MinValue;
@@ -141,6 +153,7 @@ public partial class ProjectDetailViewModel : ViewModelBase,
         {
             await _alertService.DisplayAsync("Invalid Date Time format",
                    "DateTime must be in the format 'yyyy/mm/dd hh/mm'");
+            return;
         }
 
         if (FilterFinishDate == "")
@@ -151,6 +164,7 @@ public partial class ProjectDetailViewModel : ViewModelBase,
         {
             await _alertService.DisplayAsync("Invalid Date Time format",
                    "DateTime must be in the format 'yyyy/mm/dd hh/mm'");
+            return;
         }
 
 

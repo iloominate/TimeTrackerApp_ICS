@@ -76,11 +76,22 @@ public partial class ProjectEditViewModel : ViewModelBase,
     {
         await base.LoadDataAsync();
 
-        Project = await _projectFacade.GetAsync(ProjectId);
         UserList.Clear();
-        foreach (ProjectAmountListModel User in Project.Users)
+        Project = await _projectFacade.GetAsync(ProjectId);
+
+        if (Project == null)
+        {
+            throw new NullReferenceException("ProjectDetailViewModel Project is null");
+        }
+        foreach (ProjectAmountListModel? User in Project.Users)
         { 
             UserDetailModel? userDetailToAdd = await _userFacade.GetAsync(User.UserId);
+
+            if (userDetailToAdd == null)
+            {
+                throw new NullReferenceException("ProjectDetailViewModel userDetailToAdd is null");
+            }
+
             UserListModel? userListToAdd = _userModelMapper.MapToListModel(userDetailToAdd);
             UserList.Add(userListToAdd);
         }
@@ -164,22 +175,27 @@ public partial class ProjectEditViewModel : ViewModelBase,
     {
         DateTime _startDateTime;
         DateTime _finishDateTime;
+
         if (FilterStartDate == "")
         {
             _startDateTime = DateTime.MinValue;
+
         } else if (!DateTime.TryParseExact(FilterStartDate, "yyyy/MM/dd HH:mm", CultureInfo.InvariantCulture, DateTimeStyles.None, out _startDateTime))
         {
             await _alertService.DisplayAsync("Invalid Date Time format",
                    "DateTime must be in the format 'yyyy/mm/dd hh/mm'");
+            return;
         }
 
         if (FilterFinishDate == "")
         {
             _finishDateTime = DateTime.MaxValue;
+
         } else if (!DateTime.TryParseExact(FilterFinishDate, "yyyy/MM/dd HH:mm", CultureInfo.InvariantCulture, DateTimeStyles.None, out _finishDateTime))
         {
             await _alertService.DisplayAsync("Invalid Date Time format",
                    "DateTime must be in the format 'yyyy/mm/dd hh/mm'");
+            return;
         }
             
 

@@ -20,7 +20,7 @@ public partial class UserEditViewModel : ViewModelBase, IRecipient<GetUserMessag
     private readonly INavigationService _navigationService;
     private readonly IAlertService _alertService;
 
-    public UserDetailModel User { get; set; } = UserDetailModel.Empty; 
+    public UserDetailModel? User { get; set; } = UserDetailModel.Empty; 
     public Guid UserId { get; set; } = Guid.Empty;
     public UserEditViewModel(
         IUserFacade userFacade,
@@ -37,6 +37,10 @@ public partial class UserEditViewModel : ViewModelBase, IRecipient<GetUserMessag
     [RelayCommand]
     private async Task SaveAsync()
     {
+        if (User == null)
+        {
+            throw new NullReferenceException("UserEditViewModel User is null");
+        }
         if (User.Name == "")
         {
             await _alertService.DisplayAsync("User must have a name",

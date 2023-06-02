@@ -51,7 +51,15 @@ public partial class ActivityDetailViewModel : ViewModelBase, IRecipient<Activit
         await base.LoadDataAsync(); 
 
         Activity = await _activityFacade.GetAsync(ActivityId);
+        if (Activity == null)
+        {
+            throw new NullReferenceException("ActivityDetailViewModel Activity is null");
+        }
         UserDetailModel? userOwner = await _userFacade.GetAsync(Activity.UserId);
+        if (userOwner == null)
+        {
+            throw new NullReferenceException("ActivityDetailViewModel userOwner is null");
+        }
         UserOwnerName = userOwner.Name;
     }
 

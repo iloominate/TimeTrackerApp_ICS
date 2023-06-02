@@ -52,6 +52,10 @@ public partial class ProjectCreateViewModel : ViewModelBase
     [RelayCommand]
     private async Task SaveAsync()
     {
+        if (Project == null)
+        {
+            throw new NullReferenceException("ProjectCreateViewModel Project is null");
+        }
         if (Project.Name == "")
         {
             await _alertService.DisplayAsync("Activity must have a name",
