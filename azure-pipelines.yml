@@ -24,6 +24,12 @@ steps:
     script: 'dotnet workload install maui'
 
 - task: DotNetCoreCLI@2
+  name: "Restore"
+  inputs:
+    command: 'restore'
+    projects: 'TimeTracker.sln'
+
+- task: DotNetCoreCLI@2
   name: "Build"
   inputs:
     command: 'build'
@@ -33,10 +39,4 @@ steps:
   name: "Test"
   inputs:
     command: 'test'
-    projects: 'TimeTracker.sln'
-
-- task: DotNetCoreCLI@2
-  name: "Restore"
-  inputs:
-    command: 'restore'
     projects: 'TimeTracker.sln'
