@@ -34,3 +34,9 @@ steps:
   inputs:
     command: 'test'
     projects: 'TimeTracker.sln'
+
+- task: DotNetCoreCLI@2
+  name: "Restore"
+  inputs:
+    command: 'restore'
+    projects: 'TimeTracker.sln'
